@@ -1,13 +1,14 @@
 
-public class PropertyOwner {
+public class PropertyOwner extends Client{
 	private String ownerNum;
-	private Address address;
-	private String phone;
+	private Property property;
 	
-	public PropertyOwner(String ownerNum, Address address, String phone) {
+	
+	public PropertyOwner(String fname, String lname, String phone, Staff member, String ownerNum,
+			Property property) {
+		super(fname, lname, phone, member);
 		this.ownerNum = ownerNum;
-		this.address = address;
-		this.phone = phone;
+		this.property = property;
 	}
 
 	/**
@@ -24,33 +25,5 @@ public class PropertyOwner {
 		this.ownerNum = ownerNum;
 	}
 
-	/**
-	 * @return the address
-	 */
-	public Address getAddress() {
-		return address;
-	}
 
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	/**
-	 * @return the phone
-	 */
-	public String getPhone() {
-		return phone;
-	}
-
-	/**
-	 * @param phone the phone to set
-	 */
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	
-	
 }

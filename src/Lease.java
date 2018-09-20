@@ -1,37 +1,24 @@
-import java.time.LocalDate;
 
-public class Lease {
+public class Lease extends Property{
 	private String leaseNum;
-	private String clientNum;
-	private String clientName;
-	private String propNum;
-	private Address probAddr;
-	private String propType;
-	private int rooms;
-	private double monthlyRent;
-	private String paymentType;
+	private Client client;
+	private String payMethod;
 	private double deposit;
-	private boolean paid;
-	private LocalDate start;
-	private LocalDate end;
-	private int duration;
+	private boolean depositPaid;
+	private String rentStart;
+	private String rentEnd;
+	private String duration;
 	
-	public Lease(String leaseNum, String clientNum, String clientName, String propNum, Address probAddr,
-			String propType, int rooms, double monthlyRent, String paymentType, double deposit, boolean paid,
-			LocalDate start, LocalDate end, int duration) {
+	public Lease(String leaseNum, Client client, String payMethod, double deposit, boolean depositPaid,
+			String rentStart, String rentEnd, String duration) {
+		super();
 		this.leaseNum = leaseNum;
-		this.clientNum = clientNum;
-		this.clientName = clientName;
-		this.propNum = propNum;
-		this.probAddr = probAddr;
-		this.propType = propType;
-		this.rooms = rooms;
-		this.monthlyRent = monthlyRent;
-		this.paymentType = paymentType;
+		this.client = client;
+		this.payMethod = payMethod;
 		this.deposit = deposit;
-		this.paid = paid;
-		this.start = start;
-		this.end = end;
+		this.depositPaid = depositPaid;
+		this.rentStart = rentStart;
+		this.rentEnd = rentEnd;
 		this.duration = duration;
 	}
 
@@ -50,115 +37,31 @@ public class Lease {
 	}
 
 	/**
-	 * @return the clientNum
+	 * @return the client
 	 */
-	public String getClientNum() {
-		return clientNum;
+	public Client getClient() {
+		return client;
 	}
 
 	/**
-	 * @param clientNum the clientNum to set
+	 * @param client the client to set
 	 */
-	public void setClientNum(String clientNum) {
-		this.clientNum = clientNum;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	/**
-	 * @return the clientName
+	 * @return the payMethod
 	 */
-	public String getClientName() {
-		return clientName;
+	public String getPayMethod() {
+		return payMethod;
 	}
 
 	/**
-	 * @param clientName the clientName to set
+	 * @param payMethod the payMethod to set
 	 */
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
-	}
-
-	/**
-	 * @return the propNum
-	 */
-	public String getPropNum() {
-		return propNum;
-	}
-
-	/**
-	 * @param propNum the propNum to set
-	 */
-	public void setPropNum(String propNum) {
-		this.propNum = propNum;
-	}
-
-	/**
-	 * @return the probAddr
-	 */
-	public Address getProbAddr() {
-		return probAddr;
-	}
-
-	/**
-	 * @param probAddr the probAddr to set
-	 */
-	public void setProbAddr(Address probAddr) {
-		this.probAddr = probAddr;
-	}
-
-	/**
-	 * @return the propType
-	 */
-	public String getPropType() {
-		return propType;
-	}
-
-	/**
-	 * @param propType the propType to set
-	 */
-	public void setPropType(String propType) {
-		this.propType = propType;
-	}
-
-	/**
-	 * @return the rooms
-	 */
-	public int getRooms() {
-		return rooms;
-	}
-
-	/**
-	 * @param rooms the rooms to set
-	 */
-	public void setRooms(int rooms) {
-		this.rooms = rooms;
-	}
-
-	/**
-	 * @return the monthlyRent
-	 */
-	public double getMonthlyRent() {
-		return monthlyRent;
-	}
-
-	/**
-	 * @param monthlyRent the monthlyRent to set
-	 */
-	public void setMonthlyRent(double monthlyRent) {
-		this.monthlyRent = monthlyRent;
-	}
-
-	/**
-	 * @return the paymentType
-	 */
-	public String getPaymentType() {
-		return paymentType;
-	}
-
-	/**
-	 * @param paymentType the paymentType to set
-	 */
-	public void setPaymentType(String paymentType) {
-		this.paymentType = paymentType;
+	public void setPayMethod(String payMethod) {
+		this.payMethod = payMethod;
 	}
 
 	/**
@@ -176,59 +79,59 @@ public class Lease {
 	}
 
 	/**
-	 * @return the paid
+	 * @return the depositPaid
 	 */
-	public boolean isPaid() {
-		return paid;
+	public boolean isDepositPaid() {
+		return depositPaid;
 	}
 
 	/**
-	 * @param paid the paid to set
+	 * @param depositPaid the depositPaid to set
 	 */
-	public void setPaid(boolean paid) {
-		this.paid = paid;
+	public void setDepositPaid(boolean depositPaid) {
+		this.depositPaid = depositPaid;
 	}
 
 	/**
-	 * @return the start
+	 * @return the rentStart
 	 */
-	public LocalDate getStart() {
-		return start;
+	public String getRentStart() {
+		return rentStart;
 	}
 
 	/**
-	 * @param start the start to set
+	 * @param rentStart the rentStart to set
 	 */
-	public void setStart(LocalDate start) {
-		this.start = start;
+	public void setRentStart(String rentStart) {
+		this.rentStart = rentStart;
 	}
 
 	/**
-	 * @return the end
+	 * @return the rentEnd
 	 */
-	public LocalDate getEnd() {
-		return end;
+	public String getRentEnd() {
+		return rentEnd;
 	}
 
 	/**
-	 * @param end the end to set
+	 * @param rentEnd the rentEnd to set
 	 */
-	public void setEnd(LocalDate end) {
-		this.end = end;
+	public void setRentEnd(String rentEnd) {
+		this.rentEnd = rentEnd;
 	}
 
 	/**
 	 * @return the duration
 	 */
-	public int getDuration() {
+	public String getDuration() {
 		return duration;
 	}
 
 	/**
 	 * @param duration the duration to set
 	 */
-	public void setDuration(int duration) {
+	public void setDuration(String duration) {
 		this.duration = duration;
 	}
-
+	
 }

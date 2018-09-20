@@ -1,44 +1,16 @@
 
-public class Client {
-	private String clientNum;
-	private String name;
+public class Client extends Person{
 	private String phone;
-	private Staff member;
-	private PropRent prop = new PropRent();
+	private Staff member;	
 	
-	public Client(String clientNum, String name, String phone) {
-		this.clientNum = clientNum;
-		this.name = name;
+	public Client(String fname, String lname, String phone, Staff member) {
+		super(fname, lname);
 		this.phone = phone;
+		this.member = member;
 	}
 
-	/**
-	 * @return the clientNum
-	 */
-	public String getClientNum() {
-		return clientNum;
-	}
+	
 
-	/**
-	 * @param clientNum the clientNum to set
-	 */
-	public void setClientNum(String clientNum) {
-		this.clientNum = clientNum;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	/**
 	 * @return the phone
@@ -68,20 +40,6 @@ public class Client {
 		this.member = member;
 	}
 
-	/**
-	 * @return the prop
-	 */
-	public PropRent getProp() {
-		return prop;
-	}
 
-	/**
-	 * @param prop the prop to set
-	 */
-	public void setProp(PropRent prop) {
-		this.prop = prop;
-	}
-	
-	
 
 }

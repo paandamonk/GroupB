@@ -1,107 +1,58 @@
-import java.time.LocalDate;
 
 public class PropView {
-	private String clientNum;
-	private String clientName;
-	private String clientPhone;
-	private String propNum;
-	private Address propAddr;
-	private LocalDate viewdate;
+	private Renter renter;
+	private Property property;
+	private String viewDate;
 	private String comments;
 	
-	public PropView(String clientNum, String clientName, String clientPhone, String propNum, Address propAddr,
-			LocalDate viewdate, String comments) {
-		this.clientNum = clientNum;
-		this.clientName = clientName;
-		this.clientPhone = clientPhone;
-		this.propNum = propNum;
-		this.propAddr = propAddr;
-		this.viewdate = viewdate;
+	public PropView(Renter renter, Property property, String viewDate, String comments) {
+		super();
+		this.renter = renter;
+		this.property = property;
+		this.viewDate = viewDate;
 		this.comments = comments;
 	}
 
 	/**
-	 * @return the clientNum
+	 * @return the renter
 	 */
-	public String getClientNum() {
-		return clientNum;
+	public Renter getRenter() {
+		return renter;
 	}
 
 	/**
-	 * @param clientNum the clientNum to set
+	 * @param renter the renter to set
 	 */
-	public void setClientNum(String clientNum) {
-		this.clientNum = clientNum;
+	public void setRenter(Renter renter) {
+		this.renter = renter;
 	}
 
 	/**
-	 * @return the clientName
+	 * @return the property
 	 */
-	public String getClientName() {
-		return clientName;
+	public Property getProperty() {
+		return property;
 	}
 
 	/**
-	 * @param clientName the clientName to set
+	 * @param property the property to set
 	 */
-	public void setClientName(String clientName) {
-		this.clientName = clientName;
+	public void setProperty(Property property) {
+		this.property = property;
 	}
 
 	/**
-	 * @return the clientPhone
+	 * @return the viewDate
 	 */
-	public String getClientPhone() {
-		return clientPhone;
+	public String getViewDate() {
+		return viewDate;
 	}
 
 	/**
-	 * @param clientPhone the clientPhone to set
+	 * @param viewDate the viewDate to set
 	 */
-	public void setClientPhone(String clientPhone) {
-		this.clientPhone = clientPhone;
-	}
-
-	/**
-	 * @return the propNum
-	 */
-	public String getPropNum() {
-		return propNum;
-	}
-
-	/**
-	 * @param propNum the propNum to set
-	 */
-	public void setPropNum(String propNum) {
-		this.propNum = propNum;
-	}
-
-	/**
-	 * @return the propAddr
-	 */
-	public Address getPropAddr() {
-		return propAddr;
-	}
-
-	/**
-	 * @param propAddr the propAddr to set
-	 */
-	public void setPropAddr(Address propAddr) {
-		this.propAddr = propAddr;
-	}
-
-	/**
-	 * @return the viewdate
-	 */
-	public LocalDate getViewdate() {
-		return viewdate;
-	}
-
-	/**
-	 * @param viewdate the viewdate to set
-	 */
-	public void setViewdate(LocalDate viewdate) {
-		this.viewdate = viewdate;
+	public void setViewDate(String viewDate) {
+		this.viewDate = viewDate;
 	}
 
 	/**
@@ -117,6 +68,6 @@ public class PropView {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	
+
 
 }

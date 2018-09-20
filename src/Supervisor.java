@@ -1,42 +1,63 @@
+import java.util.ArrayList;
 
 public class Supervisor extends Staff {
-	private Staff[] group;
+	private ArrayList<Staff> group = new ArrayList<>(10);
 	
 
-	public Supervisor(String staffNum, String name, String position, String gender, String DOB, Staff[] group) {
-		super(staffNum, name, position, gender, DOB);
-		this.group = group;
+	
+
+	public Supervisor(String fname, String lname, int position, String gender, String dOB, String staffNum) {
+		super(fname, lname, position, gender, dOB, staffNum);
 	}
 
-	/**
-	 * @return the group
-	 */
-	public Staff[] getGroup() {
-		return group;
+	
+	public void addStaff(Staff s) {
+		group.add(s);
 	}
-
-	/**
-	 * @param group the group to set
-	 */
-	public void setGroup(Staff[] group) {
-		this.group = group;
+	
+	public void remStaff(Staff s) {
+		group.remove(s);
 	}
-	/**
-	 * Sets individual members of the group.
-	 * @param n
-	 * @param member
-	 * @param group
-	 */
-	public void setIndvGroup(int n, Staff member, Staff[] group) {
-		group[n] = member;
+	
+	public void setStaff(ArrayList<Staff> sGroup) {
+		group = sGroup;
 	}
-	public void replaceGroup(Staff in, Staff out, Staff[] group) {
-		for(int i=0; i<group.length; i++) {
-			if (group[i] == out) {
-				group[i] = in;
-			}
-		}
-	}
+	
+	
+	
+//	/**
+//	 * @return the group
+//	 */
+//	public Staff[] getGroup() {
+//		return group;
+//	}
+//
+//	/**
+//	 * @param group the group to set
+//	 */
+//	public void setGroup(Staff[] group) {
+//		this.group = group;
+//	}
+//	/**
+//	 * Sets individual members of the group.
+//	 * @param n
+//	 * @param member
+//	 * @param group
+//	 */
+//	public void setIndvGroup(int n, Staff member, Staff[] group) {
+//		group[n] = member;
+//	}
+//	public void replaceGroup(Staff in, Staff out, Staff[] group) {
+//		for(int i=0; i<group.length; i++) {
+//			if (group[i] == out) {
+//				group[i] = in;
+//			}
+//		}
+//	}
+//	
+//	
+//
+//	
 	
 
 }
