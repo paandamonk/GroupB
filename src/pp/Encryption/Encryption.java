@@ -26,6 +26,10 @@ public class Encryption {
 
             byte[] outputBytes = cipher.doFinal(inputBytes);
 
+            //Converts the encrypted byte data to a string, then displays it.
+            String decryptedText = new String(outputBytes, "UTF-8");
+            System.out.println(decryptedText);
+
             FileOutputStream outputStream = new FileOutputStream(outputFile);
             outputStream.write(outputBytes);
 
@@ -39,14 +43,36 @@ public class Encryption {
         }
     }
 
+    static void stringProcessor(int cipherMode, String key, String inputString, File outputFile){
+        try {
+            Key secretKey = new SecretKeySpec(key.getBytes(), "AES");
+            Cipher cipher = Cipher.getInstance("AES");
+            cipher.init(cipherMode, secretKey);
+
+            byte[] inputBytes = inputString.getBytes();
+            byte[] outputBytes = cipher.doFinal(inputBytes);
+
+            FileOutputStream outputStream = new FileOutputStream(outputFile);
+            outputStream.write(outputBytes);
+
+            outputStream.close();
+
+        } catch (NoSuchPaddingException | NoSuchAlgorithmException
+                | InvalidKeyException | BadPaddingException
+                | IllegalBlockSizeException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         String key = "This is a secret";
-        File inputFile = new File("text.txt");
+        //File inputFile = new File("text.txt");
+        String inputString = "Test input! Was it decrypted?";
         File encryptedFile = new File("text.encrypted");
         File decryptedFile = new File("decryptedtext.txt");
 
         try {
-            Encryption.fileProcessor(Cipher.ENCRYPT_MODE,key,inputFile,encryptedFile);
+            Encryption.stringProcessor(Cipher.ENCRYPT_MODE,key,inputString,encryptedFile);
             Encryption.fileProcessor(Cipher.DECRYPT_MODE,key,encryptedFile,decryptedFile);
             System.out.println("Success");
         } catch (Exception ex) {
