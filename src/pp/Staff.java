@@ -5,39 +5,54 @@ import java.util.ArrayList;
 public class Staff extends Person{
 
 	private int position;
+	private String name;
 	private String gender;
-	private String DOB;
+	private int age;
+	//private String branch;
 	private Staff Supervisor;
+	private String dOB;
+	private Branch branch;
 	private String staffNum;
 	private double salary;
-	private ArrayList<Property> propList = new ArrayList<>(100);
+	private int id;
+	private ArrayList<PropertyNew> propList = new ArrayList<>(100);
 	private ArrayList<Staff> group = new ArrayList<>(10);
 	
+	public Staff(int id, String name, int age, String address, double Salary){
+		super(name,name);
+		this.id = id;
+		this.name = name;
+		this.setAge(age);
+		this.salary = Salary;
+	}
 	public Staff(String fname, String lname, int position) {
 		super(fname, lname);
 		this.position = position;
 	}
 
-	public Staff(String fname, String lname, int position, String gender, String dOB, String staffNum, double salary) {
+	public Staff(String fname, String lname, int position, Branch branch, String gender, String dOB, String staffNum, double salary) {
 		super(fname, lname);
 		this.position = position;
 		this.gender = gender;
-		DOB = dOB;
+		this.setdOB(dOB);
 		this.staffNum = staffNum;
 		this.salary = salary;
 	}
-	public Staff(String fname, String lname, int position, String gender, String dOB, String staffNum, double salary, Staff Supervisor) {
+	
+	public Staff(String fname, String lname, int position, Branch branch, String gender, String dOB, String staffNum, double salary, Staff Supervisor) {
 		super(fname, lname);
 		this.position = position;
 		this.gender = gender;
-		DOB = dOB;
 		this.staffNum = staffNum;
 		this.salary = salary;
 		this.Supervisor = Supervisor;
 	}
 	
-	public void inputData(Property p) {
+	public void inputData(PropertyNew p) {
 		propList.add(p);
+	}
+	public int getID(){
+		return this.id;
 	}
 	/**
 	 * @return the position
@@ -64,22 +79,37 @@ public class Staff extends Person{
 		this.gender = gender;
 	}
 	/**
-	 * @return the dOB
-	 */
-	public String getDOB() {
-		return DOB;
-	}
-	/**
-	 * @param dOB the dOB to set
-	 */
-	public void setDOB(String dOB) {
-		DOB = dOB;
-	}
-	/**
 	 * @return the supervisor
 	 */
 	public Staff getSupervisor() {
 		return Supervisor;
+	}
+	public Branch getBranch(){
+		return branch;
+	}
+	/**
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	/**
+	 * @param branch the branch to set
+	 */
+	public void setBranch(Branch branch) {
+		this.branch = branch;
 	}
 	/**
 	 * @param supervisor the supervisor to set
@@ -114,13 +144,13 @@ public class Staff extends Person{
 	/**
 	 * @return the propList
 	 */
-	public ArrayList<Property> getPropList() {
+	public ArrayList<PropertyNew> getPropList() {
 		return propList;
 	}
 	/**
 	 * @param propList the propList to set
 	 */
-	public void setPropList(ArrayList<Property> propList) {
+	public void setPropList(ArrayList<PropertyNew> propList) {
 		this.propList = propList;
 	}
 	/**
@@ -134,6 +164,21 @@ public class Staff extends Person{
 	 */
 	public void setGroup(ArrayList<Staff> group) {
 		this.group = group;
+	}
+	public String getName(){
+		return this.name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
+	}
+	public String getdOB() {
+		return dOB;
+	}
+	public void setdOB(String dOB) {
+		this.dOB = dOB;
 	}
 
 //

@@ -1,10 +1,10 @@
 package pp;
 
 public class Renter extends Client{
-	private String renterNum;
+	private int renterNum;
 	private Property property;
 	
-	public Renter(String fname, String lname, String phone, Staff member, String renterNum, Property property) {
+	public Renter(int renterNum, String fname, String lname, String phone, Staff member, Property property) {
 		super(fname, lname, phone, member);
 		this.renterNum = renterNum;
 		this.property = property;
@@ -13,14 +13,14 @@ public class Renter extends Client{
 	/**
 	 * @return the renterNum
 	 */
-	public String getRenterNum() {
+	public int getRenterNum() {
 		return renterNum;
 	}
 
 	/**
 	 * @param renterNum the renterNum to set
 	 */
-	public void setRenterNum(String renterNum) {
+	public void setRenterNum(int renterNum) {
 		this.renterNum = renterNum;
 	}
 
