@@ -3,15 +3,23 @@ package pp;
 public class Client extends Person{
 	private String phone;
 	private Staff member;	
+	private String address;
+	private int idNum;
+	private double max;
 	
+	public Client(String fname, String lname, String phone, Staff member, int idNum, String address, double maxPrice) {
+		super(fname, lname);
+		this.phone = phone;
+		this.member = member;
+		this.idNum = idNum;
+		this.address =  address;	
+		this.max = maxPrice;		
+	}
 	public Client(String fname, String lname, String phone, Staff member) {
 		super(fname, lname);
 		this.phone = phone;
 		this.member = member;
 	}
-
-	
-
 
 	/**
 	 * @return the phone
