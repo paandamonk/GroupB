@@ -4,8 +4,8 @@ public class Renter extends Client{
 	private int renterNum;
 	private Property property;
 	
-	public Renter(int renterNum, String fname, String lname, String phone, Staff member, Property property) {
-		super(fname, lname, phone, member);
+	public Renter(int renterNum, String fname, String lname, String phone, int staffId, Property property) {
+		super(fname, lname, phone, staffId);
 		this.renterNum = renterNum;
 		this.property = property;
 	}

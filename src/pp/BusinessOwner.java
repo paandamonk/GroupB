@@ -5,9 +5,9 @@ public class BusinessOwner extends PropertyOwner{
 	private String businessType;
 
 	
-	public BusinessOwner(String fname, String lname, String phone, Staff member, int ownerNum,
+	public BusinessOwner(String fname, String lname, String phone, int staffId, int ownerNum,
 			PropertyNew property, String businessName, String businessType) {
-		super(ownerNum, fname, lname, phone, member, property);
+		super(ownerNum, fname, lname, phone, staffId, property);
 		this.businessName = businessName;
 		this.businessType = businessType;
 	}

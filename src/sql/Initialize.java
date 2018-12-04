@@ -50,13 +50,11 @@ public class Initialize
          stmt.executeUpdate(sql);//2
          
          sql = "CREATE TABLE CLIENTS" +
-                      "(CLIENTNUM INT PRIMARY KEY     NOT NULL," +
+                      "(CLIENTID INT PRIMARY KEY     NOT NULL," +
                       " FNAME        TEXT   NOT NULL, " +
                       " LNAME        TEXT   NOT NULL, " +
                       " PHONE        TEXT   NOT NULL, " + 
                       " MAXRENT      REAL   NOT NULL, " +
-                      " SFNAME       TEXT   NOT NULL, " +
-                      " SLNAME       TEXT   NOT NULL, " +
                       " STAFFNUM     TEXT   NOT NULL, " +
                       " STREET       TEXT   NOT NULL, " + 
                       " CITY         TEXT   NOT NULL, " + 

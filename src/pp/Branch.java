@@ -32,15 +32,15 @@ public class Branch {
 	}
 	
 	public void perOwner(int ownerIdNum) {
-		for (int i = 0; i < staff.size(); i++) {
-			if (staff.get(i).getPosition() == 0) {
+		/*for (int i = 0; i < staff.size(); i++) {
+			/*if (staff.get(i).getPosition() == 0) {
 				for (int n = 0; n < staff.get(i).getPropList().size(); n++) {
 					if (staff.get(i).getPropList().get(n).getOwner().getOwnerNum() == ownerIdNum) {
 						System.out.println(staff.get(i).getPropList().get(n));
 					}
 				}
 			}
-		}
+		}*/
 		
 	}
 	/**

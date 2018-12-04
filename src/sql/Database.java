@@ -18,12 +18,19 @@ public class Database {
       }
      // Input sInput = new Input("STAFF");
       //sInput.addInfo(1, "2", "3", 4, 43.2);
-       Input pInput = new Input("PROPERTIES");
-       pInput.addInfo(1, "'2'", "'3'", "'4'" ,"'5'", 4, 43.2, "'john'");
+       //Input pInput = new Input("PROPERTIES");
+       //pInput.addPropertyInfo(1, "'2'", "'3'", "'4'" ,"'5'", 4, 43.2, "'john'");
        Print print = new Print("PROPERTIES");   
        print.Print("PROPERTIES");
       // getProp(000);
        printProp(000);
+
+       //Input clientInput = new Input("CLIENTS");
+       //clientInput.addClientInfo(0,"'Connor'", "'Colabella'", "'123-456-7890'",
+       //        30, 5, 0, "'Highland'", 100.0);
+
+       ArrayList<Client> clientList = getClients();
+       System.out.println(clientList.get(0).getFname() + " TEST");
 
    }
  public ArrayList<Staff> getStaff(int pos){
@@ -69,71 +76,45 @@ public class Database {
 	 }
 	 
  }
-// public ArrayList<Client> getClient(){
-//	 	ArrayList<Client> clientList = new ArrayList();
-//	 	Statement stmt = null;
-// 		String fName, lName, address, phone;
-// 		float maxRent;
-// 		int idNum, staffNum;
-// 		try{
-// 			ResultSet rs = stmt.executeQuery("SELECT * FROM CLIENTS;");
-// 			while(rs.next()){
-//		 		fName = rs.getString("FNAME");
-//		 		lName = rs.getString("LNAME");
-//		 		address = rs.getString("ADDRESS");
-//		 		phone = rs.getString("PHONE");
-//		 		staffNum = rs.getInt("STAFFNUM");	 		
-//		 		idNum = rs.getInt("CLIENTNUM");
-//		 		maxRent = rs.getFloat("MAXRENT");
-//		 		Client client = new Client(fName, lName, phone, staffNum, idNum, address, maxRent);
-//		 		clientList.add(client);
-// 			}
-//	 	}catch(SQLException e){
-//	 		e.printStackTrace();
-//	 	}
-// 		return clientList;
-// }
+ public static ArrayList<Client> getClients(){
+     Connection c = null;
+     Statement stmt = null;
 
-	/*public void getProp(String tableName) {
-	      Connection c = null;
-	  	ArrayList<Property> list = new ArrayList<Property>();
-	      Statement stmt = null;
-	      */
-	      /*try {
-	         //Class.forName("org.sqlite.JDBC");
-	         c = DriverManager.getConnection("jdbc:sqlite:test.db");
-	         c.setAutoCommit(false);
-	         System.out.println("Opened database successfully");
+     ArrayList<Client> clientList = new ArrayList();
+     String fName, lName, phone, street, city, postCode;
+     int idNum, staffNum;
+     float maxRent;
 
-	         stmt = c.createStatement();
-	         ResultSet rs = stmt.executeQuery( "SELECT * FROM " + tableName + ";" );
-	         
-	         while ( rs.next() ) {
-	         int propNum = rs.getInt("PROPNUM");
-	         String  street = rs.getString("STREET");
-	         String city = rs.getString("CITY");
-	         String postcode = rs.getString("POSTCODE");
-	         String type  = rs.getString("TYPE");
-	         int  rooms = rs.getInt("ROOMS");
-	         double rent = rs.getDouble("RENT");
-	         
-	         System.out.println( "PROPNUM = " + propNum );
-	         System.out.println( "STREET = " + street );
-	         System.out.println("CITY = " + city);
-	         System.out.println("POSTCODE = " + postcode);
-	         System.out.println( "TYPE = " + type );
-	         System.out.println( "ROOMS = " + rooms );
-	         System.out.println( "RENT = " + rent );
-	         System.out.println();
-	      }
-	      rs.close();
-	      stmt.close();
-	      c.close();
-	      } catch ( Exception e ) {
-	         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-	         System.exit(0);
-	      }
-	}*/
+ 		try{
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
+ 			ResultSet rs = stmt.executeQuery("SELECT * FROM CLIENTS;");
+ 			while(rs.next()){
+                idNum = rs.getInt("CLIENTID");
+		 		fName = rs.getString("FNAME");
+		 		lName = rs.getString("LNAME");
+                phone = rs.getString("PHONE");
+                staffNum = rs.getInt("STAFFNUM");
+		 		street = rs.getString("STREET");
+                city = rs.getString("CITY");
+                postCode = rs.getString("POSTCODE");
+                maxRent = rs.getFloat("MAXRENT");
+
+		 		Client client = new Client(idNum, fName, lName, phone, staffNum, idNum, street, city, postCode, maxRent);
+		 		clientList.add(client);
+ 			}
+	 	}catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+ 		return clientList;
+ }
+
+
  
  public static void printProp(int Num) {
      Connection c = null;

@@ -5,9 +5,9 @@ public class PropertyOwner extends Client{
 	private PropertyNew property;
 	
 	
-	public PropertyOwner(int ownerNum, String fname, String lname, String phone, Staff member,
+	public PropertyOwner(int ownerNum, String fname, String lname, String phone, int staffId,
 			PropertyNew property) {
-		super(fname, lname, phone, member);
+		super(fname, lname, phone, staffId);
 		this.ownerNum = ownerNum;
 		this.property = property;
 	}
