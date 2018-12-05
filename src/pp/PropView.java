@@ -2,14 +2,19 @@ package pp;
 
 public class PropView {
 	private Renter renter;
-	private Property property;
-	private String viewDate;
-	private String comments;
+	private int clientId, propertyId;
+	private String fname, lname, phone, street, city, postCode, date, viewDate, comments;
 	
-	public PropView(Renter renter, Property property, String viewDate, String comments) {
+	public PropView(int clientId, String fname, String lname, String phone, int propertyId, String street, String city, String postCode, String viewDate, String comments) {
 		super();
-		this.renter = renter;
-		this.property = property;
+		this.clientId = clientId;
+		this.propertyId = propertyId;
+		this.fname = fname;
+		this.lname = lname;
+		this.phone = phone;
+		this.street = street;
+		this.city = city;
+		this.postCode = postCode;
 		this.viewDate = viewDate;
 		this.comments = comments;
 	}
@@ -31,16 +36,16 @@ public class PropView {
 	/**
 	 * @return the property
 	 */
-	public Property getProperty() {
+	/*public Property getProperty() {
 		return property;
-	}
+	}*/
 
 	/**
 	 * @param property the property to set
 	 */
-	public void setProperty(Property property) {
+	/*public void setProperty(Property property) {
 		this.property = property;
-	}
+	}*/
 
 	/**
 	 * @return the viewDate

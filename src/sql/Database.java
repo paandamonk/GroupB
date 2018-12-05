@@ -25,19 +25,26 @@ public class Database {
       // getProp(000);
        //printProp(000);
 
-      // Input clientInput = new Input("CLIENTS");
-      // clientInput.addClientInfo(0,"'Connor'", "'Colabella'", "'123-456-7890'",
+       //Input clientInput = new Input("CLIENTS");
+       //clientInput.addClientInfo(0,"'Connor'", "'Colabella'", "'123-456-7890'",
        //        30, 5, 0, "'Highland'", 100.0);
 
-        ArrayList<Client> clientList = getClients();
-        System.out.println(clientList.get(0).getFname() + " TEST");
+        //ArrayList<Client> clientList = getClients();
+        //System.out.println(clientList.get(0).getFname() + " TEST");
 
         //Input leaseInput = new Input("LEASE");
         //leaseInput.addLeaseInfo(0, 1, "'Thomas'", "'Benedict'", 1, "'30 Archibald Lane'", "'Kingston'", "'12528'",
          //    "'Apartment'", 3, 750.0, "'Credit'", 1000.0, 1, "'12/5/18'", "'12/1/20'", "'Two years'");
 
-        ArrayList<Lease> leaseList = getLease();
-        System.out.println(leaseList.get(0).getStreet() + " TEST");
+        //ArrayList<Lease> leaseList = getLease();
+        //System.out.println(leaseList.get(0).getStreet() + " TEST");
+
+     //Input propViewInput = new Input("PROPVIEW");
+     //propViewInput.addPropViewInfo(1, "'Richard'", "'Bulganari'", "'012-345-6789'", 10,
+     //        "'40 Hawk Drive'", "'Albany'", "'10405'", "'6/22/19'", "'Beautiful view'");
+
+     ArrayList<PropView> propViewList = getPropView();
+     System.out.println(propViewList.get(0).getViewDate() + " TEST");
 
 
    }
@@ -180,6 +187,44 @@ public class Database {
      }
      System.out.println("Operation done successfully");
    }
+
+    public static ArrayList<PropView> getPropView(){
+        Connection c = null;
+        Statement stmt = null;
+
+        ArrayList<PropView> propViewList = new ArrayList();
+        int clientId, propertyId;
+        String fname, lname, phone, street, city, postCode, viewDate, comments;
+
+        try{
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PROPVIEW;");
+            while(rs.next()){
+                clientId = rs.getInt("CLIENTNUM");
+                fname = rs.getString("FNAME");
+                lname = rs.getString("LNAME");
+                phone = rs.getString("CELL");
+                propertyId = rs.getInt("PROPNUM");
+                street = rs.getString("STREET");
+                city = rs.getString("CITY");
+                postCode = rs.getString("POSTCODE");
+                viewDate = rs.getString("VIEWDATE");
+                comments = rs.getString("COMMENTS");
+
+                PropView propView = new PropView(clientId, fname, lname, phone, propertyId, street, city, postCode, viewDate, comments);
+                propViewList.add(propView);
+            }
+        }catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        return propViewList;
+    }
 
     public static ArrayList<Lease> getLease(){
         Connection c = null;

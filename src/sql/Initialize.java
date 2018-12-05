@@ -70,7 +70,7 @@ public class Initialize
                       " STREET       TEXT   NOT NULL, " + 
                       " CITY         TEXT   NOT NULL, " + 
                       " POSTCODE     TEXT   NOT NULL, " +
-                      " DATE         TEXT   NOT NULL, " + 
+                      " VIEWDATE     TEXT   NOT NULL, " +
                       " COMMENTS     TEXT   NOT NULL)"; 
          stmt.executeUpdate(sql);//4
          
