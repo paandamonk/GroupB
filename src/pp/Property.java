@@ -5,7 +5,7 @@ public class Property {
 	private String city;
 	private String postcode;
 	private String type;
-	private String propNumber;
+	private int propertyId;
 	private int numRooms;
 	private double monthlyRent;
 	private PropertyOwner owner;
@@ -14,14 +14,24 @@ public class Property {
 		super();
 	}
 
-	public Property(String street, String city, String postcode, String type, String propNumber, int numRooms,
-			double monthlyRent, PropertyOwner owner) {
+	public Property(String street, String city, String postcode, String type, int propertyId, int numRooms, double monthlyRent) {
 		super();
 		this.street = street;
 		this.city = city;
 		this.postcode = postcode;
 		this.type = type;
-		this.propNumber = propNumber;
+		this.propertyId = propertyId;
+		this.numRooms = numRooms;
+		this.monthlyRent = monthlyRent;
+	}
+
+	public Property(String street, String city, String postcode, String type, int propertyId, int numRooms, double monthlyRent, PropertyOwner owner) {
+		super();
+		this.street = street;
+		this.city = city;
+		this.postcode = postcode;
+		this.type = type;
+		this.propertyId = propertyId;
 		this.numRooms = numRooms;
 		this.monthlyRent = monthlyRent;
 		this.owner = owner;
@@ -86,15 +96,15 @@ public class Property {
 	/**
 	 * @return the propNumber
 	 */
-	public String getPropNumber() {
-		return propNumber;
+	public int getPropertyId() {
+		return propertyId;
 	}
 
 	/**
-	 * @param propNumber the propNumber to set
+	 * @param propertyId the propertyId to set
 	 */
-	public void setPropNumber(String propNumber) {
-		this.propNumber = propNumber;
+	public void setPpropertyId(int propertyId) {
+		this.propertyId = propertyId;
 	}
 
 	/**

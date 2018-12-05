@@ -65,4 +65,34 @@ public class Input
       }
       System.out.println("Records created successfully");
     }
+
+    public void addLeaseInfo(int leaseId, int clientId, String fname, String lname, int propertyId, String street, String city, String postCode,
+                             String type, int numRooms, double monthlyRent, String payMethod, double deposit, int depositPaid, String rentStart, String rentEnd, String duration) {
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
+            String sql = "INSERT INTO " + tableName + " (LEASENUM,CLIENTNUM,FNAME,LNAME,PROPNUM,STREET,CITY,POSTCODE," +
+                    "TYPE,ROOMS,RENT,PAYMETHOD,DEPOSIT,PAIDDEPOSIT,STARTDATE,ENDDATE,DURATION) " +
+                    "VALUES (" + leaseId + "," + clientId + "," + fname + "," + lname + "," + propertyId + "," + street + "," +
+                    city + "," + postCode + "," + type + "," + numRooms + "," + monthlyRent + "," + payMethod+ ","
+                    + deposit + "," + depositPaid + "," + rentStart + "," + rentEnd + "," + duration + ");";
+
+            stmt.executeUpdate(sql);
+
+            stmt.close();
+            c.commit();
+            c.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        System.out.println("Lease record for " + fname + " " + lname + " created successfully");
+    }
 }

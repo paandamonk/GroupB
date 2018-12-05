@@ -20,17 +20,25 @@ public class Database {
       //sInput.addInfo(1, "2", "3", 4, 43.2);
        //Input pInput = new Input("PROPERTIES");
        //pInput.addPropertyInfo(1, "'2'", "'3'", "'4'" ,"'5'", 4, 43.2, "'john'");
-       Print print = new Print("PROPERTIES");   
-       print.Print("PROPERTIES");
+       //Print print = new Print("PROPERTIES");
+       //print.Print("PROPERTIES");
       // getProp(000);
-       printProp(000);
+       //printProp(000);
 
-       //Input clientInput = new Input("CLIENTS");
-       //clientInput.addClientInfo(0,"'Connor'", "'Colabella'", "'123-456-7890'",
+      // Input clientInput = new Input("CLIENTS");
+      // clientInput.addClientInfo(0,"'Connor'", "'Colabella'", "'123-456-7890'",
        //        30, 5, 0, "'Highland'", 100.0);
 
-       ArrayList<Client> clientList = getClients();
-       System.out.println(clientList.get(0).getFname() + " TEST");
+        ArrayList<Client> clientList = getClients();
+        System.out.println(clientList.get(0).getFname() + " TEST");
+
+        //Input leaseInput = new Input("LEASE");
+        //leaseInput.addLeaseInfo(0, 1, "'Thomas'", "'Benedict'", 1, "'30 Archibald Lane'", "'Kingston'", "'12528'",
+         //    "'Apartment'", 3, 750.0, "'Credit'", 1000.0, 1, "'12/5/18'", "'12/1/20'", "'Two years'");
+
+        ArrayList<Lease> leaseList = getLease();
+        System.out.println(leaseList.get(0).getStreet() + " TEST");
+
 
    }
  public ArrayList<Staff> getStaff(int pos){
@@ -172,6 +180,53 @@ public class Database {
      }
      System.out.println("Operation done successfully");
    }
+
+    public static ArrayList<Lease> getLease(){
+        Connection c = null;
+        Statement stmt = null;
+
+        ArrayList<Lease> leaseList = new ArrayList();
+        String fname, lname, street, city, postCode, type, payMethod, rentStart, rentEnd, duration;
+        int leaseId, clientId, propertyId, numRooms, paidDeposit;
+        double monthlyRent, deposit;
+
+        try{
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM LEASE;");
+            while(rs.next()){
+                leaseId = rs.getInt("LEASENUM");
+                clientId = rs.getInt("CLIENTNUM");
+                fname = rs.getString("FNAME");
+                lname = rs.getString("LNAME");
+                propertyId = rs.getInt("PROPNUM");
+                street = rs.getString("STREET");
+                city = rs.getString("CITY");
+                postCode = rs.getString("POSTCODE");
+                type = rs.getString("TYPE");
+                numRooms = rs.getInt("ROOMS");
+                monthlyRent = rs.getDouble("RENT");
+                payMethod = rs.getString("PAYMETHOD");
+                deposit = rs.getDouble("DEPOSIT");
+                paidDeposit = rs.getInt("PAIDDEPOSIT");
+                rentStart = rs.getString("STARTDATE");
+                rentEnd = rs.getString("ENDDATE");
+                duration = rs.getString("DURATION");
+
+                Lease lease = new Lease(leaseId, clientId, fname, lname, propertyId, street, city, postCode,
+                        type, numRooms, monthlyRent, payMethod, deposit, paidDeposit, rentStart, rentEnd, duration);
+                leaseList.add(lease);
+            }
+        }catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        return leaseList;
+    }
 
 
 	     
