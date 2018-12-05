@@ -7,7 +7,9 @@ public class Staff extends Person{
 	private int position;
 	private String gender;
 	private String DOB;
+	private String Branch;
 	private Staff Supervisor;
+	private int SupId;
 	private String staffNum;
 	private double salary;
 	private ArrayList<Property> propList = new ArrayList<>(100);
@@ -16,6 +18,15 @@ public class Staff extends Person{
 	public Staff(String fname, String lname, int position) {
 		super(fname, lname);
 		this.position = position;
+	}
+	public Staff(String sID, int pos, String Fname, String Lname, String branch, String sex, String DoB, Double salary, int sup) {
+		super(Fname, Lname);
+		this.position = pos;
+		this.Branch = branch;
+		this.gender = sex;
+		this.DOB = DoB;
+		this.staffNum = sID;
+		this.SupId = sup;
 	}
 
 	public Staff(String fname, String lname, int position, String gender, String dOB, String staffNum, double salary) {
@@ -134,6 +145,14 @@ public class Staff extends Person{
 	 */
 	public void setGroup(ArrayList<Staff> group) {
 		this.group = group;
+	}
+	
+	public String getFname() {
+		return this.getFname();
+	}
+	
+	public String getBranch()	{
+		return this.Branch;
 	}
 
 //

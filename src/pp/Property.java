@@ -5,17 +5,17 @@ public class Property {
 	private String city;
 	private String postcode;
 	private String type;
-	private String propNumber;
+	private int propNumber;
 	private int numRooms;
 	private double monthlyRent;
-	private PropertyOwner owner;
+	private String owner;
 	
 	public Property() {
 		super();
 	}
 
-	public Property(String street, String city, String postcode, String type, String propNumber, int numRooms,
-			double monthlyRent, PropertyOwner owner) {
+	public Property(String street, String city, String postcode, String type, int propNumber, int numRooms,
+			double monthlyRent, String owner) {
 		super();
 		this.street = street;
 		this.city = city;
@@ -86,14 +86,14 @@ public class Property {
 	/**
 	 * @return the propNumber
 	 */
-	public String getPropNumber() {
+	public int getPropNumber() {
 		return propNumber;
 	}
 
 	/**
 	 * @param propNumber the propNumber to set
 	 */
-	public void setPropNumber(String propNumber) {
+	public void setPropNumber(int propNumber) {
 		this.propNumber = propNumber;
 	}
 
@@ -128,14 +128,14 @@ public class Property {
 	/**
 	 * @return the owner
 	 */
-	public PropertyOwner getOwner() {
+	public String getOwner() {
 		return owner;
 	}
 
 	/**
 	 * @param owner the owner to set
 	 */
-	public void setOwner(PropertyOwner owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 	
