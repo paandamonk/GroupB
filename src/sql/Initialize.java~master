@@ -6,6 +6,7 @@ public class Initialize
     public static void main(String[] args) {
       Connection c = null;
       Statement stmt = null;
+      
    
       try {
          Class.forName("org.sqlite.JDBC");
@@ -21,7 +22,8 @@ public class Initialize
                       " BRANCH       TEXT   NOT NULL, " +
                       " SEX          TEXT   NOT NULL, " +
                       " DOB          TEXT   NOT NULL, " +
-                      " SUPERVISOR   TEXT   NOT NULL)"; 
+                      " SALARY       REAL	NOT NULL, " +
+                      " SUPERVISOR   INT   NOT NULL)"; 
          stmt.executeUpdate(sql);
          
          sql = "CREATE TABLE PROPERTIES" +
@@ -32,7 +34,7 @@ public class Initialize
                       " TYPE         TEXT   NOT NULL, " +
                       " ROOMS        INT    NOT NULL, " +
                       " RENT         REAL   NOT NULL, " +
-                      " OWNER        TEXT   NOT NULL)"; 
+                      " OWNER        INT   NOT NULL)"; 
          stmt.executeUpdate(sql);
          
          sql = "CREATE TABLE OWNERS" +
@@ -42,6 +44,7 @@ public class Initialize
                       " STREET       TEXT   NOT NULL, " + 
                       " CITY         TEXT   NOT NULL, " + 
                       " POSTCODE     TEXT   NOT NULL, " +
+                      " MEMID		 INT	NOT NULL, " +
                       " PHONE        TEXT   NOT NULL)"; 
          stmt.executeUpdate(sql);
          
@@ -52,7 +55,7 @@ public class Initialize
                       " PHONE        TEXT   NOT NULL, " + 
                       " TYPE         TEXT   NOT NULL, " +
                       " MAXRENT      REAL   NOT NULL, " +
-                      " STAFFNUM   TEXT   NOT NULL)"; 
+                      " STAFFNUM   INT   NOT NULL)"; 
          stmt.executeUpdate(sql);
          
          sql = "CREATE TABLE PROPVIEW" +

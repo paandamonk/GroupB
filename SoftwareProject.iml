@@ -7,10 +7,18 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+<<<<<<< HEAD
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
           <root url="jar://$USER_HOME$/Desktop/sqlite-jdbc-3.23.1.jar!/" />
+=======
+    <orderEntry type="library" name="Java" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/sqlite-jdbc-3.23.1.jar!/" />
+>>>>>>> master
         </CLASSES>
         <JAVADOC />
         <SOURCES />

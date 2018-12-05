@@ -2,11 +2,44 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6842675a-bcf4-462e-a1e5-b2ed410e1b3c" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/pp/PropView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pp/PropView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sql/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/Database.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sql/Initialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/Initialize.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sql/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/Input.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test.db" beforeDir="false" afterPath="$PROJECT_DIR$/test.db" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQLiteDB/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQLiteDB/Delete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/Delete.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQLiteDB/Initialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/Initialize.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQLiteDB/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQLiteDB/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SQLiteDB/Print.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sql/Print.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SoftwareProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SoftwareProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Address.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/AgentMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Branch.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/BusinessOwner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Client.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Lease.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/ManagerMen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Menu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Person.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/PropView.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Property.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/PropertyOwner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Renter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Staff.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/StaffAccount.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/SubMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Supervisor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Testclass.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/UserInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/UserTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pp/Backend/FileReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pp/Backend/FileReader.java" afterDir="false" />
+>>>>>>> master
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,6 +48,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FUSProjectUsageTrigger">
     <session id="-964101611">
       <usages-collector id="statistics.lifecycle.project">
@@ -72,13 +106,26 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="629">
               <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+=======
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/sql/Database.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="141">
+              <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> master
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pp/UserTest.java">
+        <entry file="file://$PROJECT_DIR$/src/sql/test.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="136">
               <caret line="10" selection-start-line="10" selection-end-line="10" />
             </state>
@@ -108,20 +155,37 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
               <caret line="11" column="27" lean-forward="true" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
+=======
+            <state relative-caret-position="85">
+              <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+              <folding>
+                <element signature="e#81#82#0" expanded="true" />
+                <element signature="e#100#101#0" expanded="true" />
+              </folding>
+>>>>>>> master
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sql/Database.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="384">
               <caret line="43" column="7" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/sql/Initialize.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="51">
+              <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+>>>>>>> master
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/sql/Input.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="399">
@@ -153,17 +217,33 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
               <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/pp/Backend/FileReader.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
+>>>>>>> master
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+<<<<<<< HEAD
   <component name="FindInProjectRecents">
     <findStrings>
       <find>SFNAME</find>
       <find>name</find>
     </findStrings>
+=======
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="package-info" />
+        <option value="Class" />
+      </list>
+    </option>
+>>>>>>> master
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -171,6 +251,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/pp/Branch.java" />
         <option value="$PROJECT_DIR$/src/pp/PropertyOwner.java" />
         <option value="$PROJECT_DIR$/src/pp/Renter.java" />
@@ -182,6 +263,11 @@
         <option value="$PROJECT_DIR$/src/pp/PropView.java" />
         <option value="$PROJECT_DIR$/src/sql/Input.java" />
         <option value="$PROJECT_DIR$/src/sql/Database.java" />
+=======
+        <option value="$PROJECT_DIR$/src/sql/Database.java" />
+        <option value="$PROJECT_DIR$/src/pp/Backend/FileReader.java" />
+        <option value="$PROJECT_DIR$/src/sql/test.java" />
+>>>>>>> master
       </list>
     </option>
   </component>
@@ -202,8 +288,11 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="Scope" />
       <pane id="AndroidView" />
+=======
+>>>>>>> master
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -220,7 +309,7 @@
               <item name="GroupB" type="b2602c69:ProjectViewProjectNode" />
               <item name="GroupB" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pp" type="462c0819:PsiDirectoryNode" />
+              <item name="sql" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GroupB" type="b2602c69:ProjectViewProjectNode" />
@@ -236,12 +325,17 @@
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
+=======
+      <pane id="Scope" />
+>>>>>>> master
       <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< HEAD
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1544043596889" />
     <property name="last_opened_file_path" value="$USER_HOME$/Desktop/sqlite-jdbc-3.23.1.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -249,6 +343,21 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543977114069" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Downloads/sqlite-jdbc-3.23.1.jar!/" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\boi\GroupB\src\sql" />
+    </key>
+>>>>>>> master
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -262,6 +371,7 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Application.Database">
     <configuration name="Database" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="sql.Database" />
@@ -298,6 +408,11 @@
     </configuration>
     <configuration name="UserTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pp.UserTest" />
+=======
+  <component name="RunManager" selected="Application.test">
+    <configuration name="Database" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sql.Database" />
+>>>>>>> master
       <module name="SoftwareProject" />
       <extension name="coverage">
         <pattern>
@@ -309,6 +424,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+<<<<<<< HEAD
     <list>
       <item itemvalue="Application.UserTest" />
       <item itemvalue="Application.Database" />
@@ -321,6 +437,44 @@
         <item itemvalue="Application.Initialize" />
         <item itemvalue="Application.UserTest" />
         <item itemvalue="Application.Encryption" />
+=======
+    <configuration name="Initialize" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sql.Initialize" />
+      <module name="SoftwareProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sql.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sql.test" />
+      <module name="SoftwareProject" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sql.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Database" />
+      <item itemvalue="Application.Initialize" />
+      <item itemvalue="Application.test" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.test" />
+        <item itemvalue="Application.Initialize" />
+        <item itemvalue="Application.Database" />
+>>>>>>> master
       </list>
     </recent_temporary>
   </component>
@@ -343,10 +497,19 @@
   <component name="TimeTrackingManager">
     <option name="totallyTimeSpent" value="13366000" />
   </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
     <layout>
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17030849" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
@@ -366,6 +529,28 @@
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.32843652" />
+=======
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.498998" visible="true" weight="0.094473004" />
+      <window_info id="Structure" order="1" sideWeight="0.501002" side_tool="true" weight="0.10732648" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32884097" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32974428" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.32974428" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32839838" />
+      <window_info anchor="bottom" id="Dependency Viewer" order="12" weight="0.32974428" />
+>>>>>>> master
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -375,13 +560,14 @@
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Maven Projects" order="8" />
+<<<<<<< HEAD
+=======
+      <window_info anchor="right" id="Maven" order="9" />
+>>>>>>> master
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/pp/UserInterface.java">
@@ -451,7 +637,12 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/pp/Menu.java">
+=======
+    <entry file="file://$PROJECT_DIR$/src/package-info.java" />
+    <entry file="file://$PROJECT_DIR$/src/pp/UserInterface.java">
+>>>>>>> master
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
@@ -514,6 +705,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sql/Initialize.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pp/Backend/FileReader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sql/test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="14" selection-start-line="5" selection-start-column="14" selection-end-line="5" selection-end-column="14" />
+          <folding>
+            <element signature="e#81#82#0" expanded="true" />
+            <element signature="e#100#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sql/Database.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
   <component name="masterDetails">
     <states>
@@ -554,7 +780,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.8</last-edited>
+          <last-edited>11</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -578,6 +804,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>Java</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

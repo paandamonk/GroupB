@@ -7,11 +7,18 @@ public class Staff extends Person{
 	private int position;
 	private String name;
 	private String gender;
+<<<<<<< HEAD
 	private int age;
 	//private String branch;
 	private Staff Supervisor;
 	private String dOB;
 	private Branch branch;
+=======
+	private String DOB;
+	private String Branch;
+	private Staff Supervisor;
+	private int SupId;
+>>>>>>> master
 	private String staffNum;
 	private double salary;
 	private int id;
@@ -28,6 +35,15 @@ public class Staff extends Person{
 	public Staff(String fname, String lname, int position) {
 		super(fname, lname);
 		this.position = position;
+	}
+	public Staff(String sID, int pos, String Fname, String Lname, String branch, String sex, String DoB, Double salary, int sup) {
+		super(Fname, Lname);
+		this.position = pos;
+		this.Branch = branch;
+		this.gender = sex;
+		this.DOB = DoB;
+		this.staffNum = sID;
+		this.SupId = sup;
 	}
 
 	public Staff(String fname, String lname, int position, Branch branch, String gender, String dOB, String staffNum, double salary) {
@@ -165,6 +181,7 @@ public class Staff extends Person{
 	public void setGroup(ArrayList<Staff> group) {
 		this.group = group;
 	}
+<<<<<<< HEAD
 	public String getName(){
 		return this.name;
 	}
@@ -179,6 +196,15 @@ public class Staff extends Person{
 	}
 	public void setdOB(String dOB) {
 		this.dOB = dOB;
+=======
+	
+	public String getFname() {
+		return this.getFname();
+	}
+	
+	public String getBranch()	{
+		return this.Branch;
+>>>>>>> master
 	}
 
 //

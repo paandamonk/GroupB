@@ -5,16 +5,25 @@ public class Property {
 	private String city;
 	private String postcode;
 	private String type;
+<<<<<<< HEAD
 	private int propertyId;
+=======
+	private int propNumber;
+>>>>>>> master
 	private int numRooms;
 	private double monthlyRent;
-	private PropertyOwner owner;
+	private String owner;
 	
 	public Property() {
 		super();
 	}
 
+<<<<<<< HEAD
 	public Property(String street, String city, String postcode, String type, int propertyId, int numRooms, double monthlyRent) {
+=======
+	public Property(String street, String city, String postcode, String type, int propNumber, int numRooms,
+			double monthlyRent, String owner) {
+>>>>>>> master
 		super();
 		this.street = street;
 		this.city = city;
@@ -96,15 +105,25 @@ public class Property {
 	/**
 	 * @return the propNumber
 	 */
+<<<<<<< HEAD
 	public int getPropertyId() {
 		return propertyId;
+=======
+	public int getPropNumber() {
+		return propNumber;
+>>>>>>> master
 	}
 
 	/**
 	 * @param propertyId the propertyId to set
 	 */
+<<<<<<< HEAD
 	public void setPpropertyId(int propertyId) {
 		this.propertyId = propertyId;
+=======
+	public void setPropNumber(int propNumber) {
+		this.propNumber = propNumber;
+>>>>>>> master
 	}
 
 	/**
@@ -138,14 +157,14 @@ public class Property {
 	/**
 	 * @return the owner
 	 */
-	public PropertyOwner getOwner() {
+	public String getOwner() {
 		return owner;
 	}
 
 	/**
 	 * @param owner the owner to set
 	 */
-	public void setOwner(PropertyOwner owner) {
+	public void setOwner(String owner) {
 		this.owner = owner;
 	}
 	
