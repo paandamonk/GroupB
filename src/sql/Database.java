@@ -54,8 +54,16 @@ public class Database {
      //propOwnerInput.addPropOwnerInfo(0, "'Jerry'", "'Seinfeld'",
      //        "'40 Dollop'", "'New York'", "'10020'", 1, "'000-111-2222'");
 
-     ArrayList<PropertyOwner> propertyOwnerList = getPropOwnersByID(0);
-     System.out.println(propertyOwnerList.get(0).getFname() + " TEST");
+     //ArrayList<PropertyOwner> propertyOwnerList = getPropOwnersByID(0);
+     //System.out.println(propertyOwnerList.get(0).getFname() + " TEST");
+
+    // Input businessOwnerInput = new Input("BUSOWNERS");
+    // businessOwnerInput.addBusinessOwnerInfo(0, "'Jerry'", "'Seinfeld'",
+     //        "'40 Dollop'", "'New York'", "'10020'", "'000-111-2222'",
+      //       "'Proper Properties'", "'Property Rental'", 1);
+
+     ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
+     System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
 
    }
 
@@ -147,6 +155,52 @@ public class Database {
             System.exit(0);
         }
         return OList;
+    }
+
+    public static ArrayList<BusinessOwner> getBusinessOwnersByID(int ownID){
+        ArrayList<BusinessOwner> BusinessOwnerList	= new ArrayList<>();
+        Connection c = null;
+        Statement stmt = null;
+        String FName, LName, street, city, postCode, phone, businessName, businessType;
+        int ownerId, staffId;
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT * FROM BUSOWNERS;");
+
+            while ( rs.next() ) {
+                FName = rs.getString("FNAME");
+                LName = rs.getString("LNAME");
+                street = rs.getString("STREET");
+                city = rs.getString("CITY");
+                postCode = rs.getString("POSTCODE");
+                phone = rs.getString("PHONE");
+                ownerId = rs.getInt("OWNERNUM");
+                staffId = rs.getInt("STAFFNUM");
+                businessName = rs.getString("BNAME");
+                businessType = rs.getString("BTYPE");
+
+                if(ownID == ownerId) {
+                    BusinessOwner businessOwner = new BusinessOwner(FName, LName, street, city, postCode, phone, staffId, ownerId,
+                    businessName, businessType);
+                    BusinessOwnerList.add(businessOwner);
+                    return BusinessOwnerList;
+                }
+                else if(ownID == 0) {
+                    BusinessOwner businessOwner = new BusinessOwner(FName, LName, street, city, postCode, phone, staffId, ownerId,
+                            businessName, businessType);
+                    BusinessOwnerList.add(businessOwner);
+                }
+            }
+        }catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        return BusinessOwnerList;
 
     }
 

@@ -87,6 +87,33 @@ public class Input
         }
         System.out.println("Property Owner record created successfully");
     }
+
+    public void addBusinessOwnerInfo(int oID, String Fname, String Lname, String street, String City, String Postcode,
+                                String Phone, String BusinessName, String BusinessType,  int sID) {
+        Connection c = null;
+        Statement stmt = null;
+
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
+            String sql = "INSERT INTO " + tableName + " (OWNERNUM,FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,BTYPE,BNAME,STAFFNUM) " +
+                    "VALUES (" + oID + "," + Fname + "," + Lname + "," + street + "," + City + "," + Postcode +
+                    "," + BusinessName + "," + BusinessType + "," + Phone + "," + sID + ");";
+
+            stmt.executeUpdate(sql);
+            stmt.close();
+            c.commit();
+            c.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        System.out.println("Property Owner record created successfully");
+    }
     
     public void addPropertyInfo(int propNum, String Street, String Postcode, String City, String type, int rooms, double rent, String Owner) {
       Connection c = null;

@@ -46,6 +46,19 @@ public class Initialize
                       " PHONE        TEXT   NOT NULL, " +
                       " STAFFNUM     TEXT   NOT NULL)"; 
          stmt.executeUpdate(sql);//2
+
+          sql = "CREATE TABLE BUSOWNERS" +
+                  "(OWNERNUM INT PRIMARY KEY     NOT NULL," +
+                  " FNAME        TEXT   NOT NULL, " +
+                  " LNAME        TEXT   NOT NULL, " +
+                  " STREET       TEXT   NOT NULL, " +
+                  " CITY         TEXT   NOT NULL, " +
+                  " POSTCODE     TEXT   NOT NULL, " +
+                  " PHONE        TEXT   NOT NULL, " +
+                  " BTYPE        TEXT   NOT NULL, " +
+                  " BNAME        TEXT   NOT NULL, " +
+                  " STAFFNUM     TEXT   NOT NULL)";
+          stmt.executeUpdate(sql);//2
          
          sql = "CREATE TABLE CLIENTS" +
                       "(CLIENTID INT PRIMARY KEY     NOT NULL," +
