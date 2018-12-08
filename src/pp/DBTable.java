@@ -5,12 +5,12 @@ import java.util.*;
 
 public class DBTable {
 
-   public static void main( String args[] ) {
+   /*public static void main( String args[] ) {
       Connection c = null;
       int Find;
       Scanner kb = new Scanner(System.in);
       Statement stmt = null;
-      ArrayList<Staff> list = new ArrayList<Staff>();
+      ArrayList<Staff> StaffList = new ArrayList<Staff>();
       try {
          Class.forName("org.sqlite.JDBC");
          c = DriverManager.getConnection("jdbc:sqlite:test.db");
@@ -32,8 +32,8 @@ public class DBTable {
 //             //stmt = c.createStatement();
 //             }
          while(true){
-        	 for(int i = 0; i < list.size(); i++){
-        		 if(list.get(i).getID() == Find){
+        	 for(int i = 0; i < StaffList.size(); i++){
+        		 if(StaffList.get(i).getID() == Find){
         			 System.out.println("");
         			 
         		 }
@@ -69,6 +69,6 @@ sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) " +
 stmt.executeUpdate(sql);
 System.out.println("Table created successfully");
 
-*/    
-   }
+
+   }*/
 }

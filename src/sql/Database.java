@@ -23,18 +23,18 @@ public class Database {
        //Print print = new Print("PROPERTIES");
        //print.Print("PROPERTIES");
       // getProp(000);
-       //printProp(000);
+      // printProp(000);
 
-       //Input clientInput = new Input("CLIENTS");
-       //clientInput.addClientInfo(0,"'Connor'", "'Colabella'", "'123-456-7890'",
-       //        30, 5, 0, "'Highland'", 100.0);
+      // Input clientInput = new Input("CLIENTS");
+      // clientInput.addClientInfo(0,"'Connor'", "'Colabella'", "'123-456-7890'",
+      //         30, 5, 0, "'Highland'", 100.0);
 
         //ArrayList<Client> clientList = getClients();
         //System.out.println(clientList.get(0).getFname() + " TEST");
 
         //Input leaseInput = new Input("LEASE");
         //leaseInput.addLeaseInfo(0, 1, "'Thomas'", "'Benedict'", 1, "'30 Archibald Lane'", "'Kingston'", "'12528'",
-         //    "'Apartment'", 3, 750.0, "'Credit'", 1000.0, 1, "'12/5/18'", "'12/1/20'", "'Two years'");
+        //     "'Apartment'", 3, 750.0, "'Credit'", 1000.0, 1, "'12/5/18'", "'12/1/20'", "'Two years'");
 
         //ArrayList<Lease> leaseList = getLease();
         //System.out.println(leaseList.get(0).getStreet() + " TEST");
@@ -43,54 +43,59 @@ public class Database {
      //propViewInput.addPropViewInfo(1, "'Richard'", "'Bulganari'", "'012-345-6789'", 10,
      //        "'40 Hawk Drive'", "'Albany'", "'10405'", "'6/22/19'", "'Beautiful view'");
 
-     ArrayList<PropView> propViewList = getPropView();
-     System.out.println(propViewList.get(0).getViewDate() + " TEST");
+    // ArrayList<PropView> propViewList = getPropView();
+    // System.out.println(propViewList.get(0).getViewDate() + " TEST");
 
+    // Input staffInput = new Input("STAFF");
+    // staffInput.addStaffInfo(2, "'Matt'", "'Smith'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540, 6);
 
+      //ArrayList<Staff> staffList = getStaff(2);
+     // System.out.println(staffList.get(0).getStaffNum() + " TEST");
    }
- public ArrayList<Staff> getStaff(int pos){
-	 // returns all staff members of a certain level, call with 3 for all staff
-	 // 0 = agent, 1 = supervisor, 2 = manager
-		Statement stmt = null;
-		int clearance = 0;
-		ArrayList<Staff> list = new ArrayList<Staff>();
-		try {
-			ResultSet rs = stmt.executeQuery( "SELECT * FROM COMPANY;" );
-			while(rs.next()){
-			 int id = rs.getInt("id");
-			 clearance = rs.getInt("pos");
-             String  name = rs.getString("name");
-             int age  = rs.getInt("age");
-             String  address = rs.getString("address");
-             double salary = rs.getDouble("salary");
-             String branch = rs.getString("branch");
-             if(clearance == pos){
-            		Staff staff = new Staff(id, name, age, address, salary);
-                 	list.add(staff);
-             } 
-             else if(clearance == 3){
-            	 Staff staff = new Staff(id, name, age, address, salary);
-            	 list.add(staff);
-             }
-		}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
- public void displayStaff(){
-	 ArrayList<Staff> staffList = getStaff(3);
-	 String name;
-	 int position;
-	 double salary;
-	 for(int i = 0; i < staffList.size(); i++){
-		 name = staffList.get(i).getName();
-		 position = staffList.get(i).getPosition();
-		 salary = staffList.get(i).getSalary();
-		 // connect this garbage to the front end
-	 }
-	 
- }
+    public static ArrayList<Staff> getStaff(int idNum){
+        ArrayList<Staff> sList = new ArrayList<>();
+        Statement stmt = null;
+        //int position = 0;
+        try {
+            ResultSet rs = stmt.executeQuery( "SELECT * FROM STAFF;" );
+            while(rs.next()){
+                int staffID = rs.getInt("ID");
+                int position = rs.getInt("POSITION");
+                String  Fname = rs.getString("FNAME");
+                String Lname = rs.getString("LNAME");
+                String branch = rs.getString("BRANCH");
+                String sex = rs.getString("SEX");
+                String DoB = rs.getString("DOB");
+                Double salary = rs.getDouble("SALARY");
+                int supervisorId = rs.getInt("SUPERVISOR");
+                if(staffID == idNum){
+                    Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
+                    sList.add(staff);
+                    return sList;
+                }
+                else if(idNum == 0){
+                    Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
+                    sList.add(staff);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return sList;
+    }
+    public void displayStaff(){
+        ArrayList<Staff> staffList = getStaff(3);
+        String Fname, Lname;
+        int position;
+        double salary;
+        for(int i = 0; i < staffList.size(); i++){
+            Fname = staffList.get(i).getFname();
+            Lname = staffList.get(i).getLname();
+            position = staffList.get(i).getPosition();
+            salary = staffList.get(i).getSalary();
+        }
+
+    }
  public static ArrayList<Client> getClients(){
      Connection c = null;
      Statement stmt = null;

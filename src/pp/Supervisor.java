@@ -7,9 +7,9 @@ public class Supervisor extends Staff {
 
 
 	
-	public Supervisor(String fname, String lname, int position, Branch branch, String gender, String dOB, String staffNum,
-			double salary, ArrayList<Staff> group) {
-		super(fname, lname, position, branch, gender, dOB, staffNum, salary);
+	public Supervisor(String fname, String lname, int position, String branch, String gender, String dOB, int staffNum,
+			double salary) {
+		super(fname, lname, position, gender, dOB, staffNum, salary);
 		this.group = group;
 	}
 
