@@ -43,15 +43,64 @@ public class Database {
      //propViewInput.addPropViewInfo(1, "'Richard'", "'Bulganari'", "'012-345-6789'", 10,
      //        "'40 Hawk Drive'", "'Albany'", "'10405'", "'6/22/19'", "'Beautiful view'");
 
-    // ArrayList<PropView> propViewList = getPropView();
-    // System.out.println(propViewList.get(0).getViewDate() + " TEST");
+     //ArrayList<PropView> propViewList = getPropView();
+     //System.out.println(propViewList.get(0).getViewDate() + " TEST");
 
-    // Input staffInput = new Input("STAFF");
-    // staffInput.addStaffInfo(2, "'Matt'", "'Smith'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540, 6);
+     //Input staffInput = new Input("STAFF");
+     //staffInput.addStaffInfo(5, "'Matt'", "'Smith'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540, 6);
 
-      //ArrayList<Staff> staffList = getStaff(2);
-     // System.out.println(staffList.get(0).getStaffNum() + " TEST");
+      ArrayList<Staff> staffList = getStaffByID(5);
+      System.out.println(staffList.get(0).getStaffNum() + " TEST");
    }
+
+    public static ArrayList<Staff> getStaffByID(int idNum){
+        Connection c = null;
+        Statement stmt = null;
+
+        ArrayList<Staff> staffList = new ArrayList();
+        int staffID, position, supervisorId;
+        String Fname, Lname, branch, sex, DoB;
+        double salary;
+
+        try{
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM STAFF;");
+            while(rs.next()){
+                staffID = rs.getInt("STAFFNUM");
+                Fname = rs.getString("FNAME");
+                Lname = rs.getString("LNAME");
+                position = rs.getInt("POSITION");
+                branch = rs.getString("BRANCH");
+                sex = rs.getString("SEX");
+                DoB = rs.getString("DOB");
+                salary = rs.getDouble("SALARY");
+                supervisorId = rs.getInt("SUPERVISOR");
+
+                //Return staff of given ID
+                if(staffID == idNum) {
+                    Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
+                    staffList.add(staff);
+                    return staffList;
+                }
+                else if(idNum == 0){
+                    Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
+                    staffList.add(staff);
+                }
+                Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
+                staffList.add(staff);
+            }
+        }catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        return staffList;
+    }
+   /*
     public static ArrayList<Staff> getStaff(int idNum){
         ArrayList<Staff> sList = new ArrayList<>();
         Statement stmt = null;
@@ -59,7 +108,7 @@ public class Database {
         try {
             ResultSet rs = stmt.executeQuery( "SELECT * FROM STAFF;" );
             while(rs.next()){
-                int staffID = rs.getInt("ID");
+                int staffID = rs.getInt("STAFFNUM");
                 int position = rs.getInt("POSITION");
                 String  Fname = rs.getString("FNAME");
                 String Lname = rs.getString("LNAME");
@@ -68,7 +117,7 @@ public class Database {
                 String DoB = rs.getString("DOB");
                 Double salary = rs.getDouble("SALARY");
                 int supervisorId = rs.getInt("SUPERVISOR");
-                if(staffID == idNum){
+                /*if(staffID == idNum){
                     Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
                     sList.add(staff);
                     return sList;
@@ -77,9 +126,12 @@ public class Database {
                     Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
                     sList.add(staff);
                 }
+                Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
+                sList.add(staff);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
         }
         return sList;
     }
@@ -95,7 +147,7 @@ public class Database {
             salary = staffList.get(i).getSalary();
         }
 
-    }
+    }*/
  public static ArrayList<Client> getClients(){
      Connection c = null;
      Statement stmt = null;

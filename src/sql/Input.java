@@ -32,7 +32,7 @@ public class Input
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-        System.out.println("Staff record created successfully");
+        System.out.println("Staff record for " + Fname + "" + Lname + " created successfully");
     }
 
     public void addClientInfo(int clientId, String fname, String lname, String phone, float maxRent, int staffId,
