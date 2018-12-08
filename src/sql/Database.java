@@ -1,4 +1,5 @@
 package sql;
+import java.security.acl.Owner;
 import java.sql.*;
 import java.util.*;
 
@@ -49,8 +50,13 @@ public class Database {
      //Input staffInput = new Input("STAFF");
      //staffInput.addStaffInfo(5, "'Matt'", "'Smith'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540, 6);
 
-      ArrayList<Staff> staffList = getStaffByID(5);
-      System.out.println(staffList.get(0).getStaffNum() + " TEST");
+     //Input propOwnerInput = new Input("PROPOWNERS");
+     //propOwnerInput.addPropOwnerInfo(0, "'Jerry'", "'Seinfeld'",
+     //        "'40 Dollop'", "'New York'", "'10020'", 1, "'000-111-2222'");
+
+     ArrayList<PropertyOwner> propertyOwnerList = getPropOwnersByID(0);
+     System.out.println(propertyOwnerList.get(0).getFname() + " TEST");
+
    }
 
     public static ArrayList<Staff> getStaffByID(int idNum){
@@ -100,54 +106,50 @@ public class Database {
         }
         return staffList;
     }
-   /*
-    public static ArrayList<Staff> getStaff(int idNum){
-        ArrayList<Staff> sList = new ArrayList<>();
+
+    public static ArrayList<PropertyOwner> getPropOwnersByID(int ownID){
+        ArrayList<PropertyOwner> OList	= new ArrayList<>();
+        Connection c = null;
         Statement stmt = null;
-        //int position = 0;
+        String FName, LName, street, city, postcode, phone;
+        int OID, MID;
         try {
-            ResultSet rs = stmt.executeQuery( "SELECT * FROM STAFF;" );
-            while(rs.next()){
-                int staffID = rs.getInt("STAFFNUM");
-                int position = rs.getInt("POSITION");
-                String  Fname = rs.getString("FNAME");
-                String Lname = rs.getString("LNAME");
-                String branch = rs.getString("BRANCH");
-                String sex = rs.getString("SEX");
-                String DoB = rs.getString("DOB");
-                Double salary = rs.getDouble("SALARY");
-                int supervisorId = rs.getInt("SUPERVISOR");
-                /*if(staffID == idNum){
-                    Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
-                    sList.add(staff);
-                    return sList;
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery( "SELECT * FROM PROPOWNERS;");
+
+            while ( rs.next() ) {
+                FName = rs.getString("FNAME");
+                LName = rs.getString("LNAME");
+                street = rs.getString("STREET");
+                city = rs.getString("CITY");
+                postcode = rs.getString("POSTCODE");
+                phone = rs.getString("PHONE");
+                OID = rs.getInt("OWNERNUM");
+                MID = rs.getInt("STAFFNUM");
+
+                if(ownID == OID) {
+                    PropertyOwner o1 = new PropertyOwner(FName, LName, street, city, postcode, phone, OID, MID);
+                    OList.add(o1);
+                    return OList;
                 }
-                else if(idNum == 0){
-                    Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
-                    sList.add(staff);
+                else if(ownID == 0) {
+                    PropertyOwner o1 = new PropertyOwner(FName, LName, street, city, postcode, phone, OID, MID);
+                    OList.add(o1);
                 }
-                Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
-                sList.add(staff);
             }
-        } catch ( Exception e ) {
+        }catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-        return sList;
-    }
-    public void displayStaff(){
-        ArrayList<Staff> staffList = getStaff(3);
-        String Fname, Lname;
-        int position;
-        double salary;
-        for(int i = 0; i < staffList.size(); i++){
-            Fname = staffList.get(i).getFname();
-            Lname = staffList.get(i).getLname();
-            position = staffList.get(i).getPosition();
-            salary = staffList.get(i).getSalary();
-        }
+        return OList;
 
-    }*/
+    }
+
  public static ArrayList<Client> getClients(){
      Connection c = null;
      Statement stmt = null;

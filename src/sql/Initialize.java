@@ -36,7 +36,7 @@ public class Initialize
                       " OWNER        TEXT   NOT NULL)"; 
          stmt.executeUpdate(sql);//1
          
-         sql = "CREATE TABLE OWNERS" +
+         sql = "CREATE TABLE PROPOWNERS" +
                       "(OWNERNUM INT PRIMARY KEY     NOT NULL," +
                       " FNAME        TEXT   NOT NULL, " +
                       " LNAME        TEXT   NOT NULL, " +
@@ -44,8 +44,6 @@ public class Initialize
                       " CITY         TEXT   NOT NULL, " + 
                       " POSTCODE     TEXT   NOT NULL, " +
                       " PHONE        TEXT   NOT NULL, " +
-                      " SFNAME       TEXT   NOT NULL, " +
-                      " SLNAME       TEXT   NOT NULL, " +
                       " STAFFNUM     TEXT   NOT NULL)"; 
          stmt.executeUpdate(sql);//2
          
