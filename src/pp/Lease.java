@@ -1,5 +1,7 @@
 package pp;
 
+import static sql.Database.getClientByID;
+
 public class Lease extends Property{
 	private int leaseId;
 	private int clientId;
@@ -12,9 +14,6 @@ public class Lease extends Property{
 	private String rentEnd;
 	private String duration;
 	private Client client;
-
-	//public Property(String street, String city, String postcode, String type, String propNumber, int numRooms,
-					//double monthlyRent, PropertyOwner owner) {
 
 	public Lease(int leaseId, int clientId, String fname, String lname, int propertyId, String street, String city, String postCode,
 				 String type, int numRooms, double monthlyRent, String payMethod, double deposit, int depositPaid, String rentStart, String rentEnd, String duration) {
@@ -29,6 +28,7 @@ public class Lease extends Property{
 		this.rentStart = rentStart;
 		this.rentEnd = rentEnd;
 		this.duration = duration;
+		this.client = getClientByID(clientId).get(0);
 	}
 
 	/**
@@ -36,6 +36,13 @@ public class Lease extends Property{
 	 */
 	public int getLeaseId() {
 		return leaseId;
+	}
+
+	/**
+	 * @return the leaseNum
+	 */
+	public int getClientId() {
+		return clientId;
 	}
 
 	/**

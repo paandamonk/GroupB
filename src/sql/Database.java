@@ -204,7 +204,7 @@ public class Database {
 
     }
 
- public static ArrayList<Client> getClients(){
+ public static ArrayList<Client> getClientByID(int cID){
      Connection c = null;
      Statement stmt = null;
 
@@ -232,8 +232,17 @@ public class Database {
                 postCode = rs.getString("POSTCODE");
                 maxRent = rs.getFloat("MAXRENT");
 
-		 		Client client = new Client(idNum, fName, lName, phone, staffNum, idNum, street, city, postCode, maxRent);
-		 		clientList.add(client);
+                if(cID == idNum) {
+                    Client client = new Client(idNum, fName, lName, phone, staffNum, idNum, street, city, postCode, maxRent);
+                    clientList.add(client);
+                    return clientList;
+                }
+                else if(cID == 0) {
+                    Client client = new Client(idNum, fName, lName, phone, staffNum, idNum, street, city, postCode, maxRent);
+                    clientList.add(client);
+                }
+
+
  			}
 	 	}catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );

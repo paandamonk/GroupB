@@ -1,5 +1,7 @@
 package pp;
 
+import static sql.Database.getPropOwnersByID;
+
 public class Property {
 	private String street;
 	private String city;
@@ -23,6 +25,7 @@ public class Property {
 		this.propertyId = propertyId;
 		this.numRooms = numRooms;
 		this.monthlyRent = monthlyRent;
+		this.owner = getPropOwnersByID(propertyId).get(0);
 	}
 
 	public Property(String street, String city, String postcode, String type, int propertyId, int numRooms, double monthlyRent, PropertyOwner owner) {
@@ -34,7 +37,7 @@ public class Property {
 		this.propertyId = propertyId;
 		this.numRooms = numRooms;
 		this.monthlyRent = monthlyRent;
-		this.owner = owner;
+		this.owner = getPropOwnersByID(propertyId).get(0);
 	}
 
 	/**
@@ -143,10 +146,10 @@ public class Property {
 	}
 
 	/**
-	 * @param owner the owner to set
+	 * @param ownerId the owner to set
 	 */
-	public void setOwner(PropertyOwner owner) {
-		this.owner = owner;
+	public void setOwner(int ownerId) {
+		this.owner = getPropOwnersByID(ownerId).get(0);
 	}
 	
 

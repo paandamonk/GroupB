@@ -96,17 +96,17 @@ public class Staff extends Person {
 	}
 
 	/**
-	 * @return the supervisor
+	 * @return the supervisor's ID
 	 */
-	public Staff getSupervisor() {
-		return Supervisor;
+	public int getSupervisorID() {
+		return SupId;
 	}
 
 	/**
-	 * @param supervisor the supervisor to set
+	 * @param supervisorID the supervisorID to set
 	 */
-	public void setSupervisor(Staff supervisor) {
-		Supervisor = supervisor;
+	public void setSupervisorID(int supervisorID) {
+		SupId = supervisorID;
 	}
 
 	/**
@@ -163,10 +163,6 @@ public class Staff extends Person {
 	 */
 	public void setGroup(ArrayList<Staff> group) {
 		this.group = group;
-	}
-
-	public String getFname() {
-		return this.getFname();
 	}
 
 	public String getBranch() {
