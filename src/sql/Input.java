@@ -35,8 +35,8 @@ public class Input
         System.out.println("Staff record for " + Fname + "" + Lname + " created successfully");
     }
 
-    public void addClientInfo(int clientId, String fname, String lname, String phone, float maxRent, int staffId,
-                              int idNum, String address, double maxPrice) {
+    public void addClientInfo(int clientId, String fname, String lname, String type, String phone, float maxRent, int staffId,
+                              String street, String city, String postCode) {
         Connection c = null;
         Statement stmt = null;
 
@@ -47,9 +47,9 @@ public class Input
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO " + tableName + " (CLIENTID,FNAME,LNAME,PHONE,MAXRENT,STAFFNUM,STREET,CITY,POSTCODE) " +
-                    "VALUES (" + clientId + "," + fname + "," + lname + "," + phone + "," + maxRent + "," +
-                    staffId + "," + idNum + "," + address + "," + maxPrice + ");";
+            String sql = "INSERT INTO " + tableName + " (CLIENTID,FNAME,LNAME,TYPE,PHONE,MAXRENT,STAFFNUM,STREET,CITY,POSTCODE) " +
+                    "VALUES (" + clientId + "," + fname + "," + lname + "," + type + "," + phone + "," + maxRent + "," +
+                    staffId + "," + street + "," + city + "," + postCode + ");";
 
             stmt.executeUpdate(sql);
 

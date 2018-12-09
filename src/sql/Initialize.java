@@ -64,6 +64,7 @@ public class Initialize
                       "(CLIENTID INT PRIMARY KEY     NOT NULL," +
                       " FNAME        TEXT   NOT NULL, " +
                       " LNAME        TEXT   NOT NULL, " +
+                      " TYPE         TEXT   NOT NULL, " +
                       " PHONE        TEXT   NOT NULL, " + 
                       " MAXRENT      REAL   NOT NULL, " +
                       " STAFFNUM     TEXT   NOT NULL, " +

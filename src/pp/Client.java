@@ -9,17 +9,18 @@ public class Client extends Person{
 	private String phone;
 	private int staffId;
 	private Staff member;
-	private String street, city, postCode;
+	private String street, city, postCode, type;
 	private int idNum;
-	private double max;
+	private float max;
 	
-	public Client(int clientIdNum,String fname, String lname, String phone, int staffId, int idNum, String street, String city, String postCode, double maxPrice) {
+	public Client(int clientIdNum, String fname, String lname, String type, String phone,
+				  int staffId, String street, String city, String postCode, float maxPrice) {
 		super(fname, lname);
+		this.type = type;
 		this.clientIdNum = clientIdNum;
 		this.phone = phone;
 		this.staffId = staffId;
 		this.member = getStaffByID(staffId).get(0);
-		this.idNum = idNum;
 		this.street = street;
 		this.city = city;
 		this.postCode = postCode;
@@ -70,7 +71,7 @@ public class Client extends Person{
 	/**
 	 * @return the member
 	 */
-	public Staff getMember() {
+	public Staff getStaff() {
 		return member;
 	}
 

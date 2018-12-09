@@ -26,12 +26,15 @@ public class Database {
       // getProp(000);
       // printProp(000);
 
-      // Input clientInput = new Input("CLIENTS");
-      // clientInput.addClientInfo(0,"'Connor'", "'Colabella'", "'123-456-7890'",
-      //         30, 5, 0, "'Highland'", 100.0);
+      // Input staffInput = new Input("STAFF");
+      // staffInput.addStaffInfo(5, "'Matt'", "'Smith'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540, 6);
 
-        //ArrayList<Client> clientList = getClients();
-        //System.out.println(clientList.get(0).getFname() + " TEST");
+       //Input clientInput = new Input("CLIENTS");
+       //clientInput.addClientInfo(1,"'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'",
+       //        30, 5, "'40'", "'Highland'", "'12234'");
+
+        ArrayList<Client> clientList = getClientByID(0);
+        System.out.println(clientList.get(0).getStaff().getFname() + " TEST");
 
         //Input leaseInput = new Input("LEASE");
         //leaseInput.addLeaseInfo(0, 1, "'Thomas'", "'Benedict'", 1, "'30 Archibald Lane'", "'Kingston'", "'12528'",
@@ -47,9 +50,6 @@ public class Database {
      //ArrayList<PropView> propViewList = getPropView();
      //System.out.println(propViewList.get(0).getViewDate() + " TEST");
 
-     //Input staffInput = new Input("STAFF");
-     //staffInput.addStaffInfo(5, "'Matt'", "'Smith'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540, 6);
-
      //Input propOwnerInput = new Input("PROPOWNERS");
      //propOwnerInput.addPropOwnerInfo(0, "'Jerry'", "'Seinfeld'",
      //        "'40 Dollop'", "'New York'", "'10020'", 1, "'000-111-2222'");
@@ -62,8 +62,8 @@ public class Database {
      //        "'40 Dollop'", "'New York'", "'10020'", "'000-111-2222'",
       //       "'Proper Properties'", "'Property Rental'", 1);
 
-     ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
-     System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
+    // ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
+    // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
 
    }
 
@@ -209,7 +209,7 @@ public class Database {
      Statement stmt = null;
 
      ArrayList<Client> clientList = new ArrayList();
-     String fName, lName, phone, street, city, postCode;
+     String fName, lName, type, phone, street, city, postCode;
      int idNum, staffNum;
      float maxRent;
 
@@ -225,6 +225,7 @@ public class Database {
                 idNum = rs.getInt("CLIENTID");
 		 		fName = rs.getString("FNAME");
 		 		lName = rs.getString("LNAME");
+                type = rs.getString("TYPE");
                 phone = rs.getString("PHONE");
                 staffNum = rs.getInt("STAFFNUM");
 		 		street = rs.getString("STREET");
@@ -233,12 +234,12 @@ public class Database {
                 maxRent = rs.getFloat("MAXRENT");
 
                 if(cID == idNum) {
-                    Client client = new Client(idNum, fName, lName, phone, staffNum, idNum, street, city, postCode, maxRent);
+                    Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
                     clientList.add(client);
                     return clientList;
                 }
                 else if(cID == 0) {
-                    Client client = new Client(idNum, fName, lName, phone, staffNum, idNum, street, city, postCode, maxRent);
+                    Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
                     clientList.add(client);
                 }
 

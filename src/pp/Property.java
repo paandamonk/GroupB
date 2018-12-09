@@ -1,6 +1,7 @@
 package pp;
 
 import static sql.Database.getPropOwnersByID;
+import static sql.Database.getStaffByID;
 
 public class Property {
 	private String street;
@@ -9,6 +10,8 @@ public class Property {
 	private String type;
 	private int propertyId;
 	private int numRooms;
+	private int staffId;
+	private Staff staffMember;
 	private double monthlyRent;
 	private PropertyOwner owner;
 	
@@ -26,6 +29,8 @@ public class Property {
 		this.numRooms = numRooms;
 		this.monthlyRent = monthlyRent;
 		this.owner = getPropOwnersByID(propertyId).get(0);
+		this.staffMember = owner.getStaff();
+		this.staffId = staffMember.getStaffNum();
 	}
 
 	public Property(String street, String city, String postcode, String type, int propertyId, int numRooms, double monthlyRent, PropertyOwner owner) {

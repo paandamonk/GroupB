@@ -16,6 +16,11 @@ public class Supervisor extends Staff {
 	public void addStaff(Staff s) {
 		group.add(s);
 	}
+
+	public Staff getStaff(int index) {
+		Staff s = group.get(index);
+		return s;
+	}
 	
 	public void removeStaff(Staff s) {
 		group.remove(s);
