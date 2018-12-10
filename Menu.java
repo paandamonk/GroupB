@@ -1,4 +1,5 @@
 package pp;
+
 import sql.Database;
 
 import java.awt.BorderLayout;
@@ -21,29 +22,30 @@ import java.util.Comparator;
 
 import javax.swing.*;
 
-
 class LastNameComparator implements Comparator<String> {
-    public int compare(String b1, String b2) {
-        String[] arr1 = b1.split(" ");
-        String[] arr2 = b2.split(" ");
-        if (arr1.length > 1 && arr2.length > 1)
-            return arr1[arr1.length-1].compareTo(arr2[arr2.length-1]);
-        else
-            return 0;
-    }
+	public int compare(String b1, String b2) {
+		String[] arr1 = b1.split(" ");
+		String[] arr2 = b2.split(" ");
+		if (arr1.length > 1 && arr2.length > 1)
+			return arr1[arr1.length - 1].compareTo(arr2[arr2.length - 1]);
+		else
+			return 0;
+	}
 }
 
-public class Menu extends JFrame implements ActionListener  {
+public class Menu extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel Panel;
 	private JPanel Panel2;
 	private JPanel Panel3;
 	private JLabel label;
-	private String[] manChoices = {"", "View Managers", "View Supervisors", "View Agents", "View Employees Salaries",
-			"View Renters","View Property Owners", "View Properties","View Property Viewings" };
-	private String[] supChoices = {"", "View Supervisors", "View Agents", "View Renters","View Property Owners", "View Properties","View Property Viewings" };
-	private String[] agentChoices = {"", "View Agents", "View Renters","View Property Owners", "View Properties","View Property Viewings" };
+	private String[] manChoices = { "", "View Managers", "View Supervisors", "View Agents", "View Employees Salaries",
+			"View Renters", "View Property Owners", "View Properties", "View Property Viewings" };
+	private String[] supChoices = { "", "View Supervisors", "View Agents", "View Renters", "View Property Owners",
+			"View Properties", "View Property Viewings" };
+	private String[] agentChoices = { "", "View Agents", "View Renters", "View Property Owners", "View Properties",
+			"View Property Viewings" };
 	private JComboBox<?> choices;
 	private JRadioButton filter0;
 	private JRadioButton filter1;
@@ -60,7 +62,10 @@ public class Menu extends JFrame implements ActionListener  {
 	private JButton b;
 	private JList l;
 	private JScrollPane scroll;
-	
+	private JFrame f;
+	Database db = new Database();
+	ArrayList<Client> clientList = db.getClients();
+	DefaultListModel list = new DefaultListModel();
 
 	public Menu(int cl) {
 		if (cl == 2) {
@@ -71,7 +76,7 @@ public class Menu extends JFrame implements ActionListener  {
 			ManagerMenu();
 			add(Panel, BorderLayout.NORTH);
 			add(Panel2, BorderLayout.SOUTH);
-			add(Panel3,BorderLayout.SOUTH);
+			add(Panel3, BorderLayout.SOUTH);
 			setVisible(true);
 		}
 		if (cl == 1) {
@@ -82,7 +87,7 @@ public class Menu extends JFrame implements ActionListener  {
 			SupMenu();
 			add(Panel, BorderLayout.NORTH);
 			add(Panel2, BorderLayout.SOUTH);
-			add(Panel3,BorderLayout.SOUTH);
+			add(Panel3, BorderLayout.SOUTH);
 
 			setVisible(true);
 		}
@@ -94,7 +99,7 @@ public class Menu extends JFrame implements ActionListener  {
 			AgentMenu();
 			add(Panel, BorderLayout.NORTH);
 			add(Panel2, BorderLayout.SOUTH);
-			add(Panel3,BorderLayout.SOUTH);
+			add(Panel3, BorderLayout.SOUTH);
 
 			setVisible(true);
 
@@ -130,7 +135,6 @@ public class Menu extends JFrame implements ActionListener  {
 		filters.add(filter5);
 		filters.add(filter6);
 		filters.add(filter7);
-		
 
 		Panel.add(label);
 		Panel.add(choices);
@@ -144,6 +148,20 @@ public class Menu extends JFrame implements ActionListener  {
 		Panel2.add(filter4);
 		Panel2.add(filter5);
 		Panel2.add(filter6);
+		l = new JList();
+
+		l.setPrototypeCellValue("XXXXXXXXXXXXXXXXXXXX");
+
+		l.setPreferredSize(new Dimension(200, 200));
+		l.setVisibleRowCount(3);
+
+		l.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		l.setLayoutOrientation(JList.VERTICAL);
+		scroll = new JScrollPane();
+		scroll.setViewportView(l);
+		Panel3.add(scroll);
+		Panel3.validate();
+		Panel3.repaint();
 
 	}
 
@@ -175,7 +193,7 @@ public class Menu extends JFrame implements ActionListener  {
 		filters.add(filter5);
 		filters.add(filter6);
 		filters.add(filter7);
-		
+
 		Panel.add(label);
 		Panel.add(choices);
 		Panel.add(s);
@@ -188,7 +206,7 @@ public class Menu extends JFrame implements ActionListener  {
 		Panel2.add(filter4);
 		Panel2.add(filter5);
 		Panel2.add(filter6);
-		
+
 	}
 
 	public void AgentMenu() {
@@ -210,68 +228,42 @@ public class Menu extends JFrame implements ActionListener  {
 
 	}
 
- public void RadioListener() {
-		
+	public void RadioListener() {
+
 	}
 
-
 	public void actionPerformed(ActionEvent e) {
-	    Object src = e.getSource();
-	    
-	    if(src==b){
-		    DefaultListModel list = new DefaultListModel();
-		    Database db = new Database();
-			ArrayList<Client> clientList = db.getClients();
+		Object src = e.getSource();
+
+		if (src == b) {
+
 			String test = clientList.get(0).getFname() + " " + clientList.get(0).getLname();
 			String test2 = clientList.get(1).getFname() + " " + clientList.get(1).getLname();
+			list.addElement(test);
+			list.addElement(test2);
 			
-			
-				if(test.contains(search.getText())){
-					
-					
-					list.addElement(test);
-				}
-					if(test2.contains(search.getText())){
-						list.addElement(test2);
-					}
-					
-				
-					 l = new JList(list);
-					 
-					 
-							
-				
-					
-					
-					 l.setPrototypeCellValue("XXXXXXXXXXXXXXXXXXXX");
-					
-					 l.setPreferredSize(new Dimension(200, 200));
-					 l.setVisibleRowCount(3);
+//			for(int i = 0; i < list.size(); i++){
+//				if(list.get(i).toString().contains(search.getText())){
+//					
+//				}
+//			}
 
-					 l.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-						l.setLayoutOrientation(JList.VERTICAL);
-						scroll = new JScrollPane();
-						scroll.setViewportView(l);
-						Panel3.add(scroll);
-						Panel3.validate();
-						Panel3.repaint();
-	    }
+			l = new JList(list);
+			Panel3.removeAll();
+			scroll = new JScrollPane();
+			scroll.setViewportView(l);
+			Panel3.add(scroll);
+			Panel3.validate();
+			Panel3.repaint();
 
-	    
-			
-			
-			
-			
+		}
 
-		
-		
-
-		if(choices.getSelectedItem().equals("View Managers")) {
+		if (choices.getSelectedItem().equals("View Managers")) {
 			filter0.setText("(No Select)");
 			filter1.setText("First Name");
 			filter2.setText("Last Name");
 			filter3.setText("ID Number");
-			
+
 			filter0.setVisible(true);
 			filter1.setVisible(true);
 			filter2.setVisible(true);
@@ -279,7 +271,7 @@ public class Menu extends JFrame implements ActionListener  {
 			filter4.setVisible(false);
 			filter5.setVisible(false);
 			filter6.setVisible(false);
-			
+
 			filter0.addActionListener(this);
 			filter1.addActionListener(this);
 			filter2.addActionListener(this);
@@ -288,14 +280,14 @@ public class Menu extends JFrame implements ActionListener  {
 			filter5.addActionListener(this);
 			filter6.addActionListener(this);
 			filter7.addActionListener(this);
-			
-			if(filter0.isSelected()){
+
+			if (filter0.isSelected()) {
 				try {
-					BufferedReader in = new BufferedReader(new FileReader("/Users/KennysStuff/Documents/UserInterface/src/pp/names.txt"));
+					BufferedReader in = new BufferedReader(
+							new FileReader("/Users/KennysStuff/Documents/UserInterface/src/pp/names.txt"));
 					String line;
-					while((line = in.readLine()) != null)
-					{
-					    System.out.println(line);
+					while ((line = in.readLine()) != null) {
+						System.out.println(line);
 					}
 					in.close();
 				} catch (FileNotFoundException e1) {
@@ -303,89 +295,76 @@ public class Menu extends JFrame implements ActionListener  {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				
-				
-				
+
 			}
-   
 
+			if (filter1.isSelected()) {
+				System.out.println();
 
-			 if(filter1.isSelected()){
-				    System.out.println();
-
-				 System.out.println("Sorted by first name:");
+				System.out.println("Sorted by first name:");
 				ArrayList<String> name = new ArrayList<String>();
 				try {
-					BufferedReader in = new BufferedReader(new FileReader("/Users/KennysStuff/Documents/UserInterface/src/pp/names.txt"));
+					BufferedReader in = new BufferedReader(
+							new FileReader("/Users/KennysStuff/Documents/UserInterface/src/pp/names.txt"));
 					String line;
-					while((line = in.readLine()) != null)
-					{
+					while ((line = in.readLine()) != null) {
 						name.add(line);
-					    
+
 					}
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				
-				
+
 				Collections.sort(name);
-				
-				for(int i = 0; i < name.size(); i++){
+
+				for (int i = 0; i < name.size(); i++) {
 					System.out.println(name.get(i));
 				}
-				
-			 
-			 }
-			 if(filter2.isSelected()){
-				 
-				 System.out.println();
 
-				 System.out.println("Sorted by last name:");
-				 
-				 
-				 ArrayList<String> name = new ArrayList<String>();
-					try {
-						BufferedReader in = new BufferedReader(new FileReader("/Users/KennysStuff/Documents/UserInterface/src/pp/names.txt"));
-						String line;
-						while((line = in.readLine()) != null)
-						{
-							
-							name.add(line);
-							}
-						
-						
-						    
-						}
-					 catch (FileNotFoundException e1) {
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						e1.printStackTrace();
+			}
+			if (filter2.isSelected()) {
+
+				System.out.println();
+
+				System.out.println("Sorted by last name:");
+
+				ArrayList<String> name = new ArrayList<String>();
+				try {
+					BufferedReader in = new BufferedReader(
+							new FileReader("/Users/KennysStuff/Documents/UserInterface/src/pp/names.txt"));
+					String line;
+					while ((line = in.readLine()) != null) {
+
+						name.add(line);
 					}
-					
-					
-					Collections.sort(name, new LastNameComparator());
-					
-					for(int i = 0; i < name.size(); i++){
-						System.out.println(name.get(i));
-					}
-					
-				 
-			 }
-			 if(filter3.isSelected()){
-				 
-			 }
-			
+
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+
+				Collections.sort(name, new LastNameComparator());
+
+				for (int i = 0; i < name.size(); i++) {
+					System.out.println(name.get(i));
+				}
+
+			}
+			if (filter3.isSelected()) {
+
+			}
 
 		}
-		
-		if(choices.getSelectedItem().equals("View Supervisors")) {
+
+		if (choices.getSelectedItem().equals("View Supervisors")) {
 			filter0.setText("(No Select)");
 			filter1.setText("First Name");
 			filter2.setText("Last Name");
 			filter3.setText("ID Number");
-			
+
 			filter0.setVisible(true);
 
 			filter1.setVisible(true);
@@ -395,12 +374,12 @@ public class Menu extends JFrame implements ActionListener  {
 			filter5.setVisible(false);
 			filter6.setVisible(false);
 		}
-		if(choices.getSelectedItem().equals("View Agents")) {
+		if (choices.getSelectedItem().equals("View Agents")) {
 			filter0.setText("(No Select)");
 			filter1.setText("First Name");
 			filter2.setText("Last Name");
 			filter3.setText("ID Number");
-			
+
 			filter0.setVisible(true);
 			filter1.setVisible(true);
 			filter2.setVisible(true);
@@ -410,13 +389,13 @@ public class Menu extends JFrame implements ActionListener  {
 			filter6.setVisible(false);
 		}
 
-		if(choices.getSelectedItem().equals("View Employees Salaries")) {
+		if (choices.getSelectedItem().equals("View Employees Salaries")) {
 			filter0.setText("(No Select)");
 			filter1.setText("First Name");
 			filter2.setText("Last Name");
 			filter3.setText("Low to High");
 			filter4.setText("High to Low");
-			
+
 			filter0.setVisible(true);
 			filter1.setVisible(true);
 			filter2.setVisible(true);
@@ -424,7 +403,7 @@ public class Menu extends JFrame implements ActionListener  {
 			filter4.setVisible(true);
 			filter5.setVisible(false);
 			filter6.setVisible(false);
-			
+
 			filter0.addActionListener(this);
 			filter1.addActionListener(this);
 			filter2.addActionListener(this);
@@ -433,14 +412,14 @@ public class Menu extends JFrame implements ActionListener  {
 			filter5.addActionListener(this);
 			filter6.addActionListener(this);
 			filter7.addActionListener(this);
-			
-			if(filter0.isSelected()){
+
+			if (filter0.isSelected()) {
 				try {
-					BufferedReader in = new BufferedReader(new FileReader("/Users/KennysStuff/Documents/UserInterface/src/pp/names.txt"));
+					BufferedReader in = new BufferedReader(
+							new FileReader("/Users/KennysStuff/Documents/UserInterface/src/pp/names.txt"));
 					String line;
-					while((line = in.readLine()) != null)
-					{
-					    System.out.println(line);
+					while ((line = in.readLine()) != null) {
+						System.out.println(line);
 					}
 					in.close();
 				} catch (FileNotFoundException e1) {
@@ -448,154 +427,136 @@ public class Menu extends JFrame implements ActionListener  {
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				
+
 			}
-			 if(filter1.isSelected()){
+			if (filter1.isSelected()) {
 				ArrayList<String> name = new ArrayList<String>();
 				try {
-					BufferedReader in = new BufferedReader(new FileReader("/Users/KennysStuff/Documents/UserInterface/src/pp/names.txt"));
+					BufferedReader in = new BufferedReader(
+							new FileReader("/Users/KennysStuff/Documents/UserInterface/src/pp/names.txt"));
 					String line;
-					while((line = in.readLine()) != null)
-					{
+					while ((line = in.readLine()) != null) {
 						name.add(line);
-					    
+
 					}
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				
-				
+
 				Collections.sort(name);
-				
-				for(int i = 0; i < name.size(); i++){
+
+				for (int i = 0; i < name.size(); i++) {
 					System.out.println(name.get(i));
 				}
-				
-			 
-			 }
-			 if(filter2.isSelected()){
-				 ArrayList<String> name = new ArrayList<String>();
-					try {
-						BufferedReader in = new BufferedReader(new FileReader("/Users/KennysStuff/Documents/UserInterface/src/pp/names.txt"));
-						String line;
-						while((line = in.readLine()) != null)
-						{
-							
-							name.add(line);
-							}
-						
-						
-						    
-						}
-					 catch (FileNotFoundException e1) {
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						e1.printStackTrace();
+
+			}
+			if (filter2.isSelected()) {
+				ArrayList<String> name = new ArrayList<String>();
+				try {
+					BufferedReader in = new BufferedReader(
+							new FileReader("/Users/KennysStuff/Documents/UserInterface/src/pp/names.txt"));
+					String line;
+					while ((line = in.readLine()) != null) {
+
+						name.add(line);
 					}
-					
-					
-					Collections.sort(name, new LastNameComparator());
-					
-					for(int i = 0; i < name.size(); i++){
-						System.out.println(name.get(i));
-					}
-					
-				 
-			 }
-				
-				
-		
 
-		if(choices.getSelectedItem().equals("View Renters")) {
-			filter0.setText("(No Select)");
-			filter1.setText("First Name");
-			filter2.setText("Last Name");
-			filter3.setText("Renter ID");
-			filter4.setText("Property ID");
-			filter5.setText("Phone Number");
-			filter6.setText("Staff Member");
-			
-			filter0.setVisible(true);
-			filter1.setVisible(true);
-			filter2.setVisible(true);
-			filter3.setVisible(true);
-			filter4.setVisible(true);
-			filter5.setVisible(true);
-			filter6.setVisible(true);
-		}
-		if(choices.getSelectedItem().equals("View Property Owners")) {
-			filter0.setText("(No Select)");
-			filter1.setText("First Name");
-			filter2.setText("Last Name");
-			filter3.setText("Property Owner ID");
-			filter4.setText("Property ID");
-			filter5.setText("Phone Number");
-			filter6.setText("Staff Member");
-			
-			filter0.setVisible(true);
-			filter1.setVisible(true);
-			filter2.setVisible(true);
-			filter3.setVisible(true);
-			filter4.setVisible(true);
-			filter5.setVisible(true);
-			filter6.setVisible(true);
-			filter7.setVisible(false);
-		}
-		if(choices.getSelectedItem().equals("View Properties")){
-			
-			filter0.setText("(No Select)");
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 
-			filter1.setText("First Name");
-			filter2.setText("Last Name");
-			filter3.setText("Property Owner ID");
-			filter4.setText("Property ID");
-			filter5.setText("Phone Number");
-			
-			filter0.setVisible(true);
-			filter1.setVisible(true);
-			filter2.setVisible(true);
-			filter3.setVisible(true);
-			filter4.setVisible(true);
-			filter5.setVisible(true);
-			filter6.setVisible(false);
-			filter7.setVisible(false);
-		}
-		
-		if(choices.getSelectedItem().equals("View Property Viewings")) {
-			filter0.setText("(No Select)");
+				Collections.sort(name, new LastNameComparator());
 
-			filter1.setText("First Name");
-			filter2.setText("Last Name");
-			filter3.setText("Property Owner ID");
-			filter4.setText("Property ID");
-			filter5.setText("Phone Number");
-			filter6.setText("Staff Member");
-			filter7.setText("City");
-			
-			Panel2.add(filter7);
-			
-			filter0.setVisible(true);
-			filter1.setVisible(true);
-			filter2.setVisible(true);
-			filter3.setVisible(true);
-			filter4.setVisible(true);
-			filter5.setVisible(true);
-			filter6.setVisible(true);
-			filter7.setVisible(true);
+				for (int i = 0; i < name.size(); i++) {
+					System.out.println(name.get(i));
+				}
 
+			}
+
+			if (choices.getSelectedItem().equals("View Renters")) {
+				filter0.setText("(No Select)");
+				filter1.setText("First Name");
+				filter2.setText("Last Name");
+				filter3.setText("Renter ID");
+				filter4.setText("Property ID");
+				filter5.setText("Phone Number");
+				filter6.setText("Staff Member");
+
+				filter0.setVisible(true);
+				filter1.setVisible(true);
+				filter2.setVisible(true);
+				filter3.setVisible(true);
+				filter4.setVisible(true);
+				filter5.setVisible(true);
+				filter6.setVisible(true);
+			}
+			if (choices.getSelectedItem().equals("View Property Owners")) {
+				filter0.setText("(No Select)");
+				filter1.setText("First Name");
+				filter2.setText("Last Name");
+				filter3.setText("Property Owner ID");
+				filter4.setText("Property ID");
+				filter5.setText("Phone Number");
+				filter6.setText("Staff Member");
+
+				filter0.setVisible(true);
+				filter1.setVisible(true);
+				filter2.setVisible(true);
+				filter3.setVisible(true);
+				filter4.setVisible(true);
+				filter5.setVisible(true);
+				filter6.setVisible(true);
+				filter7.setVisible(false);
+			}
+			if (choices.getSelectedItem().equals("View Properties")) {
+
+				filter0.setText("(No Select)");
+
+				filter1.setText("First Name");
+				filter2.setText("Last Name");
+				filter3.setText("Property Owner ID");
+				filter4.setText("Property ID");
+				filter5.setText("Phone Number");
+
+				filter0.setVisible(true);
+				filter1.setVisible(true);
+				filter2.setVisible(true);
+				filter3.setVisible(true);
+				filter4.setVisible(true);
+				filter5.setVisible(true);
+				filter7.setVisible(false);
+
+			}
+
+			if (choices.getSelectedItem().equals("View Property Viewings")) {
+				filter0.setText("(No Select)");
+
+				filter1.setText("First Name");
+				filter2.setText("Last Name");
+				filter3.setText("Property Owner ID");
+				filter4.setText("Property ID");
+				filter5.setText("Phone Number");
+				filter6.setText("Staff Member");
+				filter7.setText("City");
+
+				Panel2.add(filter7);
+
+				filter0.setVisible(true);
+				filter1.setVisible(true);
+				filter2.setVisible(true);
+				filter3.setVisible(true);
+				filter4.setVisible(true);
+				filter5.setVisible(true);
+				filter6.setVisible(true);
+				filter7.setVisible(true);
+
+			}
 		}
+
 	}
-
-		
-	}
-
-	
 
 }
-
-
-
-
-		
