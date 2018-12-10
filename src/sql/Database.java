@@ -349,7 +349,7 @@ public class Database {
         return propViewList;
     }
 
-    public static ArrayList<Lease> getLease(){
+    public static ArrayList<Lease> getLeaseByClientId(int clientIdInput){
         Connection c = null;
         Statement stmt = null;
 
@@ -385,14 +385,22 @@ public class Database {
                 rentEnd = rs.getString("ENDDATE");
                 duration = rs.getString("DURATION");
 
-                Lease lease = new Lease(leaseId, clientId, fname, lname, propertyId, street, city, postCode,
-                        type, numRooms, monthlyRent, payMethod, deposit, paidDeposit, rentStart, rentEnd, duration);
-                leaseList.add(lease);
+                if(clientId == clientIdInput) {
+                    Lease lease = new Lease(leaseId, clientId, fname, lname, propertyId, street, city, postCode,
+                            type, numRooms, monthlyRent, payMethod, deposit, paidDeposit, rentStart, rentEnd, duration);
+                    leaseList.add(lease);
+                }
+                /*else if(clientIdInput == 0) {
+                    Lease lease = new Lease(leaseId, clientId, fname, lname, propertyId, street, city, postCode,
+                            type, numRooms, monthlyRent, payMethod, deposit, paidDeposit, rentStart, rentEnd, duration);
+                    leaseList.add(lease);
+                }*/
             }
         }catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
+        //TODO Might return null if no leases are associated with given client.
         return leaseList;
     }
 
