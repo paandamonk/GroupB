@@ -37,6 +37,32 @@ public class InputAuthenticator {
         else{ // name authenticator returned false
             System.out.println("Name authentication failed.");
         }
+
+        System.out.println();
+        System.out.println("Date authenticator:");
+        System.out.println(ia.dateAuthenticator("5", "10","2018"));
+        System.out.println(ia.dateAuthenticator("5ffg", "1gg0","20asd18"));
+        System.out.println(ia.dateAuthenticator("50", "8","20180"));
+    }
+
+    //Extension of digitAuthenticator method. Returns true if day, month, and year contain only digits
+    public boolean dateAuthenticator(String day, String month, String year){
+        if(!digitAuthenticator(day) || !digitAuthenticator(month) || !digitAuthenticator(year)){
+            return false;
+        }
+        else{
+            System.out.println("Test");
+            switch(month){
+                case "8":
+                    System.out.println("TEST");
+
+            }
+
+        }
+        /*else if(day.length() != 2 || month.length() < 1 || month.length() > 2 || year.length() != 4){
+            return false;
+        }*/
+        return true;
     }
 
     //Returns true if string passed contains only numbers
