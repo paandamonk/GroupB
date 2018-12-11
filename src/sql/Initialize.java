@@ -6,7 +6,6 @@ public class Initialize
     public static void main(String[] args) {
       Connection c = null;
       Statement stmt = null;
-      
    
       try {
          Class.forName("org.sqlite.JDBC");
@@ -22,9 +21,9 @@ public class Initialize
                       " BRANCH       TEXT   NOT NULL, " +
                       " SEX          TEXT   NOT NULL, " +
                       " DOB          TEXT   NOT NULL, " +
-                      " SALARY       REAL	NOT NULL, " +
-                      " SUPERVISOR   INT   NOT NULL)"; 
-         stmt.executeUpdate(sql);
+                      " SALARY       REAL   NOT NULL, " +
+                      " SUPERVISOR   TEXT   NOT NULL)"; 
+         stmt.executeUpdate(sql);//0
          
          sql = "CREATE TABLE PROPERTIES" +
                       "(PROPNUM INT PRIMARY KEY     NOT NULL," +
@@ -34,29 +33,45 @@ public class Initialize
                       " TYPE         TEXT   NOT NULL, " +
                       " ROOMS        INT    NOT NULL, " +
                       " RENT         REAL   NOT NULL, " +
-                      " OWNER        INT   NOT NULL)"; 
-         stmt.executeUpdate(sql);
+                      " OWNER        TEXT   NOT NULL)"; 
+         stmt.executeUpdate(sql);//1
          
-         sql = "CREATE TABLE OWNERS" +
+         sql = "CREATE TABLE PROPOWNERS" +
                       "(OWNERNUM INT PRIMARY KEY     NOT NULL," +
                       " FNAME        TEXT   NOT NULL, " +
                       " LNAME        TEXT   NOT NULL, " +
                       " STREET       TEXT   NOT NULL, " + 
                       " CITY         TEXT   NOT NULL, " + 
                       " POSTCODE     TEXT   NOT NULL, " +
-                      " MEMID		 INT	NOT NULL, " +
-                      " PHONE        TEXT   NOT NULL)"; 
-         stmt.executeUpdate(sql);
+                      " PHONE        TEXT   NOT NULL, " +
+                      " STAFFNUM     TEXT   NOT NULL)"; 
+         stmt.executeUpdate(sql);//2
+
+          sql = "CREATE TABLE BUSOWNERS" +
+                  "(OWNERNUM INT PRIMARY KEY     NOT NULL," +
+                  " FNAME        TEXT   NOT NULL, " +
+                  " LNAME        TEXT   NOT NULL, " +
+                  " STREET       TEXT   NOT NULL, " +
+                  " CITY         TEXT   NOT NULL, " +
+                  " POSTCODE     TEXT   NOT NULL, " +
+                  " PHONE        TEXT   NOT NULL, " +
+                  " BTYPE        TEXT   NOT NULL, " +
+                  " BNAME        TEXT   NOT NULL, " +
+                  " STAFFNUM     TEXT   NOT NULL)";
+          stmt.executeUpdate(sql);//2
          
          sql = "CREATE TABLE CLIENTS" +
-                      "(CLIENTNUM INT PRIMARY KEY     NOT NULL," +
+                      "( CLIENTID INTEGER PRIMARY KEY AUTOINCREMENT," +
                       " FNAME        TEXT   NOT NULL, " +
                       " LNAME        TEXT   NOT NULL, " +
-                      " PHONE        TEXT   NOT NULL, " + 
                       " TYPE         TEXT   NOT NULL, " +
+                      " PHONE        TEXT   NOT NULL, " + 
                       " MAXRENT      REAL   NOT NULL, " +
-                      " STAFFNUM   INT   NOT NULL)"; 
-         stmt.executeUpdate(sql);
+                      " STAFFNUM     TEXT   NOT NULL, " +
+                      " STREET       TEXT   NOT NULL, " + 
+                      " CITY         TEXT   NOT NULL, " + 
+                      " POSTCODE     TEXT   NOT NULL)"; 
+         stmt.executeUpdate(sql);//3
          
          sql = "CREATE TABLE PROPVIEW" +
                       "(CLIENTNUM INT PRIMARY KEY     NOT NULL," +
@@ -67,9 +82,9 @@ public class Initialize
                       " STREET       TEXT   NOT NULL, " + 
                       " CITY         TEXT   NOT NULL, " + 
                       " POSTCODE     TEXT   NOT NULL, " +
-                      " DATE         TEXT   NOT NULL, " + 
+                      " VIEWDATE     TEXT   NOT NULL, " +
                       " COMMENTS     TEXT   NOT NULL)"; 
-         stmt.executeUpdate(sql);
+         stmt.executeUpdate(sql);//4
          
          sql = "CREATE TABLE LEASE" +
                       "(LEASENUM INT PRIMARY KEY     NOT NULL," +
@@ -89,7 +104,7 @@ public class Initialize
                       " STARTDATE    TEXT   NOT NULL, " +
                       " ENDDATE      TEXT   NOT NULL, " +
                       " DURATION     TEXT   NOT NULL)"; 
-         stmt.executeUpdate(sql);
+         stmt.executeUpdate(sql);//5
       
          stmt.close();
          c.close();

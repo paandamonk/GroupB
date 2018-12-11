@@ -1,5 +1,8 @@
 package sql;
 import java.sql.*;
+import java.util.ArrayList;
+
+import pp.Client;
 
 public class Print
 {
@@ -20,31 +23,41 @@ public class Print
 
          stmt = c.createStatement();
          ResultSet rs = stmt.executeQuery( "SELECT * FROM " + tableName + ";" );
-         
+         String fName, lName, type, phone, street, city, postCode;
+         int idNum, staffNum;
+         float maxRent;
          while ( rs.next() ) {
-         int propNum = rs.getInt("PROPNUM");
-         String  street = rs.getString("STREET");
-         String city = rs.getString("CITY");
-         String postcode = rs.getString("POSTCODE");
-         String type  = rs.getString("TYPE");
-         int  rooms = rs.getInt("ROOMS");
-         double rent = rs.getDouble("RENT");
-         
-         System.out.println( "PROPNUM = " + propNum );
-         System.out.println( "STREET = " + street );
-         System.out.println("CITY = " + city);
-         System.out.println("POSTCODE = " + postcode);
-         System.out.println( "TYPE = " + type );
-         System.out.println( "ROOMS = " + rooms );
-         System.out.println( "RENT = " + rent );
-         System.out.println();
+        	 idNum = rs.getInt("CLIENTID");
+		 		fName = rs.getString("FNAME");
+		 		lName = rs.getString("LNAME");
+             type = rs.getString("TYPE");
+             phone = rs.getString("PHONE");
+             staffNum = rs.getInt("STAFFNUM");
+		 		street = rs.getString("STREET");
+             city = rs.getString("CITY");
+             postCode = rs.getString("POSTCODE");
+             maxRent = rs.getFloat("MAXRENT");
+             
+            System.out.println(idNum);
+            System.out.println(fName);
+            System.out.println(lName);
+            System.out.println(type);
+            System.out.println(phone);
+            System.out.println(staffNum);
+            System.out.println(street);
+            System.out.println(postCode);
+            System.out.println(maxRent);
+
+
+
+           
       }
       rs.close();
       stmt.close();
       c.close();
       } catch ( Exception e ) {
          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-         System.exit(0);
+         //System.exit(0);
       }
       System.out.println("Operation done successfully");
     }
