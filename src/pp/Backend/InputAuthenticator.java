@@ -63,8 +63,8 @@ public class InputAuthenticator {
             String dateForStorage = ia.dateForDatabase(day,month,year);
             System.out.println("Date authentication succeeded. Value being stored is: " + dateForStorage);
 
-            if(ia.dateAuthenticator("11","12","2019")){
-                String dateForStorage2 = ia.dateForDatabase("11","12","2019");
+            if(ia.dateAuthenticator("11","2","2019")){
+                String dateForStorage2 = ia.dateForDatabase("11","2","2019");
 
                 DateCalculator db = new DateCalculator();
                 System.out.println("The number of months between these two dates is: " + db.dateCalculator(dateForStorage,dateForStorage2));
@@ -175,6 +175,10 @@ public class InputAuthenticator {
     }
 
     public String dateForDatabase(String day, String month, String year){
-        return year + "-" + month + "-" + day;
+        if(month.length() == 1){
+            return year + "-" + "0" + month + "-" + day;
+        }else {
+            return year + "-" + month + "-" + day;
+        }
     }
 }
