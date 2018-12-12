@@ -2,6 +2,8 @@ package pp.Backend;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+
 public class DateCalculator {
 
     public static void main(String[] args) throws Exception {
@@ -13,14 +15,16 @@ public class DateCalculator {
         int monthDifference = db.dateCalculator(inputDate1, inputDate2);
         System.out.println("Month difference is: " + monthDifference);
 
-        db.dateBuilder("11","05","2018");
+        //sb.dateBuilder("11","05","2018");
+
+        System.out.println(db.isLeapYear(2018));
 
     }
 
-    //Returns true if string passed contains only numbers
-    public String dateBuilder(String day, String month, String year){
-        System.out.println("'" + year + "-" + month + "-" + day + "'");
-        return "'" + year + "-" + month + "-" + day + "'";
+    public boolean isLeapYear(int year) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        return cal.getActualMaximum(Calendar.DAY_OF_YEAR) > 365;
     }
 
     public int dateCalculator(String inputDate1, String inputDate2){
