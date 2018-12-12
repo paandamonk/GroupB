@@ -20,7 +20,7 @@ public class InputAuthenticator {
 
         String nameInput = "Roger";
         if(ia.nameAuthenticator(nameInput)) { // name authenticator returned true
-            String nameForStorage = ia.stringForDatabase(nameInput);
+            String nameForStorage = "'" + nameInput + "'";
             System.out.println("Name authentication succeeded. Value being stored is: " + nameForStorage);
         }
         else{ // name authenticator returned false
@@ -62,6 +62,14 @@ public class InputAuthenticator {
         if(ia.dateAuthenticator(day,month,year)) { // name authenticator returned true
             String dateForStorage = ia.dateForDatabase(day,month,year);
             System.out.println("Date authentication succeeded. Value being stored is: " + dateForStorage);
+
+            if(ia.dateAuthenticator("11","12","2019")){
+                String dateForStorage2 = ia.dateForDatabase("11","12","2019");
+
+                DateCalculator db = new DateCalculator();
+                System.out.println("The number of months between these two dates is: " + db.dateCalculator(dateForStorage,dateForStorage2));
+
+            }
         }
         else{ // name authenticator returned false
             System.out.println("Date authentication failed.");
@@ -166,11 +174,7 @@ public class InputAuthenticator {
         return false;
     }
 
-    public String stringForDatabase(String string){
-        return "'" + string + "'";
-    }
-
     public String dateForDatabase(String day, String month, String year){
-        return "'" + year + "-" + month + "-" + day + "'";
+        return year + "-" + month + "-" + day;
     }
 }
