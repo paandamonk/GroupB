@@ -22,7 +22,8 @@ public class Input
 
             stmt = c.createStatement();
             String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,POSITION,BRANCH,SEX,DOB,SALARY,SUPERVISOR) " +
-                    "VALUES ("  + Fname + "," + Lname + "," + Pos + "," + Branch + "," + sex + "," + Dob + "," + Salary + "," + supID + ");";
+                    "VALUES ('"  + Fname + "','" + Lname + "','" + Pos + "','" + Branch + "','" + sex + "','" + 
+            		Dob + "','" + Salary + "','" + supID + "');";
 
             stmt.executeUpdate(sql);
             stmt.close();
@@ -47,9 +48,9 @@ public class Input
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,TYPE,PHONE,MAXRENT,STAFFNUM,STREET,CITY,POSTCODE) " +
-                    "VALUES ("  + fname + "," + lname + "," + type + "," + phone + "," + maxRent + "," +
-                    staffId + "," + street + "," + city + "," + postCode + ");";
+            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,TYPE,PHONE,MAXRENT,STAFFN,STREET,CITY,POSTCODE) " +
+                    "VALUES ('"  + fname + "','" + lname + "','" + type + "','" + phone + "','" + maxRent + "','" +
+                    staffId + "','" + street + "','" + city + "','" + postCode + "');";
 
             stmt.executeUpdate(sql);
 
@@ -63,7 +64,7 @@ public class Input
         System.out.println("Client record for " + fname + " " + lname + " created successfully");
     }
 
-    public void addPropOwnerInfo(String Fname, String Lname, String street, String City, String Postcode, int sID, String Phone) {
+    public void addPropOwnerInfo(String Fname, String Lname, String street, String City, String Postcode, String Phone, int sID) {
         Connection c = null;
         Statement stmt = null;
 
@@ -75,7 +76,8 @@ public class Input
 
             stmt = c.createStatement();
             String sql = "INSERT INTO " + tableName + " (OWNERNUM,FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,STAFFNUM) " +
-                    "VALUES ("  + Fname + "," + Lname + "," + street + "," + City + "," + Postcode + "," + Phone + "," + sID + ");";
+                    "VALUES ('"  + Fname + "','" + Lname + "','" + street + "','" + City + "','" + Postcode + "','" +
+            		Phone + "','" + sID + "');";
 
             stmt.executeUpdate(sql);
             stmt.close();
@@ -101,8 +103,8 @@ public class Input
 
             stmt = c.createStatement();
             String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,BTYPE,BNAME,STAFFNUM) " +
-                    "VALUES ("  + Fname + "," + Lname + "," + street + "," + City + "," + Postcode +
-                    "," + BusinessName + "," + BusinessType + "," + Phone + "," + sID + ");";
+                    "VALUES ('"  + Fname + "','" + Lname + "','" + street + "','" + City + "','" + Postcode +
+                    "','" + BusinessName + "','" + BusinessType + "','" + Phone + "','" + sID + "');";
 
             stmt.executeUpdate(sql);
             stmt.close();
@@ -127,7 +129,8 @@ public class Input
 
          stmt = c.createStatement();
          String sql = "INSERT INTO " + tableName + " (STREET,CITY,POSTCODE,TYPE,ROOMS,RENT,OWNER) " +
-                        "VALUES ("  + Street + "," + City + "," + Postcode + "," + type + "," + rooms + "," + rent + "," + Owner + ");";
+                        "VALUES ('"  + Street + "'," + City + "','" + Postcode + "','" + type + "','" +
+        		 rooms + "','" + rent + "','" + Owner + "');";
 
          stmt.executeUpdate(sql);
 
@@ -153,8 +156,8 @@ public class Input
 
             stmt = c.createStatement();
             String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,CELL,PROPNUM,STREET,CITY,POSTCODE,VIEWDATE,COMMENTS) " +
-                    "VALUES (" + fname + "," + lname + "," + phone + "," + propertyId + "," + street + "," +
-                    city + "," + postCode + "," + viewDate + "," + comments + ");";
+                    "VALUES ('" + fname + "','" + lname + "','" + phone + "','" + propertyId + "','" + street + "','" +
+                    city + "','" + postCode + "','" + viewDate + "','" + comments + "');";
 
             stmt.executeUpdate(sql);
 
@@ -182,9 +185,9 @@ public class Input
             stmt = c.createStatement();
             String sql = "INSERT INTO " + tableName + " (CLIENTNUM,FNAME,LNAME,PROPNUM,STREET,CITY,POSTCODE," +
                     "TYPE,ROOMS,RENT,PAYMETHOD,DEPOSIT,PAIDDEPOSIT,STARTDATE,ENDDATE,DURATION) " +
-                    "VALUES ("  + clientId + "," + fname + "," + lname + "," + propertyId + "," + street + "," +
-                    city + "," + postCode + "," + type + "," + numRooms + "," + monthlyRent + "," + payMethod+ ","
-                    + deposit + "," + depositPaid + "," + rentStart + "," + rentEnd + "," + duration + ");";
+                    "VALUES ('"  + clientId + "','" + fname + "','" + lname + "','" + propertyId + "','" + street + "','" +
+                    city + "','" + postCode + "','" + type + "','" + numRooms + "','" + monthlyRent + "','" + payMethod+ "','"
+                    + deposit + "','" + depositPaid + "','" + rentStart + "','" + rentEnd + "','" + duration + "');";
 
             stmt.executeUpdate(sql);
 

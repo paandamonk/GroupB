@@ -26,15 +26,16 @@ public class Database {
       // getProp(000);
       // printProp(000);
 
-      // Input staffInput = new Input("STAFF");
-      // staffInput.addStaffInfo(5, "'Matt'", "'Smith'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540, 6);
-
-       //Input clientInput = new Input("CLIENTS");
-       //clientInput.addClientInfo(1,"'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'",
-       //        30, 5, "'40'", "'Highland'", "'12234'");
-
-        ArrayList<Client> clientList = getClientByID(0);
-        System.out.println(clientList.get(0).getStaff().getFname() + " TEST");
+//       Input staffInput = new Input("STAFF");
+//       staffInput.addStaffInfo("'Matt'", "'Smith'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540, 6);
+//
+//       Input clientInput = new Input("CLIENTS");
+//       String name = "Connor";
+//       clientInput.addClientInfo(name, "'Colabella'", "'Apartment'", "'123-456-7890'",
+//               30, 5, "'40'", "'Highland'", "'12234'");
+//
+//        ArrayList<Client> clientList = getClientByID(0);
+//        System.out.println(clientList.get(0).getStaff().getFname() + " TEST");
 
         //Input leaseInput = new Input("LEASE");
         //leaseInput.addLeaseInfo(0, 1, "'Thomas'", "'Benedict'", 1, "'30 Archibald Lane'", "'Kingston'", "'12528'",
@@ -80,7 +81,7 @@ public class Database {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully(staff)");
 
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM STAFF;");
@@ -101,7 +102,7 @@ public class Database {
                     staffList.add(staff);
                     return staffList;
                 }
-                else if(idNum == -1){
+                else if(idNum == 0){
                     Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
                     staffList.add(staff);
                 }
@@ -125,7 +126,7 @@ public class Database {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully (propowner)");
 
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery( "SELECT * FROM PROPOWNERS;");
@@ -145,7 +146,7 @@ public class Database {
                     OList.add(o1);
                     return OList;
                 }
-                else if(ownID == -1) {
+                else if(ownID == 0) {
                     PropertyOwner o1 = new PropertyOwner(FName, LName, street, city, postcode, phone, OID, MID);
                     OList.add(o1);
                 }
@@ -167,7 +168,7 @@ public class Database {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully(busowner)");
 
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery( "SELECT * FROM BUSOWNERS;");
@@ -190,7 +191,7 @@ public class Database {
                     BusinessOwnerList.add(businessOwner);
                     return BusinessOwnerList;
                 }
-                else if(ownID == -1) {
+                else if(ownID == 0) {
                     BusinessOwner businessOwner = new BusinessOwner(FName, LName, street, city, postCode, phone, staffId, ownerId,
                             businessName, businessType);
                     BusinessOwnerList.add(businessOwner);
@@ -207,46 +208,58 @@ public class Database {
  public static ArrayList<Client> getClientByID(int cID){
      Connection c = null;
      Statement stmt = null;
+     
 
      ArrayList<Client> clientList = new ArrayList();
      String fName, lName, type, phone, street, city, postCode;
      int idNum, staffNum;
-     float maxRent;
+     double maxRent;
 
  		try{
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully (clientbyid)");
 
             stmt = c.createStatement();
  			ResultSet rs = stmt.executeQuery("SELECT * FROM CLIENTS;");
+            idNum = rs.getInt("CLIENTID");
  			while(rs.next()){
                 idNum = rs.getInt("CLIENTID");
 		 		fName = rs.getString("FNAME");
 		 		lName = rs.getString("LNAME");
                 type = rs.getString("TYPE");
                 phone = rs.getString("PHONE");
-                staffNum = rs.getInt("STAFFNUM");
+                maxRent = rs.getDouble("MAXRENT");
+                staffNum = rs.getInt("STAFFN");
 		 		street = rs.getString("STREET");
                 city = rs.getString("CITY");
                 postCode = rs.getString("POSTCODE");
-                maxRent = rs.getFloat("MAXRENT");
-
+		 		System.out.println("guy");
+                Client client = new Client(rs.getInt("CLIENTID"), rs.getString("FNAME"), 
+                		rs.getString("LNAME"), rs.getString("TYPE"), rs.getString("PHONE"), 
+                		rs.getInt("STAFFN"), rs.getString("STREET"), rs.getString("CITY"), 
+                		rs.getString("POSTCODE"), rs.getDouble("MAXRENT"));
+                System.out.println("guy");
                 if(cID == idNum) {
-                    Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
+                	System.out.println("we're in");
+                     client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
+                    System.out.println("Client being returned: " + client.toString());
+
                     clientList.add(client);
+                    System.out.println("Client being returned: " + client.toString());
                     return clientList;
                 }
-                else if(cID == -1) {
-                    Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
+                else if(cID == 0) {
+                	System.out.println("we're inx2");
+                     client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
+                     System.out.println("Client being returned: " + client.toString());
                     clientList.add(client);
                 }
-
-
  			}
 	 	}catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.out.println("Ya dun fuced it boy");
             System.exit(0);
         }
  		return clientList;
@@ -263,7 +276,7 @@ public class Database {
         Class.forName("org.sqlite.JDBC");
         c = DriverManager.getConnection("jdbc:sqlite:test.db");
         c.setAutoCommit(false);
-        System.out.println("Opened database successfully");
+        System.out.println("Opened database successfully(print prop)");
 
         stmt = c.createStatement();
         ResultSet rs = stmt.executeQuery( "SELECT * FROM " + "PROPERTIES " + ";" );
@@ -323,7 +336,7 @@ public class Database {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully(propview)");
 
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM PROPVIEW;");
@@ -362,7 +375,7 @@ public class Database {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:test.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully(lease)");
 
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM LEASE;");

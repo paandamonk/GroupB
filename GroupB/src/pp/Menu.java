@@ -1,6 +1,7 @@
 package pp;
 
 import sql.Database;
+import pp.Add;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -35,7 +36,7 @@ public class Menu extends JFrame implements ActionListener {
 	private JLabel label;
 	private JLabel j;
 	private String[] manChoices = { "", "View Managers", "View Supervisors", "View Agents", "View Employees Salaries",
-			"View Renters", "View Property Owners", "View Properties", "View Property Viewings" };
+			"View Clients", "View Property Owners", "View Properties", "View Property Viewings" };
 	private String[] supChoices = { "", "View Supervisors", "View Agents", "View Renters", "View Property Owners",
 			"View Properties", "View Property Viewings" };
 	private String[] agentChoices = { "", "View Agents", "View Renters", "View Property Owners", "View Properties",
@@ -225,6 +226,9 @@ public class Menu extends JFrame implements ActionListener {
 		Panel2.add(city);
 		Panel2.add(lowtoHigh);
 		Panel2.add(hightoLow);
+		for(int i = 0; i < clientList.size(); i++) {
+			
+		}
 		l = new JList();
 
 		l.setPrototypeCellValue("XXXXXXXXXXXXXXXXXXXX");
@@ -253,7 +257,7 @@ public class Menu extends JFrame implements ActionListener {
 		search = new JTextField(20);
 		b = new JButton("Search");
 		b.addActionListener(this);
-		choices = new JComboBox<Object>(supChoices);
+//		choices = new JComboBox<Object>(supChoices);
 		choices.addActionListener(this);
 		choices.setEditable(false);
 		filters = new ButtonGroup();
@@ -279,67 +283,19 @@ public class Menu extends JFrame implements ActionListener {
 
 	}
 
+	//this action listener needs help
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		
-		
-//		if(add.getSelectedItem().equals("Add Client")){
-//			JLabel f = new JLabel("First Name:");
-//			JLabel l = new JLabel("Last Name:");
-//			JLabel sp = new JLabel("");
-//			JLabel sp1 = new JLabel("");
-//			JLabel ph = new JLabel("Phone Number:");
-//			JLabel sp2 = new JLabel("");
-//			JLabel num = new JLabel("Staff Number:");
-//			JLabel st = new JLabel("Address:");
-//			JLabel sp3 = new JLabel("");
-//			JLabel ci = new JLabel("City:");
-//			JLabel sp4 = new JLabel("");
-//			JLabel zi = new JLabel("Zipcode:");
-//			JLabel sp5 = new JLabel("");
-//			JLabel sp6 = new JLabel("");
-//			JLabel sp7 = new JLabel("");
-//			JLabel max = new JLabel("Max Rent:");
-//
-//			
-//
-//			first = new JTextField(15);
-//			last = new JTextField(15);
-//			phone = new JTextField(15);
-//			staffNum = new JTextField(15);
-//			street = new JTextField(20);
-//			Ccity = new JTextField(20);
-//			zip = new JTextField(20);
-//			maxRent = new JTextField(20);
-			button = new JButton("Submit");
-//			addPanel.add(f);
-//			addPanel.add(first);
-//			addPanel.add(sp);
-//			addPanel.add(l);
-//			addPanel.add(last);
-//			addPanel.add(sp1);
-//			addPanel.add(ph);
-//			addPanel.add(phone);
-//			addPanel.add(sp7);
-//			addPanel.add(max);
-//			addPanel.add(maxRent);
-//			addPanel.add(sp2);
-//			addPanel.add(num);
-//			addPanel.add(staffNum);
-//			addPanel.add(sp3);
-//			addPanel.add(st);
-//			addPanel.add(street);
-//			addPanel.add(sp4);
-//			addPanel.add(sp6);
-//			addPanel.add(ci);
-//			addPanel.add(city);
-//			addPanel.add(sp5);
-//			addPanel.add(zi);
-//			addPanel.add(zip);
-//			addPanel.add(button);
-//			addPanel.validate();
-//			addPanel.repaint();	
-//		}
+		if(src == a) {
+			
+			Add window = new Add();
+			window.frame.setVisible(true);
+
+			
+		}
+
+		//this if-statement will be copied and pasted into all of the choices. this was just for testing purposes.
 		if (src == b) {
 			if(clientList.size()> 0){
 			String test = clientList.get(0).getFname() + " " + clientList.get(0).getLname();
@@ -370,6 +326,7 @@ public class Menu extends JFrame implements ActionListener {
 			hightoLow.setVisible(false);
 		}
 
+		//needs work
 		if (choices.getSelectedItem().equals("View Managers")) {
 
 			noSelect.setVisible(true);
@@ -379,7 +336,7 @@ public class Menu extends JFrame implements ActionListener {
 
 		}
 
-		
+		//needs work
 		if (choices.getSelectedItem().equals("View Supervisors")) {
 
 			noSelect.setVisible(true);
@@ -388,6 +345,7 @@ public class Menu extends JFrame implements ActionListener {
 			staffId.setVisible(true);
 
 		}
+		//needs work
 		if (choices.getSelectedItem().equals("View Agents")) {
 
 			noSelect.setVisible(true);
@@ -396,6 +354,7 @@ public class Menu extends JFrame implements ActionListener {
 			staffId.setVisible(true);
 
 		}
+		//needs work
 		if (choices.getSelectedItem().equals("View Employees Salaries")) {
 
 			noSelect.setVisible(true);
@@ -407,8 +366,20 @@ public class Menu extends JFrame implements ActionListener {
 
 		}
 
-		if (choices.getSelectedItem().equals("View Renters")) {
-
+		//needs work
+		if (choices.getSelectedItem().equals("View Clients")) {
+			list = new DefaultListModel();
+			for(int i = 0; i < clientList.size(); i++) {
+				list.addElement(clientList.get(i));
+			}
+			l = new JList(list);
+			Panel3.removeAll();
+			scroll = new JScrollPane();
+			scroll.setViewportView(l);
+			Panel3.add(scroll);
+			Panel3.validate();
+			Panel3.repaint();
+			
 			noSelect.setVisible(true);
 			firstName.setVisible(true);
 			lastName.setVisible(true);
@@ -417,6 +388,8 @@ public class Menu extends JFrame implements ActionListener {
 			propId.setVisible(true);
 			phoneNum.setVisible(true);
 		}
+		
+		//needs work
 		if (choices.getSelectedItem().equals("View Property Owners")) {
 
 			noSelect.setVisible(true);
@@ -428,6 +401,7 @@ public class Menu extends JFrame implements ActionListener {
 			staffMemAdded.setVisible(true);
 
 		}
+		//needs work
 		if (choices.getSelectedItem().equals("View Properties")) {
 
 			noSelect.setVisible(true);
@@ -439,6 +413,7 @@ public class Menu extends JFrame implements ActionListener {
 			city.setVisible(true);
 
 		}
+		//needs work
 		if (choices.getSelectedItem().equals("View Property Viewings")) {
 
 			noSelect.setVisible(true);

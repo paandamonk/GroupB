@@ -11,10 +11,10 @@ public class Client extends Person{
 	private Staff member;
 	private String street, city, postCode, type;
 	private int idNum;
-	private float max;
+	private double max;
 	
 	public Client(int clientIdNum, String fname, String lname, String type, String phone,
-				  int staffId, String street, String city, String postCode, float maxPrice) {
+				  int staffId, String street, String city, String postCode, double maxRent) {
 		super(fname, lname);
 		this.type = type;
 		this.clientIdNum = clientIdNum;
@@ -24,7 +24,7 @@ public class Client extends Person{
 		this.street = street;
 		this.city = city;
 		this.postCode = postCode;
-		this.max = maxPrice;		
+		this.max = maxRent;		
 	}
 	public Client(String fname, String lname, String phone, int staffId) {
 		super(fname, lname);
@@ -33,6 +33,90 @@ public class Client extends Person{
 		this.member = getStaffByID(staffId).get(0);
 	}
 
+	/**
+	 * @return the clientIdNum
+	 */
+	public int getClientIdNum() {
+		return clientIdNum;
+	}
+	/**
+	 * @param clientIdNum the clientIdNum to set
+	 */
+	public void setClientIdNum(int clientIdNum) {
+		this.clientIdNum = clientIdNum;
+	}
+	/**
+	 * @return the staffId
+	 */
+	public int getStaffId() {
+		return staffId;
+	}
+	/**
+	 * @param staffId the staffId to set
+	 */
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+	/**
+	 * @return the idNum
+	 */
+	public int getIdNum() {
+		return idNum;
+	}
+	/**
+	 * @param idNum the idNum to set
+	 */
+	public void setIdNum(int idNum) {
+		this.idNum = idNum;
+	}
+	/**
+	 * @return the max
+	 */
+	public double getMax() {
+		return max;
+	}
+	/**
+	 * @param max the max to set
+	 */
+	public void setMax(double max) {
+		this.max = max;
+	}
+	/**
+	 * @return the member
+	 */
+	public Staff getMember() {
+		return member;
+	}
+	/**
+	 * @param street the street to set
+	 */
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+	/**
+	 * @param postCode the postCode to set
+	 */
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
 	/**
 	 * @return the street
 	 */
@@ -80,6 +164,13 @@ public class Client extends Person{
 	 */
 	public void setMember(Staff member) {
 		this.member = member;
+	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return getFname() + " " + getLname() + ", id = " + getClientIdNum();
 	}
 
 

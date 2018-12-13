@@ -14,7 +14,7 @@ public class Initialize
             
          stmt = c.createStatement();
          String sql = "CREATE TABLE STAFF" +
-                      "(STAFFNUM INT PRIMARY KEY     AUTOINCREMENT," +
+                      "(STAFFNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
                       " FNAME        TEXT   NOT NULL, " + 
                       " LNAME        TEXT   NOT NULL, " + 
                       " POSITION     INT    NOT NULL, " +
@@ -26,7 +26,7 @@ public class Initialize
          stmt.executeUpdate(sql);//0
          
          sql = "CREATE TABLE PROPERTIES" +
-                      "(PROPNUM INT PRIMARY KEY     AUTOINCRERMENT," +
+                      "(PROPNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
                       " STREET       TEXT   NOT NULL, " + 
                       " CITY         TEXT   NOT NULL, " + 
                       " POSTCODE     TEXT   NOT NULL, " +
@@ -37,7 +37,7 @@ public class Initialize
          stmt.executeUpdate(sql);//1
          
          sql = "CREATE TABLE PROPOWNERS" +
-                      "(OWNERNUM INT PRIMARY KEY     AUTOINCREMENT," +
+                      "(POWNERNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
                       " FNAME        TEXT   NOT NULL, " +
                       " LNAME        TEXT   NOT NULL, " +
                       " STREET       TEXT   NOT NULL, " + 
@@ -48,7 +48,7 @@ public class Initialize
          stmt.executeUpdate(sql);//2
 
           sql = "CREATE TABLE BUSOWNERS" +
-                  "(OWNERNUM INT PRIMARY KEY     AUTOINCREMENT," +
+                  "(BOWNERNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
                   " FNAME        TEXT   NOT NULL, " +
                   " LNAME        TEXT   NOT NULL, " +
                   " STREET       TEXT   NOT NULL, " +
@@ -61,20 +61,20 @@ public class Initialize
           stmt.executeUpdate(sql);//2
          
          sql = "CREATE TABLE CLIENTS" +
-                      "(CLIENTID INT PRIMARY KEY     AUTOINCREMENT," +
+                      "(CLIENTID INTEGER PRIMARY KEY AUTOINCREMENT," +
                       " FNAME        TEXT   NOT NULL, " +
                       " LNAME        TEXT   NOT NULL, " +
                       " TYPE         TEXT   NOT NULL, " +
                       " PHONE        TEXT   NOT NULL, " + 
                       " MAXRENT      REAL   NOT NULL, " +
-                      " STAFFNUM     TEXT   NOT NULL, " +
+                      " STAFFN       INT    NOT NULL, " +
                       " STREET       TEXT   NOT NULL, " + 
                       " CITY         TEXT   NOT NULL, " + 
                       " POSTCODE     TEXT   NOT NULL)"; 
          stmt.executeUpdate(sql);//3
          
          sql = "CREATE TABLE PROPVIEW" +
-                      "(CLIENTNUM INT PRIMARY KEY     AUTOINCREMENT," +
+                      "(CLIENTNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
                       " FNAME        TEXT   NOT NULL, " +
                       " LNAME        TEXT   NOT NULL, " +
                       " CELL         TEXT   NOT NULL, " + 
@@ -87,7 +87,7 @@ public class Initialize
          stmt.executeUpdate(sql);//4
          
          sql = "CREATE TABLE LEASE" +
-                      "(LEASENUM INT PRIMARY KEY     AUTOINCREMENT," +
+                      "(LEASENUM INTEGER PRIMARY KEY AUTOINCREMENT," +
                       " CLIENTNUM    INT    NOT NULL, " +
                       " FNAME        TEXT   NOT NULL, " +
                       " LNAME        TEXT   NOT NULL, " + 
@@ -110,6 +110,7 @@ public class Initialize
          c.close();
       } catch ( Exception e ) {
          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+         
          System.exit(0);
       }
       System.out.println("Created database and tables successfully");
