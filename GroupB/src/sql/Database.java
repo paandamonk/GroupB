@@ -26,46 +26,44 @@ public class Database {
       // getProp(000);
       // printProp(000);
 
-//       Input staffInput = new Input("STAFF");
-//       staffInput.addStaffInfo("'Matt'", "'Smith'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540, 6);
-//
-//       Input clientInput = new Input("CLIENTS");
-//       String name = "Connor";
-//       clientInput.addClientInfo(name, "'Colabella'", "'Apartment'", "'123-456-7890'",
-//               30, 5, "'40'", "'Highland'", "'12234'");
-//
-//        ArrayList<Client> clientList = getClientByID(0);
-//        System.out.println(clientList.get(0).getStaff().getFname() + " TEST");
+       Input staffInput = new Input("STAFF");
+       staffInput.addStaffInfo("Matt", "Jones", 0, "New York", "Male", "10/14/1997", 2300.540, 2);
+       staffInput.addStaffInfo("Chris", "Smith", 1, "New York", "Male", "10/14/1997", 43000.540, 3);
+       staffInput.addStaffInfo("Josh", "Grosh", 2, "New York", "Male", "10/14/1997", 13000.540, 3);
+       staffInput.addStaffInfo("Trevor", "Milton", 0, "New York", "Male", "10/14/1997", 23000.540, 2);
+       staffInput.addStaffInfo("Allen", "Sweeney", 0, "New York", "Male", "10/14/1997", 23000.540, 2);
 
-        //Input leaseInput = new Input("LEASE");
-        //leaseInput.addLeaseInfo(0, 1, "'Thomas'", "'Benedict'", 1, "'30 Archibald Lane'", "'Kingston'", "'12528'",
-        //     "'Apartment'", 3, 750.0, "'Credit'", 1000.0, 1, "'12/5/18'", "'12/1/20'", "'Two years'");
+       Input clientInput = new Input("CLIENTS");
+       String name = "Connor";
+       clientInput.addClientInfo(name, "Colabella", "Apartment", "123-456-7890",
+               30, 5, "40", "Highland", "12234");
+       clientInput.addClientInfo("Kenny", "Manning", "Mansion", "123-456-7890",
+               30, 5, "40", "Highland", "12234");
+       clientInput.addClientInfo("Robert", "Williams", "Home", "123-456-7890",
+               30, 5, "40", "Highland", "12234");
+       clientInput.addClientInfo("Nick", "Grunk", "Desk", "123-456-7890",
+               30, 5, "40", "Highland", "12234");
+       clientInput.addClientInfo("Liam", "Colololol", "House", "123-456-7890",
+               30, 5, "40", "Highland", "12234");
 
-        //ArrayList<Lease> leaseList = getLease();
-        //System.out.println(leaseList.get(0).getStreet() + " TEST");
+        Input leaseInput = new Input("LEASE");
+        leaseInput.addLeaseInfo(1, "Thomas", "Benedict", 1, "30 Archibald Lane", "Kingston", "12528",
+             "Apartment", 3, 750.0, "Credit", 1000.0, 1, "12/5/18", "12/1/20", "Two years");
+        leaseInput.addLeaseInfo(1, "Shannon", "Reachie", 1, "30 Archibald Lane", "Kingston", "12528",
+                "Apartment", 3, 750.0, "Credit", 1000.0, 1, "12/5/18", "12/1/20", "Two years");
 
-     //Input propViewInput = new Input("PROPVIEW");
-     //propViewInput.addPropViewInfo(1, "'Richard'", "'Bulganari'", "'012-345-6789'", 10,
-     //        "'40 Hawk Drive'", "'Albany'", "'10405'", "'6/22/19'", "'Beautiful view'");
+     Input propViewInput = new Input("PROPVIEW");
+     propViewInput.addPropViewInfo("Richard", "Bulganari", "012-345-6789", 10,
+             "40 Hawk Drive", "Albany", "10405", "6/22/19", "Beautiful view");
 
-     //ArrayList<PropView> propViewList = getPropView();
-     //System.out.println(propViewList.get(0).getViewDate() + " TEST");
+     Input propOwnerInput = new Input("PROPOWNERS");
+     propOwnerInput.addPropOwnerInfo("Jerry", "Seinfeld",
+             "40 Dollop", "New York", "10020","000-111-2222", 1);
 
-     //Input propOwnerInput = new Input("PROPOWNERS");
-     //propOwnerInput.addPropOwnerInfo(0, "'Jerry'", "'Seinfeld'",
-     //        "'40 Dollop'", "'New York'", "'10020'", 1, "'000-111-2222'");
-
-     //ArrayList<PropertyOwner> propertyOwnerList = getPropOwnersByID(0);
-     //System.out.println(propertyOwnerList.get(0).getFname() + " TEST");
-
-    // Input businessOwnerInput = new Input("BUSOWNERS");
-    // businessOwnerInput.addBusinessOwnerInfo(0, "'Jerry'", "'Seinfeld'",
-     //        "'40 Dollop'", "'New York'", "'10020'", "'000-111-2222'",
-      //       "'Proper Properties'", "'Property Rental'", 1);
-
-    // ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
-    // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
-
+     Input businessOwnerInput = new Input("BUSOWNERS");
+     businessOwnerInput.addBusinessOwnerInfo("Louie", "CK",
+             "40 Dollop", "New York", "10020", "000-111-2222",
+             "Proper Properties", "Property Rental", 1);
    }
 
     public static ArrayList<Staff> getStaffByID(int idNum){
@@ -138,7 +136,7 @@ public class Database {
                 city = rs.getString("CITY");
                 postcode = rs.getString("POSTCODE");
                 phone = rs.getString("PHONE");
-                OID = rs.getInt("OWNERNUM");
+                OID = rs.getInt("POWNERNUM");
                 MID = rs.getInt("STAFFNUM");
 
                 if(ownID == OID) {
@@ -180,7 +178,7 @@ public class Database {
                 city = rs.getString("CITY");
                 postCode = rs.getString("POSTCODE");
                 phone = rs.getString("PHONE");
-                ownerId = rs.getInt("OWNERNUM");
+                ownerId = rs.getInt("BOWNERNUM");
                 staffId = rs.getInt("STAFFNUM");
                 businessName = rs.getString("BNAME");
                 businessType = rs.getString("BTYPE");

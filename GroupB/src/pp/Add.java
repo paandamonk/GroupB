@@ -1,4 +1,4 @@
-package pp;
+ package pp;
 
 import javax.swing.JFrame;
 import java.awt.GridLayout;
@@ -326,7 +326,7 @@ public class Add implements ActionListener{
 						(textField_8.getText() == null);
 				
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-				if(cleared) {
+//				if(cleared) {
 					Input clientinput = new Input("CLIENTS");
 					String fname = textField.getText();
 					String lname = textField_1.getText();
@@ -340,11 +340,11 @@ public class Add implements ActionListener{
 					clientinput.addClientInfo(fname, lname, type,
 							phone, rent, staffId,
 							street, city, zip);
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-
-				}
+//				}
+//				else {
+//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
+//
+//				}
 	
 			}
 			textField.setText(null);
@@ -412,7 +412,7 @@ public class Add implements ActionListener{
 						(textField_6.getText() == null);
 				
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-				if(cleared) {
+			//	if(cleared) {
 					Input propertyinput = new Input("PROPERTIES");
 					String street = textField.getText();
 					String city = textField_1.getText();
@@ -423,11 +423,11 @@ public class Add implements ActionListener{
 					String owner = textField_6.getText();
 
 					propertyinput.addPropertyInfo(street, zip, city, type, rooms, rent, owner);
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-
-				}
+//				}
+//				else {
+//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
+//
+//				}
 			}
 			textField.setText(null);
 			textField_1.setText(null);
@@ -492,7 +492,7 @@ public class Add implements ActionListener{
 						(textField_6.getText() == null) ||(textField_7.getText() == null);
 				
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-				if(cleared) {
+			//	if(cleared) {
 					Input staffinput = new Input("STAFF");
 					String fname = textField.getText();
 					String lname = textField_1.getText();
@@ -504,11 +504,11 @@ public class Add implements ActionListener{
 					int supId = Integer.parseInt(textField_7.getText());
 					
 					staffinput.addStaffInfo(fname, lname, position, branch, sex, DoB, salary, supId);
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-
-				}
+//				}
+//				else {
+//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
+//
+//				}
 	
 			}
 			textField.setText(null);
@@ -572,7 +572,7 @@ public class Add implements ActionListener{
 						(textField_6.getText() == null);
 				
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-				if(cleared) {
+		//		if(cleared) {
 					Input propownerinput = new Input("PROPOWNERS");
 					String fname = textField.getText();
 					String lname = textField_1.getText();
@@ -582,11 +582,11 @@ public class Add implements ActionListener{
 					String phone = textField_5.getText();
 					int staffId = Integer.parseInt(textField_6.getText());
 					propownerinput.addPropOwnerInfo(fname, lname, street, city, zip, phone, staffId);
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-
-				}
+//				}
+//				else {
+//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
+//
+//				}
 	
 			}
 			textField.setText(null);
@@ -656,7 +656,7 @@ public class Add implements ActionListener{
 						(textField_8.getText() == null);
 				
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-				if(cleared) {
+			//	if(cleared) {
 					Input busownerinput = new Input("BUSOWNERS");
 					String fname = textField.getText();
 					String lname = textField_1.getText();
@@ -668,11 +668,11 @@ public class Add implements ActionListener{
 					String btype = textField_7.getText();
 					int staffId = Integer.parseInt(textField_8.getText());
 					busownerinput.addBusinessOwnerInfo(fname, lname, street, city, zip, phone, bname, btype, staffId);
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-
-				}
+//				}
+//				else {
+//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
+//
+//				}
 	
 			}
 			textField.setText(null);
@@ -745,7 +745,7 @@ public class Add implements ActionListener{
 						(textField_8.getText() == null);
 				
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-				if(cleared) {
+		//		if(cleared) {
 					Input propviewinput = new Input("PROPVIEW");
 					String fname = textField.getText();
 					String lname = textField_1.getText();
@@ -757,11 +757,11 @@ public class Add implements ActionListener{
 					String viewdate = textField_7.getText();
 					String comments = textField_8.getText();
 					propviewinput.addPropViewInfo(fname, lname, cell, propId, street, city, zip, viewdate, comments);
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-
-				}
+//				}
+//				else {
+//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
+//
+//				}
 	
 			}
 			textField.setText(null);
@@ -857,7 +857,7 @@ public class Add implements ActionListener{
 					   (textField_14.getText() == null) || (textField_15.getText() == null);
 				
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-				if(cleared) {
+//				if(cleared) {
 					Input leaseinput = new Input("LEASE");
 					int clientId = Integer.parseInt(textField.getText());
 					String fname = textField_1.getText();
@@ -880,11 +880,11 @@ public class Add implements ActionListener{
 
 
 					
-				}
-				else {
-					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-
-				}
+//				}
+//				else {
+//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
+//
+//				}
 	
 			}
 			textField.setText(null);

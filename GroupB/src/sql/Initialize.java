@@ -1,6 +1,8 @@
 package sql;
 import java.sql.*;
 
+import pp.UserInterface;
+
 public class Initialize
 {
     public static void main(String[] args) {
@@ -111,8 +113,10 @@ public class Initialize
       } catch ( Exception e ) {
          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
          
-         System.exit(0);
+        // System.exit(0);
       }
       System.out.println("Created database and tables successfully");
+		UserInterface u = new UserInterface();
+
     }
 }

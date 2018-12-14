@@ -75,7 +75,7 @@ public class Input
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO " + tableName + " (OWNERNUM,FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,STAFFNUM) " +
+            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,STAFFNUM) " +
                     "VALUES ('"  + Fname + "','" + Lname + "','" + street + "','" + City + "','" + Postcode + "','" +
             		Phone + "','" + sID + "');";
 

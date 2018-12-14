@@ -151,6 +151,14 @@ public class Staff extends Person {
 		this.propList = propList;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return getFname() + " " + getLname() + "; Position: " + getPosition();
+	}
+
 	/**
 	 * @return the group
 	 */
