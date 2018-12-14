@@ -19,12 +19,32 @@ public class InputAuthenticator {
         System.out.println(ia.nameAuthenticator("RogeR"));
 
         String nameInput = "Roger";
-        if(ia.nameAuthenticator(nameInput)) { // name authenticator returned true
+        if(ia.nameAuthenticator(nameInput)) { // authenticator returned true
             String nameForStorage = "'" + nameInput + "'";
             System.out.println("Name authentication succeeded. Value being stored is: " + nameForStorage);
         }
         else{ // name authenticator returned false
             System.out.println("Name authentication failed.");
+        }
+        System.out.println();
+
+        ////////////// ADDRESS AUTHENTICATION //////////////
+
+        System.out.println("Address authenticator:");
+        System.out.println(ia.addressAuthenticator("30 Hawk Drive"));
+        System.out.println(ia.addressAuthenticator("30 H!awk Drive"));
+        System.out.println(ia.addressAuthenticator("30 Hawk Drive "));
+        System.out.println(ia.addressAuthenticator("30 Hawk Drive123"));
+        System.out.println(ia.addressAuthenticator("30HawkDrive"));
+        System.out.println(ia.addressAuthenticator("3 0 H a w k D r i v e"));
+
+        String addressInput = "30 Hawk Drive";
+        if(ia.addressAuthenticator(addressInput)) { // authenticator returned true
+            String addressForStorage = "'" + addressInput + "'";
+            System.out.println("Address authentication succeeded. Value being stored is: " + addressForStorage);
+        }
+        else{ // name authenticator returned false
+            System.out.println("Address authentication failed.");
         }
         System.out.println();
 
@@ -56,7 +76,7 @@ public class InputAuthenticator {
         System.out.println(ia.digitAuthenticator("!@#$5^&*("));
 
         String digitInput = "12345";
-        if(ia.digitAuthenticator(digitInput)) { // name authenticator returned true
+        if(ia.digitAuthenticator(digitInput)) { // authenticator returned true
             int digitsForStorage = Integer.valueOf(digitInput);
             System.out.println("Digit authentication succeeded. Value being stored is: " + digitsForStorage);
             System.out.println("Proof that input is now an integer, here's the input - 1: " + (digitsForStorage - 1));
@@ -75,7 +95,7 @@ public class InputAuthenticator {
         System.out.println(ia.zipcodeAuthenticator("!@#$5^&*("));
 
         String zipcodeInput = "12528";
-        if(ia.digitAuthenticator(zipcodeInput) && ia.zipcodeAuthenticator(zipcodeInput)) { // name authenticator returned true
+        if(ia.digitAuthenticator(zipcodeInput) && ia.zipcodeAuthenticator(zipcodeInput)) { // authenticator returned true
             int digitsForStorage = Integer.valueOf(zipcodeInput);
             System.out.println("Zipcode authentication succeeded. Value being stored is: " + digitsForStorage);
             System.out.println("Proof that input is now an integer, here's the input - 1: " + (digitsForStorage - 1));
@@ -97,7 +117,7 @@ public class InputAuthenticator {
         System.out.println("7: " + ia.dateAuthenticator("50", "03","20180"));
 
         String day = "25"; String month = "12"; String year = "2018";
-        if(ia.dateAuthenticator(day,month,year)) { // name authenticator returned true
+        if(ia.dateAuthenticator(day,month,year)) { // authenticator returned true
             String dateForStorage = ia.dateForDatabase(day,month,year);
             System.out.println("Date authentication succeeded. Value being stored is: " + dateForStorage);
 
@@ -185,6 +205,19 @@ public class InputAuthenticator {
                 return false;
             }
             else if(Character.isDigit(digits.charAt(i)) && i == (digits.length() - 1)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    //Returns true if string passed contains only numbers
+    public boolean addressAuthenticator(String address){
+        for(int i = 0; i < address.length(); i++){
+            if(!Character.isDigit(address.charAt(i)) && !Character.isLetter(address.charAt(i)) && address.charAt(i) != ' '){
+                return false;
+            }
+            else if(Character.isLetter(address.charAt(i)) && i == (address.length() - 1)){
                 return true;
             }
         }
