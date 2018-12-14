@@ -10,7 +10,7 @@ public class Input
         tableName = tName;
     }
 
-    public void addStaffInfo(int sID, String Fname, String Lname, int Pos, String Branch, String sex, String Dob, double Salary, int supID) {
+    public void addStaffInfo(int sID, String Fname, String Lname, int Pos, String Branch, String sex, String Dob, double Salary, String username, String password, int supID) {
         Connection c = null;
         Statement stmt = null;
 
@@ -21,8 +21,8 @@ public class Input
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO " + tableName + " (STAFFNUM,FNAME,LNAME,POSITION,BRANCH,SEX,DOB,SALARY,SUPERVISOR) " +
-                    "VALUES (" + sID + "," + Fname + "," + Lname + "," + Pos + "," + Branch + "," + sex + "," + Dob + "," + Salary + "," + supID + ");";
+            String sql = "INSERT INTO  STAFF (STAFFNUM,FNAME,LNAME,POSITION,BRANCH,SEX,DOB,SALARY,PASSWORD,SUPERVISOR) " +
+                    "VALUES (" + sID + ",'" + Fname + "','" + Lname + "','" + Pos + "','" + Branch + "','" + sex + "','" + Dob + "','" + Salary + "','" + username + "','" + password + "','" + supID + "');";
 
             stmt.executeUpdate(sql);
             stmt.close();
