@@ -33,8 +33,8 @@ public class Database {
        //clientInput.addClientInfo(1,"'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'",
        //        30, 5, "'40'", "'Highland'", "'12234'");
 
-        ArrayList<Client> clientList = getClientByID(0);
-        System.out.println(clientList.get(0).getStaff().getFname() + " TEST");
+       // ArrayList<Client> clientList = getClientByID(1);
+       // System.out.println(clientList.get(0).getStaff().getFname() + " TEST");
 
         //Input leaseInput = new Input("LEASE");
         //leaseInput.addLeaseInfo(0, 1, "'Thomas'", "'Benedict'", 1, "'30 Archibald Lane'", "'Kingston'", "'12528'",
@@ -65,6 +65,8 @@ public class Database {
     // ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
     // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
 
+      ArrayList<Staff> sList = getStaffByID(1);
+      System.out.println(sList.get(0).getFname() + " MASTER USER");
    }
 
     public static ArrayList<Staff> getStaffByID(int idNum){

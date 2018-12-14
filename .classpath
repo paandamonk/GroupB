@@ -9,6 +9,7 @@
 	<classpathentry excluding="Encryption/|SQLTesting/" kind="src" path="src/pp/Backend"/>
 	<classpathentry kind="src" path="src/pp/Backend/Encryption"/>
 	<classpathentry kind="src" path="src/pp/Backend/SQLTesting"/>
+	<classpathentry excluding="src/|src/pp/Backend/|src/pp/Backend/Encryption/|src/pp/Backend/SQLTesting/" kind="src" path=""/>
 	<classpathentry kind="lib" path="C:/Users/boi/Downloads/sqlite-jdbc-3.23.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

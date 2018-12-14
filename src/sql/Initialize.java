@@ -1,11 +1,21 @@
 package sql;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.sql.*;
+import aes.encryption;
+import java.util.Scanner;
+import sql.Input;
 
 public class Initialize
 {
-    public static void main(String[] args) {
+    public static void main(String[] args){
       Connection c = null;
       Statement stmt = null;
+      
+      File NF = new File("11235813.txt");
+      String SK;
+      Scanner kb = new Scanner(System.in);
    
       try {
          Class.forName("org.sqlite.JDBC");
@@ -22,6 +32,8 @@ public class Initialize
                       " SEX          TEXT   NOT NULL, " +
                       " DOB          TEXT   NOT NULL, " +
                       " SALARY       REAL   NOT NULL, " +
+                      " USERNAME     TEXT   NOT NULL, " +
+                      " PASSWORD     TEXT   NOT NULL, " +
                       " SUPERVISOR   TEXT   NOT NULL)"; 
          stmt.executeUpdate(sql);//0
          
@@ -112,6 +124,85 @@ public class Initialize
          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
          System.exit(0);
       }
+      
+      System.out.println("Enter Secrest key");
+      encryption.setKey(SK = kb.nextLine());
+      try (PrintWriter out = new PrintWriter("11235813.txt")) {
+    	out.println(SK);  
+      }catch(Exception FileNotFoundException) {
+  	    System.out.println("Unable to create file");
+  	}
+      
+    
+      /* System.out.println("Enter first employee information:");
+       * System.out.print("Staff ID Number: ");
+      int sID = kb.nextInt();
+      System.out.print("Enter First Name: ");
+      String Fname = kb.nextLine();
+      System.out.print("Enter Last Name: ");
+      String Lname = kb.nextLine();
+      System.out.println("Branch Location: ");
+      String Branch = kb.nextLine();
+      System.out.println("Gender: ");
+      String sex = kb.nextLine();
+      System.out.print("Date Of Birth (YYYY-MM-DD): ");
+      String Dob = kb.nextLine();
+      System.out.println("Salary: ");
+      Double Salary = kb.nextDouble();
+      int Pos = 2;
+      int supID = 0;
+      */
+      
+      System.out.println("Welcome Master User");
+      System.out.println("Please Enter:");
+      System.out.print("First Name: ");
+      String Fname = kb.nextLine();
+      System.out.print("Enter Last Name: ");
+      String Lname = kb.nextLine();
+      System.out.print("Enter UserName: ");
+      String UserName = kb.nextLine();
+      String Password1 = "q", Password2 = "p";
+      while(!Password1.equals(Password2)) {
+    	  System.out.print("Enter Password: ");
+    	  Password1 = kb.nextLine();
+    	  System.out.print("Verify Password: ");
+    	  Password2 = kb.nextLine();
+    	  System.out.println(Password1 + " " + Password2);
+    	  if(!Password1.equals(Password2))	System.out.println("Passwords do not match, please try again");
+      }
+      
+      Password1 = encryption.encrypt(Password1, SK);
+      System.out.println(Password1);
+      int sID = 1;
+      int Pos = 4;
+      String Branch = "MASTER";
+      String sex = "MASTER";
+      String Dob = "MASTER";
+      double Salary = 0.00;
+      int supID = -1;
+      
+      
+      
+      try {
+          Class.forName("org.sqlite.JDBC");
+          c = DriverManager.getConnection("jdbc:sqlite:test.db");
+          c.setAutoCommit(false);
+          System.out.println("Opened database successfully");
+
+          stmt = c.createStatement();
+          String sql = "INSERT INTO  STAFF (STAFFNUM,FNAME,LNAME,POSITION,BRANCH,SEX,DOB,SALARY,USERNAME,PASSWORD,SUPERVISOR) " +
+                  "VALUES (" + sID + ",'" + Fname + "','" + Lname + "','" + Pos + "','" + Branch + "','" + sex + "','" + Dob + "','" + Salary + "','" + UserName + "','" + Password1 + "','" + supID + "');";
+
+          stmt.executeUpdate(sql);
+          stmt.close();
+          c.commit();
+          c.close();
+      } catch ( Exception e ) {
+          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+          System.exit(0);
+      }
+      System.out.println("Staff record for " + Fname + " " + Lname + " created successfully");
+      
       System.out.println("Created database and tables successfully");
     }
 }
