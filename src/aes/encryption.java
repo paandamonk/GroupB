@@ -14,7 +14,7 @@ public class encryption {
 	private static SecretKeySpec secretKey;
 	private static byte[] key;
 	
-	public static void setKey(String myKey)				// called in initialize to set secret key
+	public static void setKey(String myKey)
     {
         MessageDigest sha = null;
         try {
@@ -23,9 +23,6 @@ public class encryption {
             key = sha.digest(key);
             key = Arrays.copyOf(key, 16);
             secretKey = new SecretKeySpec(key, "AES");
-            
-            
-            System.out.println("Secret key set successfully");
         }
         catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
