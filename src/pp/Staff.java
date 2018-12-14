@@ -1,10 +1,12 @@
 package pp;
 
+import aes.*;
 import java.util.ArrayList;
 
 public class Staff extends Person {
 
 	private int position;
+	private String Password;
 	private String gender;
 	private String DOB;
 	private String Branch;
@@ -18,6 +20,10 @@ public class Staff extends Person {
 	public Staff(String fname, String lname, int position) {
 		super(fname, lname);
 		this.position = position;
+	}
+	
+	public static void main(String[] args) {
+		setPass("dicks", "492384723");
 	}
 
 	public Staff(int sID, int pos, String Fname, String Lname, String branch, String sex, String DoB, Double salary, int sup) {
@@ -51,6 +57,10 @@ public class Staff extends Person {
 
 	public void inputData(Property p) {
 		propList.add(p);
+	}
+	
+	public static void setPass(String password, String skey) {
+		System.out.println(aes.encryption.encrypt(password, skey));
 	}
 
 	/**
