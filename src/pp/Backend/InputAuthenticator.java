@@ -28,6 +28,25 @@ public class InputAuthenticator {
         }
         System.out.println();
 
+        ////////////// MONEY AUTHENTICATION //////////////
+
+        System.out.println("Money authenticator:");
+        System.out.println(ia.moneyAuthenticator("123FOUR5"));
+        System.out.println(ia.moneyAuthenticator("12345.00"));
+        System.out.println(ia.moneyAuthenticator("12345.0"));
+        System.out.println(ia.moneyAuthenticator("100.1040"));
+
+        String moneyInput = "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999.99";
+        if(ia.moneyAuthenticator(moneyInput)) { // name authenticator returned true
+            double moneyForStorage = Double.valueOf(moneyInput);
+            System.out.println("Money authentication succeeded. Value being stored is: " + moneyForStorage);
+            System.out.println("Proof that input is now a double, here's the input - 1: " + (moneyForStorage - 1));
+        }
+        else{ // name authenticator returned false
+            System.out.println("Money authentication failed.");
+        }
+        System.out.println();
+
         ////////////// DIGIT AUTHENTICATION //////////////
 
         System.out.println("Digit authenticator:");
@@ -43,7 +62,26 @@ public class InputAuthenticator {
             System.out.println("Proof that input is now an integer, here's the input - 1: " + (digitsForStorage - 1));
         }
         else{ // name authenticator returned false
-            System.out.println("Name authentication failed.");
+            System.out.println("Digit authentication failed.");
+        }
+        System.out.println();
+
+        ////////////// ZIP CODE AUTHENTICATION //////////////
+
+        System.out.println("Zipcode authenticator:");
+        System.out.println(ia.zipcodeAuthenticator("123FOUR5"));
+        System.out.println(ia.zipcodeAuthenticator("aab456"));
+        System.out.println(ia.zipcodeAuthenticator("12345"));
+        System.out.println(ia.zipcodeAuthenticator("!@#$5^&*("));
+
+        String zipcodeInput = "12528";
+        if(ia.digitAuthenticator(zipcodeInput) && ia.zipcodeAuthenticator(zipcodeInput)) { // name authenticator returned true
+            int digitsForStorage = Integer.valueOf(zipcodeInput);
+            System.out.println("Zipcode authentication succeeded. Value being stored is: " + digitsForStorage);
+            System.out.println("Proof that input is now an integer, here's the input - 1: " + (digitsForStorage - 1));
+        }
+        else{ // name authenticator returned false
+            System.out.println("Zipcode authentication failed.");
         }
         System.out.println();
 
@@ -141,12 +179,6 @@ public class InputAuthenticator {
     }
 
     //Returns true if string passed contains only numbers
-    public boolean monthAuthenticator(String month){
-
-        return false;
-    }
-
-    //Returns true if string passed contains only numbers
     public boolean digitAuthenticator(String digits){
         for(int i = 0; i < digits.length(); i++){
             if(!Character.isDigit(digits.charAt(i))){
@@ -154,6 +186,40 @@ public class InputAuthenticator {
             }
             else if(Character.isDigit(digits.charAt(i)) && i == (digits.length() - 1)){
                 return true;
+            }
+        }
+        return false;
+    }
+
+    //Returns true if string passed contains only numbers
+    public boolean moneyAuthenticator(String money){
+        int dotCount = 0;
+        double m = -1; //initialized to a negative to force a false return if parameters aren't met
+        for(int i = 0; i <  money.length(); i++){
+            if(!Character.isDigit(money.charAt(i))){
+                if(money.charAt(i) != '.' && i != money.length() - 2){
+                    return false;
+                }
+                else if(money.charAt(i) == '.'){
+                    dotCount++;
+                }
+            }
+        }
+        if(dotCount == 1) {
+            String[] moneyForCalculation = money.split("\\.");
+            m = Double.valueOf(moneyForCalculation[0] + moneyForCalculation[1]);
+        }
+        return (m >= 0 && m < Double.MAX_VALUE); //returns the true or false result of this line. (i.e. returns true if m is within the boundaries set.)
+    }
+
+    //Returns true if string passed contains only numbers
+    public boolean zipcodeAuthenticator(String digits){
+        for(int i = 0; i < digits.length(); i++){
+            if(!Character.isDigit(digits.charAt(i))){
+                return false;
+            }
+            else if(Character.isDigit(digits.charAt(i)) && i == (digits.length() - 1)){
+                return (digits.length() != 5);
             }
         }
         return false;
