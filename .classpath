@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="pp/Backend/Encryption/|pp/Backend/SQLTesting/|pp/Backend/" kind="src" path="src"/>
+	<classpathentry excluding="Encryption/|SQLTesting/" kind="src" path="src/pp/Backend"/>
+	<classpathentry kind="src" path="src/pp/Backend/Encryption"/>
+	<classpathentry kind="src" path="src/pp/Backend/SQLTesting"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/Nick/workspace/8 Queens Problem/SoftwareEngineering/sqlite-jdbc-3.23.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

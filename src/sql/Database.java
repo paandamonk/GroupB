@@ -183,6 +183,7 @@ public class Database {
                 staffId = rs.getInt("STAFFNUM");
                 businessName = rs.getString("BNAME");
                 businessType = rs.getString("BTYPE");
+                               
 
                 if(ownID == ownerId) {
                     BusinessOwner businessOwner = new BusinessOwner(FName, LName, street, city, postCode, phone, staffId, ownerId,
@@ -232,6 +233,8 @@ public class Database {
                 city = rs.getString("CITY");
                 postCode = rs.getString("POSTCODE");
                 maxRent = rs.getFloat("MAXRENT");
+                
+                System.out.println("name: " +fName + " " + lName);
 
                 if(cID == idNum) {
                     Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
