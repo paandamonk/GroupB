@@ -89,12 +89,12 @@ public class Menu extends JFrame implements ActionListener {
 	Staff s1 = new Staff();
 	PropertyOwner propertyOwner = new PropertyOwner();
 	BusinessOwner businessOwner = new BusinessOwner();
-	ArrayList<Client> clientList = db.getClientByID(0);
-	ArrayList<Staff> staffList = s1.getStaffByID(0);
-	ArrayList<PropertyOwner> propOwnerList = propertyOwner.getPropOwnersByID(0);
-	ArrayList<BusinessOwner> busOwnerList = businessOwner.getBusinessOwnersByID(0);
-	ArrayList<PropView> propViewList = db.getPropView();
-	ArrayList<Lease> leaseList = db.getLeaseByClientId(0);
+	//ArrayList<Client> clientList = db.getClientByID(0);
+	//ArrayList<Staff> staffList = s1.getStaffByID(0);
+	//ArrayList<PropertyOwner> propOwnerList = propertyOwner.getPropOwnersByID(0);
+	//ArrayList<BusinessOwner> busOwnerList = businessOwner.getBusinessOwnersByID(0);
+	//ArrayList<PropView> propViewList = db.getPropView();
+	//ArrayList<Lease> leaseList = db.getLeaseByClientId(0);
 	DefaultListModel list = new DefaultListModel();
 
 	public Menu(int cl) {
@@ -114,7 +114,7 @@ public class Menu extends JFrame implements ActionListener {
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			setLayout(new GridLayout(3, 2));
 			setSize(4000, 3000);
-			SupMenu();
+			//SupMenu();
 			add(Panel, BorderLayout.NORTH);
 			add(Panel2, BorderLayout.SOUTH);
 			add(Panel3, BorderLayout.SOUTH);
@@ -126,7 +126,7 @@ public class Menu extends JFrame implements ActionListener {
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			setLayout(new GridLayout(3, 2));
 			setSize(4000, 3000);
-			AgentMenu();
+			//AgentMenu();
 			add(Panel, BorderLayout.NORTH);
 			add(Panel2, BorderLayout.SOUTH);
 			add(Panel3, BorderLayout.SOUTH);
@@ -233,9 +233,9 @@ public class Menu extends JFrame implements ActionListener {
 		Panel2.add(city);
 		Panel2.add(lowtoHigh);
 		Panel2.add(hightoLow);
-		for(int i = 0; i < clientList.size(); i++) {
+		//for(int i = 0; i < clientList.size(); i++) {
 			
-		}
+		//}
 		l = new JList();
 
 		l.setPrototypeCellValue("XXXXXXXXXXXXXXXXXXXX");
@@ -307,7 +307,7 @@ public class Menu extends JFrame implements ActionListener {
 
 		//this if-statement will be copied and pasted into all of the choices. this was just for testing purposes.
 		if (src == b) {
-			if(clientList.size()> 0){
+		/*	if(clientList.size()> 0){
 			String test = clientList.get(0).getFname() + " " + clientList.get(0).getLname();
 			String test2 = clientList.get(1).getFname() + " " + clientList.get(1).getLname();
 			list.addElement(test);
@@ -334,7 +334,7 @@ public class Menu extends JFrame implements ActionListener {
 			city.setVisible(false);
 			lowtoHigh.setVisible(false);
 			hightoLow.setVisible(false);
-		}
+		}*/
 
 		//needs work
 		if (choices.getSelectedItem().equals("View Managers")) {
@@ -346,12 +346,12 @@ public class Menu extends JFrame implements ActionListener {
 			
 			list = new DefaultListModel();
 			ArrayList<Staff> managers = new ArrayList();
-			for(int i = 0; i < staffList.size(); i++){
+			/*for(int i = 0; i < staffList.size(); i++){
 				if(staffList.get(i).getPosition() == 2){
 					managers.add(staffList.get(i));
 					list.addElement(staffList.get(i));
 				}
-			}
+			}*/
 			
 			if(noSelect.isSelected()) {
 				l = new JList(list);
@@ -417,12 +417,12 @@ public class Menu extends JFrame implements ActionListener {
 			
 			list = new DefaultListModel();
 			ArrayList<Staff> supervisors = new ArrayList();
-			for(int i = 0; i < staffList.size(); i++){
+			/*for(int i = 0; i < staffList.size(); i++){
 				if(staffList.get(i).getPosition() == 1){
 					supervisors.add(staffList.get(i));
 					list.addElement(staffList.get(i));
 				}
-			}
+			}*/
 			
 			if(noSelect.isSelected()) {
 				l = new JList(list);
@@ -487,12 +487,12 @@ public class Menu extends JFrame implements ActionListener {
 			
 			list = new DefaultListModel();
 			ArrayList<Staff> agents = new ArrayList();
-			for(int i = 0; i < staffList.size(); i++){
+			/*for(int i = 0; i < staffList.size(); i++){
 				if(staffList.get(i).getPosition() == 0){
 					agents.add(staffList.get(i));
 					list.addElement(staffList.get(i));
 				}
-			}
+			}*/
 			
 			if(noSelect.isSelected()) {
 				l = new JList(list);
@@ -559,10 +559,10 @@ public class Menu extends JFrame implements ActionListener {
 			
 			list = new DefaultListModel();
 			ArrayList<Staff> staff = new ArrayList();
-			for(int i = 0; i < staffList.size(); i++){
+			/*for(int i = 0; i < staffList.size(); i++){
 				staff.add(staffList.get(i));
 				list.addElement(staffList.get(i));
-			}
+			}*/
 			if(lowtoHigh.isSelected()) {
 				
 			}
@@ -605,10 +605,10 @@ public class Menu extends JFrame implements ActionListener {
 			
 			list = new DefaultListModel();
 			ArrayList<Client> clients = new ArrayList();
-			for(int i = 0; i < clientList.size(); i++) {
+			/*for(int i = 0; i < clientList.size(); i++) {
 				clients.add(clientList.get(i));
 				list.addElement(clientList.get(i));
-			}
+			}*/
 			l = new JList(list);
 			Panel3.removeAll();
 			scroll = new JScrollPane();
@@ -708,4 +708,5 @@ public class Menu extends JFrame implements ActionListener {
 		
 	}
 
+    }
 }
