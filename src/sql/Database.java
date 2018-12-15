@@ -66,10 +66,10 @@ public class Database {
     // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
 
      EditData ed = new EditData();
-     ed.deleteInfo("BUSOWNERS", "OWNERNUM", 0);
+    // ed.deleteInfo("BUSOWNERS", "OWNERNUM", 0);
 
-     //ed.updateInfo("STAFF", "FNAME", 0, "Seymour", "STAFFNUM",1);
-    // ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
+     ed.updateInfo("STAFF", "FNAME", 0, "Thomas", "STAFFNUM",1);
+     ed.updateInfo("STAFF", "LNAME", 0, "Oxford", "STAFFNUM",1);
 
 
 
