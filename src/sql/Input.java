@@ -48,15 +48,14 @@ public class Input
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully (Clients)");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,TYPE,PHONE,MAXRENT,STAFFN,STREET,CITY,POSTCODE) " +
-                    "VALUES (" + fname + "','" + lname + "','" + type + "','" + phone + "','" + maxRent + "','" +
-                    staffId + "','" + street + "','" + city + "','" + postCode + "');";
+            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,TYPE,PHONE,MAXRENT,STAFFNUM,STREET,CITY,POSTCODE) " +
+                    "VALUES (" + fname + "," + lname + "," + type + "," + phone  + "," + maxRent + "," + staffId +
+                    "," + street + "," + city + "," + postCode + ");";
 
             stmt.executeUpdate(sql);
-
             stmt.close();
             c.commit();
             c.close();
@@ -64,7 +63,7 @@ public class Input
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-        System.out.println("Client record for " + fname + " " + lname + " created successfully");
+        System.out.println("Client record created successfully");
     }
 
     public void addPropOwnerInfo(int oID, String Fname, String Lname, String street, String City, String Postcode, int sID, String Phone) {

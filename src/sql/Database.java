@@ -18,8 +18,8 @@ public class Database {
             System.exit(0);
         }
 
-        Input staffInput = new Input("STAFF");
-        staffInput.addStaffInfo("'Lupin'", "'Three'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 1);
+        //Input staffInput = new Input("STAFF");
+       // staffInput.addStaffInfo("'Lupin'", "'Three'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 1);
 
         //Input businessOwnerInput = new Input("BUSOWNERS");
         //businessOwnerInput.addBusinessOwnerInfo("'Robin'", "'Hood'",
@@ -34,6 +34,10 @@ public class Database {
 
         //ed.updateInfo("STAFF", "FNAME", 0, "Seymour", "STAFFNUM",1);
         //ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
+
+        //Input clientInput = new Input("CLIENTS");
+        //clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'",
+        //        30.1, 5, "'40'", "'Highland'", "'12234'");
 
         BusinessOwner businessOwner = new BusinessOwner();
         ArrayList<BusinessOwner> businessOwnerList = businessOwner.getBusinessOwnersByID(0);
@@ -93,8 +97,6 @@ public class Database {
                     Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
                     clientList.add(client);
                 }
-
-
             }
         }catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
