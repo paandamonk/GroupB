@@ -12,7 +12,7 @@ public class Database {
       Connection c = null;
       try {
          Class.forName("org.sqlite.JDBC");
-         c = DriverManager.getConnection("jdbc:sqlite:database.db.db");
+         c = DriverManager.getConnection("jdbc:sqlite:database.db");
       } catch ( Exception e ) {
          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
          System.exit(0);
@@ -33,8 +33,8 @@ public class Database {
        //clientInput.addClientInfo(1,"'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'",
        //        30, 5, "'40'", "'Highland'", "'12234'");
 
-        ArrayList<Client> clientList = getClientByID(0);
-        System.out.println(clientList.get(0).getStaff().getFname() + " TEST");
+       // ArrayList<Client> clientList = getClientByID(0);
+       // System.out.println(clientList.get(0).getStaff().getFname() + " TEST");
 
         //Input leaseInput = new Input("LEASE");
         //leaseInput.addLeaseInfo(0, 1, "'Thomas'", "'Benedict'", 1, "'30 Archibald Lane'", "'Kingston'", "'12528'",
@@ -65,6 +65,12 @@ public class Database {
     // ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
     // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
 
+     EditData ed = new EditData();
+     ed.updateInfo("STAFF", "FNAME", 0, "Seymour", "STAFFNUM",1);
+     ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
+
+     ArrayList<Staff> staffList = getStaffByID(0);
+     System.out.println(staffList.get(0).getFname() + " " + staffList.get(0).getLname());
    }
 
     public static ArrayList<Staff> getStaffByID(int idNum){
@@ -73,14 +79,14 @@ public class Database {
 
         ArrayList<Staff> staffList = new ArrayList();
         int staffID, position, supervisorId;
-        String Fname, Lname, branch, sex, DoB;
+        String Fname, Lname, branch, sex, DoB, username, password;
         double salary;
 
         try{
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully(staff)");
 
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM STAFF;");
@@ -93,19 +99,21 @@ public class Database {
                 sex = rs.getString("SEX");
                 DoB = rs.getString("DOB");
                 salary = rs.getDouble("SALARY");
+                username = rs.getString("USERNAME");
+                password = rs.getString("PASSWORD");
                 supervisorId = rs.getInt("SUPERVISOR");
 
                 //Return staff of given ID
                 if(staffID == idNum) {
-                    Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
+                    Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password, supervisorId);
                     staffList.add(staff);
                     return staffList;
                 }
                 else if(idNum == 0){
-                    Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
+                    Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password,  supervisorId);
                     staffList.add(staff);
                 }
-                Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, supervisorId);
+                Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password,  supervisorId);
                 staffList.add(staff);
             }
         }catch ( Exception e ) {
@@ -234,7 +242,7 @@ public class Database {
                 postCode = rs.getString("POSTCODE");
                 maxRent = rs.getFloat("MAXRENT");
                 
-                System.out.println("name: " +fName + " " + lName);
+                System.out.println("name: " + fName + " " + lName);
 
                 if(cID == idNum) {
                     Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
