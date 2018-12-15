@@ -57,20 +57,32 @@ public class Database {
      //ArrayList<PropertyOwner> propertyOwnerList = getPropOwnersByID(0);
      //System.out.println(propertyOwnerList.get(0).getFname() + " TEST");
 
-    // Input businessOwnerInput = new Input("BUSOWNERS");
-    // businessOwnerInput.addBusinessOwnerInfo(0, "'Jerry'", "'Seinfeld'",
-     //        "'40 Dollop'", "'New York'", "'10020'", "'000-111-2222'",
-      //       "'Proper Properties'", "'Property Rental'", 1);
+     //Input businessOwnerInput = new Input("BUSOWNERS");
+     //businessOwnerInput.addBusinessOwnerInfo(0, "'Jerry'", "'Seinfeld'",
+      //       "'40 Dollop'", "'New York'", "'10020'", "'000-111-2222'",
+       //      "'Proper Properties'", "'Property Rental'", 1);
 
-    // ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
+     //ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
     // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
 
      EditData ed = new EditData();
-     ed.updateInfo("STAFF", "FNAME", 0, "Seymour", "STAFFNUM",1);
-     ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
+     ed.deleteInfo("BUSOWNERS", "OWNERNUM", 0);
 
+     //ed.updateInfo("STAFF", "FNAME", 0, "Seymour", "STAFFNUM",1);
+    // ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
+
+
+
+     ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
+     if(businessOwnerList.size() > 0) {
+         System.out.println(businessOwnerList.get(0).getFname() + " " + businessOwnerList.get(0).getLname());
+     }
+     else{
+         System.out.println("No business owners exist in the database.");
+     }
      ArrayList<Staff> staffList = getStaffByID(0);
      System.out.println(staffList.get(0).getFname() + " " + staffList.get(0).getLname());
+
    }
 
     public static ArrayList<Staff> getStaffByID(int idNum){
