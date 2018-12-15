@@ -8,6 +8,7 @@ import sql.Input;
 import sql.Print;
 
 public class Database {
+<<<<<<< HEAD
     public static void main(String[] args) {
         Connection c = null;
         try {
@@ -35,6 +36,35 @@ public class Database {
 
         // ArrayList<Client> clientList = getClientByID(0);
         // System.out.println(clientList.get(0).getStaff().getFname() + " TEST");
+=======
+ public static void main(String[] args) {
+      Connection c = null;
+      try {
+         Class.forName("org.sqlite.JDBC");
+         c = DriverManager.getConnection("jdbc:sqlite:database.db");
+      } catch ( Exception e ) {
+         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+         System.exit(0);
+      }
+     // Input sInput = new Input("STAFF");
+      //sInput.addInfo(1, "2", "3", 4, 43.2);
+       //Input pInput = new Input("PROPERTIES");
+       //pInput.addPropertyInfo(1, "'2'", "'3'", "'4'" ,"'5'", 4, 43.2, "'john'");
+       //Print print = new Print("PROPERTIES");
+       //print.Print("PROPERTIES");
+      // getProp(000);
+      // printProp(000);
+
+      // Input staffInput = new Input("STAFF");
+      // staffInput.addStaffInfo(5, "'Matt'", "'Smith'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540, 6);
+
+       //Input clientInput = new Input("CLIENTS");
+       //clientInput.addClientInfo(1,"'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'",
+       //        30, 5, "'40'", "'Highland'", "'12234'");
+
+       // ArrayList<Client> clientList = getClientByID(0);
+       // System.out.println(clientList.get(0).getStaff().getFname() + " TEST");
+>>>>>>> Encryption
 
         //Input leaseInput = new Input("LEASE");
         //leaseInput.addLeaseInfo(0, 1, "'Thomas'", "'Benedict'", 1, "'30 Archibald Lane'", "'Kingston'", "'12528'",
@@ -68,6 +98,7 @@ public class Database {
         EditData ed = new EditData();
         //ed.deleteInfo("BUSOWNERS", "OWNERNUM", 0);
 
+<<<<<<< HEAD
         ed.updateInfo("STAFF", "FNAME", 0, "Seymour", "STAFFNUM",1);
         ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
 
@@ -84,6 +115,35 @@ public class Database {
         System.out.println(staffList.get(0).getFname() + " " + staffList.get(0).getLname());
 
     }
+=======
+     //Input businessOwnerInput = new Input("BUSOWNERS");
+     //businessOwnerInput.addBusinessOwnerInfo(0, "'Jerry'", "'Seinfeld'",
+      //       "'40 Dollop'", "'New York'", "'10020'", "'000-111-2222'",
+       //      "'Proper Properties'", "'Property Rental'", 1);
+
+     //ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
+    // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
+
+     EditData ed = new EditData();
+    // ed.deleteInfo("BUSOWNERS", "OWNERNUM", 0);
+
+     ed.updateInfo("STAFF", "FNAME", 0, "Thomas", "STAFFNUM",1);
+     ed.updateInfo("STAFF", "LNAME", 0, "Oxford", "STAFFNUM",1);
+
+
+
+     ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
+     if(businessOwnerList.size() > 0) {
+         System.out.println(businessOwnerList.get(0).getFname() + " " + businessOwnerList.get(0).getLname());
+     }
+     else{
+         System.out.println("No business owners exist in the database.");
+     }
+     ArrayList<Staff> staffList = getStaffByID(0);
+     System.out.println(staffList.get(0).getFname() + " " + staffList.get(0).getLname());
+
+   }
+>>>>>>> Encryption
 
     public static ArrayList<Staff> getStaffByID(int idNum){
         Connection c = null;
@@ -203,6 +263,7 @@ public class Database {
                 staffId = rs.getInt("STAFFNUM");
                 businessName = rs.getString("BNAME");
                 businessType = rs.getString("BTYPE");
+                               
 
 
                 if(ownID == ownerId) {
@@ -253,6 +314,8 @@ public class Database {
                 city = rs.getString("CITY");
                 postCode = rs.getString("POSTCODE");
                 maxRent = rs.getFloat("MAXRENT");
+                
+                System.out.println("name: " + fName + " " + lName);
 
                 System.out.println("name: " + fName + " " + lName);
 
@@ -272,6 +335,7 @@ public class Database {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
+<<<<<<< HEAD
         return clientList;
     }
 
@@ -310,6 +374,46 @@ public class Database {
                 System.out.println( "RENT = " + rent );
                 System.out.println( "OWNER = " + owner);
 
+=======
+ 		return clientList;
+ }
+
+
+ 
+ public static void printProp(int Num) {
+     Connection c = null;
+     Statement stmt = null;
+     ArrayList<PropertyNew> propertiesList = new ArrayList<PropertyNew>();
+     
+     try {
+        Class.forName("org.sqlite.JDBC");
+        c = DriverManager.getConnection("jdbc:sqlite:database.db");
+        c.setAutoCommit(false);
+        System.out.println("Opened database successfully");
+
+        stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery( "SELECT * FROM " + "PROPERTIES " + ";" );
+        
+        while ( rs.next() ) {
+        int propNum = rs.getInt("PROPNUM");
+        String  street = rs.getString("STREET");
+        String city = rs.getString("CITY");
+        String postcode = rs.getString("POSTCODE");
+        String type  = rs.getString("TYPE");
+        int  rooms = rs.getInt("ROOMS");
+        double rent = rs.getDouble("RENT");
+        String owner  = rs.getString("OWNER");
+        
+        System.out.println( "PROPNUM = " + propNum );
+        System.out.println( "STREET = " + street );
+        System.out.println("CITY = " + city);
+        System.out.println("POSTCODE = " + postcode);
+        System.out.println( "TYPE = " + type );
+        System.out.println( "ROOMS = " + rooms );
+        System.out.println( "RENT = " + rent );
+        System.out.println( "OWNER = " + owner);
+       
+>>>>>>> Encryption
         /*if(Num == propNum){
         	Property prp = new Property(street,city,postcode,type, propNum,rooms,rent,owner);
         	propertiesList.add(prp);
