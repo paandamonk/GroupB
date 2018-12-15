@@ -64,7 +64,7 @@ public class Input
         System.out.println("Client record for " + fname + " " + lname + " created successfully");
     }
 
-    public void addPropOwnerInfo(String Fname, String Lname, String street, String City, String Postcode, String Phone, int sID) {
+    public void addPropOwnerInfo(int oID, String Fname, String Lname, String street, String City, String Postcode, int sID, String Phone) {
         Connection c = null;
         Statement stmt = null;
 
@@ -75,9 +75,8 @@ public class Input
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,STAFFNUM) " +
-                    "VALUES ('"  + Fname + "','" + Lname + "','" + street + "','" + City + "','" + Postcode + "','" +
-                    Phone + "','" + sID + "');";
+            String sql = "INSERT INTO " + tableName + " (OWNERNUM,FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,STAFFNUM) " +
+                    "VALUES (" + oID + "," + Fname + "," + Lname + "," + street + "," + City + "," + Postcode + "," + Phone + "," + sID + ");";
 
             stmt.executeUpdate(sql);
             stmt.close();
@@ -90,8 +89,8 @@ public class Input
         System.out.println("Property Owner record created successfully");
     }
 
-    public void addBusinessOwnerInfo(String Fname, String Lname, String street, String City, String Postcode,
-                                     String Phone, String BusinessName, String BusinessType, int sID) {
+    public void addBusinessOwnerInfo(int oID, String Fname, String Lname, String street, String City, String Postcode,
+                                     String Phone, String BusinessName, String BusinessType,  int sID) {
         Connection c = null;
         Statement stmt = null;
 
@@ -99,12 +98,12 @@ public class Input
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully (Business Owners)");
+            System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,BTYPE,BNAME,STAFFNUM) " +
-                    "VALUES ('"  + Fname + "','" + Lname + "','" + street + "','" + City + "','" + Postcode +
-                    "','" + BusinessName + "','" + BusinessType + "','" + Phone + "','" + sID + "');";
+            String sql = "INSERT INTO " + tableName + " (OWNERNUM,FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,BTYPE,BNAME,STAFFNUM) " +
+                    "VALUES (" + oID + "," + Fname + "," + Lname + "," + street + "," + City + "," + Postcode +
+                    "," + BusinessName + "," + BusinessType + "," + Phone + "," + sID + ");";
 
             stmt.executeUpdate(sql);
             stmt.close();

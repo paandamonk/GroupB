@@ -583,7 +583,7 @@ public class Add implements ActionListener{
 					String zip = textField_4.getText();
 					String phone = textField_5.getText();
 					int staffId = Integer.parseInt(textField_6.getText());
-					propownerinput.addPropOwnerInfo(fname, lname, street, city, zip, phone, staffId);
+					//propownerinput.addPropOwnerInfo(fname, lname, street, city, zip, phone, staffId);
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
@@ -668,7 +668,7 @@ public class Add implements ActionListener{
 					String bname = textField_6.getText();
 					String btype = textField_7.getText();
 					int staffId = Integer.parseInt(textField_8.getText());
-					busownerinput.addBusinessOwnerInfo(fname, lname, street, city, zip, phone, bname, btype, staffId);
+					//busownerinput.addBusinessOwnerInfo(fname, lname, street, city, zip, phone, bname, btype, staffId);
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");

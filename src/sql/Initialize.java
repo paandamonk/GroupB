@@ -21,9 +21,10 @@ public class Initialize
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:database.db");
 
+
             stmt = c.createStatement();
             String sql = "CREATE TABLE STAFF" +
-                    "(STAFFNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "(STAFFNUM INT PRIMARY KEY     NOT NULL," +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
                     " POSITION     INT    NOT NULL, " +
@@ -37,7 +38,7 @@ public class Initialize
             stmt.executeUpdate(sql);//0
 
             sql = "CREATE TABLE PROPERTIES" +
-                    "(PROPNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "(PROPNUM INT PRIMARY KEY     NOT NULL," +
                     " STREET       TEXT   NOT NULL, " +
                     " CITY         TEXT   NOT NULL, " +
                     " POSTCODE     TEXT   NOT NULL, " +
@@ -48,7 +49,7 @@ public class Initialize
             stmt.executeUpdate(sql);//1
 
             sql = "CREATE TABLE PROPOWNERS" +
-                    "(POWNERNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "(OWNERNUM INT PRIMARY KEY     NOT NULL," +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
                     " STREET       TEXT   NOT NULL, " +
@@ -59,7 +60,7 @@ public class Initialize
             stmt.executeUpdate(sql);//2
 
             sql = "CREATE TABLE BUSOWNERS" +
-                    "(BOWNERNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "(OWNERNUM INT PRIMARY KEY     NOT NULL," +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
                     " STREET       TEXT   NOT NULL, " +
@@ -72,20 +73,20 @@ public class Initialize
             stmt.executeUpdate(sql);//2
 
             sql = "CREATE TABLE CLIENTS" +
-                    "(CLIENTID INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "(CLIENTID INT PRIMARY KEY     NOT NULL," +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
                     " TYPE         TEXT   NOT NULL, " +
                     " PHONE        TEXT   NOT NULL, " +
                     " MAXRENT      REAL   NOT NULL, " +
-                    " STAFFN       INT    NOT NULL, " +
+                    " STAFFNUM     TEXT   NOT NULL, " +
                     " STREET       TEXT   NOT NULL, " +
                     " CITY         TEXT   NOT NULL, " +
                     " POSTCODE     TEXT   NOT NULL)";
             stmt.executeUpdate(sql);//3
 
             sql = "CREATE TABLE PROPVIEW" +
-                    "(CLIENTNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "(CLIENTNUM INT PRIMARY KEY     NOT NULL," +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
                     " CELL         TEXT   NOT NULL, " +
@@ -98,7 +99,7 @@ public class Initialize
             stmt.executeUpdate(sql);//4
 
             sql = "CREATE TABLE LEASE" +
-                    "(LEASENUM INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "(LEASENUM INT PRIMARY KEY     NOT NULL," +
                     " CLIENTNUM    INT    NOT NULL, " +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
