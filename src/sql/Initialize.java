@@ -125,7 +125,7 @@ public class Initialize
             System.exit(0);
         }
 
-        System.out.println("Enter Secrest key");
+        System.out.println("Enter secret key");
         encryption.setKey(SK = kb.nextLine());
         try (PrintWriter out = new PrintWriter("11235813.txt")) {
             out.println(SK);
