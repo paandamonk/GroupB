@@ -24,7 +24,7 @@ public class Initialize
 
             stmt = c.createStatement();
             String sql = "CREATE TABLE STAFF" +
-                    "(STAFFNUM INT PRIMARY KEY     NOT NULL," +
+                    "(STAFFNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
                     " POSITION     INT    NOT NULL, " +
@@ -38,7 +38,7 @@ public class Initialize
             stmt.executeUpdate(sql);//0
 
             sql = "CREATE TABLE PROPERTIES" +
-                    "(PROPNUM INT PRIMARY KEY     NOT NULL," +
+                    "(PROPNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " STREET       TEXT   NOT NULL, " +
                     " CITY         TEXT   NOT NULL, " +
                     " POSTCODE     TEXT   NOT NULL, " +
@@ -49,7 +49,7 @@ public class Initialize
             stmt.executeUpdate(sql);//1
 
             sql = "CREATE TABLE PROPOWNERS" +
-                    "(OWNERNUM INT PRIMARY KEY     NOT NULL," +
+                    "(POWNERNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
                     " STREET       TEXT   NOT NULL, " +
@@ -60,7 +60,7 @@ public class Initialize
             stmt.executeUpdate(sql);//2
 
             sql = "CREATE TABLE BUSOWNERS" +
-                    "(OWNERNUM INT PRIMARY KEY     NOT NULL," +
+                    "(BOWNERNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
                     " STREET       TEXT   NOT NULL, " +
@@ -73,7 +73,7 @@ public class Initialize
             stmt.executeUpdate(sql);//2
 
             sql = "CREATE TABLE CLIENTS" +
-                    "(CLIENTID INT PRIMARY KEY     NOT NULL," +
+                    "(CLIENTID INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
                     " TYPE         TEXT   NOT NULL, " +
@@ -86,7 +86,7 @@ public class Initialize
             stmt.executeUpdate(sql);//3
 
             sql = "CREATE TABLE PROPVIEW" +
-                    "(CLIENTNUM INT PRIMARY KEY     NOT NULL," +
+                    "(CLIENTNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
                     " CELL         TEXT   NOT NULL, " +
@@ -99,7 +99,7 @@ public class Initialize
             stmt.executeUpdate(sql);//4
 
             sql = "CREATE TABLE LEASE" +
-                    "(LEASENUM INT PRIMARY KEY     NOT NULL," +
+                    "(LEASENUM INTEGER PRIMARY KEY AUTOINCREMENT," +
                     " CLIENTNUM    INT    NOT NULL, " +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +

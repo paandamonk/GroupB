@@ -1,5 +1,8 @@
 package sql;
+import pp.Staff;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Input
 {
@@ -10,7 +13,7 @@ public class Input
         tableName = tName;
     }
 
-    public void addStaffInfo(String Fname, String Lname, int Pos, String Branch, String sex, String Dob, double Salary, int supID) {
+    public void addStaffInfo(String Fname, String Lname, int position, String Branch, String sex, String Dob, double Salary, String username, String password, int supID) {
         Connection c = null;
         Statement stmt = null;
 
@@ -18,12 +21,12 @@ public class Input
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully (Staff)");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,POSITION,BRANCH,SEX,DOB,SALARY,SUPERVISOR) " +
-                    "VALUES ('"  + Fname + "','" + Lname + "','" + Pos + "','" + Branch + "','" + sex + "','" +
-                    Dob + "','" + Salary + "','" + supID + "');";
+            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,POSITION,BRANCH,SEX,DOB,SALARY,USERNAME,PASSWORD,SUPERVISOR) " +
+                    "VALUES (" + Fname + "," + Lname + "," + position + "," + Branch  + "," + sex + "," + Dob +
+                    "," + Salary + "," + username + "," + password + "," + supID + ");";
 
             stmt.executeUpdate(sql);
             stmt.close();
@@ -33,7 +36,7 @@ public class Input
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-        System.out.println("Staff record for " + Fname + "" + Lname + " created successfully");
+        System.out.println("Staff record created successfully");
     }
 
     public void addClientInfo(String fname, String lname, String type, String phone, double maxRent, int staffId,
@@ -49,7 +52,7 @@ public class Input
 
             stmt = c.createStatement();
             String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,TYPE,PHONE,MAXRENT,STAFFN,STREET,CITY,POSTCODE) " +
-                    "VALUES ('"  + fname + "','" + lname + "','" + type + "','" + phone + "','" + maxRent + "','" +
+                    "VALUES (" + fname + "','" + lname + "','" + type + "','" + phone + "','" + maxRent + "','" +
                     staffId + "','" + street + "','" + city + "','" + postCode + "');";
 
             stmt.executeUpdate(sql);
@@ -89,7 +92,7 @@ public class Input
         System.out.println("Property Owner record created successfully");
     }
 
-    public void addBusinessOwnerInfo(int oID, String Fname, String Lname, String street, String City, String Postcode,
+    public void addBusinessOwnerInfo(String Fname, String Lname, String street, String City, String Postcode,
                                      String Phone, String BusinessName, String BusinessType,  int sID) {
         Connection c = null;
         Statement stmt = null;
@@ -98,11 +101,11 @@ public class Input
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully (Business Owners)");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO " + tableName + " (OWNERNUM,FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,BTYPE,BNAME,STAFFNUM) " +
-                    "VALUES (" + oID + "," + Fname + "," + Lname + "," + street + "," + City + "," + Postcode +
+            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,BTYPE,BNAME,STAFFNUM) " +
+                    "VALUES (" + Fname + "," + Lname + "," + street + "," + City + "," + Postcode +
                     "," + BusinessName + "," + BusinessType + "," + Phone + "," + sID + ");";
 
             stmt.executeUpdate(sql);
@@ -113,7 +116,7 @@ public class Input
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-        System.out.println("Property Owner record created successfully");
+        System.out.println("Business Owner record created successfully");
     }
 
     public void addPropertyInfo(String Street, String Postcode, String City, String type, int rooms, double rent, String Owner) {

@@ -1,10 +1,7 @@
 package pp;
 
-import sql.*;
-
-import static sql.Database.getStaffByID;
-
 public class Client extends Person{
+	Staff staff = new Staff();
 	private int clientIdNum;
 	private String phone;
 	private int staffId;
@@ -12,6 +9,8 @@ public class Client extends Person{
 	private String street, city, postCode, type;
 	private int idNum;
 	private double max;
+
+	public Client() {}
 	
 	public Client(int clientIdNum, String fname, String lname, String type, String phone,
 				  int staffId, String street, String city, String postCode, double maxRent) {
@@ -20,7 +19,7 @@ public class Client extends Person{
 		this.clientIdNum = clientIdNum;
 		this.phone = phone;
 		this.staffId = staffId;
-		this.member = getStaffByID(staffId).get(0);
+		this.member = staff.getStaffByID(staffId).get(0);
 		this.street = street;
 		this.city = city;
 		this.postCode = postCode;
@@ -30,7 +29,7 @@ public class Client extends Person{
 		super(fname, lname);
 		this.phone = phone;
 		this.staffId = staffId;
-		this.member = getStaffByID(staffId).get(0);
+		this.member = staff.getStaffByID(staffId).get(0);
 	}
 
 	/**

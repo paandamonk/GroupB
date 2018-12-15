@@ -40,7 +40,7 @@ public class EditData {
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-          System.out.println("Updated successfully");
+          System.out.println("Update method finished successfully (does not necessarily mean update was successful");
     }
     public void deleteInfo(String tableName,String primeFactor, int idNumber){
       Connection c = null;
@@ -63,7 +63,7 @@ public class EditData {
          System.err.println( e.getClass().getName() + ": " + e.getMessage() );
          System.exit(0);
       }
-      System.out.println("Deleted successfully");
+      System.out.println("Delete method finished successfully (does not necessarily mean delete was successful)");
     }
     public void print(String tableName){
       Connection c = null;

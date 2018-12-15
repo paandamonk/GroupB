@@ -83,10 +83,13 @@ public class Menu extends JFrame implements ActionListener {
 	private JFrame f;
 	
 	Database db = new Database();
+	Staff s1 = new Staff();
+	PropertyOwner propertyOwner = new PropertyOwner();
+	BusinessOwner businessOwner = new BusinessOwner();
 	ArrayList<Client> clientList = db.getClientByID(0);
-	ArrayList<Staff> staffList = db.getStaffByID(0);
-	ArrayList<PropertyOwner> propOwnerList = db.getPropOwnersByID(0);
-	ArrayList<BusinessOwner> busOwnerList = db.getBusinessOwnersByID(0);
+	ArrayList<Staff> staffList = s1.getStaffByID(0);
+	ArrayList<PropertyOwner> propOwnerList = propertyOwner.getPropOwnersByID(0);
+	ArrayList<BusinessOwner> busOwnerList = businessOwner.getBusinessOwnersByID(0);
 	ArrayList<PropView> propViewList = db.getPropView();
 	ArrayList<Lease> leaseList = db.getLeaseByClientId(0);
 	DefaultListModel list = new DefaultListModel();

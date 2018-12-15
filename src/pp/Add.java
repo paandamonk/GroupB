@@ -505,7 +505,7 @@ public class Add implements ActionListener{
 					double salary = Double.parseDouble(textField_6.getText());
 					int supId = Integer.parseInt(textField_7.getText());
 					
-					staffinput.addStaffInfo(fname, lname, position, branch, sex, DoB, salary, supId);
+					//staffinput.addStaffInfo(fname, lname, position, branch, sex, DoB, salary,username,password, supId);
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
@@ -659,15 +659,18 @@ public class Add implements ActionListener{
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
 			//	if(cleared) {
 					Input busownerinput = new Input("BUSOWNERS");
-					String fname = textField.getText();
-					String lname = textField_1.getText();
-					String street = textField_2.getText();
-					String city = textField_3.getText();
-					String zip = textField_4.getText();
-					String phone = textField_5.getText();
-					String bname = textField_6.getText();
-					String btype = textField_7.getText();
-					int staffId = Integer.parseInt(textField_8.getText());
+					String fname = "'" + textField.getText() + "'";
+					String lname = "'" + textField_1.getText() + "'";
+					String street = "'" + textField_2.getText() + "'";
+					String city = "'" + textField_3.getText() + "'";
+					String zip = "'" + textField_4.getText() + "'";
+					String phone = "'" + textField_5.getText() + "'";
+					String bname = "'" + textField_6.getText() + "'";
+					String btype = "'" + textField_7.getText() + "'";
+				if(!textField_7.getText().equals("")) {
+                    int staffId = Integer.parseInt(textField_8.getText());
+                    busownerinput.addBusinessOwnerInfo(fname, lname, street, city, zip, phone, bname, btype, staffId);
+                }
 					//busownerinput.addBusinessOwnerInfo(fname, lname, street, city, zip, phone, bname, btype, staffId);
 //				}
 //				else {

@@ -5,6 +5,10 @@ import sql.Initialize;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,6 +27,8 @@ public class Staff extends Person {
 	private double salary;
 	private ArrayList<Property> propList = new ArrayList<>(100);
 	private ArrayList<Staff> group = new ArrayList<>(10);
+
+    public Staff() { }
 
 	public Staff(String fname, String lname, int position) {
 		super(fname, lname);
@@ -86,8 +92,56 @@ public class Staff extends Person {
 		}		
 		return false;
 	}
-	
-	
+
+    public ArrayList<Staff> getStaffByID(int idNum){
+        Connection c;
+        Statement stmt;
+
+        ArrayList<Staff> staffList = new ArrayList();
+        int staffID, position, supervisorId;
+        String Fname, Lname, branch, sex, DoB, username, password;
+        double salary;
+
+        try{
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:database.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully (Staff)");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM STAFF;");
+            while(rs.next()){
+                staffID = rs.getInt("STAFFNUM");
+                Fname = rs.getString("FNAME");
+                Lname = rs.getString("LNAME");
+                position = rs.getInt("POSITION");
+                branch = rs.getString("BRANCH");
+                sex = rs.getString("SEX");
+                DoB = rs.getString("DOB");
+                salary = rs.getDouble("SALARY");
+                username = rs.getString("USERNAME");
+                password = rs.getString("PASSWORD");
+                supervisorId = rs.getInt("SUPERVISOR");
+
+                //Return staff of given ID
+                if(staffID == idNum) {
+                    Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password, supervisorId);
+                    staffList.add(staff);
+                    return staffList;
+                }
+                else if(idNum == 0){
+                    Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password,  supervisorId);
+                    staffList.add(staff);
+                }
+                Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password,  supervisorId);
+                staffList.add(staff);
+            }
+        }catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        return staffList;
+    }
 
 	/**
 	 * @return the position
