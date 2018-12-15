@@ -341,9 +341,7 @@ public class Add implements ActionListener{
 					String street = textField_6.getText();
 					String city = textField_7.getText();
 					String zip = textField_8.getText();
-					clientinput.addClientInfo(fname, lname, type,
-							phone, rent, staffId,
-							street, city, zip);
+					clientinput.addClientInfo(fname, lname, type, phone, rent, staffId, street, city, zip);
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");

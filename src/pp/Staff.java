@@ -1,15 +1,24 @@
 package pp;
 
+import aes.*;
+import sql.Initialize;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Staff extends Person {
 
 	private int position;
+	private String Password;
+	private String Username;
 	private String gender;
 	private String DOB;
 	private String Branch;
 	private Staff Supervisor;
 	private int SupId;
+	File file = new File("11235813");
 	private int staffNum;
 	private double salary;
 	private ArrayList<Property> propList = new ArrayList<>(100);
@@ -19,7 +28,19 @@ public class Staff extends Person {
 		super(fname, lname);
 		this.position = position;
 	}
-
+	
+	public Staff(int sID, int pos, String Fname, String Lname, String branch, String sex, String DoB, Double salary, String Username, String Password, int sup) {
+		super(Fname, Lname);
+		this.position = pos;
+		this.Branch = branch;
+		this.gender = sex;
+		this.DOB = DoB;
+		this.staffNum = sID;
+		this.Username = Username;
+		this.Password = Password;
+		this.SupId = sup;
+	}
+	
 	public Staff(int sID, int pos, String Fname, String Lname, String branch, String sex, String DoB, Double salary, int sup) {
 		super(Fname, Lname);
 		this.position = pos;
@@ -52,6 +73,21 @@ public class Staff extends Person {
 	public void inputData(Property p) {
 		propList.add(p);
 	}
+	
+	public static void setPass(String password, String skey) {
+		System.out.println(aes.encryption.encrypt(password, skey));
+	}
+	
+	public boolean checkPass(String EnterPass) throws FileNotFoundException {
+		Scanner inf = new Scanner(file);
+		if(EnterPass == encryption.decrypt(Password, inf.next())) {
+			System.out.println("Password Confirmed");
+			return true;
+		}		
+		return false;
+	}
+	
+	
 
 	/**
 	 * @return the position
@@ -149,14 +185,6 @@ public class Staff extends Person {
 	 */
 	public void setPropList(ArrayList<Property> propList) {
 		this.propList = propList;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return getFname() + " " + getLname() + "; Position: " + getPosition();
 	}
 
 	/**

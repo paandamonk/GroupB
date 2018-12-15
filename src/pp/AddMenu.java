@@ -86,8 +86,8 @@ public class AddMenu extends JFrame implements ActionListener {
 			city = new JTextField(20);
 			zip = new JTextField(20);
 			maxRent = new JTextField(20);
-			button = new JButton("Submit");	
-			
+			button = new JButton("Submit");
+
 			addPanel.add(f);
 			addPanel.add(first);
 			addPanel.add(l);
@@ -115,7 +115,7 @@ public class AddMenu extends JFrame implements ActionListener {
 				clientinput.addClientInfo(first.getText(), last.getText(), type.getText(), phone.getText(),
 						Double.parseDouble(maxRent.getText()), Integer.parseInt(staffNum.getText()), street.getText(), 
 						city.getText(), zip.getText());
-				
+
 			}
 
 		}

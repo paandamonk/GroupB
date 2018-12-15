@@ -4,8 +4,8 @@ import java.sql.*;
 public class Input
 {
     private String tableName;
-    
-    
+
+
     public Input(String tName){
         tableName = tName;
     }
@@ -16,14 +16,14 @@ public class Input
 
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
             String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,POSITION,BRANCH,SEX,DOB,SALARY,SUPERVISOR) " +
-                    "VALUES ('"  + Fname + "','" + Lname + "','" + Pos + "','" + Branch + "','" + sex + "','" + 
-            		Dob + "','" + Salary + "','" + supID + "');";
+                    "VALUES ('"  + Fname + "','" + Lname + "','" + Pos + "','" + Branch + "','" + sex + "','" +
+                    Dob + "','" + Salary + "','" + supID + "');";
 
             stmt.executeUpdate(sql);
             stmt.close();
@@ -43,7 +43,7 @@ public class Input
 
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
@@ -70,14 +70,14 @@ public class Input
 
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO " + tableName + " (OWNERNUM,FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,STAFFNUM) " +
+            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,STAFFNUM) " +
                     "VALUES ('"  + Fname + "','" + Lname + "','" + street + "','" + City + "','" + Postcode + "','" +
-            		Phone + "','" + sID + "');";
+                    Phone + "','" + sID + "');";
 
             stmt.executeUpdate(sql);
             stmt.close();
@@ -91,15 +91,15 @@ public class Input
     }
 
     public void addBusinessOwnerInfo(String Fname, String Lname, String street, String City, String Postcode,
-                                String Phone, String BusinessName, String BusinessType,  int sID) {
+                                     String Phone, String BusinessName, String BusinessType, int sID) {
         Connection c = null;
         Statement stmt = null;
 
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully (Business Owners)");
 
             stmt = c.createStatement();
             String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,BTYPE,BNAME,STAFFNUM) " +
@@ -116,32 +116,32 @@ public class Input
         }
         System.out.println("Property Owner record created successfully");
     }
-    
+
     public void addPropertyInfo(String Street, String Postcode, String City, String type, int rooms, double rent, String Owner) {
-      Connection c = null;
-      Statement stmt = null;
-      
-      try {
-         Class.forName("org.sqlite.JDBC");
-         c = DriverManager.getConnection("jdbc:sqlite:test.db");
-         c.setAutoCommit(false);
-         System.out.println("Opened database successfully");
+        Connection c = null;
+        Statement stmt = null;
 
-         stmt = c.createStatement();
-         String sql = "INSERT INTO " + tableName + " (STREET,CITY,POSTCODE,TYPE,ROOMS,RENT,OWNER) " +
-                        "VALUES ('"  + Street + "'," + City + "','" + Postcode + "','" + type + "','" +
-        		 rooms + "','" + rent + "','" + Owner + "');";
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:database.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
 
-         stmt.executeUpdate(sql);
+            stmt = c.createStatement();
+            String sql = "INSERT INTO " + tableName + " (STREET,CITY,POSTCODE,TYPE,ROOMS,RENT,OWNER) " +
+                    "VALUES ('"  + Street + "'," + City + "','" + Postcode + "','" + type + "','" +
+                    rooms + "','" + rent + "','" + Owner + "');";
 
-         stmt.close();
-         c.commit();
-         c.close();
-      } catch ( Exception e ) {
-         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-         System.exit(0);
-      }
-      System.out.println("Records created successfully");
+            stmt.executeUpdate(sql);
+
+            stmt.close();
+            c.commit();
+            c.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        System.out.println("Records created successfully");
     }
 
     public void addPropViewInfo(String fname, String lname, String phone, int propertyId, String street, String city, String postCode, String viewDate, String comments) {
@@ -150,7 +150,7 @@ public class Input
 
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
@@ -178,7 +178,7 @@ public class Input
 
         try {
             Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
