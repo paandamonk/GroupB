@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
+	<name>Nick_GroupB</name>
+=======
 	<name>GroupB</name>
+>>>>>>> DatabaseManagement
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,11 +18,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>pp</name>
-			<type>2</type>
-			<location>C:/Users/boi/GroupB/src/pp</location>
-		</link>
-	</linkedResources>
 </projectDescription>

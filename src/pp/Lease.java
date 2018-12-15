@@ -1,40 +1,55 @@
 package pp;
 
+import static sql.Database.getClientByID;
+
 public class Lease extends Property{
-	private String leaseNum;
-	private Client client;
+	private int leaseId;
+	private int clientId;
 	private String payMethod;
+	private String fname;
+	private String lname;
 	private double deposit;
-	private boolean depositPaid;
+	private int depositPaid;
 	private String rentStart;
 	private String rentEnd;
 	private String duration;
-	
-	public Lease(String leaseNum, Client client, String payMethod, double deposit, boolean depositPaid,
-			String rentStart, String rentEnd, String duration) {
-		super();
-		this.leaseNum = leaseNum;
-		this.client = client;
+	private Client client;
+
+	public Lease(int leaseId, int clientId, String fname, String lname, int propertyId, String street, String city, String postCode,
+				 String type, int numRooms, double monthlyRent, String payMethod, double deposit, int depositPaid, String rentStart, String rentEnd, String duration) {
+		super(street, city, postCode, type, propertyId, numRooms, monthlyRent);
+		this.leaseId = leaseId;
+		this.clientId = clientId;
+		this.fname = fname;
+		this.lname = lname;
 		this.payMethod = payMethod;
 		this.deposit = deposit;
 		this.depositPaid = depositPaid;
 		this.rentStart = rentStart;
 		this.rentEnd = rentEnd;
 		this.duration = duration;
+		this.client = getClientByID(clientId).get(0);
 	}
 
 	/**
 	 * @return the leaseNum
 	 */
-	public String getLeaseNum() {
-		return leaseNum;
+	public int getLeaseId() {
+		return leaseId;
 	}
 
 	/**
-	 * @param leaseNum the leaseNum to set
+	 * @return the leaseNum
 	 */
-	public void setLeaseNum(String leaseNum) {
-		this.leaseNum = leaseNum;
+	public int getClientId() {
+		return clientId;
+	}
+
+	/**
+	 * @param leaseId the leaseNum to set
+	 */
+	public void setLeaseNum(int leaseId) {
+		this.leaseId = leaseId;
 	}
 
 	/**
@@ -82,14 +97,14 @@ public class Lease extends Property{
 	/**
 	 * @return the depositPaid
 	 */
-	public boolean isDepositPaid() {
+	public int isDepositPaid() {
 		return depositPaid;
 	}
 
 	/**
 	 * @param depositPaid the depositPaid to set
 	 */
-	public void setDepositPaid(boolean depositPaid) {
+	public void setDepositPaid(int depositPaid) {
 		this.depositPaid = depositPaid;
 	}
 

@@ -1,30 +1,48 @@
 package pp;
 
+import static sql.Database.getPropOwnersByID;
+import static sql.Database.getStaffByID;
+
 public class Property {
 	private String street;
 	private String city;
 	private String postcode;
 	private String type;
-	private int propNumber;
+	private int propertyId;
 	private int numRooms;
+	private int staffId;
+	private Staff staffMember;
 	private double monthlyRent;
-	private String owner;
+	private PropertyOwner owner;
 	
 	public Property() {
 		super();
 	}
 
-	public Property(String street, String city, String postcode, String type, int propNumber, int numRooms,
-			double monthlyRent, String owner) {
+	public Property(String street, String city, String postcode, String type, int propertyId, int numRooms, double monthlyRent) {
 		super();
 		this.street = street;
 		this.city = city;
 		this.postcode = postcode;
 		this.type = type;
-		this.propNumber = propNumber;
+		this.propertyId = propertyId;
 		this.numRooms = numRooms;
 		this.monthlyRent = monthlyRent;
-		this.owner = owner;
+		this.owner = getPropOwnersByID(propertyId).get(0);
+		this.staffMember = owner.getStaff();
+		this.staffId = staffMember.getStaffNum();
+	}
+
+	public Property(String street, String city, String postcode, String type, int propertyId, int numRooms, double monthlyRent, PropertyOwner owner) {
+		super();
+		this.street = street;
+		this.city = city;
+		this.postcode = postcode;
+		this.type = type;
+		this.propertyId = propertyId;
+		this.numRooms = numRooms;
+		this.monthlyRent = monthlyRent;
+		this.owner = getPropOwnersByID(propertyId).get(0);
 	}
 
 	/**
@@ -86,15 +104,15 @@ public class Property {
 	/**
 	 * @return the propNumber
 	 */
-	public int getPropNumber() {
-		return propNumber;
+	public int getPropertyId() {
+		return propertyId;
 	}
 
 	/**
-	 * @param propNumber the propNumber to set
+	 * @param propertyId the propertyId to set
 	 */
-	public void setPropNumber(int propNumber) {
-		this.propNumber = propNumber;
+	public void setPpropertyId(int propertyId) {
+		this.propertyId = propertyId;
 	}
 
 	/**
@@ -128,15 +146,15 @@ public class Property {
 	/**
 	 * @return the owner
 	 */
-	public String getOwner() {
+	public PropertyOwner getOwner() {
 		return owner;
 	}
 
 	/**
-	 * @param owner the owner to set
+	 * @param ownerId the owner to set
 	 */
-	public void setOwner(String owner) {
-		this.owner = owner;
+	public void setOwner(int ownerId) {
+		this.owner = getPropOwnersByID(ownerId).get(0);
 	}
 	
 

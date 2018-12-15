@@ -1,27 +1,143 @@
 package pp;
 
+import sql.*;
+
+import static sql.Database.getStaffByID;
+
 public class Client extends Person{
+	private int clientIdNum;
 	private String phone;
+	private int staffId;
 	private Staff member;
-	private String Type;
-	private float MaxRent;
-	private int ID;
-		
-	public Client(String fName, String lName, String phone, Staff Mem, int idNum, float maxRent, String type) {
-		super(fName, lName);
+	private String street, city, postCode, type;
+	private int idNum;
+	private double max;
+	
+	public Client(int clientIdNum, String fname, String lname, String type, String phone,
+				  int staffId, String street, String city, String postCode, double maxRent) {
+		super(fname, lname);
+		this.type = type;
+		this.clientIdNum = clientIdNum;
 		this.phone = phone;
-		this.ID = idNum;
-		this.Type = type;
-		this.MaxRent = maxRent;	
-		this.member = Mem; 
+		this.staffId = staffId;
+		this.member = getStaffByID(staffId).get(0);
+		this.street = street;
+		this.city = city;
+		this.postCode = postCode;
+		this.max = maxRent;		
+	}
+	public Client(String fname, String lname, String phone, int staffId) {
+		super(fname, lname);
+		this.phone = phone;
+		this.staffId = staffId;
+		this.member = getStaffByID(staffId).get(0);
 	}
 
-	public void memInfo() {
-		System.out.println("Staff Member:  " + member.getFname() + " " + member.getLname());
-		System.out.println("Staff ID:      " + member.getStaffNum());
-		System.out.println("Staff Branch:  " + member.getBranch());
+	/**
+	 * @return the clientIdNum
+	 */
+	public int getClientIdNum() {
+		return clientIdNum;
 	}
-	
+	/**
+	 * @param clientIdNum the clientIdNum to set
+	 */
+	public void setClientIdNum(int clientIdNum) {
+		this.clientIdNum = clientIdNum;
+	}
+	/**
+	 * @return the staffId
+	 */
+	public int getStaffId() {
+		return staffId;
+	}
+	/**
+	 * @param staffId the staffId to set
+	 */
+	public void setStaffId(int staffId) {
+		this.staffId = staffId;
+	}
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+	/**
+	 * @return the idNum
+	 */
+	public int getIdNum() {
+		return idNum;
+	}
+	/**
+	 * @param idNum the idNum to set
+	 */
+	public void setIdNum(int idNum) {
+		this.idNum = idNum;
+	}
+	/**
+	 * @return the max
+	 */
+	public double getMax() {
+		return max;
+	}
+	/**
+	 * @param max the max to set
+	 */
+	public void setMax(double max) {
+		this.max = max;
+	}
+	/**
+	 * @return the member
+	 */
+	public Staff getMember() {
+		return member;
+	}
+	/**
+	 * @param street the street to set
+	 */
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	/**
+	 * @param city the city to set
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+	/**
+	 * @param postCode the postCode to set
+	 */
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
+	/**
+	 * @return the street
+	 */
+	public String getStreet() {
+		return street;
+	}
+
+	/**
+	 * @return the city
+	 */
+	public String getCity() {
+		return city;
+	}
+
+	/**
+	 * @return the city
+	 */
+	public String getPostCode() {
+		return postCode;
+	}
+
 	/**
 	 * @return the phone
 	 */
@@ -39,7 +155,7 @@ public class Client extends Person{
 	/**
 	 * @return the member
 	 */
-	public Staff getMember() {
+	public Staff getStaff() {
 		return member;
 	}
 
@@ -49,4 +165,14 @@ public class Client extends Person{
 	public void setMember(Staff member) {
 		this.member = member;
 	}
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return getFname() + " " + getLname() + ", id = " + getClientIdNum();
+	}
+
+
+
 }
