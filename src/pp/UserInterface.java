@@ -58,8 +58,6 @@ public class UserInterface extends JFrame implements ActionListener {
 		PasswordText.setEchoChar('*');
 		Login = new JButton("Login");
 		Login.addActionListener(this);
-		getRootPane().setDefaultButton(Login);
-		
 		usP.add(UserPrompt);
 		usP.add(UsernameText);
 		usP.add(PassPrompt);

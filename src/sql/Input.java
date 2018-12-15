@@ -10,11 +10,7 @@ public class Input
         tableName = tName;
     }
 
-<<<<<<< HEAD
     public void addStaffInfo(String Fname, String Lname, int Pos, String Branch, String sex, String Dob, double Salary, int supID) {
-=======
-    public void addStaffInfo(int sID, String Fname, String Lname, int Pos, String Branch, String sex, String Dob, double Salary, String username, String password, int supID) {
->>>>>>> Encryption
         Connection c = null;
         Statement stmt = null;
 
@@ -25,14 +21,9 @@ public class Input
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-<<<<<<< HEAD
             String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,POSITION,BRANCH,SEX,DOB,SALARY,SUPERVISOR) " +
                     "VALUES ('"  + Fname + "','" + Lname + "','" + Pos + "','" + Branch + "','" + sex + "','" +
                     Dob + "','" + Salary + "','" + supID + "');";
-=======
-            String sql = "INSERT INTO  STAFF (STAFFNUM,FNAME,LNAME,POSITION,BRANCH,SEX,DOB,SALARY,PASSWORD,SUPERVISOR) " +
-                    "VALUES (" + sID + ",'" + Fname + "','" + Lname + "','" + Pos + "','" + Branch + "','" + sex + "','" + Dob + "','" + Salary + "','" + username + "','" + password + "','" + supID + "');";
->>>>>>> Encryption
 
             stmt.executeUpdate(sql);
             stmt.close();
@@ -124,7 +115,6 @@ public class Input
         }
         System.out.println("Property Owner record created successfully");
     }
-<<<<<<< HEAD
 
     public void addPropertyInfo(String Street, String Postcode, String City, String type, int rooms, double rent, String Owner) {
         Connection c = null;
@@ -151,33 +141,6 @@ public class Input
             System.exit(0);
         }
         System.out.println("Records created successfully");
-=======
-    
-    public void addPropertyInfo(int propNum, String Street, String Postcode, String City, String type, int rooms, double rent, String Owner) {
-      Connection c = null;
-      Statement stmt = null;
-      
-      try {
-         Class.forName("org.sqlite.JDBC");
-         c = DriverManager.getConnection("jdbc:sqlite:database.db");
-         c.setAutoCommit(false);
-         System.out.println("Opened database successfully");
-
-         stmt = c.createStatement();
-         String sql = "INSERT INTO " + tableName + " (PROPNUM,STREET,CITY,POSTCODE,TYPE,ROOMS,RENT,OWNER) " +
-                        "VALUES (" + propNum + "," + Street + "," + City + "," + Postcode + "," + type + "," + rooms + "," + rent + "," + Owner + ");";
-
-         stmt.executeUpdate(sql);
-
-         stmt.close();
-         c.commit();
-         c.close();
-      } catch ( Exception e ) {
-         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-         System.exit(0);
-      }
-      System.out.println("Records created successfully");
->>>>>>> Encryption
     }
 
     public void addPropViewInfo(String fname, String lname, String phone, int propertyId, String street, String city, String postCode, String viewDate, String comments) {
