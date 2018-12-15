@@ -54,6 +54,12 @@ public class Database {
         for(int i = 0; i < staffList.size(); i++){
             System.out.println(staffList.get(i).getFname() + " " + staffList.get(i).getLname() + ", " + staffList.get(i).getStaffNum());
         }
+
+        //Staff staff = new Staff();
+        ArrayList<Client> clientList = getClientByID(0);
+        for(int i = 0; i < clientList.size(); i++){
+            System.out.println(clientList.get(i).getFname() + " " + clientList.get(i).getLname() + ", " + clientList.get(i).getClientIdNum());
+        }
     }
 
 
@@ -85,8 +91,6 @@ public class Database {
                 city = rs.getString("CITY");
                 postCode = rs.getString("POSTCODE");
                 maxRent = rs.getFloat("MAXRENT");
-
-                System.out.println("name: " + fName + " " + lName);
 
                 if(cID == idNum) {
                     Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
@@ -177,7 +181,7 @@ public class Database {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully (PropView)");
 
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM PROPVIEW;");
@@ -216,7 +220,7 @@ public class Database {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:database.db");
             c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
+            System.out.println("Opened database successfully (Lease)");
 
             stmt = c.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM LEASE;");

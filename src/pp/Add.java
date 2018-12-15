@@ -230,6 +230,9 @@ public class Add implements ActionListener{
 		btnSubmit.addActionListener(this);
 		//Ensures box opens to add clients
 		comboBox.setSelectedIndex(0);
+
+
+
 		/*textField.setVisible(false);
 		textField_1.setVisible(false);
 		textField_2.setVisible(false);
@@ -261,8 +264,8 @@ public class Add implements ActionListener{
 		l12.setVisible(false);
 		l13.setVisible(false);
 		l14.setVisible(false);
-		l15.setVisible(false);*/
-
+		l15.setVisible(false);
+        */
 	}
 
 	@Override
@@ -331,7 +334,6 @@ public class Add implements ActionListener{
 				
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
 //				if(cleared) {
-					Input clientinput = new Input("CLIENTS");
 					String fname = "'" + textField.getText() + "'";
 					String lname = "'" + textField_1.getText() + "'";
 					String type = "'" + textField_2.getText() + "'";
@@ -341,6 +343,7 @@ public class Add implements ActionListener{
 					String street = "'" + textField_6.getText() + "'";
 					String city = "'" + textField_7.getText() + "'";
 					String zip = "'" + textField_8.getText() + "'";
+                    Input clientinput = new Input("CLIENTS");
 					clientinput.addClientInfo(fname, lname, type, phone, rent, staffId, street, city, zip);
 //				}
 //				else {

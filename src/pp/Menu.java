@@ -17,6 +17,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -296,6 +299,8 @@ public class Menu extends JFrame implements ActionListener {
 			
 			Add window = new Add();
 			window.frame.setVisible(true);
+
+
 
 			
 		}
