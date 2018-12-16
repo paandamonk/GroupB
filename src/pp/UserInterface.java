@@ -9,6 +9,7 @@ import java.io.File;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class UserInterface extends JFrame implements ActionListener {
 
@@ -55,8 +56,6 @@ public class UserInterface extends JFrame implements ActionListener {
 		final int[] count = {0};
 
 		if(!database.exists()){
-
-
 			JPanel display = new JPanel(new BorderLayout());
 			JPanel registration = new JPanel();
 			JPanel hint = new JPanel(new BorderLayout());
@@ -173,11 +172,6 @@ public class UserInterface extends JFrame implements ActionListener {
 		}
 	}
 
-	public int dataSubmission(int fieldCount, String input){
-
-		return fieldCount;
-	}
-
 	public void actionPerformed(ActionEvent e) {
 		String action = e.getActionCommand();
 
@@ -188,17 +182,17 @@ public class UserInterface extends JFrame implements ActionListener {
 		else if (action.equals("Login")) {
 			String user = UsernameText.getText();
 			String pass = PasswordText.getText();
-			for (int i = 0; i < staffAcc.length; i++) {
-				if (staffAcc[i].getUser().equals(user) && staffAcc[i].getPass().equals(pass)) {
+			Staff staff = new Staff();
+			ArrayList<Staff> staffList = staff.getStaffByID(0);
+			for (int i = 0; i < staffList.size(); i++) {
+				if (staffList.get(i).getUsername().equals(user) && staffList.get(i).getPassword().equals(pass)) {
 					in = true;
 					setVisible(false);
 					setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 					Menu menu = new Menu(staffAcc[i].getStaff().getPosition());
 				}
 			}
-			if(in == false)
-				JOptionPane.showMessageDialog(null, "Invalid username/password. \n Try again.");
-
+			if(!in) { JOptionPane.showMessageDialog(null, "Invalid username/password. \n Try again."); }
 		}
 	}
 }

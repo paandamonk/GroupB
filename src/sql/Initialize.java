@@ -124,10 +124,9 @@ public class Initialize {
     }
 
     public void initializeMasterUser(String[] masterUserData){ //secretKey, fName, lName, username, password
-        File secretKey = new File("11235813.txt");
         encryption.setKey(masterUserData[0]);
         try (PrintWriter keyWriter = new PrintWriter("11235813.txt")) {
-            keyWriter.println(secretKey);
+            keyWriter.println(masterUserData[0]);
         }
         catch(Exception FileNotFoundException) {
             System.out.println("Unable to create file");

@@ -16,7 +16,7 @@ public class Staff extends Person {
 
 	private int position;
 	private String Password;
-	private String Username;
+	private String username;
 	private String gender;
 	private String DOB;
 	private String Branch;
@@ -42,7 +42,7 @@ public class Staff extends Person {
 		this.gender = sex;
 		this.DOB = DoB;
 		this.staffNum = sID;
-		this.Username = Username;
+		this.username = Username;
 		this.Password = Password;
 		this.SupId = sup;
 	}
@@ -209,6 +209,29 @@ public class Staff extends Person {
 	 */
 	public void setStaffNum(int staffNum) {
 		this.staffNum = staffNum;
+	}
+
+	/**
+	 * @return the username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		try {
+			File file = new File("11235813.txt");
+			Scanner input = new Scanner(file);
+			String secretKey = input.nextLine();
+			Password = encryption.decrypt(Password, secretKey); //password, secret key
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return Password;
 	}
 
 	/**

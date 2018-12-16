@@ -1,8 +1,11 @@
 package sql;
+import java.io.File;
+import java.io.PrintWriter;
 import java.security.acl.Owner;
 import java.sql.*;
 import java.util.*;
 
+import aes.encryption;
 import pp.*;
 import sql.Input;
 import sql.Print;
@@ -18,8 +21,8 @@ public class Database {
             System.exit(0);
         }
 
-        Input staffInput = new Input("STAFF");
-        staffInput.addStaffInfo("'Lupin'", "'Three'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 1);
+        //Input staffInput = new Input("STAFF");
+        //staffInput.addStaffInfo("'Lupin'", "'Three'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 1);
 
         //Input businessOwnerInput = new Input("BUSOWNERS");
         //businessOwnerInput.addBusinessOwnerInfo("'Robin'", "'Hood'",
@@ -50,9 +53,9 @@ public class Database {
             System.out.println("No business owners exist in the database.");
         }
         Staff staff = new Staff();
-        ArrayList<Staff> staffList = staff.getStaffByID(0);
+        ArrayList<Staff> staffList = staff.getStaffByID(1);
         for(int i = 0; i < staffList.size(); i++){
-            System.out.println(staffList.get(i).getFname() + " " + staffList.get(i).getLname() + ", " + staffList.get(i).getStaffNum());
+            System.out.println(staffList.get(i).getFname() + " " + staffList.get(i).getLname() + ", " + staffList.get(i).getUsername() + ", " + staffList.get(i).getPassword());
         }
 
         //Staff staff = new Staff();
