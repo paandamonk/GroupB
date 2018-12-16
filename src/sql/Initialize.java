@@ -134,7 +134,7 @@ public class Initialize {
         String password = "'" + encryption.encrypt(masterUserData[4], masterUserData[0]) + "'"; //password, secret key (encrypting password with secret key)
 
         Input staffInput = new Input("STAFF");
-        staffInput.addStaffInfo("'" + masterUserData[1] + "'", "'" + masterUserData[2] + "'", 4, "'MASTER'", "'MASTER'",
+        staffInput.addStaffInfo("'" + masterUserData[1] + "'", "'" + masterUserData[2] + "'", 3, "'MASTER'", "'MASTER'",
                 "'MASTER'", 0.00,"'" + masterUserData[3] + "'", password, -1);
     }
 }

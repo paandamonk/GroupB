@@ -42,29 +42,35 @@ public class EditData {
         }
           System.out.println("Update method finished successfully (does not necessarily mean update was successful");
     }
-    public void deleteInfo(String tableName,String primeFactor, int idNumber){
-      Connection c = null;
-      Statement stmt = null;
-      
-      try {
-         Class.forName("org.sqlite.JDBC");
-         c = DriverManager.getConnection("jdbc:sqlite:database.db");
-         c.setAutoCommit(false);
-         //System.out.println("Opened database successfully");
+    public void deleteInfo(String tableName, String primeFactor, int idNumber){
+        //Disables deletion of master user
+        if(tableName.equals("STAFF") && idNumber == 1){
+            System.out.println("Cannot delete Master User");
+            return;
+        }
+        Connection c = null;
+        Statement stmt = null;
 
-         stmt = c.createStatement();
-         String sql = "DELETE from " + tableName + " where " + primeFactor + "=" + idNumber + ";";
-         stmt.executeUpdate(sql);
-         c.commit();
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:database.db");
+            c.setAutoCommit(false);
+            //System.out.println("Opened database successfully");
 
-         stmt.close();
-         c.close();
-      } catch ( Exception e ) {
-         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-         System.exit(0);
-      }
-      System.out.println("Delete method finished successfully (does not necessarily mean delete was successful)");
+            stmt = c.createStatement();
+            String sql = "DELETE from " + tableName + " where " + primeFactor + "=" + idNumber + ";";
+            stmt.executeUpdate(sql);
+            c.commit();
+
+            stmt.close();
+            c.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        System.out.println("Delete method finished successfully (does not necessarily mean delete was successful)");
     }
+
     public void print(String tableName){
       Connection c = null;
       Statement stmt = null;

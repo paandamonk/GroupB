@@ -32,8 +32,8 @@ public class Database {
         //ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
         // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
 
-        //EditData ed = new EditData();
-        //ed.deleteInfo("STAFF", "STAFFNUM", 1);
+        EditData ed = new EditData();
+        ed.deleteInfo("STAFF", "STAFFNUM", 1);
 
         //ed.updateInfo("STAFF", "FNAME", 0, "Seymour", "STAFFNUM",1);
         //ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);

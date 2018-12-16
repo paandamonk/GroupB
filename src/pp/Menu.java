@@ -44,7 +44,7 @@ public class Menu extends JFrame implements ActionListener {
 			"View Properties", "View Property Viewings" };
 	private String[] agentChoices = { "", "View Agents", "View Renters", "View Property Owners", "View Properties",
 			"View Property Viewings" };
-	
+
 	private String[] addChoices = {"", "Add Client", "Add Property", "Add Staff", "Add Owners", "Add Property Viewing", "Add Lease"};
 	private JComboBox<?> choices;
 	private JComboBox<?> add;
@@ -76,7 +76,7 @@ public class Menu extends JFrame implements ActionListener {
 	private JTextField staff;
 	private JTextField owner;
 	private JTextField propView;
-	
+
 	private JLabel s;
 	private JLabel n;
 	private JButton b;
@@ -84,7 +84,7 @@ public class Menu extends JFrame implements ActionListener {
 	private JList l;
 	private JScrollPane scroll;
 	private JFrame f;
-	
+
 	Database db = new Database();
 	Staff s1 = new Staff();
 	PropertyOwner propertyOwner = new PropertyOwner();
@@ -98,7 +98,7 @@ public class Menu extends JFrame implements ActionListener {
 	DefaultListModel list = new DefaultListModel();
 
 	public Menu(int cl) {
-		if (cl == 2) {
+		if (cl == 2 || cl == 3) {
 			setTitle("Manager Menu");
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			setLayout(new GridLayout(3, 0));
@@ -135,9 +135,9 @@ public class Menu extends JFrame implements ActionListener {
 
 		}
 	}
-	
+
 	public void AddMenu(){
-		
+
 		addPanel = new JPanel();
 		setLayout(new GridLayout(2,0));
 		j = new JLabel("Add information here!");
@@ -146,7 +146,7 @@ public class Menu extends JFrame implements ActionListener {
 		add.addActionListener(this);
 		addPanel.add(j);
 		addPanel.add(add);
-		
+
 	}
 
 	public void ManagerMenu() {
@@ -189,7 +189,7 @@ public class Menu extends JFrame implements ActionListener {
 		filters.add(city);
 		filters.add(lowtoHigh);
 		filters.add(hightoLow);
-		
+
 		noSelect.setText("(No Select)");
 		firstName.setText("First Name");
 		lastName.setText("Last Name");
@@ -234,7 +234,7 @@ public class Menu extends JFrame implements ActionListener {
 		Panel2.add(lowtoHigh);
 		Panel2.add(hightoLow);
 		//for(int i = 0; i < clientList.size(); i++) {
-			
+
 		//}
 		l = new JList();
 
@@ -269,7 +269,7 @@ public class Menu extends JFrame implements ActionListener {
 		choices.addActionListener(this);
 		choices.setEditable(false);
 		filters = new ButtonGroup();
-		
+
 	}
 
 	public void AgentMenu() {
@@ -288,7 +288,6 @@ public class Menu extends JFrame implements ActionListener {
 		Panel.add(s);
 		Panel.add(search);
 		Panel.add(b);
-
 	}
 
 	//this action listener needs help
@@ -302,143 +301,313 @@ public class Menu extends JFrame implements ActionListener {
 
 
 
-			
+
 		}
 
 		//this if-statement will be copied and pasted into all of the choices. this was just for testing purposes.
 		if (src == b) {
-		/*	if(clientList.size()> 0){
-			String test = clientList.get(0).getFname() + " " + clientList.get(0).getLname();
-			String test2 = clientList.get(1).getFname() + " " + clientList.get(1).getLname();
-			list.addElement(test);
-			list.addElement(test2);
+			/*	if(clientList.size()> 0){
+				String test = clientList.get(0).getFname() + " " + clientList.get(0).getLname();
+				String test2 = clientList.get(1).getFname() + " " + clientList.get(1).getLname();
+				list.addElement(test);
+				list.addElement(test2);
 
-			l = new JList(list);
-			Panel3.removeAll();
-			scroll = new JScrollPane();
-			scroll.setViewportView(l);
-			Panel3.add(scroll);
-			Panel3.validate();
-			Panel3.repaint();
+				l = new JList(list);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
+				}
 			}
-		}
-		if (choices.getSelectedItem().equals(null)) {
-			firstName.setVisible(false);
-			lastName.setVisible(false);
-			staffId.setVisible(false);
-			propOwnerId.setVisible(false);
-			propId.setVisible(false);
-			renterId.setVisible(false);
-			phoneNum.setVisible(false);
-			staffMemAdded.setVisible(false);
-			city.setVisible(false);
-			lowtoHigh.setVisible(false);
-			hightoLow.setVisible(false);
-		}*/
+			if (choices.getSelectedItem().equals(null)) {
+				firstName.setVisible(false);
+				lastName.setVisible(false);
+				staffId.setVisible(false);
+				propOwnerId.setVisible(false);
+				propId.setVisible(false);
+				renterId.setVisible(false);
+				phoneNum.setVisible(false);
+				staffMemAdded.setVisible(false);
+				city.setVisible(false);
+				lowtoHigh.setVisible(false);
+				hightoLow.setVisible(false);
+			}*/
 
-		//needs work
-		if (choices.getSelectedItem().equals("View Managers")) {
-			
-			noSelect.setVisible(true);
-			firstName.setVisible(true);
-			lastName.setVisible(true);
-			staffId.setVisible(true);
-			
-			list = new DefaultListModel();
-			ArrayList<Staff> managers = new ArrayList();
-			/*for(int i = 0; i < staffList.size(); i++){
-				if(staffList.get(i).getPosition() == 2){
-					managers.add(staffList.get(i));
+			//needs work
+			if (choices.getSelectedItem().equals("View Managers")) {
+
+				noSelect.setVisible(true);
+				firstName.setVisible(true);
+				lastName.setVisible(true);
+				staffId.setVisible(true);
+
+				list = new DefaultListModel();
+				ArrayList<Staff> managers = new ArrayList();
+				/*for(int i = 0; i < staffList.size(); i++){
+					if(staffList.get(i).getPosition() == 2){
+						managers.add(staffList.get(i));
+						list.addElement(staffList.get(i));
+					}
+				}*/
+
+				if(noSelect.isSelected()) {
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
+				}
+				if(firstName.isSelected()) {
+					list = new DefaultListModel();
+					Collections.sort(managers, ((m1,m2) -> m1.getFname().compareTo(m2.getFname())));
+					for(int i = 0; i < managers.size(); i++){
+						list.addElement(managers.get(i));
+					}
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
+				}
+				if(lastName.isSelected()) {
+					list = new DefaultListModel();
+					Collections.sort(managers, ((m1,m2) -> m1.getLname().compareTo(m2.getLname())));
+					for(int i = 0; i < managers.size(); i++){
+						list.addElement(managers.get(i));
+					}
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
+				}
+				if(staffId.isSelected()) {
+					list = new DefaultListModel();
+					Collections.sort(managers, ((m1,m2) -> m1.getStaffNum() - m2.getStaffNum() ));
+					for(int i = 0; i < managers.size(); i++){
+						list.addElement(managers.get(i));
+					}
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
+				}
+
+			}
+
+			//needs work
+			if (choices.getSelectedItem().equals("View Supervisors")) {
+
+				noSelect.setVisible(true);
+				firstName.setVisible(true);
+				lastName.setVisible(true);
+				staffId.setVisible(true);
+
+				list = new DefaultListModel();
+				ArrayList<Staff> supervisors = new ArrayList();
+				/*for(int i = 0; i < staffList.size(); i++){
+					if(staffList.get(i).getPosition() == 1){
+						supervisors.add(staffList.get(i));
+						list.addElement(staffList.get(i));
+					}
+				}*/
+
+				if(noSelect.isSelected()) {
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
+				}
+				if(firstName.isSelected()) {
+					list = new DefaultListModel();
+					Collections.sort(supervisors, ((m1,m2) -> m1.getFname().compareTo(m2.getFname())));
+					for(int i = 0; i < supervisors.size(); i++){
+						list.addElement(supervisors.get(i));
+					}
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
+				}
+				if(lastName.isSelected()) {
+					list = new DefaultListModel();
+					Collections.sort(supervisors, ((m1,m2) -> m1.getLname().compareTo(m2.getLname())));
+					for(int i = 0; i < supervisors.size(); i++){
+						list.addElement(supervisors.get(i));
+					}
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
+				}
+				if(staffId.isSelected()) {
+					list = new DefaultListModel();
+					Collections.sort(supervisors, ((m1,m2) -> m1.getStaffNum() - m2.getStaffNum() ));
+					for(int i = 0; i < supervisors.size(); i++){
+						list.addElement(supervisors.get(i));
+					}
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
+				}
+
+			}
+			//needs work
+			if (choices.getSelectedItem().equals("View Agents")) {
+
+				noSelect.setVisible(true);
+				firstName.setVisible(true);
+				lastName.setVisible(true);
+				staffId.setVisible(true);
+
+				list = new DefaultListModel();
+				ArrayList<Staff> agents = new ArrayList();
+				/*for(int i = 0; i < staffList.size(); i++){
+					if(staffList.get(i).getPosition() == 0){
+						agents.add(staffList.get(i));
+						list.addElement(staffList.get(i));
+					}
+				}*/
+
+				if(noSelect.isSelected()) {
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
+				}
+				if(firstName.isSelected()) {
+					list = new DefaultListModel();
+					Collections.sort(agents, ((m1,m2) -> m1.getFname().compareTo(m2.getFname())));
+					for(int i = 0; i < agents.size(); i++){
+						list.addElement(agents.get(i));
+					}
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
+				}
+				if(lastName.isSelected()) {
+					list = new DefaultListModel();
+					Collections.sort(agents, ((m1,m2) -> m1.getLname().compareTo(m2.getLname())));
+					for(int i = 0; i < agents.size(); i++){
+						list.addElement(agents.get(i));
+					}
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
+				}
+				if(staffId.isSelected()) {
+					list = new DefaultListModel();
+					Collections.sort(agents, ((m1,m2) -> m1.getStaffNum() - m2.getStaffNum() ));
+					for(int i = 0; i < agents.size(); i++){
+						list.addElement(agents.get(i));
+					}
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
+				}
+
+			}
+			//needs work
+			if (choices.getSelectedItem().equals("View Employees Salaries")) {
+
+				noSelect.setVisible(true);
+				firstName.setVisible(true);
+				lastName.setVisible(true);
+				staffId.setVisible(true);
+				lowtoHigh.setVisible(true);
+				hightoLow.setVisible(true);
+
+				list = new DefaultListModel();
+				ArrayList<Staff> staff = new ArrayList();
+				/*for(int i = 0; i < staffList.size(); i++){
+					staff.add(staffList.get(i));
 					list.addElement(staffList.get(i));
+				}*/
+				if(lowtoHigh.isSelected()) {
+
 				}
-			}*/
-			
-			if(noSelect.isSelected()) {
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-			}
-			if(firstName.isSelected()) {
-				list = new DefaultListModel();
-				Collections.sort(managers, ((m1,m2) -> m1.getFname().compareTo(m2.getFname())));
-				for(int i = 0; i < managers.size(); i++){
-					list.addElement(managers.get(i));
+				if(hightoLow.isSelected()) {
+
 				}
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-			}
-			if(lastName.isSelected()) {
-				list = new DefaultListModel();
-				Collections.sort(managers, ((m1,m2) -> m1.getLname().compareTo(m2.getLname())));
-				for(int i = 0; i < managers.size(); i++){
-					list.addElement(managers.get(i));
+
+				if(noSelect.isSelected()) {
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
 				}
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-			}
-			if(staffId.isSelected()) {
-				list = new DefaultListModel();
-				Collections.sort(managers, ((m1,m2) -> m1.getStaffNum() - m2.getStaffNum() ));
-				for(int i = 0; i < managers.size(); i++){
-					list.addElement(managers.get(i));
+				if(firstName.isSelected()) {
+
 				}
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
+				if(lastName.isSelected()) {
+
+				}
+				if(staffId.isSelected()) {
+
+				}
+
 			}
 
-		}
+			//needs work
+			if (choices.getSelectedItem().equals("View Clients")) {
 
-		//needs work
-		if (choices.getSelectedItem().equals("View Supervisors")) {
 
-			noSelect.setVisible(true);
-			firstName.setVisible(true);
-			lastName.setVisible(true);
-			staffId.setVisible(true);
-			
-			list = new DefaultListModel();
-			ArrayList<Staff> supervisors = new ArrayList();
-			/*for(int i = 0; i < staffList.size(); i++){
-				if(staffList.get(i).getPosition() == 1){
-					supervisors.add(staffList.get(i));
-					list.addElement(staffList.get(i));
-				}
-			}*/
-			
-			if(noSelect.isSelected()) {
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-			}
-			if(firstName.isSelected()) {
+				noSelect.setVisible(true);
+				firstName.setVisible(true);
+				lastName.setVisible(true);
+				renterId.setVisible(true);
+				propOwnerId.setVisible(true);
+				propId.setVisible(true);
+				phoneNum.setVisible(true);
+
 				list = new DefaultListModel();
-				Collections.sort(supervisors, ((m1,m2) -> m1.getFname().compareTo(m2.getFname())));
-				for(int i = 0; i < supervisors.size(); i++){
-					list.addElement(supervisors.get(i));
-				}
+				ArrayList<Client> clients = new ArrayList();
+				/*for(int i = 0; i < clientList.size(); i++) {
+					clients.add(clientList.get(i));
+					list.addElement(clientList.get(i));
+				}*/
 				l = new JList(list);
 				Panel3.removeAll();
 				scroll = new JScrollPane();
@@ -446,267 +615,95 @@ public class Menu extends JFrame implements ActionListener {
 				Panel3.add(scroll);
 				Panel3.validate();
 				Panel3.repaint();
-			}
-			if(lastName.isSelected()) {
-				list = new DefaultListModel();
-				Collections.sort(supervisors, ((m1,m2) -> m1.getLname().compareTo(m2.getLname())));
-				for(int i = 0; i < supervisors.size(); i++){
-					list.addElement(supervisors.get(i));
+				if(noSelect.isSelected()) {
+
 				}
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-			}
-			if(staffId.isSelected()) {
-				list = new DefaultListModel();
-				Collections.sort(supervisors, ((m1,m2) -> m1.getStaffNum() - m2.getStaffNum() ));
-				for(int i = 0; i < supervisors.size(); i++){
-					list.addElement(supervisors.get(i));
+				if(firstName.isSelected()) {
+					list = new DefaultListModel();
+					Collections.sort(clients, ((m1,m2) -> m1.getFname().compareTo(m2.getFname())));
+					for(int i = 0; i < clients.size(); i++){
+						list.addElement(clients.get(i));
+					}
+					l = new JList(list);
+					Panel3.removeAll();
+					scroll = new JScrollPane();
+					scroll.setViewportView(l);
+					Panel3.add(scroll);
+					Panel3.validate();
+					Panel3.repaint();
 				}
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
+				if(lastName.isSelected()) {
+
+				}
 			}
 
-		}
-		//needs work
-		if (choices.getSelectedItem().equals("View Agents")) {
+			//needs work
+			if (choices.getSelectedItem().equals("View Property Owners")) {
 
-			noSelect.setVisible(true);
-			firstName.setVisible(true);
-			lastName.setVisible(true);
-			staffId.setVisible(true);
-			
-			list = new DefaultListModel();
-			ArrayList<Staff> agents = new ArrayList();
-			/*for(int i = 0; i < staffList.size(); i++){
-				if(staffList.get(i).getPosition() == 0){
-					agents.add(staffList.get(i));
-					list.addElement(staffList.get(i));
-				}
-			}*/
-			
-			if(noSelect.isSelected()) {
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-			}
-			if(firstName.isSelected()) {
-				list = new DefaultListModel();
-				Collections.sort(agents, ((m1,m2) -> m1.getFname().compareTo(m2.getFname())));
-				for(int i = 0; i < agents.size(); i++){
-					list.addElement(agents.get(i));
-				}
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-			}
-			if(lastName.isSelected()) {
-				list = new DefaultListModel();
-				Collections.sort(agents, ((m1,m2) -> m1.getLname().compareTo(m2.getLname())));
-				for(int i = 0; i < agents.size(); i++){
-					list.addElement(agents.get(i));
-				}
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-			}
-			if(staffId.isSelected()) {
-				list = new DefaultListModel();
-				Collections.sort(agents, ((m1,m2) -> m1.getStaffNum() - m2.getStaffNum() ));
-				for(int i = 0; i < agents.size(); i++){
-					list.addElement(agents.get(i));
-				}
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-			}
+				noSelect.setVisible(true);
+				firstName.setVisible(true);
+				lastName.setVisible(true);
+				propOwnerId.setVisible(true);
+				propId.setVisible(true);
+				phoneNum.setVisible(true);
+				staffMemAdded.setVisible(true);
 
-		}
-		//needs work
-		if (choices.getSelectedItem().equals("View Employees Salaries")) {
+				if(noSelect.isSelected()) {
 
-			noSelect.setVisible(true);
-			firstName.setVisible(true);
-			lastName.setVisible(true);
-			staffId.setVisible(true);
-			lowtoHigh.setVisible(true);
-			hightoLow.setVisible(true);
-			
-			list = new DefaultListModel();
-			ArrayList<Staff> staff = new ArrayList();
-			/*for(int i = 0; i < staffList.size(); i++){
-				staff.add(staffList.get(i));
-				list.addElement(staffList.get(i));
-			}*/
-			if(lowtoHigh.isSelected()) {
-				
-			}
-			if(hightoLow.isSelected()) {
-				
-			}
-			
-			if(noSelect.isSelected()) {
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-			}
-			if(firstName.isSelected()) {
-				
-			}
-			if(lastName.isSelected()) {
-				
-			}
-			if(staffId.isSelected()) {
-				
-			}
-
-		}
-
-		//needs work
-		if (choices.getSelectedItem().equals("View Clients")) {
-			
-			
-			noSelect.setVisible(true);
-			firstName.setVisible(true);
-			lastName.setVisible(true);
-			renterId.setVisible(true);
-			propOwnerId.setVisible(true);
-			propId.setVisible(true);
-			phoneNum.setVisible(true);
-			
-			list = new DefaultListModel();
-			ArrayList<Client> clients = new ArrayList();
-			/*for(int i = 0; i < clientList.size(); i++) {
-				clients.add(clientList.get(i));
-				list.addElement(clientList.get(i));
-			}*/
-			l = new JList(list);
-			Panel3.removeAll();
-			scroll = new JScrollPane();
-			scroll.setViewportView(l);
-			Panel3.add(scroll);
-			Panel3.validate();
-			Panel3.repaint();
-			if(noSelect.isSelected()) {
-				
-			}
-			if(firstName.isSelected()) {
-				list = new DefaultListModel();
-				Collections.sort(clients, ((m1,m2) -> m1.getFname().compareTo(m2.getFname())));
-				for(int i = 0; i < clients.size(); i++){
-					list.addElement(clients.get(i));
 				}
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
+				if(firstName.isSelected()) {
+
+				}
+				if(lastName.isSelected()) {
+
+				}
+
 			}
-			if(lastName.isSelected()) {
-				
+			//needs work
+			if (choices.getSelectedItem().equals("View Properties")) {
+
+				noSelect.setVisible(true);
+				firstName.setVisible(true);
+				lastName.setVisible(true);
+				propOwnerId.setVisible(true);
+				propId.setVisible(true);
+				phoneNum.setVisible(true);
+				city.setVisible(true);
+
+				if(noSelect.isSelected()) {
+
+				}
+				if(firstName.isSelected()) {
+
+				}
+				if(lastName.isSelected()) {
+
+				}
+
+			}
+			//needs work
+			if (choices.getSelectedItem().equals("View Property Viewings")) {
+
+				noSelect.setVisible(true);
+				firstName.setVisible(true);
+				lastName.setVisible(true);
+				propOwnerId.setVisible(true);
+				propId.setVisible(true);
+				phoneNum.setVisible(true);
+				city.setVisible(true);
+				staffMemAdded.setVisible(true);
+
+				if(noSelect.isSelected()) {
+
+				}
+				if(firstName.isSelected()) {
+
+				}
+				if(lastName.isSelected()) {
+
+				}
+
 			}
 		}
-		
-		//needs work
-		if (choices.getSelectedItem().equals("View Property Owners")) {
-
-			noSelect.setVisible(true);
-			firstName.setVisible(true);
-			lastName.setVisible(true);
-			propOwnerId.setVisible(true);
-			propId.setVisible(true);
-			phoneNum.setVisible(true);
-			staffMemAdded.setVisible(true);
-			
-			if(noSelect.isSelected()) {
-
-			}
-			if(firstName.isSelected()) {
-				
-			}
-			if(lastName.isSelected()) {
-				
-			}
-
-		}
-		//needs work
-		if (choices.getSelectedItem().equals("View Properties")) {
-
-			noSelect.setVisible(true);
-			firstName.setVisible(true);
-			lastName.setVisible(true);
-			propOwnerId.setVisible(true);
-			propId.setVisible(true);
-			phoneNum.setVisible(true);
-			city.setVisible(true);
-			
-			if(noSelect.isSelected()) {
-
-			}
-			if(firstName.isSelected()) {
-				
-			}
-			if(lastName.isSelected()) {
-				
-			}
-
-		}
-		//needs work
-		if (choices.getSelectedItem().equals("View Property Viewings")) {
-
-			noSelect.setVisible(true);
-			firstName.setVisible(true);
-			lastName.setVisible(true);
-			propOwnerId.setVisible(true);
-			propId.setVisible(true);
-			phoneNum.setVisible(true);
-			city.setVisible(true);
-			staffMemAdded.setVisible(true);
-			
-			if(noSelect.isSelected()) {
-
-			}
-			if(firstName.isSelected()) {
-				
-			}
-			if(lastName.isSelected()) {
-				
-			}
-
-		}
-		
-	}
-
     }
 }

@@ -15,13 +15,13 @@ public class UserInterface extends JFrame implements ActionListener {
 
 	private File database = new File("database.db");
 
-	Staff Rob = new Staff("Rob", "Williams", 2);
-	Staff Kenny = new Staff("Kenny", "Manning", 1);
+	//Staff Rob = new Staff("Rob", "Williams", 2);
+	//Staff Kenny = new Staff("Kenny", "Manning", 1);
 
-	StaffAccount Robacc = new StaffAccount(Rob.getFname(), "robman", Rob);
-	StaffAccount Kennyacc = new StaffAccount(Kenny.getFname(), "kenman", Kenny);
+	//StaffAccount Robacc = new StaffAccount(Rob.getFname(), "robman", Rob);
+	///StaffAccount Kennyacc = new StaffAccount(Kenny.getFname(), "kenman", Kenny);
 
-	private StaffAccount[] staffAcc = { Robacc, Kennyacc };
+	//private StaffAccount[] staffAcc = { Robacc, Kennyacc };
 
 	private String[] Manager = { "Rob", "robman", "Dave", "daveman" };
 	private String[] Supervisors = { "Kenny", "kenman", "Bob", "bobman" };
@@ -31,8 +31,8 @@ public class UserInterface extends JFrame implements ActionListener {
 
 	private JPanel usP;
 	private JPasswordField PasswordText;
-	private JTextField UsernameText, registrationText;
-	private JLabel PassPrompt, UserPrompt, registrationPrompt;
+	private JTextField UsernameText;
+	private JLabel PassPrompt, UserPrompt;
 	private JButton Login;
 	private JPanel manPanel;
 	private JLabel man;
@@ -189,7 +189,7 @@ public class UserInterface extends JFrame implements ActionListener {
 					in = true;
 					setVisible(false);
 					setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-					Menu menu = new Menu(staffAcc[i].getStaff().getPosition());
+					Menu menu = new Menu(staffList.get(i).getPosition());
 				}
 			}
 			if(!in) { JOptionPane.showMessageDialog(null, "Invalid username/password. \n Try again."); }
