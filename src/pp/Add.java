@@ -706,7 +706,7 @@ public class Add implements ActionListener{
 			textField_6.setVisible(true);
 			textField_7.setVisible(true);
 			textField_8.setVisible(true);
-			textField_9.setVisible(false);
+			textField_9.setVisible(true);
 			textField_10.setVisible(false);
 			textField_11.setVisible(false);
 			textField_12.setVisible(false);
@@ -740,6 +740,9 @@ public class Add implements ActionListener{
 			l8 = new JLabel("Comments");
 			panel_1.add(l8);
 			panel_1.add(textField_8);
+			l9 = new JLabel("Client Number");
+			panel_1.add(l9);
+			panel_1.add(textField_9);
 			panel_1.validate();
 			panel_1.repaint();
 			
@@ -749,21 +752,22 @@ public class Add implements ActionListener{
 						(textField_2.getText() == null) || (textField_3.getText() == null) ||
 						(textField_4.getText() == null) || (textField_5.getText() == null) ||
 						(textField_6.getText() == null) ||(textField_7.getText() == null) ||
-						(textField_8.getText() == null);
+						(textField_8.getText() == null) || (textField_9.getText() == null);
 				
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
 		//		if(cleared) {
 					Input propviewinput = new Input("PROPVIEW");
-					String fname = textField.getText();
-					String lname = textField_1.getText();
-					String cell = textField_2.getText();
+					String fname = "'" + textField.getText() + "'";
+					String lname = "'" + textField_1.getText() + "'";
+					String cell = "'" + textField_2.getText() + "'";
 					int propId = Integer.parseInt(textField_3.getText());
-					String street = textField_4.getText();
-					String city = textField_5.getText();
-					String zip = textField_6.getText();
-					String viewdate = textField_7.getText();
-					String comments = textField_8.getText();
-					propviewinput.addPropViewInfo(fname, lname, cell, propId, street, city, zip, viewdate, comments);
+					String street = "'" + textField_4.getText() + "'";
+					String city = "'" + textField_5.getText() + "'";
+					String zip = "'" + textField_6.getText() + "'";
+					String viewdate = "'" + textField_7.getText() + "'";
+					String comments = "'" + textField_8.getText() + "'";
+					int clientID = Integer.parseInt(textField_9.getText());
+					propviewinput.addPropViewInfo(clientID,fname, lname, cell, propId, street, city, zip, viewdate, comments);
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");

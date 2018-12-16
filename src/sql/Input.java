@@ -145,7 +145,7 @@ public class Input
         System.out.println("Records created successfully");
     }
 
-    public void addPropViewInfo(String fname, String lname, String phone, int propertyId, String street, String city, String postCode, String viewDate, String comments) {
+    public void addPropViewInfo(int clientNum, String fname, String lname, String phone, int propertyId, String street, String city, String postCode, String viewDate, String comments) {
         Connection c = null;
         Statement stmt = null;
 
@@ -156,15 +156,16 @@ public class Input
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,CELL,PROPNUM,STREET,CITY,POSTCODE,VIEWDATE,COMMENTS) " +
-                    "VALUES ('" + fname + "','" + lname + "','" + phone + "','" + propertyId + "','" + street + "','" +
-                    city + "','" + postCode + "','" + viewDate + "','" + comments + "');";
+            String sql = "INSERT INTO " + tableName + " (CLIENTNUM,FNAME,LNAME,CELL,PROPNUM,STREET,CITY,POSTCODE,VIEWDATE,COMMENTS) " +
+                    "VALUES (" + clientNum + "," + fname + "," + lname + "," + phone + "," + propertyId + "," + street + "," +
+                    city + "," + postCode + "," + viewDate + "," + comments + ");";
 
             stmt.executeUpdate(sql);
 
             stmt.close();
             c.commit();
             c.close();
+            System.out.println("ClientNum: " + clientNum);
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);

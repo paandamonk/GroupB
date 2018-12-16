@@ -82,7 +82,8 @@ public class Initialize {
             stmt.executeUpdate(sql);//3
 
             sql = "CREATE TABLE PROPVIEW" +
-                    "(CLIENTNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "(VIEWNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
+            		" CLIENTNUM    INT	  NOT NULL, " +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
                     " CELL         TEXT   NOT NULL, " +

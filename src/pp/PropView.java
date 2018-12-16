@@ -1,4 +1,6 @@
 package pp;
+import java.sql.*;
+import java.util.ArrayList;
 import static sql.Database.getClientByID;
 
 public class PropView {
@@ -20,6 +22,44 @@ public class PropView {
 		this.viewDate = viewDate;
 		this.comments = comments;
 	}
+	
+	public static ArrayList<PropView> getPropView(){
+        Connection c = null;
+        Statement stmt = null;
+
+        ArrayList<PropView> propViewList = new ArrayList();
+        int clientId, propertyId;
+        String fname, lname, phone, street, city, postCode, viewDate, comments;
+
+        try{
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            c.setAutoCommit(false);
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM PROPVIEW;");
+            while(rs.next()){
+                clientId = rs.getInt("CLIENTNUM");
+                fname = rs.getString("FNAME");
+                lname = rs.getString("LNAME");
+                phone = rs.getString("CELL");
+                propertyId = rs.getInt("PROPNUM");
+                street = rs.getString("STREET");
+                city = rs.getString("CITY");
+                postCode = rs.getString("POSTCODE");
+                viewDate = rs.getString("VIEWDATE");
+                comments = rs.getString("COMMENTS");
+
+                PropView propView = new PropView(clientId, fname, lname, phone, propertyId, street, city, postCode, viewDate, comments);
+                propViewList.add(propView);
+            }
+        }catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+        return propViewList;
+    }
 
 	/**
 	 * @return the renter
