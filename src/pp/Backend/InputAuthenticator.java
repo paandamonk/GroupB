@@ -136,7 +136,7 @@ public class InputAuthenticator {
     }
 
     //Extension of digitAuthenticator method. Returns true if day, month, and year contain only digits
-    public boolean dateAuthenticator(String day, String month, String year){
+    private boolean dateAuthenticator(String day, String month, String year){
         DateCalculator dc = new DateCalculator();
         if(digitAuthenticator(day) && digitAuthenticator(month) && digitAuthenticator(year)){
             // ensures months can only be numbered from 1 to 12
@@ -213,12 +213,13 @@ public class InputAuthenticator {
 
     //Returns true if string passed contains only numbers
     public boolean addressAuthenticator(String address){
-        for(int i = 0; i < address.length(); i++){
-            if(!Character.isDigit(address.charAt(i)) && !Character.isLetter(address.charAt(i)) && address.charAt(i) != ' '){
-                return false;
-            }
-            else if(Character.isLetter(address.charAt(i)) && i == (address.length() - 1)){
-                return true;
+        if(lengthAuthenticator(address, 1)) {
+            for (int i = 0; i < address.length(); i++) {
+                if (!Character.isDigit(address.charAt(i)) && !Character.isLetter(address.charAt(i)) && address.charAt(i) != ' ') {
+                    return false;
+                } else if (Character.isLetter(address.charAt(i)) && i == (address.length() - 1)) {
+                    return true;
+                }
             }
         }
         return false;
@@ -228,19 +229,20 @@ public class InputAuthenticator {
     public boolean moneyAuthenticator(String money){
         int dotCount = 0;
         double m = -1; //initialized to a negative to force a false return if parameters aren't met
-        for(int i = 0; i <  money.length(); i++){
-            if(!Character.isDigit(money.charAt(i))){
-                if(money.charAt(i) != '.' && i != money.length() - 2){
-                    return false;
-                }
-                else if(money.charAt(i) == '.'){
-                    dotCount++;
+        if(lengthAuthenticator(money,1)) {
+            for (int i = 0; i < money.length(); i++) {
+                if (!Character.isDigit(money.charAt(i))) {
+                    if (money.charAt(i) != '.' && i != money.length() - 2) {
+                        return false;
+                    } else if (money.charAt(i) == '.') {
+                        dotCount++;
+                    }
                 }
             }
-        }
-        if(dotCount == 1) {
-            String[] moneyForCalculation = money.split("\\.");
-            m = Double.valueOf(moneyForCalculation[0] + moneyForCalculation[1]);
+            if (dotCount == 1) {
+                String[] moneyForCalculation = money.split("\\.");
+                m = Double.valueOf(moneyForCalculation[0] + moneyForCalculation[1]);
+            }
         }
         return (m >= 0 && m < Double.MAX_VALUE); //returns the true or false result of this line. (i.e. returns true if m is within the boundaries set.)
     }
@@ -260,12 +262,27 @@ public class InputAuthenticator {
 
     //Returns true if string passed contains only letters, with the first letter being uppercase and the remaining lowercase.
     public boolean nameAuthenticator(String name){
-        if(Character.isUpperCase(name.charAt(0))){
-            for(int i = 1; i < name.length(); i++){
-                if(Character.isUpperCase(name.charAt(i)) || !Character.isLetter(name.charAt(i))){
-                    return false;
+        if(lengthAuthenticator(name, 0)) {
+            if (Character.isUpperCase(name.charAt(0))) {
+                for (int i = 1; i < name.length(); i++) {
+                    if (Character.isUpperCase(name.charAt(i)) || !Character.isLetter(name.charAt(i))) {
+                        return false;
+                    } else if (!Character.isUpperCase(name.charAt(i)) && i == (name.length() - 1) && Character.isLetter(name.charAt(name.length() - 1))) {
+                        return true;
+                    }
                 }
-                else if(!Character.isUpperCase(name.charAt(i)) && i == (name.length() - 1) && Character.isLetter(name.charAt(name.length() - 1))){
+            }
+        }
+        return false;
+    }
+
+    //Returns true if string passed contains only letters, numbers, and is between 1 and 16 characters in length
+    public boolean userDataAuthenticator(String userData){
+        if(lengthAuthenticator(userData, 0)) {
+            for (int i = 0; i < userData.length(); i++) {
+                if (!Character.isDigit(userData.charAt(i)) || !Character.isLetter(userData.charAt(i))) {
+                    return false;
+                } else if (Character.isDigit(userData.charAt(i)) || Character.isLetter(userData.charAt(i)) && i == (userData.length() - 1)) {
                     return true;
                 }
             }
@@ -273,7 +290,18 @@ public class InputAuthenticator {
         return false;
     }
 
-    public String dateForDatabase(String day, String month, String year){
+    //Returns true if string passed is less than or equal to maximum length
+    public boolean lengthAuthenticator(String input, int inputType){
+        if(inputType == 0) {
+            return (input.length() > 0 && input.length() <= 16);
+        }
+        else if(inputType == 1) {
+            return (input.length() > 0 && input.length() <= 32);
+        }
+        return false;
+    }
+
+    public  String dateForDatabase(String day, String month, String year){
         if(month.length() == 1){
             return year + "-" + "0" + month + "-" + day;
         }else {
