@@ -130,8 +130,8 @@ public class Input
 
             stmt = c.createStatement();
             String sql = "INSERT INTO " + tableName + " (STREET,CITY,POSTCODE,TYPE,ROOMS,RENT,OWNER) " +
-                    "VALUES ('"  + Street + "'," + City + "','" + Postcode + "','" + type + "','" +
-                    rooms + "','" + rent + "','" + Owner + "');";
+                    "VALUES ("  + Street + "," + City + "," + Postcode + "," + type + "," +
+                    rooms + "," + rent + "," + Owner + ");";
 
             stmt.executeUpdate(sql);
 

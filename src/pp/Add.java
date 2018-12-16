@@ -419,13 +419,13 @@ public class Add implements ActionListener{
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
 			//	if(cleared) {
 					Input propertyinput = new Input("PROPERTIES");
-					String street = textField.getText();
-					String city = textField_1.getText();
-					String zip = textField_2.getText();
-					String type = textField_3.getText();
+					String street = "'" + textField.getText() + "'";
+					String city = "'" + textField_1.getText() + "'";
+					String zip ="'" + textField_2.getText() + "'";
+					String type = "'" + textField_3.getText() + "'";
 					int rooms = Integer.parseInt(textField_4.getText());
 					double rent = Double.parseDouble(textField_5.getText());
-					String owner = textField_6.getText();
+					String owner = "'" + textField_6.getText() + "'";
 
 					propertyinput.addPropertyInfo(street, zip, city, type, rooms, rent, owner);
 //				}

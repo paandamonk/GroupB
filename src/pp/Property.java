@@ -1,4 +1,7 @@
 package pp;
+import java.sql.*;
+import java.util.ArrayList;
+import pp.PropertyOwner;
 
 public class Property {
 	Staff staff = new Staff();
@@ -41,6 +44,43 @@ public class Property {
 		this.monthlyRent = monthlyRent;
 		this.owner = propertyOwner.getPropOwnersByID(propertyId).get(0);
 	}
+	
+	public void getPropertyByID(int Num) {
+	     Connection c = null;
+	     Statement stmt = null;
+	     ArrayList<Property> propertiesList = new ArrayList<Property>();
+	     
+	     try {
+	        Class.forName("org.sqlite.JDBC");
+	        c = DriverManager.getConnection("jdbc:sqlite:test.db");
+	        c.setAutoCommit(false);
+	        System.out.println("Opened database successfully");
+
+	        stmt = c.createStatement();
+	        ResultSet rs = stmt.executeQuery( "SELECT * FROM " + "PROPERTIES " + ";" );
+	        
+	        while ( rs.next() ) {
+	        int propNum = rs.getInt("PROPNUM");
+	        String  street = rs.getString("STREET");
+	        String city = rs.getString("CITY");
+	        String postcode = rs.getString("POSTCODE");
+	        String type  = rs.getString("TYPE");
+	        int  rooms = rs.getInt("ROOMS");
+	        double rent = rs.getDouble("RENT");
+	        int Owner  = rs.getInt("OWNER");	   
+	        if(Num == propNum){
+	        	Property prp = new Property(street,city,postcode,type, propNum,rooms,rent,owner);
+	        	propertiesList.add(prp);
+	        } 
+	        else if(propNum == 000){
+	        	Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, owner);
+	        	propertiesList.add(prp);
+	        	System.out.println(propertiesList.get(0).getStreet().toString() + " TEST");
+	        }
+	        }
+	     }catch(Exception e){
+	        	e.printStackTrace();
+	        }
 
 	/**
 	 * @return the street
