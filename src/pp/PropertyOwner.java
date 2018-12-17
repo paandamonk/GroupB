@@ -16,7 +16,7 @@ public class PropertyOwner extends Client{
 	private int MID;
 	private Staff member;
 
-	public PropertyOwner(){}
+	public PropertyOwner() {}
 
 	public PropertyOwner(String FName, String LName, String street, String city, String postcode, String phone, int OID, int MID) {
 		super(FName, LName, phone, MID);

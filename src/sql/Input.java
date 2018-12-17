@@ -66,7 +66,7 @@ public class Input
         System.out.println("Client record created successfully");
     }
 
-    public void addPropOwnerInfo(int oID, String Fname, String Lname, String street, String City, String Postcode, int sID, String Phone) {
+    public void addPropOwnerInfo(String Fname, String Lname, String street, String City, String Postcode, String Phone, int sID) {
         Connection c = null;
         Statement stmt = null;
 
@@ -77,8 +77,8 @@ public class Input
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-            String sql = "INSERT INTO " + tableName + " (OWNERNUM,FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,STAFFNUM) " +
-                    "VALUES (" + oID + "," + Fname + "," + Lname + "," + street + "," + City + "," + Postcode + "," + Phone + "," + sID + ");";
+            String sql = "INSERT INTO " + tableName + " (FNAME,LNAME,STREET,CITY,POSTCODE,PHONE,STAFFNUM) " +
+                    "VALUES (" + Fname + "," + Lname + "," + street + "," + City + "," + Postcode + "," + Phone + "," + sID + ");";
 
             stmt.executeUpdate(sql);
             stmt.close();
@@ -142,7 +142,7 @@ public class Input
             System.err.println( e.getClass().getName() + ": " + e.getMessage() );
             System.exit(0);
         }
-        System.out.println("Records created successfully");
+        System.out.println("Property record created successfully");
     }
 
     public void addPropViewInfo(int clientNum, String fname, String lname, String phone, int propertyId, String street, String city, String postCode, String viewDate, String comments) {
@@ -165,7 +165,6 @@ public class Input
             stmt.close();
             c.commit();
             c.close();
-            System.out.println("ClientNum: " + clientNum);
         } catch ( Exception e ) {
             System.err.println( e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -174,7 +173,8 @@ public class Input
     }
 
     public void addLeaseInfo(int clientId, String fname, String lname, int propertyId, String street, String city, String postCode,
-                             String type, int numRooms, double monthlyRent, String payMethod, double deposit, int depositPaid, String rentStart, String rentEnd, String duration) {
+                             String type, int numRooms, double monthlyRent, String payMethod, double deposit, int depositPaid,
+                             String rentStart, String rentEnd, String duration) {
         Connection c = null;
         Statement stmt = null;
 
@@ -187,12 +187,11 @@ public class Input
             stmt = c.createStatement();
             String sql = "INSERT INTO " + tableName + " (CLIENTNUM,FNAME,LNAME,PROPNUM,STREET,CITY,POSTCODE," +
                     "TYPE,ROOMS,RENT,PAYMETHOD,DEPOSIT,PAIDDEPOSIT,STARTDATE,ENDDATE,DURATION) " +
-                    "VALUES ('"  + clientId + "','" + fname + "','" + lname + "','" + propertyId + "','" + street + "','" +
-                    city + "','" + postCode + "','" + type + "','" + numRooms + "','" + monthlyRent + "','" + payMethod+ "','"
-                    + deposit + "','" + depositPaid + "','" + rentStart + "','" + rentEnd + "','" + duration + "');";
+                    "VALUES (" + clientId + "," + fname + "," + lname + "," + propertyId + "," + street + "," +
+                    city + "," + postCode + "," + type + "," + numRooms + "," + monthlyRent + "," + payMethod+ ","
+                    + deposit + "," + depositPaid + "," + rentStart + "," + rentEnd + "," + duration + ");";
 
             stmt.executeUpdate(sql);
-
             stmt.close();
             c.commit();
             c.close();

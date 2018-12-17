@@ -41,7 +41,7 @@ public class Initialize {
                     " TYPE         TEXT   NOT NULL, " +
                     " ROOMS        INT    NOT NULL, " +
                     " RENT         REAL   NOT NULL, " +
-                    " OWNER        INT    NOT NULL)";
+                    " OWNER        TEXT   NOT NULL)";
             stmt.executeUpdate(sql);//1
 
             sql = "CREATE TABLE PROPOWNERS" +
@@ -83,7 +83,7 @@ public class Initialize {
 
             sql = "CREATE TABLE PROPVIEW" +
                     "(VIEWNUM INTEGER PRIMARY KEY AUTOINCREMENT," +
-            		" CLIENTNUM    INT	  NOT NULL, " +
+                    " CLIENTNUM    INT	  NOT NULL, " +
                     " FNAME        TEXT   NOT NULL, " +
                     " LNAME        TEXT   NOT NULL, " +
                     " CELL         TEXT   NOT NULL, " +
