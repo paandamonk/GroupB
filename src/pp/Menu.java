@@ -160,6 +160,10 @@ public class Menu extends JFrame implements ActionListener {
 		b.addActionListener(this);
 		a = new JButton("Add Info");
 		a.addActionListener(this);
+		JButton register = new JButton("Register New Staff");
+		register.addActionListener(e -> {
+			UserInterface userInterface = new UserInterface(true);
+		});
 		//a.setPreferredSize(new Dimension(50, 25));
 		choices = new JComboBox<Object>(manChoices);
 		choices.addActionListener(this);
@@ -222,6 +226,7 @@ public class Menu extends JFrame implements ActionListener {
 		Panel.add(search);
 		Panel.add(b);
 		Panel.add(a);
+		Panel.add(register);
 		Panel2.add(noSelect);
 		Panel2.add(firstName);
 		Panel2.add(lastName);
@@ -295,8 +300,8 @@ public class Menu extends JFrame implements ActionListener {
 		Object src = e.getSource();
 		
 		if(src == a) {
-			
 			Add window = new Add();
+			setResizable(false);
 			window.frame.setVisible(true);
 
 
