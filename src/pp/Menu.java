@@ -98,7 +98,7 @@ public class Menu extends JFrame implements ActionListener {
 	DefaultListModel list = new DefaultListModel();
 
 	public Menu(int cl) {
-		if (cl == 2 || cl == 3) {
+		if (cl == 2) {
 			setTitle("Manager Menu");
 			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			setLayout(new GridLayout(3, 0));

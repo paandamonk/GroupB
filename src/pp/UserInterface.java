@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class UserInterface extends JFrame implements ActionListener {
 
@@ -41,8 +42,10 @@ public class UserInterface extends JFrame implements ActionListener {
 	public UserInterface(boolean staffRegistration) {
 		setTitle("Proper Properties");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setLayout(new GridLayout(3, 2));
-		setSize(1500, 3000);
+		setLayout(new GridLayout(5, 2));
+		//if(!staffRegistration) {
+			setSize(1500, 3000);
+		//}
 		setResizable(false);
 		buildLogin(staffRegistration);
 		//add(usP, BorderLayout.WEST);
@@ -52,8 +55,12 @@ public class UserInterface extends JFrame implements ActionListener {
 
 	private void buildLogin(boolean staffRegistration) {
 		InputAuthenticator ia = new InputAuthenticator();
-		final String[] registrationField = new String[5]; //secretKey, fName, lName, username, password
+		//registrationField (When !staffRegistration): secretKey, fName, lName, username, password
+		//registrationField (When staffRegistration): fName, lName, position, branch, sex, DoB, username, password
+		final String[] registrationField = new String[9];
 		final int[] count = {0};
+		AtomicReference<String> input = new AtomicReference<>("");
+		int intInput = -1;
 
 		JPanel display = new JPanel(new BorderLayout());
 		JPanel registration = new JPanel();
@@ -69,11 +76,32 @@ public class UserInterface extends JFrame implements ActionListener {
 		JTextField keyText = new JTextField(20);
 		keyText.setEditable(true);
 
+		JLabel yearLabel = new JLabel("Year");
+		keyInput.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+
+		JLabel monthLabel = new JLabel("Month");
+		keyInput.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+		JTextField monthField = new JTextField(3);
+		keyText.setEditable(true);
+
+		JLabel dayLabel = new JLabel("Day");
+		keyInput.setFont(new Font("Times New Roman", Font.PLAIN, 15));
+
+
+		JTextField dayField = new JTextField(3);
+		keyText.setEditable(true);
+
 		JButton submit = new JButton("Submit");
 
 		JLabel hintText = new JLabel("");
 		hintText.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 		hintText.setHorizontalAlignment(JLabel.CENTER);
+
+		JRadioButton b1 = new JRadioButton();
+		JRadioButton b2 = new JRadioButton();
+		JRadioButton b3 = new JRadioButton();
 
 		if(!database.exists() && !staffRegistration){
 			add(display);
@@ -174,6 +202,7 @@ public class UserInterface extends JFrame implements ActionListener {
 		}
 		//staffRegistration must be true
 		else{
+			System.out.println("Registering Staff");
 			add(display);
 			add(registration);
 			add(hint);
@@ -185,69 +214,189 @@ public class UserInterface extends JFrame implements ActionListener {
 			registration.add(keyText);
 			registration.add(submit);
 			hint.add(hintText, BorderLayout.NORTH);
-			count[0] = 1;
 
 			submit.addActionListener(e -> {
-				if(ia.lengthAuthenticator(keyText.getText(), 1)) { //1 - 32 character length parameter.
+				if(ia.lengthAuthenticator(keyText.getText(), 1) || ia.lengthAuthenticator(input.get(), 1)) { //1 - 32 character length parameter.
 					switch (count[0]){
-						case 1: {
-							registrationField[1] = keyText.getText(); // fName
+						case 0: {
+							registrationField[0] = keyText.getText(); // fName
 							keyInput.setText("Please Enter Last Name:");
 							hintText.setText("");
 							count[0]++; // 2
 						}
 						break;
-						case 2: {
-							registrationField[2] = keyText.getText(); // lName
-							keyInput.setText("Please Enter Position (Manager, Supervisor, Agent):");
+						case 1: {
+							registrationField[1] = input.get(); // sex
+							keyInput.setText("Please Enter Position: ");
 							hintText.setText("");
+							registration.remove(keyText);
+							registration.remove(submit);
+
+							registration.add(b1);
+							b1.setText("Manager");
+							b1.addActionListener(e2 -> {
+								input.set("2");
+								b2.setSelected(false);
+								b3.setSelected(false);
+							});
+
+							registration.add(b2);
+							b2.setText("Supervisor");
+							b2.addActionListener(e2 -> {
+								input.set("1");
+								b1.setSelected(false);
+								b3.setSelected(false);
+							});
+
+							registration.add(b3);
+							b3.setText("Agent");
+							b3.addActionListener(e2 -> {
+								input.set("0");
+								b1.setSelected(false);
+								b2.setSelected(false);
+							});
+							registration.add(submit);
+
+							count[0]++; // 3
+						}
+						break;
+						case 2: {
+							registrationField[2] = keyText.getText(); // position
+							keyInput.setText("Please Enter Branch:");
+							hintText.setText("");
+
+							b1.setText("");
+							b2.setText("");
+							b3.setText("");
+
+							b1.setSelected(false);
+							b2.setSelected(false);
+							b3.setSelected(false);
+
+							registration.remove(b1);
+							registration.remove(b2);
+							registration.remove(b3);
+							registration.remove(submit);
+
+							registration.add(keyText);
+							registration.add(submit);
+							input.set("");
+
 							count[0]++; // 3
 						}
 						break;
 						case 3: {
-							registrationField[2] = keyText.getText(); // lName
-							keyInput.setText("Please Enter Branch:");
+							registrationField[3] = keyText.getText(); // branch
+							keyInput.setText("Please Enter Sex: ");
 							hintText.setText("");
+							registration.remove(keyText);
+							registration.remove(submit);
+							registration.add(b1);
+							b1.setText("Male");
+							b1.addActionListener(e2 -> {
+								input.set("Male");
+								b2.setSelected(false);
+							});
+
+							registration.add(b2);
+							b2.setText("Female");
+							b2.addActionListener(e2 -> {
+								input.set("Female");
+								b1.setSelected(false);
+							});
+							registration.add(submit);
+
 							count[0]++; // 3
 						}
+						break;
 						case 4: {
-							registrationField[2] = keyText.getText(); // lName
+							registrationField[4] = keyText.getText(); // sex
+							keyInput.setText("Please Enter DoB:");
+							hintText.setText("");
+
+							b1.setText("");
+							b2.setText("");
+							b3.setText("");
+
+							b1.setSelected(false);
+							b2.setSelected(false);
+							b3.setSelected(false);
+
+							registration.remove(b1);
+							registration.remove(b2);
+							registration.remove(submit);
+
+							registration.add(yearLabel);
+
+							registration.add(keyText);
+								keyText.setColumns(3);
+
+							registration.add(monthLabel);
+							registration.add(monthField);
+
+							registration.add(dayLabel);
+							registration.add(dayField);
+
+							registration.add(submit);
+							input.set("");
+
+							if(ia.lengthAuthenticator(input.get(), 1) && ia.lengthAuthenticator(monthField.getText(), 1) && ia.lengthAuthenticator(dayField.getText(), 1)){
+								count[0]++; // 3
+							}
+							else{
+								hintText.setText("Date entered must be valid.");
+							}
+						}
+						break;
+						case 5: {
+							registrationField[5] = keyText.getText(); // DoB
 							keyInput.setText("Please Enter Salary:");
 							hintText.setText("");
+
+							keyText.setColumns(20);
+
+							registration.remove(yearLabel);
+							registration.remove(monthLabel);
+							registration.remove(monthField);
+							registration.remove(dayLabel);
+							registration.add(dayField);
+
 							count[0]++; // 3
 						}
-						case 5: {
-							registrationField[2] = keyText.getText(); // lName
-							keyInput.setText("Please Enter Supervisor:");
-							hintText.setText("");
-							count[0]++; // 3
-						}
+						break;
 						case 6: {
-							registrationField[2] = keyText.getText(); // lName
-							keyInput.setText("Please Enter Username:");
+							registrationField[6] = keyText.getText(); // position
+							keyInput.setText("Please Enter Supervisor:");
 							hintText.setText("");
 							count[0]++; // 3
 						}
 						break;
 						case 7: {
-							registrationField[3] = keyText.getText(); // username
+							registrationField[7] = keyText.getText(); // supervisor
+							keyInput.setText("Please Enter Usernamee:");
+							hintText.setText("");
+							count[0]++; // 3
+						}
+						break;
+						case 8: {
+							registrationField[8] = keyText.getText(); // username
 							keyInput.setText("Please Enter Password:");
 							hintText.setText("");
 							count[0]++; // 4
 						}
 						break;
-						case 8: {
-							registrationField[4] = keyText.getText(); // password
+						case 9: {
+							registrationField[9] = keyText.getText(); // password
 							keyInput.setText("Verify Password:");
 							hintText.setText("");
 							count[0]++; // 5
 						}
 						break;
-						case 9: {
+						case 10: {
 							// If passwords match, execute final user creation
-							if(registrationField[4].equals(keyText.getText())){
+							if(registrationField[9].equals(keyText.getText())){ // password authentication
 								//Register new Staff
-
+								System.out.println("Registering new Staff!");
 								//Close window
 								setVisible(false);
 								setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -256,7 +405,7 @@ public class UserInterface extends JFrame implements ActionListener {
 							else{
 								keyInput.setText("Please Enter Password:");
 								hintText.setText("Passwords did not match. Please try again.");
-								count[0] = 7;
+								count[0] = 8;
 							}
 						}
 					}
