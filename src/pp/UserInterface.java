@@ -57,7 +57,7 @@ public class UserInterface extends JFrame implements ActionListener {
 		InputAuthenticator ia = new InputAuthenticator();
 		//registrationField (When !staffRegistration): secretKey, fName, lName, username, password
 		//registrationField (When staffRegistration): fName, lName, position, branch, sex, DoB, username, password
-		final String[] registrationField = new String[9];
+		final String[] registrationField = new String[10];
 		final int[] count = {0};
 		AtomicReference<String> input = new AtomicReference<>("");
 		int intInput = -1;
@@ -340,28 +340,28 @@ public class UserInterface extends JFrame implements ActionListener {
 							registration.add(submit);
 							input.set("");
 
-							if(ia.lengthAuthenticator(input.get(), 1) && ia.lengthAuthenticator(monthField.getText(), 1) && ia.lengthAuthenticator(dayField.getText(), 1)){
+							count[0]++; // 3
+						}
+						break;
+						case 5: {
+							if(ia.lengthAuthenticator(keyText.getText(), 1) && ia.lengthAuthenticator(monthField.getText(), 1) && ia.lengthAuthenticator(dayField.getText(), 1)) {
+								registrationField[5] = keyText.getText(); // DoB //TODO parse data at this input
+								keyInput.setText("Please Enter Salary:");
+								hintText.setText("");
+
+								keyText.setColumns(20);
+
+								registration.remove(yearLabel);
+								registration.remove(monthLabel);
+								registration.remove(monthField);
+								registration.remove(dayLabel);
+								registration.remove(dayField);
+
 								count[0]++; // 3
 							}
 							else{
 								hintText.setText("Date entered must be valid.");
 							}
-						}
-						break;
-						case 5: {
-							registrationField[5] = keyText.getText(); // DoB
-							keyInput.setText("Please Enter Salary:");
-							hintText.setText("");
-
-							keyText.setColumns(20);
-
-							registration.remove(yearLabel);
-							registration.remove(monthLabel);
-							registration.remove(monthField);
-							registration.remove(dayLabel);
-							registration.add(dayField);
-
-							count[0]++; // 3
 						}
 						break;
 						case 6: {
@@ -409,10 +409,17 @@ public class UserInterface extends JFrame implements ActionListener {
 							}
 						}
 					}
-					keyText.setText("");
+					if(count[0] != 5) {
+						keyText.setText("");
+					}
 				}
 				else{
-					hintText.setText("Input must be between 1 & 32 characters");
+					if(count[0] != 5) {
+						hintText.setText("Input must be between 1 & 32 characters");
+					}
+					else{
+						hintText.setText("Date entered must be valid.");
+					}
 				}
 			});
 
