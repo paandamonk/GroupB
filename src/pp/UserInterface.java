@@ -1,6 +1,7 @@
 package pp;
 
 import pp.Backend.InputAuthenticator;
+import pp.Frontend.MultibleSelections;
 import sql.Initialize;
 
 import javax.swing.JFrame;
@@ -11,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
+
+import static javax.swing.SpringLayout.WEST;
+import static javax.swing.SwingConstants.CENTER;
 
 public class UserInterface extends JFrame implements ActionListener {
 
@@ -38,6 +42,9 @@ public class UserInterface extends JFrame implements ActionListener {
 	private JPanel manPanel;
 	private JLabel man;
 	private JFrame second;
+	private String staffItemClicked = "";
+
+	public UserInterface() {}
 
 	public UserInterface(boolean staffRegistration) {
 		setTitle("Proper Properties");
@@ -60,7 +67,6 @@ public class UserInterface extends JFrame implements ActionListener {
 		final String[] registrationField = new String[10];
 		final int[] count = {0};
 		AtomicReference<String> input = new AtomicReference<>("");
-		int intInput = -1;
 
 		JPanel display = new JPanel(new BorderLayout());
 		JPanel registration = new JPanel();
@@ -68,7 +74,7 @@ public class UserInterface extends JFrame implements ActionListener {
 
 		JLabel welcomeText = new JLabel("Welcome Master User");
 		welcomeText.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		welcomeText.setHorizontalAlignment(JLabel.CENTER);
+		welcomeText.setHorizontalAlignment(CENTER);
 
 		JLabel keyInput = new JLabel("Please Enter Secret Key:");
 		keyInput.setFont(new Font("Times New Roman", Font.PLAIN, 15));
@@ -97,7 +103,7 @@ public class UserInterface extends JFrame implements ActionListener {
 
 		JLabel hintText = new JLabel("");
 		hintText.setFont(new Font("Times New Roman", Font.PLAIN, 15));
-		hintText.setHorizontalAlignment(JLabel.CENTER);
+		hintText.setHorizontalAlignment(CENTER);
 
 		JRadioButton b1 = new JRadioButton();
 		JRadioButton b2 = new JRadioButton();
@@ -202,6 +208,23 @@ public class UserInterface extends JFrame implements ActionListener {
 		}
 		//staffRegistration must be true
 		else{
+
+			MultibleSelections ms = new MultibleSelections();
+			//ms.StaffSelections();
+
+			JScrollPane staffPane;
+			JList staffList = ms.StaffSelections();
+			staffList.addListSelectionListener(e -> {
+				String selection = "";
+				Object obj[] = staffList.getSelectedValues();
+				for(int i = 0; i < obj.length; i++) {
+					selection += (String) obj[i];
+				}
+				keyText.setText(selection);
+			});
+
+			staffPane = new JScrollPane(staffList);
+
 			System.out.println("Registering Staff");
 			add(display);
 			add(registration);
@@ -209,11 +232,20 @@ public class UserInterface extends JFrame implements ActionListener {
 
 			display.add(welcomeText);
 				welcomeText.setText("Welcome Manager! Enter new staff information below:");
+
 			registration.add(keyInput);
 			keyInput.setText("Please Enter First Name:");
 			registration.add(keyText);
 			registration.add(submit);
 			hint.add(hintText, BorderLayout.NORTH);
+
+
+			add(staffPane);
+			staffPane.setVisible(false);
+
+			count[0] = 6;
+
+
 
 			submit.addActionListener(e -> {
 				if(ia.lengthAuthenticator(keyText.getText(), 1) || ia.lengthAuthenticator(input.get(), 1)) { //1 - 32 character length parameter.
@@ -222,7 +254,8 @@ public class UserInterface extends JFrame implements ActionListener {
 							registrationField[0] = keyText.getText(); // fName
 							keyInput.setText("Please Enter Last Name:");
 							hintText.setText("");
-							count[0]++; // 2
+
+							count[0]++; // 1
 						}
 						break;
 						case 1: {
@@ -366,16 +399,41 @@ public class UserInterface extends JFrame implements ActionListener {
 						break;
 						case 6: {
 							registrationField[6] = keyText.getText(); // DoB
-							keyInput.setText("Please Enter Supervisor:");
+							keyInput.setText("Please Select Supervisor:");
 							hintText.setText("");
+
+							registration.remove(keyText);
+							registration.remove(submit);
+							remove(registration);
+							remove(hint);
+
+							add(staffPane);
+							staffPane.setVisible(true);
+							setSize(400,350);
+
+							add(registration);
+							registration.add(submit);
+
+
+							add(hint);
+							hintText.setText("TEST");
+
 							count[0]++; // 3
 						}
 						break;
 						case 7: {
-							registrationField[7] = keyText.getText(); // supervisor
-							keyInput.setText("Please Enter Usernamee:");
-							hintText.setText("");
-							count[0]++; // 3
+								System.out.println(keyText.getText() + "AAAAAAA"); //TODO retrieve staff id from selection
+								registrationField[7] = keyText.getText(); // supervisor
+								keyInput.setText("Please Enter Usernamee:");
+								hintText.setText("");
+								staffPane.setVisible(false);
+
+								registration.remove(submit);
+								registration.add(keyText);
+								keyText.setColumns(10);
+								registration.add(submit);
+
+								count[0]++; // 3
 						}
 						break;
 						case 8: {
@@ -422,8 +480,11 @@ public class UserInterface extends JFrame implements ActionListener {
 					}
 				}
 			});
-
 		}
+	}
+
+	public void setItemClicked(String itemClicked){
+		staffItemClicked = itemClicked;
 	}
 
 	public void actionPerformed(ActionEvent e) {
