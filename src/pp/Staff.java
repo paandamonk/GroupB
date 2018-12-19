@@ -282,4 +282,14 @@ public class Staff extends Person {
 	public String getBranch() {
 		return this.Branch;
 	}
+	
+	public String toString(){
+		return (getFname() + " " +getLname());
+		
+	}
+	
+	
+	
+	
+	
 }
