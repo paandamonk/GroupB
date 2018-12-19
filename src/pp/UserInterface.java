@@ -345,7 +345,7 @@ public class UserInterface extends JFrame implements ActionListener {
 						break;
 						case 5: {
 							if(ia.lengthAuthenticator(keyText.getText(), 1) && ia.lengthAuthenticator(monthField.getText(), 1) && ia.lengthAuthenticator(dayField.getText(), 1)) {
-								registrationField[5] = keyText.getText(); // DoB //TODO parse data at this input
+								registrationField[5] = keyText.getText() + monthField.getText() + dayField.getText(); // DoB //TODO parse data at this input
 								keyInput.setText("Please Enter Salary:");
 								hintText.setText("");
 
@@ -365,7 +365,7 @@ public class UserInterface extends JFrame implements ActionListener {
 						}
 						break;
 						case 6: {
-							registrationField[6] = keyText.getText(); // position
+							registrationField[6] = keyText.getText(); // DoB
 							keyInput.setText("Please Enter Supervisor:");
 							hintText.setText("");
 							count[0]++; // 3
@@ -405,7 +405,7 @@ public class UserInterface extends JFrame implements ActionListener {
 							else{
 								keyInput.setText("Please Enter Password:");
 								hintText.setText("Passwords did not match. Please try again.");
-								count[0] = 8;
+								count[0] = 9;
 							}
 						}
 					}

@@ -20,8 +20,8 @@ public class Database {
             System.exit(0);
         }
 
-        //Input staffInput = new Input("STAFF");
-        //staffInput.addStaffInfo("'Lupin'", "'Three'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 1);
+        Input staffInput = new Input("STAFF");
+        staffInput.addStaffInfo("'Lupin'", "'Three'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 1);
 
         //Input businessOwnerInput = new Input("BUSOWNERS");
         //businessOwnerInput.addBusinessOwnerInfo("'Robin'", "'Hood'",
@@ -32,10 +32,10 @@ public class Database {
         // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
 
         EditData ed = new EditData();
-        ed.deleteInfo("STAFF", "STAFFNUM", 1);
+       // ed.deleteInfo("STAFF", "STAFFNUM", 1);
 
         //ed.updateInfo("STAFF", "FNAME", 0, "Seymour", "STAFFNUM",1);
-        //ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
+       // ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
 
         //Input clientInput = new Input("CLIENTS");
         //clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'",
