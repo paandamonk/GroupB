@@ -17,15 +17,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
 import javax.swing.*;
+
 
 
 public class Menu extends JFrame implements ActionListener {
@@ -90,7 +88,7 @@ public class Menu extends JFrame implements ActionListener {
 	PropertyOwner propertyOwner = new PropertyOwner();
 	BusinessOwner businessOwner = new BusinessOwner();
 	//ArrayList<Client> clientList = db.getClientByID(0);
-	//ArrayList<Staff> staffList = s1.getStaffByID(0);
+	ArrayList<Staff> staffList = s1.getStaffByID(0);
 	//ArrayList<PropertyOwner> propOwnerList = propertyOwner.getPropOwnersByID(0);
 	//ArrayList<BusinessOwner> busOwnerList = businessOwner.getBusinessOwnersByID(0);
 	//ArrayList<PropView> propViewList = db.getPropView();
@@ -310,13 +308,12 @@ public class Menu extends JFrame implements ActionListener {
 		}
 
 		//this if-statement will be copied and pasted into all of the choices. this was just for testing purposes.
-		if (src == b) {
-			/*	if(clientList.size()> 0){
-				String test = clientList.get(0).getFname() + " " + clientList.get(0).getLname();
-				String test2 = clientList.get(1).getFname() + " " + clientList.get(1).getLname();
+		
+				/*//if(clientList.size()> 0){
+				//String test = clientList.get(0).getFname() + " " + clientList.get(0).getLname();
+				//String test2 = clientList.get(1).getFname() + " " + clientList.get(1).getLname();
 				list.addElement(test);
 				list.addElement(test2);
-
 				l = new JList(list);
 				Panel3.removeAll();
 				scroll = new JScrollPane();
@@ -325,7 +322,7 @@ public class Menu extends JFrame implements ActionListener {
 				Panel3.validate();
 				Panel3.repaint();
 				}
-			}
+			
 			if (choices.getSelectedItem().equals(null)) {
 				firstName.setVisible(false);
 				lastName.setVisible(false);
@@ -339,6 +336,7 @@ public class Menu extends JFrame implements ActionListener {
 				lowtoHigh.setVisible(false);
 				hightoLow.setVisible(false);
 			}*/
+		
 
 			//needs work
 			if (choices.getSelectedItem().equals("View Managers")) {
@@ -347,17 +345,32 @@ public class Menu extends JFrame implements ActionListener {
 				firstName.setVisible(true);
 				lastName.setVisible(true);
 				staffId.setVisible(true);
+				propOwnerId.setVisible(false);
+				 propId.setVisible(false);
+			    renterId.setVisible(false);
+				 phoneNum.setVisible(false);
+				 staffMemAdded.setVisible(false);
+				 city.setVisible(false);
+				 lowtoHigh.setVisible(false);
+				 hightoLow.setVisible(false);
+				
 
-				list = new DefaultListModel();
-				ArrayList<Staff> managers = new ArrayList();
-				/*for(int i = 0; i < staffList.size(); i++){
+				
+				
+				}
+			
+			ArrayList<Staff> managers = new ArrayList();
+			
+			if(staffList.size()> 0){
+				for(int i = 0; i < staffList.size(); i++){
 					if(staffList.get(i).getPosition() == 2){
 						managers.add(staffList.get(i));
-						list.addElement(staffList.get(i));
+						list.addElement(staffList.get(i).toString());
 					}
-				}*/
+				}
 
 				if(noSelect.isSelected()) {
+					
 					l = new JList(list);
 					Panel3.removeAll();
 					scroll = new JScrollPane();
@@ -366,6 +379,8 @@ public class Menu extends JFrame implements ActionListener {
 					Panel3.validate();
 					Panel3.repaint();
 				}
+					
+				
 				if(firstName.isSelected()) {
 					list = new DefaultListModel();
 					Collections.sort(managers, ((m1,m2) -> m1.getFname().compareTo(m2.getFname())));
@@ -418,6 +433,14 @@ public class Menu extends JFrame implements ActionListener {
 				firstName.setVisible(true);
 				lastName.setVisible(true);
 				staffId.setVisible(true);
+				propOwnerId.setVisible(false);
+				 propId.setVisible(false);
+			    renterId.setVisible(false);
+				 phoneNum.setVisible(false);
+				 staffMemAdded.setVisible(false);
+				 city.setVisible(false);
+				 lowtoHigh.setVisible(false);
+				 hightoLow.setVisible(false);
 
 				list = new DefaultListModel();
 				ArrayList<Staff> supervisors = new ArrayList();
@@ -488,6 +511,14 @@ public class Menu extends JFrame implements ActionListener {
 				firstName.setVisible(true);
 				lastName.setVisible(true);
 				staffId.setVisible(true);
+				propOwnerId.setVisible(false);
+				 propId.setVisible(false);
+			    renterId.setVisible(false);
+				 phoneNum.setVisible(false);
+				 staffMemAdded.setVisible(false);
+				 city.setVisible(false);
+				 lowtoHigh.setVisible(false);
+				 hightoLow.setVisible(false);
 
 				list = new DefaultListModel();
 				ArrayList<Staff> agents = new ArrayList();
@@ -560,6 +591,12 @@ public class Menu extends JFrame implements ActionListener {
 				staffId.setVisible(true);
 				lowtoHigh.setVisible(true);
 				hightoLow.setVisible(true);
+				propOwnerId.setVisible(false);
+				 propId.setVisible(false);
+			    renterId.setVisible(false);
+				 phoneNum.setVisible(false);
+				 staffMemAdded.setVisible(false);
+				 city.setVisible(false);
 
 				list = new DefaultListModel();
 				ArrayList<Staff> staff = new ArrayList();
@@ -606,6 +643,11 @@ public class Menu extends JFrame implements ActionListener {
 				propOwnerId.setVisible(true);
 				propId.setVisible(true);
 				phoneNum.setVisible(true);
+				staffId.setVisible(false);
+				lowtoHigh.setVisible(false);
+				hightoLow.setVisible(false);
+				staffMemAdded.setVisible(false);
+				 city.setVisible(false);
 
 				list = new DefaultListModel();
 				ArrayList<Client> clients = new ArrayList();
@@ -652,6 +694,12 @@ public class Menu extends JFrame implements ActionListener {
 				propId.setVisible(true);
 				phoneNum.setVisible(true);
 				staffMemAdded.setVisible(true);
+				lowtoHigh.setVisible(false);
+				hightoLow.setVisible(false);
+				city.setVisible(false);
+				renterId.setVisible(false);
+				staffId.setVisible(false);
+
 
 				if(noSelect.isSelected()) {
 
@@ -674,6 +722,13 @@ public class Menu extends JFrame implements ActionListener {
 				propId.setVisible(true);
 				phoneNum.setVisible(true);
 				city.setVisible(true);
+				staffMemAdded.setVisible(false);
+				lowtoHigh.setVisible(false);
+				hightoLow.setVisible(false);
+				renterId.setVisible(false);
+				staffId.setVisible(false);
+
+
 
 				if(noSelect.isSelected()) {
 
@@ -697,6 +752,12 @@ public class Menu extends JFrame implements ActionListener {
 				phoneNum.setVisible(true);
 				city.setVisible(true);
 				staffMemAdded.setVisible(true);
+				staffId.setVisible(false);
+				lowtoHigh.setVisible(false);
+				hightoLow.setVisible(false);
+				renterId.setVisible(false);
+
+
 
 				if(noSelect.isSelected()) {
 
@@ -711,4 +772,5 @@ public class Menu extends JFrame implements ActionListener {
 			}
 		}
     }
-}
+
+
