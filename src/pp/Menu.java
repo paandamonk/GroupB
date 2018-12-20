@@ -147,7 +147,7 @@ public class Menu extends JFrame implements ActionListener {
         search.addActionListener(this);
         b = new JButton("Search");
         b.addActionListener(this);
-        a = new JButton("Add Info");
+        a = new JButton("Edit Data");
         a.addActionListener(this);
         if (cl == 2) {
             label = new JLabel("Welcome Manager!");

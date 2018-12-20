@@ -51,8 +51,9 @@ public class Add implements ActionListener{
 	private JPanel panel;
 	private JPanel panel_1;
 	private JButton btnSubmit;
+	private JRadioButton b1, b2, b3;
 
-	/**
+    /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -105,11 +106,11 @@ public class Add implements ActionListener{
 
         panel.add(comboBox);
 
-        JRadioButton b1 = new JRadioButton();
+        b1 = new JRadioButton();
             b1.setText("Add");
-        JRadioButton b2 = new JRadioButton();
+        b2 = new JRadioButton();
             b2.setText("Update");
-        JRadioButton b3 = new JRadioButton();
+        b3 = new JRadioButton();
             b3.setText("Delete");
         panel.add(b1);
         b1.setSelected(true);
@@ -470,6 +471,9 @@ public class Add implements ActionListener{
 		if(comboBox.getSelectedItem().equals("Staff")) {
 			panel_1.removeAll();
 
+			b1.setSelected(false);
+            b1.setVisible(false);
+
 			textField.setVisible(true);
 			textField_1.setVisible(true);
 			textField_2.setVisible(true);
@@ -549,6 +553,9 @@ public class Add implements ActionListener{
 			textField_6.setText(null);
 
 		}
+		else{
+            b1.setVisible(true);
+        }
 		//under construction
 		if(comboBox.getSelectedItem().equals("Property Owners")) {
 			panel_1.removeAll();
