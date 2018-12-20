@@ -143,6 +143,51 @@ public class Staff extends Person {
         }
         return staffList;
     }
+	public ArrayList<Staff> getStaffByPosition(int staffPos){
+		Connection c;
+		Statement stmt;
+
+		ArrayList<Staff> staffList = new ArrayList();
+		int staffID, position, supervisorId;
+		String Fname, Lname, branch, sex, DoB, username, password;
+		double salary;
+
+		try{
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:database.db");
+			c.setAutoCommit(false);
+			System.out.println("Opened database successfully (Staff)");
+
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM STAFF;");
+			while(rs.next()){
+				staffID = rs.getInt("STAFFNUM");
+				Fname = rs.getString("FNAME");
+				Lname = rs.getString("LNAME");
+				position = rs.getInt("POSITION");
+				branch = rs.getString("BRANCH");
+				sex = rs.getString("SEX");
+				DoB = rs.getString("DOB");
+				salary = rs.getDouble("SALARY");
+				username = rs.getString("USERNAME");
+				password = rs.getString("PASSWORD");
+				supervisorId = rs.getInt("SUPERVISOR");
+
+				//Return staff of given ID
+				if(position == staffPos) {
+					Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password, supervisorId);
+					staffList.add(staff);
+				}
+			}
+			stmt.close();
+			c.commit();
+			c.close();
+		}catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
+		}
+		return staffList;
+	}
 
 	/**
 	 * @return the position
@@ -238,6 +283,22 @@ public class Staff extends Person {
 	}
 
 	/**
+	 * @param password the Password to set
+	 */
+	public String encryptPassword(String password) {
+		try {
+			File file = new File("11235813.txt");
+			Scanner input = new Scanner(file);
+			String secretKey = input.nextLine();
+			password = encryption.encrypt(password, secretKey); //password, secret key
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		return password;
+	}
+
+	/**
 	 * @return the salary
 	 */
 	public double getSalary() {
@@ -282,14 +343,9 @@ public class Staff extends Person {
 	public String getBranch() {
 		return this.Branch;
 	}
-	
 	public String toString(){
-		return (getFname() + " " +getLname());
-		
+		return(getFname() + " " + getLname() + " (ID: "  + getStaffNum() + ")");
 	}
-	
-	
-	
 	
 	
 }

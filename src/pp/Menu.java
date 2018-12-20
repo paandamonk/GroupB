@@ -37,7 +37,7 @@ public class Menu extends JFrame implements ActionListener {
 	private JLabel label;
 	private JLabel j;
 	private String[] manChoices = {"View Managers", "View Supervisors", "View Agents", "View Employees Salaries",
-			"View Clients", "View Property Owners", "View Properties", "View Property Viewings" };
+			"View Clients", "View Property Owners", "View Properties", "View Property Viewings", "View Leases" };
 	private String[] supChoices = { "", "View Supervisors", "View Agents", "View Renters", "View Property Owners",
 			"View Properties", "View Property Viewings" };
 	private String[] agentChoices = { "", "View Agents", "View Renters", "View Property Owners", "View Properties",
@@ -168,17 +168,32 @@ public class Menu extends JFrame implements ActionListener {
 		choices.setEditable(false);
 		filters = new ButtonGroup();
 		noSelect = new JRadioButton();
+		noSelect.addActionListener(this);
 		firstName = new JRadioButton();
+		firstName.addActionListener(this);
 		lastName = new JRadioButton();
+		lastName.addActionListener(this);
 		staffId = new JRadioButton();
+		staffId.addActionListener(this);
 		propOwnerId = new JRadioButton();
+		propOwnerId.addActionListener(this);
 		propId = new JRadioButton();
+		propId.addActionListener(this);
 		phoneNum = new JRadioButton();
+		phoneNum.addActionListener(this);
 		staffMemAdded = new JRadioButton();
+		staffMemAdded.addActionListener(this);
 		renterId = new JRadioButton();
+		renterId.addActionListener(this);
 		city = new JRadioButton();
+		city.addActionListener(this);
+
 		lowtoHigh = new JRadioButton();
+		lowtoHigh.addActionListener(this);
+
 		hightoLow = new JRadioButton();
+		hightoLow.addActionListener(this);
+
 		filters.add(noSelect);
 		filters.add(firstName);
 		filters.add(lastName);
@@ -368,9 +383,14 @@ public class Menu extends JFrame implements ActionListener {
 						list.addElement(staffList.get(i).toString());
 					}
 				}
+			}
 
 				if(noSelect.isSelected()) {
-					
+					list = new DefaultListModel();
+
+					for(int i = 0; i < managers.size(); i++){
+						list.addElement(managers.get(i));
+					}
 					l = new JList(list);
 					Panel3.removeAll();
 					scroll = new JScrollPane();
@@ -424,7 +444,7 @@ public class Menu extends JFrame implements ActionListener {
 					Panel3.repaint();
 				}
 
-			}
+			
 
 			//needs work
 			if (choices.getSelectedItem().equals("View Supervisors")) {
