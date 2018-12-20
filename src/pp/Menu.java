@@ -38,6 +38,7 @@ public class Menu extends JFrame implements ActionListener {
 	private JPanel addPanel;
 	private JLabel label;
 	private JLabel j;
+	private int clearance;
 	private String[] manChoices = {"View Managers", "View Supervisors", "View Agents", "View Employees Salaries",
 			"View Clients", "View Property Owners", "View Properties", "View Property Viewings" };
 	private String[] supChoices = { "", "View Supervisors", "View Agents", "View Renters", "View Property Owners",
@@ -97,210 +98,175 @@ public class Menu extends JFrame implements ActionListener {
 	//ArrayList<Lease> leaseList = db.getLeaseByClientId(0);
 	DefaultListModel list = new DefaultListModel();
 
-	public Menu(int cl) {
-		if (cl == 2) {
-			setTitle("Manager Menu");
-			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			setLayout(new GridLayout(3, 0));
-			setSize(900, 700);
-			ManagerMenu();
-			add(Panel, BorderLayout.NORTH);
-			add(Panel2, BorderLayout.SOUTH);
-			add(Panel3, BorderLayout.SOUTH);
-			setVisible(true);
-		}
-		if (cl == 1) {
-			setTitle("Supervisor Menu");
-			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			setLayout(new GridLayout(3, 2));
-			setSize(4000, 3000);
-			//SupMenu();
-			add(Panel, BorderLayout.NORTH);
-			add(Panel2, BorderLayout.SOUTH);
-			add(Panel3, BorderLayout.SOUTH);
+    public Menu(int cl) {
+        if (cl == 2) {
+            setTitle("Manager Menu");
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setLayout(new GridLayout(3, 0));
+            setSize(900, 700);
+            ManagerMenu(cl);
+            add(Panel, BorderLayout.NORTH);
+            add(Panel2, BorderLayout.SOUTH);
+            add(Panel3, BorderLayout.SOUTH);
+            setVisible(true);
+        }
+        if (cl == 1) {
+            setTitle("Supervisor Menu");
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setLayout(new GridLayout(3, 0));
+            setSize(900, 700);
+            ManagerMenu(cl);
+            add(Panel, BorderLayout.NORTH);
+            add(Panel2, BorderLayout.SOUTH);
+            add(Panel3, BorderLayout.SOUTH);
 
-			setVisible(true);
-		}
-		if (cl == 0) {
-			setTitle("Agent Menu");
-			setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			setLayout(new GridLayout(3, 2));
-			setSize(4000, 3000);
-			//AgentMenu();
-			add(Panel, BorderLayout.NORTH);
-			add(Panel2, BorderLayout.SOUTH);
-			add(Panel3, BorderLayout.SOUTH);
+            setVisible(true);
+        }
+        if (cl == 0) {
+            setTitle("Agent Menu");
+            setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            setLayout(new GridLayout(3, 0));
+            setSize(900, 700);
+            ManagerMenu(cl);
+            add(Panel, BorderLayout.NORTH);
+            add(Panel2, BorderLayout.SOUTH);
+            add(Panel3, BorderLayout.SOUTH);
 
-			setVisible(true);
+            setVisible(true);
 
-		}
-	}
+        }
+    }
 
-	public void AddMenu(){
+    public void ManagerMenu(int cl) {
+        clearance = cl;
+        Panel = new JPanel();
+        Panel2 = new JPanel();
+        Panel3 = new JPanel();
+        s = new JLabel("Search:");
+        search = new JTextField(20);
+        search.addActionListener(this);
+        b = new JButton("Search");
+        b.addActionListener(this);
+        a = new JButton("Add Info");
+        a.addActionListener(this);
+        if (cl == 2) {
+            label = new JLabel("Welcome Manager!");
+            choices = new JComboBox<Object>(manChoices);
+            choices.addActionListener(this);
+            choices.setEditable(false);
 
-		addPanel = new JPanel();
-		setLayout(new GridLayout(2,0));
-		j = new JLabel("Add information here!");
-		add = new JComboBox<Object>(addChoices);
-		add.setEditable(false);
-		add.addActionListener(this);
-		addPanel.add(j);
-		addPanel.add(add);
+        }
+        if (cl == 1) {
+            label = new JLabel("Welcome Supervisor!");
+            choices = new JComboBox<Object>(supChoices);
+            choices.addActionListener(this);
+            choices.setEditable(false);
+        }
+        if (cl == 0) {
+            label = new JLabel("Welcome Agent!");
+            choices = new JComboBox<Object>(agentChoices);
+            choices.addActionListener(this);
+            choices.setEditable(false);
+        }
 
-	}
+        filters = new ButtonGroup();
+        noSelect = new JRadioButton();
+        firstName = new JRadioButton();
+        lastName = new JRadioButton();
+        staffId = new JRadioButton();
+        propOwnerId = new JRadioButton();
+        propId = new JRadioButton();
+        phoneNum = new JRadioButton();
+        staffMemAdded = new JRadioButton();
+        renterId = new JRadioButton();
+        city = new JRadioButton();
+        lowtoHigh = new JRadioButton();
+        hightoLow = new JRadioButton();
+        filters.add(noSelect);
+        filters.add(firstName);
+        filters.add(lastName);
+        filters.add(staffId);
+        filters.add(propOwnerId);
+        filters.add(propId);
+        filters.add(phoneNum);
+        filters.add(staffMemAdded);
+        filters.add(renterId);
+        filters.add(city);
+        filters.add(lowtoHigh);
+        filters.add(hightoLow);
 
-	public void ManagerMenu() {
-		Panel = new JPanel();
-		Panel2 = new JPanel();
-		Panel3 = new JPanel();
-		label = new JLabel("Welcome Manager!");
-		s = new JLabel("Search:");
-		search = new JTextField(20);
-		b = new JButton("Search");
-		b.addActionListener(this);
-		a = new JButton("Add Info");
-		a.addActionListener(this);
-		JButton register = new JButton("Register New Staff");
-		register.addActionListener(e -> {
-			UserInterface userInterface = new UserInterface(true);
-		});
-		//a.setPreferredSize(new Dimension(50, 25));
-		choices = new JComboBox<Object>(manChoices);
-		choices.addActionListener(this);
-		choices.setEditable(false);
-		filters = new ButtonGroup();
-		noSelect = new JRadioButton();
-		firstName = new JRadioButton();
-		lastName = new JRadioButton();
-		staffId = new JRadioButton();
-		propOwnerId = new JRadioButton();
-		propId = new JRadioButton();
-		phoneNum = new JRadioButton();
-		staffMemAdded = new JRadioButton();
-		renterId = new JRadioButton();
-		city = new JRadioButton();
-		lowtoHigh = new JRadioButton();
-		hightoLow = new JRadioButton();
-		filters.add(noSelect);
-		filters.add(firstName);
-		filters.add(lastName);
-		filters.add(staffId);
-		filters.add(propOwnerId);
-		filters.add(propId);
-		filters.add(phoneNum);
-		filters.add(staffMemAdded);
-		filters.add(renterId);
-		filters.add(city);
-		filters.add(lowtoHigh);
-		filters.add(hightoLow);
+        noSelect.setText("(No Select)");
+        firstName.setText("First Name");
+        lastName.setText("Last Name");
+        staffId.setText("Id Number");
+        propOwnerId.setText("Property Owner Id");
+        propId.setText("Property Id");
+        renterId.setText("Renter Id");
+        phoneNum.setText("Phone Number");
+        staffMemAdded.setText("Staff Member Added");
+        city.setText("City");
+        lowtoHigh.setText("Low to High");
+        hightoLow.setText("High to Low");
 
-		noSelect.setText("(No Select)");
-		firstName.setText("First Name");
-		lastName.setText("Last Name");
-		staffId.setText("Id Number");
-		propOwnerId.setText("Property Owner Id");
-		propId.setText("Property Id");
-		renterId.setText("Renter Id");
-		phoneNum.setText("Phone Number");
-		staffMemAdded.setText("Staff Member Added");
-		city.setText("City");
-		lowtoHigh.setText("Low to High");
-		hightoLow.setText("High to Low");
+        noSelect.setVisible(true);
+        firstName.setVisible(false);
+        lastName.setVisible(false);
+        staffId.setVisible(false);
+        propOwnerId.setVisible(false);
+        propId.setVisible(false);
+        renterId.setVisible(false);
+        phoneNum.setVisible(false);
+        staffMemAdded.setVisible(false);
+        city.setVisible(false);
+        lowtoHigh.setVisible(false);
+        hightoLow.setVisible(false);
 
-		noSelect.setVisible(true);
-		firstName.setVisible(false);
-		lastName.setVisible(false);
-		staffId.setVisible(false);
-		propOwnerId.setVisible(false);
-		propId.setVisible(false);
-		renterId.setVisible(false);
-		phoneNum.setVisible(false);
-		staffMemAdded.setVisible(false);
-		city.setVisible(false);
-		lowtoHigh.setVisible(false);
-		hightoLow.setVisible(false);
+        Panel.add(label);
+        Panel.add(choices);
+        Panel.add(s);
+        Panel.add(search);
+        Panel.add(b);
+        Panel.add(a);
+        if (cl == 2) {
+            JButton register = new JButton("Register New Staff");
+            register.addActionListener(e -> {
+                UserInterface userInterface = new UserInterface(true);
+            });
+            Panel.add(register);
+        }
+        Panel2.add(noSelect);
+        Panel2.add(firstName);
+        Panel2.add(lastName);
+        Panel2.add(staffId);
+        Panel2.add(propOwnerId);
+        Panel2.add(propId);
+        Panel2.add(phoneNum);
+        Panel2.add(renterId);
+        Panel2.add(city);
+        Panel2.add(lowtoHigh);
+        Panel2.add(hightoLow);
+        l = new JList();
+        l.setPrototypeCellValue("XXXXXXXXXXXXXXXXXXXX");
+        l.setPreferredSize(new Dimension(200, 200));
+        l.setVisibleRowCount(3);
+        l.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        l.setLayoutOrientation(JList.VERTICAL);
+        scroll = new JScrollPane();
+        scroll.setViewportView(l);
+        Panel3.add(scroll);
+        Panel3.validate();
+        Panel3.repaint();
+        choices.setSelectedIndex(0);
+        noSelect.setSelected(true);
 
-		Panel.add(label);
-		Panel.add(choices);
-		Panel.add(s);
-		Panel.add(search);
-		Panel.add(b);
-		Panel.add(a);
-		Panel.add(register);
-		Panel2.add(noSelect);
-		Panel2.add(firstName);
-		Panel2.add(lastName);
-		Panel2.add(staffId);
-		Panel2.add(propOwnerId);
-		Panel2.add(propId);
-		Panel2.add(phoneNum);
-		Panel2.add(renterId);
-		Panel2.add(city);
-		Panel2.add(lowtoHigh);
-		Panel2.add(hightoLow);
-		//for(int i = 0; i < clientList.size(); i++) {
-
-		//}
-		l = new JList();
-
-		l.setPrototypeCellValue("XXXXXXXXXXXXXXXXXXXX");
-
-		l.setPreferredSize(new Dimension(200, 200));
-		l.setVisibleRowCount(3);
-
-		l.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		l.setLayoutOrientation(JList.VERTICAL);
-		scroll = new JScrollPane();
-		scroll.setViewportView(l);
-		Panel3.add(scroll);
-		Panel3.validate();
-		Panel3.repaint();
-//		AddMenu();
-//		add(addPanel);
-//		setVisible(true);
-		choices.setSelectedIndex(0);
-
-	}
-
-	public void SupMenu() {
-		Panel = new JPanel();
-		Panel2 = new JPanel();
-		label = new JLabel("Welcome Supervisor!");
-		s = new JLabel("Search:");
-		search = new JTextField(20);
-		b = new JButton("Search");
-		b.addActionListener(this);
-//		choices = new JComboBox<Object>(supChoices);
-		choices.addActionListener(this);
-		choices.setEditable(false);
-		filters = new ButtonGroup();
-
-	}
-
-	public void AgentMenu() {
-		Panel = new JPanel();
-		Panel2 = new JPanel();
-		label = new JLabel("Welcome Agent!");
-		s = new JLabel("Search:");
-		search = new JTextField(20);
-		b = new JButton("Search");
-		b.addActionListener(this);
-		choices = new JComboBox<Object>(agentChoices);
-		choices.addActionListener(this);
-		choices.setEditable(false);
-		Panel.add(label);
-		Panel.add(choices);
-		Panel.add(s);
-		Panel.add(search);
-		Panel.add(b);
-	}
+    }
 
 	//this action listener needs help
 	public void actionPerformed(ActionEvent e) {
 		Object src = e.getSource();
 		
 		if(src == a) {
-			Add window = new Add();
+			Add window = new Add(clearance);
 			setResizable(false);
 			window.frame.setVisible(true);
 
@@ -707,7 +673,6 @@ public class Menu extends JFrame implements ActionListener {
 				if(lastName.isSelected()) {
 
 				}
-
 			}
 		}
     }

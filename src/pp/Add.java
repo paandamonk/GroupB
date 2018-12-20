@@ -1,14 +1,8 @@
 package pp;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 
 import sql.Input;
@@ -25,7 +19,8 @@ public class Add implements ActionListener{
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private String[] addChoices = {"Add Client", "Add Property", "Add Staff", "Add Property Owners", "Add Business Owners", "Add Property Viewing", "Add Lease"};
+	private String[] addChoices = {"Clients", "Properties", "Staff", "Property Owners", "Business Owners", "Property Viewings", "Leases"};
+    private String[]addChoicesNotManager = {"Clients", "Properties", "Property Owners", "Business Owners", "Property Viewings", "Leases"};
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
@@ -57,15 +52,12 @@ public class Add implements ActionListener{
 	private JPanel panel_1;
 	private JButton btnSubmit;
 
-
-
-
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		Add window = new Add();
-		window.frame.setVisible(true);
+		//Add window = new Add(cl);
+		//window.frame.setVisible(true);
 //		EventQueue.invokeLater(new Runnable() {
 //			public void run() {
 //				try {
@@ -81,17 +73,17 @@ public class Add implements ActionListener{
 	/**
 	 * Create the application.
 	 */
-	public Add() {
-		initialize();
+	public Add(int cl) {
+		initialize(cl);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(int cl) {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 450, 500);
+		frame.setBounds(100, 100, 600, 500);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -101,12 +93,43 @@ public class Add implements ActionListener{
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
 
 		JLabel lblSelect = new JLabel("Select:");
-		panel.add(lblSelect);
-		comboBox = new JComboBox<Object>(addChoices);
+		//panel.add(lblSelect);
+        if(cl == 2) {
+            comboBox = new JComboBox<Object>(addChoices);
+        }
+        else{
+            comboBox = new JComboBox<Object>(addChoicesNotManager);
+        }
 		comboBox.addActionListener(this);
 		//comboBox.setSelectedIndex(0);
 
-		panel.add(comboBox);
+        panel.add(comboBox);
+
+        JRadioButton b1 = new JRadioButton();
+            b1.setText("Add");
+        JRadioButton b2 = new JRadioButton();
+            b2.setText("Update");
+        JRadioButton b3 = new JRadioButton();
+            b3.setText("Delete");
+        panel.add(b1);
+        b1.setSelected(true);
+        panel.add(b2);
+        panel.add(b3);
+        //add
+        b1.addActionListener(e2 -> {
+            b2.setSelected(false);
+            b3.setSelected(false);
+        });
+        //update
+        b2.addActionListener(e2 -> {
+            b1.setSelected(false);
+            b3.setSelected(false);
+        });
+        //delete
+        b3.addActionListener(e2 -> {
+            b1.setSelected(false);
+            b2.setSelected(false);
+        });
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, null, null));
@@ -225,7 +248,7 @@ public class Add implements ActionListener{
 		textField_15.setColumns(10);
 		panel_1.add(textField_15);
 
-		btnSubmit = new JButton("Submit");
+		btnSubmit = new JButton("<html><h1>Submit</h1></html>");
 		//btnSubmit.setPreferredSize(new Dimension(75, 75));
 		frame.getContentPane().add(btnSubmit, BorderLayout.CENTER);
 		btnSubmit.addActionListener(this);
@@ -273,7 +296,7 @@ public class Add implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 
 		//all done except for button
-		if(comboBox.getSelectedItem().equals("Add Client")) {
+		if(comboBox.getSelectedItem().equals("Clients")) {
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -367,7 +390,7 @@ public class Add implements ActionListener{
 
 		}
 		//Up to date except button listener
-		if(comboBox.getSelectedItem().equals("Add Property")) {
+		if(comboBox.getSelectedItem().equals("Properties")) {
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -444,7 +467,7 @@ public class Add implements ActionListener{
 			textField_6.setText(null);
 		}
 		//Up to date except button listener
-		if(comboBox.getSelectedItem().equals("Add Staff")) {
+		if(comboBox.getSelectedItem().equals("Staff")) {
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -527,7 +550,7 @@ public class Add implements ActionListener{
 
 		}
 		//under construction
-		if(comboBox.getSelectedItem().equals("Add Property Owners")) {
+		if(comboBox.getSelectedItem().equals("Property Owners")) {
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -604,7 +627,7 @@ public class Add implements ActionListener{
 			textField_6.setText(null);
 		}
 		//Up to date besides the idiot protection
-		if(comboBox.getSelectedItem().equals("Add Business Owners")) {
+		if(comboBox.getSelectedItem().equals("Business Owners")) {
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -695,7 +718,7 @@ public class Add implements ActionListener{
 
 		}
 		//idiot proofing
-		if(comboBox.getSelectedItem().equals("Add Property Viewing")) {
+		if(comboBox.getSelectedItem().equals("Property Viewing")) {
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -788,7 +811,7 @@ public class Add implements ActionListener{
 		}
 		//under construction
 
-		if(comboBox.getSelectedItem().equals("Add Lease")) {
+		if(comboBox.getSelectedItem().equals("Leases")) {
 			panel_1.removeAll();
 
 			textField.setVisible(true);
