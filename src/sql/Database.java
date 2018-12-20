@@ -21,7 +21,7 @@ public class Database {
         }
 
         Input staffInput = new Input("STAFF");
-        staffInput.addStaffInfo("'Lupin'", "'Three'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 1);
+        //staffInput.addStaffInfo("'Lupin'", "'Three'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 1);
 
         //Input businessOwnerInput = new Input("BUSOWNERS");
         //businessOwnerInput.addBusinessOwnerInfo("'Robin'", "'Hood'",
@@ -54,7 +54,7 @@ public class Database {
         Staff staff = new Staff();
         ArrayList<Staff> staffList = staff.getStaffByID(1);
         for(int i = 0; i < staffList.size(); i++){
-            System.out.println(staffList.get(i).getFname() + " " + staffList.get(i).getLname() + ", " + staffList.get(i).getUsername() + ", " + staffList.get(i).getPassword());
+            System.out.println(staffList.get(i).getFname() + " " + staffList.get(i).getLname() + ", " + staffList.get(i).getUsername() + ", " + staffList.get(i).getSalary());
         }
 
         //Staff staff = new Staff();

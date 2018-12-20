@@ -4,10 +4,12 @@ import javax.swing.JFrame;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 
@@ -25,7 +27,7 @@ public class Add implements ActionListener{
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private String[] addChoices = {"Add Client", "Add Property", "Add Staff", "Add Property Owners", "Add Business Owners", "Add Property Viewing", "Add Lease"};
+	private String[] addChoices = {"Add Client", "Add Property", "Add Property Owners", "Add Business Owners", "Add Property Viewing", "Add Lease"};
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
@@ -36,6 +38,10 @@ public class Add implements ActionListener{
 	private JTextField textField_13;
 	private JTextField textField_14;
 	private JTextField textField_15;
+	private JRadioButton add;
+	private JRadioButton update;
+	private JRadioButton delete;
+	private ButtonGroup select;
 	private JLabel l0;
 	private JLabel l1;
 	private JLabel l2;
@@ -56,6 +62,7 @@ public class Add implements ActionListener{
 	private JPanel panel;
 	private JPanel panel_1;
 	private JButton btnSubmit;
+	private int menuType;
 
 
 
@@ -84,11 +91,25 @@ public class Add implements ActionListener{
 	public Add() {
 		initialize();
 	}
+	public Add(int cl) {
+		this.menuType = cl;
+		initialize();
+	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		select = new ButtonGroup();
+		add = new JRadioButton();
+		update = new JRadioButton();
+		delete = new JRadioButton();
+		select.add(add);
+		select.add(update);
+		select.add(delete);
+		add.setText("Add");
+		update.setText("Update");
+		delete.setText("Delete");
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 450, 500);

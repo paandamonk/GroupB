@@ -59,6 +59,9 @@ public class BusinessOwner extends PropertyOwner{
 					BusinessOwnerList.add(businessOwner);
 				}
 			}
+			stmt.close();
+			c.commit();
+			c.close();
 		}catch ( Exception e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);

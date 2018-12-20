@@ -50,7 +50,7 @@ public class PropertyOwner extends Client{
 				city = rs.getString("CITY");
 				postcode = rs.getString("POSTCODE");
 				phone = rs.getString("PHONE");
-				OID = rs.getInt("OWNERNUM");
+				OID = rs.getInt("POWNERNUM");
 				MID = rs.getInt("STAFFNUM");
 
 				if(ownID == OID) {
@@ -63,6 +63,9 @@ public class PropertyOwner extends Client{
 					OList.add(o1);
 				}
 			}
+			stmt.close();
+			c.commit();
+			c.close();
 		}catch ( Exception e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);

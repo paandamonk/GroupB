@@ -27,7 +27,7 @@ public class Initialize {
                     " BRANCH       TEXT   NOT NULL, " +
                     " SEX          TEXT   NOT NULL, " +
                     " DOB          TEXT   NOT NULL, " +
-                    " SALARY       REAL   NOT NULL, " +
+                    " SALARY       TEXT   NOT NULL, " +
                     " USERNAME     TEXT   NOT NULL, " +
                     " PASSWORD     TEXT   NOT NULL, " +
                     " SUPERVISOR   TEXT   NOT NULL)";
@@ -52,7 +52,7 @@ public class Initialize {
                     " CITY         TEXT   NOT NULL, " +
                     " POSTCODE     TEXT   NOT NULL, " +
                     " PHONE        TEXT   NOT NULL, " +
-                    " STAFFNUM     TEXT   NOT NULL)";
+                    " STAFFNUM     INT    NOT NULL)";
             stmt.executeUpdate(sql);//2
 
             sql = "CREATE TABLE BUSOWNERS" +
@@ -65,7 +65,7 @@ public class Initialize {
                     " PHONE        TEXT   NOT NULL, " +
                     " BTYPE        TEXT   NOT NULL, " +
                     " BNAME        TEXT   NOT NULL, " +
-                    " STAFFNUM     TEXT   NOT NULL)";
+                    " STAFFNUM     INT    NOT NULL)";
             stmt.executeUpdate(sql);//2
 
             sql = "CREATE TABLE CLIENTS" +
@@ -75,7 +75,7 @@ public class Initialize {
                     " TYPE         TEXT   NOT NULL, " +
                     " PHONE        TEXT   NOT NULL, " +
                     " MAXRENT      REAL   NOT NULL, " +
-                    " STAFFNUM     TEXT   NOT NULL, " +
+                    " STAFFNUM     INT    NOT NULL, " +
                     " STREET       TEXT   NOT NULL, " +
                     " CITY         TEXT   NOT NULL, " +
                     " POSTCODE     TEXT   NOT NULL)";
@@ -136,6 +136,6 @@ public class Initialize {
 
         Input staffInput = new Input("STAFF");
         staffInput.addStaffInfo("'" + masterUserData[1] + "'", "'" + masterUserData[2] + "'", 2, "'MASTER'", "'MASTER'",
-                "'MASTER'", 0.00,"'" + masterUserData[3] + "'", password, -1);
+                "'MASTER'", "0.00","'" + masterUserData[3] + "'", password, -1);
     }
 }
