@@ -15,23 +15,24 @@ public class MultibleSelections extends JFrame implements ListSelectionListener 
     Staff staff = new Staff();
     ArrayList<Staff> staffArray = new ArrayList<>();
 
-    public JList<String> StaffSelections() {
+    public JList<String> StaffSelections(int clearance) {
         Container c = getContentPane();
         c.setLayout(new FlowLayout());
-        staffArray = staff.getStaffByID(0);
+        staffArray = staff.getStaffByPosition(clearance);
         String names[] = new String[staffArray.size()];
         //Fill the list with data
         for(int i = 0; i < names.length; i++){
             String position = Integer.toString(staffArray.get(i).getPosition());
             String fName = staffArray.get(i).getFname();
             String lName = staffArray.get(i).getLname();
+            int id = staffArray.get(i).getStaffNum();
             if(position.equals("2")){
                 position = "Manager";
             }
             else if(position.equals("1")){
                 position = "Supervisor";
             }
-            names[i] = "(" + position + ") " + fName + " " + lName;
+            names[i] = "(" + position + ") " + fName + " " + lName + " (ID: " + id + ")";
         }
 
         staffJList = new JList<>(names) ;                    // creating JList object; pass the array as parameter

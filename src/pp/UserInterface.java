@@ -3,6 +3,7 @@ package pp;
 import pp.Backend.InputAuthenticator;
 import pp.Frontend.MultibleSelections;
 import sql.Initialize;
+import sql.Input;
 
 import javax.swing.JFrame;
 import javax.swing.*;
@@ -13,7 +14,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
-import static javax.swing.SpringLayout.WEST;
 import static javax.swing.SwingConstants.CENTER;
 
 public class UserInterface extends JFrame implements ActionListener {
@@ -209,11 +209,12 @@ public class UserInterface extends JFrame implements ActionListener {
 		//staffRegistration must be true
 		else{
 
-			MultibleSelections ms = new MultibleSelections();
 			//ms.StaffSelections();
 
-			JScrollPane staffPane;
-			JList staffList = ms.StaffSelections();
+			AtomicReference<JScrollPane> staffPane = new AtomicReference<>();
+			//JList staffList = ms.StaffSelections();
+			final JList[] staffList = {new JList()};
+			/*staffList = ms.StaffSelections();
 			staffList.addListSelectionListener(e -> {
 				String selection = "";
 				Object obj[] = staffList.getSelectedValues();
@@ -221,15 +222,14 @@ public class UserInterface extends JFrame implements ActionListener {
 					selection += (String) obj[i];
 				}
 				keyText.setText(selection);
-			});
+			});*/
 
-			staffPane = new JScrollPane(staffList);
+			staffPane.set(new JScrollPane(staffList[0]));
 
 			System.out.println("Registering Staff");
 			add(display);
 			add(registration);
 			add(hint);
-
 			display.add(welcomeText);
 				welcomeText.setText("Welcome Manager! Enter new staff information below:");
 
@@ -240,12 +240,8 @@ public class UserInterface extends JFrame implements ActionListener {
 			hint.add(hintText, BorderLayout.NORTH);
 
 
-			add(staffPane);
-			staffPane.setVisible(false);
-
-			count[0] = 6;
-
-
+			add(staffPane.get());
+			staffPane.get().setVisible(false);
 
 			submit.addActionListener(e -> {
 				if(ia.lengthAuthenticator(keyText.getText(), 1) || ia.lengthAuthenticator(input.get(), 1)) { //1 - 32 character length parameter.
@@ -259,7 +255,7 @@ public class UserInterface extends JFrame implements ActionListener {
 						}
 						break;
 						case 1: {
-							registrationField[1] = input.get(); // sex
+							registrationField[1] = input.get(); // lName
 							keyInput.setText("Please Enter Position: ");
 							hintText.setText("");
 							registration.remove(keyText);
@@ -294,7 +290,7 @@ public class UserInterface extends JFrame implements ActionListener {
 						}
 						break;
 						case 2: {
-							registrationField[2] = keyText.getText(); // position
+							registrationField[2] = input.get(); // position
 							keyInput.setText("Please Enter Branch:");
 							hintText.setText("");
 
@@ -373,7 +369,7 @@ public class UserInterface extends JFrame implements ActionListener {
 							registration.add(submit);
 							input.set("");
 
-							count[0]++; // 3
+							count[0]++;
 						}
 						break;
 						case 5: {
@@ -390,7 +386,12 @@ public class UserInterface extends JFrame implements ActionListener {
 								registration.remove(dayLabel);
 								registration.remove(dayField);
 
-								count[0]++; // 3
+								if(Integer.parseInt(registrationField[2]) == 2){ //if position == 2 (Manager) skip the supervisor selection. Managers have no supervisors.
+									count[0] = count[0] + 2;
+								}
+								else{
+									count[0]++;
+								}
 							}
 							else{
 								hintText.setText("Date entered must be valid.");
@@ -407,26 +408,55 @@ public class UserInterface extends JFrame implements ActionListener {
 							remove(registration);
 							remove(hint);
 
-							add(staffPane);
-							staffPane.setVisible(true);
+							MultibleSelections ms = new MultibleSelections();
+							int selectedPosition = Integer.parseInt(registrationField[2]);
+
+							if(selectedPosition == 1){
+								staffList[0] = ms.StaffSelections(2); // If position is supervisor, only return managers
+							}
+							else if(selectedPosition == 0){
+								staffList[0] = ms.StaffSelections(1); // If position is agent, only return supervisors
+							}
+
+							staffList[0].addListSelectionListener(e2 -> {
+								String selection = "";
+								Object obj[] = staffList[0].getSelectedValues();
+								for(int i = 0; i < obj.length; i++) {
+									selection += (String) obj[i];
+								}
+								//get id of whoever was selected
+
+
+								//keyText.setText(selection);
+							});
+							staffPane.set(new JScrollPane(staffList[0]));
+
+							add(staffPane.get());
+							staffPane.get().setVisible(true);
 							setSize(400,350);
 
 							add(registration);
 							registration.add(submit);
 
-
 							add(hint);
-							hintText.setText("TEST");
+							hintText.setText("");
 
 							count[0]++; // 3
 						}
 						break;
 						case 7: {
-								System.out.println(keyText.getText() + "AAAAAAA"); //TODO retrieve staff id from selection
+							if(Integer.parseInt(registrationField[2]) == 2){ //if position == 2 (Manager) skip the supervisor selection. Managers have no supervisors.
+								registrationField[7] = "-1";
+							}
+							else{
+								registrationField[7] = keyText.getText(); // supervisor
+							}
+								System.out.println(registrationField[7] + "AAAAAAA");
+
 								registrationField[7] = keyText.getText(); // supervisor
 								keyInput.setText("Please Enter Usernamee:");
 								hintText.setText("");
-								staffPane.setVisible(false);
+								staffPane.get().setVisible(false);
 
 								registration.remove(submit);
 								registration.add(keyText);
@@ -455,6 +485,24 @@ public class UserInterface extends JFrame implements ActionListener {
 							if(registrationField[9].equals(keyText.getText())){ // password authentication
 								//Register new Staff
 								System.out.println("Registering new Staff!");
+
+								Staff staff = new Staff();
+								Input staffInput = new Input("STAFF");
+
+								String fName = "'" + registrationField[0] + "'";
+								String lName = "'" + registrationField[1] + "'";
+								int position = Integer.parseInt(registrationField[2]);
+								String branch = "'" + registrationField[3] + "'";
+								String sex = "'" + registrationField[4] + "'";
+
+
+								int supervisorID = Integer.parseInt(registrationField[7]);
+								String username = "'" + registrationField[8] + "'";
+								String password = "'" + staff.encryptPassword(registrationField[9]) + "'";
+
+								staffInput.addStaffInfo(fName, lName, position, branch, sex,
+										"'10/14/1997'", 23000.540,username,password,supervisorID);
+
 								//Close window
 								setVisible(false);
 								setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
