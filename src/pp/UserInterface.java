@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static javax.swing.SwingConstants.CENTER;
+import static javax.swing.SwingConstants.EAST;
+import static javax.swing.SwingConstants.NORTH;
 
 public class UserInterface extends JFrame implements ActionListener {
 
@@ -108,6 +110,7 @@ public class UserInterface extends JFrame implements ActionListener {
 		JRadioButton b1 = new JRadioButton();
 		JRadioButton b2 = new JRadioButton();
 		JRadioButton b3 = new JRadioButton();
+		JRadioButton backButton = new JRadioButton();
 
 		if(!database.exists() && !staffRegistration){
 			add(display);
@@ -121,11 +124,11 @@ public class UserInterface extends JFrame implements ActionListener {
 			hint.add(hintText, BorderLayout.NORTH);
 
 			//Set submit button to a local variable to avoid potential conflicts
-
 				submit.addActionListener(e -> {
 					if(ia.lengthAuthenticator(keyText.getText(), 1)) { //1 - 32 character length parameter.
 						switch (count[0]){
 							case 0: {
+								System.out.println(ia.nameAuthenticator(keyText.getText()));
 								registrationField[0] = keyText.getText(); // secretKey
 								keyInput.setText("Please Enter First Name:");
 								hintText.setText("");
@@ -133,31 +136,51 @@ public class UserInterface extends JFrame implements ActionListener {
 							}
 							break;
 							case 1: {
-								registrationField[1] = keyText.getText(); // fName
-								keyInput.setText("Please Enter Last Name:");
-								hintText.setText("");
-								count[0]++; // 2
+								if(ia.nameAuthenticator(keyText.getText())) {
+									registrationField[1] = keyText.getText(); // fName
+									keyInput.setText("Please Enter Last Name:");
+									hintText.setText("");
+									count[0]++; // 2
+								}
+								else{
+									hintText.setText("The first letter of a name must be uppercase, and the rest must be lowercase.");
+								}
 							}
 							break;
 							case 2: {
-								registrationField[2] = keyText.getText(); // lName
-								keyInput.setText("Please Enter Username:");
-								hintText.setText("");
-								count[0]++; // 3
+								if(ia.nameAuthenticator(keyText.getText())) {
+									registrationField[2] = keyText.getText(); // lName
+									keyInput.setText("Please Enter Username:");
+									hintText.setText("");
+									count[0]++; // 3
+								}
+								else{
+									hintText.setText("The first letter of a name must be uppercase, and the rest must be lowercase.");
+								}
 							}
 							break;
 							case 3: {
-								registrationField[3] = keyText.getText(); // username
-								keyInput.setText("Please Enter Password:");
-								hintText.setText("");
-								count[0]++; // 4
+								if(ia.lengthAuthenticator(keyText.getText(), 0)) {
+									registrationField[3] = keyText.getText(); // username
+									keyInput.setText("Please Enter Password:");
+									hintText.setText("");
+									count[0]++; // 4
+								}
+								else{
+									hintText.setText("Input must be between 1 & 16 characters");
+								}
 							}
 							break;
 							case 4: {
-								registrationField[4] = keyText.getText(); // password
-								keyInput.setText("Verify Password:");
-								hintText.setText("");
-								count[0]++; // 5
+								if(ia.lengthAuthenticator(keyText.getText(), 0)) {
+									registrationField[4] = keyText.getText(); // password
+									keyInput.setText("Verify Password:");
+									hintText.setText("");
+									count[0]++; // 5
+								}
+								else{
+									hintText.setText("Input must be between 1 & 16 characters");
+								}
 							}
 							break;
 							case 5: {
@@ -182,7 +205,14 @@ public class UserInterface extends JFrame implements ActionListener {
 						keyText.setText("");
 					}
 					else{
-						hintText.setText("Input must be between 1 & 32 characters");
+						// Usernames
+						if(count[0] == 3 || count[0] == 4) {
+							hintText.setText("Input must be between 1 & 16 characters");
+						}
+						// Everything else
+						else{
+							hintText.setText("Input must be between 1 & 32 characters");
+						}
 					}
 				});
 		}
@@ -208,26 +238,23 @@ public class UserInterface extends JFrame implements ActionListener {
 		}
 		//staffRegistration must be true
 		else{
-
-			//ms.StaffSelections();
-
 			AtomicReference<JScrollPane> staffPane = new AtomicReference<>();
 			//JList staffList = ms.StaffSelections();
 			final JList[] staffList = {new JList()};
-			/*staffList = ms.StaffSelections();
-			staffList.addListSelectionListener(e -> {
-				String selection = "";
-				Object obj[] = staffList.getSelectedValues();
-				for(int i = 0; i < obj.length; i++) {
-					selection += (String) obj[i];
-				}
-				keyText.setText(selection);
-			});*/
 
 			staffPane.set(new JScrollPane(staffList[0]));
 
 			System.out.println("Registering Staff");
 			add(display);
+
+			/*display.add(backButton, BorderLayout.EAST);
+			backButton.setText("Back");
+			backButton.setVisible(false);
+			backButton.addActionListener(e -> {
+				count[0]--;
+
+			});*/
+
 			add(registration);
 			add(hint);
 			display.add(welcomeText);
@@ -247,46 +274,58 @@ public class UserInterface extends JFrame implements ActionListener {
 				if(ia.lengthAuthenticator(keyText.getText(), 1) || ia.lengthAuthenticator(input.get(), 1)) { //1 - 32 character length parameter.
 					switch (count[0]){
 						case 0: {
-							registrationField[0] = keyText.getText(); // fName
-							keyInput.setText("Please Enter Last Name:");
-							hintText.setText("");
+							if(ia.nameAuthenticator(keyText.getText())) {
+								//backButton.setVisible(true);
+								registrationField[0] = keyText.getText(); // fName
+								keyInput.setText("Please Enter Last Name:");
+								hintText.setText("");
 
-							count[0]++; // 1
+								count[0]++; // 1
+							}
+							else{
+								hintText.setText("The first letter of a name must be uppercase, and the rest must be lowercase.");
+							}
 						}
 						break;
 						case 1: {
-							registrationField[1] = input.get(); // lName
-							keyInput.setText("Please Enter Position: ");
-							hintText.setText("");
-							registration.remove(keyText);
-							registration.remove(submit);
+							if(ia.nameAuthenticator(keyText.getText())) {
 
-							registration.add(b1);
-							b1.setText("Manager");
-							b1.addActionListener(e2 -> {
-								input.set("2");
-								b2.setSelected(false);
-								b3.setSelected(false);
-							});
+								registrationField[1] = keyText.getText(); // lName
+								keyInput.setText("Please Enter Position: ");
+								hintText.setText("");
+								registration.remove(keyText);
+								registration.remove(submit);
 
-							registration.add(b2);
-							b2.setText("Supervisor");
-							b2.addActionListener(e2 -> {
-								input.set("1");
-								b1.setSelected(false);
-								b3.setSelected(false);
-							});
+								registration.add(b1);
+								b1.setText("Manager");
+								b1.addActionListener(e2 -> {
+									input.set("2");
+									b2.setSelected(false);
+									b3.setSelected(false);
+								});
 
-							registration.add(b3);
-							b3.setText("Agent");
-							b3.addActionListener(e2 -> {
-								input.set("0");
-								b1.setSelected(false);
-								b2.setSelected(false);
-							});
-							registration.add(submit);
+								registration.add(b2);
+								b2.setText("Supervisor");
+								b2.addActionListener(e2 -> {
+									input.set("1");
+									b1.setSelected(false);
+									b3.setSelected(false);
+								});
 
-							count[0]++; // 3
+								registration.add(b3);
+								b3.setText("Agent");
+								b3.addActionListener(e2 -> {
+									input.set("0");
+									b1.setSelected(false);
+									b2.setSelected(false);
+								});
+								registration.add(submit);
+
+								count[0]++; // 3
+							}
+							else{
+								hintText.setText("The first letter of a name must be uppercase, and the rest must be lowercase.");
+							}
 						}
 						break;
 						case 2: {
@@ -316,7 +355,7 @@ public class UserInterface extends JFrame implements ActionListener {
 						break;
 						case 3: {
 							registrationField[3] = keyText.getText(); // branch
-							keyInput.setText("Please Enter Sex: ");
+							keyInput.setText("Please Select Sex: ");
 							hintText.setText("");
 							registration.remove(keyText);
 							registration.remove(submit);
@@ -339,7 +378,7 @@ public class UserInterface extends JFrame implements ActionListener {
 						}
 						break;
 						case 4: {
-							registrationField[4] = keyText.getText(); // sex
+							registrationField[4] = input.get(); // sex
 							keyInput.setText("Please Enter DoB:");
 							hintText.setText("");
 
@@ -373,9 +412,9 @@ public class UserInterface extends JFrame implements ActionListener {
 						}
 						break;
 						case 5: {
-							if(ia.lengthAuthenticator(keyText.getText(), 1) && ia.lengthAuthenticator(monthField.getText(), 1) && ia.lengthAuthenticator(dayField.getText(), 1)) {
-								registrationField[5] = keyText.getText() + monthField.getText() + dayField.getText(); // DoB //TODO parse data at this input
-								keyInput.setText("Please Enter Salary:");
+							if(ia.dateAuthenticator(dayField.getText(), monthField.getText(), keyText.getText())) {
+								registrationField[5] = ia.dateForDatabase(dayField.getText(), monthField.getText(), keyText.getText()); //doB
+								keyInput.setText("Please Enter Salary: $");
 								hintText.setText("");
 
 								keyText.setColumns(20);
@@ -386,10 +425,9 @@ public class UserInterface extends JFrame implements ActionListener {
 								registration.remove(dayLabel);
 								registration.remove(dayField);
 
-								if(Integer.parseInt(registrationField[2]) == 2){ //if position == 2 (Manager) skip the supervisor selection. Managers have no supervisors.
-									count[0] = count[0] + 2;
-								}
-								else{
+								if (Integer.parseInt(registrationField[2]) == 2) { //if position == 2 (Manager) skip the supervisor selection. Managers have no supervisors.
+									count[0] = count[0] + 2; }
+								else {
 									count[0]++;
 								}
 							}
@@ -399,62 +437,69 @@ public class UserInterface extends JFrame implements ActionListener {
 						}
 						break;
 						case 6: {
-							registrationField[6] = keyText.getText(); // DoB
-							keyInput.setText("Please Select Supervisor:");
-							hintText.setText("");
+							if(ia.moneyAuthenticator(keyText.getText())) {
+								registrationField[6] = keyText.getText(); // salary
+								keyInput.setText("Please Select Supervisor:");
+								hintText.setText("");
 
-							registration.remove(keyText);
-							registration.remove(submit);
-							remove(registration);
-							remove(hint);
+								registration.remove(keyText);
+								registration.remove(submit);
+								remove(registration);
+								remove(hint);
 
-							MultibleSelections ms = new MultibleSelections();
-							int selectedPosition = Integer.parseInt(registrationField[2]);
+								MultibleSelections ms = new MultibleSelections();
+								int selectedPosition = Integer.parseInt(registrationField[2]);
 
-							if(selectedPosition == 1){
-								staffList[0] = ms.StaffSelections(2); // If position is supervisor, only return managers
-							}
-							else if(selectedPosition == 0){
-								staffList[0] = ms.StaffSelections(1); // If position is agent, only return supervisors
-							}
-
-							staffList[0].addListSelectionListener(e2 -> {
-								String selection = "";
-								Object obj[] = staffList[0].getSelectedValues();
-								for(int i = 0; i < obj.length; i++) {
-									selection += (String) obj[i];
+								if (selectedPosition == 1) {
+									staffList[0] = ms.StaffSelections(2); // If position is supervisor, only return managers
+								} else if (selectedPosition == 0) {
+									staffList[0] = ms.StaffSelections(1); // If position is agent, only return supervisors
 								}
-								//get id of whoever was selected
 
+								staffList[0].addListSelectionListener(e2 -> {
+									String selection = "";
+									Object obj[] = staffList[0].getSelectedValues();
+									for (int i = 0; i < obj.length; i++) {
+										selection += (String) obj[i];
+									}
+									//get id of whoever was selected
+									String[] id = selection.split(" ");
+									keyText.setText(id[4].substring(0, id[4].length() - 1));
+								});
+								staffPane.set(new JScrollPane(staffList[0]));
 
-								//keyText.setText(selection);
-							});
-							staffPane.set(new JScrollPane(staffList[0]));
+								add(staffPane.get());
+								staffPane.get().setVisible(true);
+								setSize(400, 350);
 
-							add(staffPane.get());
-							staffPane.get().setVisible(true);
-							setSize(400,350);
+								add(registration);
+								registration.add(submit);
 
-							add(registration);
-							registration.add(submit);
+								add(hint);
+								hintText.setText("");
 
-							add(hint);
-							hintText.setText("");
-
-							count[0]++; // 3
+								count[0]++; // 3
+							}
+							else{
+								hintText.setText("Salary must be entered in the form of a decimal number.");
+							}
 						}
 						break;
 						case 7: {
 							if(Integer.parseInt(registrationField[2]) == 2){ //if position == 2 (Manager) skip the supervisor selection. Managers have no supervisors.
 								registrationField[7] = "-1";
+								if(ia.moneyAuthenticator(keyText.getText())) {
+									registrationField[6] = keyText.getText(); // salary
+								}
+								else{
+									hintText.setText("Salary must be entered in the form of a decimal number.");
+									break;
+								}
 							}
 							else{
 								registrationField[7] = keyText.getText(); // supervisor
 							}
-								System.out.println(registrationField[7] + "AAAAAAA");
-
-								registrationField[7] = keyText.getText(); // supervisor
-								keyInput.setText("Please Enter Usernamee:");
+								keyInput.setText("Please Enter Username:");
 								hintText.setText("");
 								staffPane.get().setVisible(false);
 
@@ -467,25 +512,38 @@ public class UserInterface extends JFrame implements ActionListener {
 						}
 						break;
 						case 8: {
-							registrationField[8] = keyText.getText(); // username
-							keyInput.setText("Please Enter Password:");
-							hintText.setText("");
-							count[0]++; // 4
+							if(ia.lengthAuthenticator(keyText.getText(), 0)) {
+								if (ia.usernameAuthenticator(keyText.getText())) {
+									registrationField[8] = keyText.getText(); // username
+									keyInput.setText("Please Enter Password:");
+									hintText.setText("");
+									count[0]++; // 4
+								}
+								else {
+									hintText.setText("That username is unavailable.");
+								}
+							}
+							else{
+								hintText.setText("Input must be between 1 & 16 characters");
+							}
 						}
 						break;
 						case 9: {
-							registrationField[9] = keyText.getText(); // password
-							keyInput.setText("Verify Password:");
-							hintText.setText("");
-							count[0]++; // 5
+							if(ia.lengthAuthenticator(keyText.getText(), 0)) {
+								registrationField[9] = keyText.getText(); // password
+								keyInput.setText("Verify Password:");
+								hintText.setText("");
+								count[0]++; // 5
+							}
+							else{
+								hintText.setText("Input must be between 1 & 16 characters");
+							}
 						}
 						break;
 						case 10: {
 							// If passwords match, execute final user creation
 							if(registrationField[9].equals(keyText.getText())){ // password authentication
-								//Register new Staff
-								System.out.println("Registering new Staff!");
-
+								//Register new Staff member
 								Staff staff = new Staff();
 								Input staffInput = new Input("STAFF");
 
@@ -494,14 +552,17 @@ public class UserInterface extends JFrame implements ActionListener {
 								int position = Integer.parseInt(registrationField[2]);
 								String branch = "'" + registrationField[3] + "'";
 								String sex = "'" + registrationField[4] + "'";
-
-
+								String doB =  "'" + registrationField[5] + "'";
+								double salary = Double.parseDouble(registrationField[6]);
 								int supervisorID = Integer.parseInt(registrationField[7]);
 								String username = "'" + registrationField[8] + "'";
 								String password = "'" + staff.encryptPassword(registrationField[9]) + "'";
 
 								staffInput.addStaffInfo(fName, lName, position, branch, sex,
-										"'10/14/1997'", 23000.540,username,password,supervisorID);
+										doB, salary,username,password,supervisorID);
+
+								System.out.println("Creating Staff: " + fName + ", " + lName + ", " + position + ", " + branch
+										+ ", " + sex + ", " + doB + ", " + salary + ", " + supervisorID + ", " + username + ", " + password);
 
 								//Close window
 								setVisible(false);
@@ -520,11 +581,17 @@ public class UserInterface extends JFrame implements ActionListener {
 					}
 				}
 				else{
-					if(count[0] != 5) {
-						hintText.setText("Input must be between 1 & 32 characters");
-					}
-					else{
+					// Date of birth
+					if(count[0] == 5) {
 						hintText.setText("Date entered must be valid.");
+					}
+					// Usernames
+					else if(count[0] == 8 || count[0] == 9) {
+						hintText.setText("Input must be between 1 & 16 characters");
+					}
+					// Everything else
+					else{
+						hintText.setText("Input must be between 1 & 32 characters");
 					}
 				}
 			});

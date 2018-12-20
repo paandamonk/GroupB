@@ -1,5 +1,9 @@
 package pp.Backend;
 
+import pp.Staff;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class InputAuthenticator {
@@ -54,7 +58,7 @@ public class InputAuthenticator {
         System.out.println(ia.moneyAuthenticator("123FOUR5"));
         System.out.println(ia.moneyAuthenticator("12345.00"));
         System.out.println(ia.moneyAuthenticator("12345.0"));
-        System.out.println(ia.moneyAuthenticator("100.1040"));
+        System.out.println(ia.moneyAuthenticator("100.1040."));
 
         String moneyInput = "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999.99";
         if(ia.moneyAuthenticator(moneyInput)) { // name authenticator returned true
@@ -136,7 +140,7 @@ public class InputAuthenticator {
     }
 
     //Extension of digitAuthenticator method. Returns true if day, month, and year contain only digits
-    private boolean dateAuthenticator(String day, String month, String year){
+    public boolean dateAuthenticator(String day, String month, String year){
         DateCalculator dc = new DateCalculator();
         if(digitAuthenticator(day) && digitAuthenticator(month) && digitAuthenticator(year)){
             // ensures months can only be numbered from 1 to 12
@@ -276,13 +280,31 @@ public class InputAuthenticator {
         return false;
     }
 
+    //Returns true if username entered does not already exist in the system
+    public boolean usernameAuthenticator(String username){
+        Staff staff = new Staff();
+        if(lengthAuthenticator(username, 0)) {
+           ArrayList<Staff> staffList = staff.getStaffByID(0);
+           for(int i = 0; i < staffList.size(); i++){
+               if(username.equals(staffList.get(i).getUsername())){
+                   return false;
+               }
+               else if(i == staffList.size() - 1 && !username.equals(staffList.get(i).getUsername())){
+                    return true;
+               }
+           }
+        }
+        return false;
+    }
+
     //Returns true if string passed contains only letters, numbers, and is between 1 and 16 characters in length
     public boolean userDataAuthenticator(String userData){
         if(lengthAuthenticator(userData, 0)) {
             for (int i = 0; i < userData.length(); i++) {
-                if (!Character.isDigit(userData.charAt(i)) || !Character.isLetter(userData.charAt(i))) {
+                if (!Character.isDigit(userData.charAt(i)) && !Character.isLetter(userData.charAt(i))) {
                     return false;
-                } else if (Character.isDigit(userData.charAt(i)) || Character.isLetter(userData.charAt(i)) && i == (userData.length() - 1)) {
+                }
+                else if (Character.isDigit(userData.charAt(i)) || Character.isLetter(userData.charAt(i)) && i == (userData.length() - 1)) {
                     return true;
                 }
             }
@@ -301,7 +323,7 @@ public class InputAuthenticator {
         return false;
     }
 
-    public  String dateForDatabase(String day, String month, String year){
+    public String dateForDatabase(String day, String month, String year){
         if(month.length() == 1){
             return year + "-" + "0" + month + "-" + day;
         }else {
