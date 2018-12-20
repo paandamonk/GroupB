@@ -1,9 +1,8 @@
- package pp;
+package pp;
 
 import javax.swing.JFrame;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,7 +13,6 @@ import java.awt.event.ActionListener;
 
 import sql.Input;
 import javax.swing.border.BevelBorder;
-import java.awt.Color;
 import javax.swing.border.EtchedBorder;
 
 
@@ -27,7 +25,7 @@ public class Add implements ActionListener{
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private String[] addChoices = {"", "Add Client", "Add Property", "Add Staff", "Add Property Owners", "Add Business Owners", "Add Property Viewing", "Add Lease"};
+	private String[] addChoices = {"Add Client", "Add Property", "Add Staff", "Add Property Owners", "Add Business Owners", "Add Property Viewing", "Add Lease"};
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
@@ -92,144 +90,151 @@ public class Add implements ActionListener{
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
 		frame.setBounds(100, 100, 450, 500);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
-		
+
 		panel = new JPanel();
 		panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, Color.GRAY, Color.BLACK));
 		frame.getContentPane().add(panel, BorderLayout.NORTH);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JLabel lblSelect = new JLabel("Select:");
 		panel.add(lblSelect);
 		comboBox = new JComboBox<Object>(addChoices);
 		comboBox.addActionListener(this);
+		//comboBox.setSelectedIndex(0);
 
 		panel.add(comboBox);
-		
+
 		panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, null, null));
 		frame.getContentPane().add(panel_1, BorderLayout.WEST);
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
-		
+
 		JLabel l0 = new JLabel("First: ");
 		panel_1.add(l0);
-		
+
 		textField = new JTextField();
 		panel_1.add(textField);
 		textField.setColumns(10);
-		
+
 		JLabel l1 = new JLabel("Second:");
 		panel_1.add(l1);
-		
+
 		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		textField_1.setColumns(1);
 		panel_1.add(textField_1);
-		
+
 		JLabel l2 = new JLabel("Third:");
 		panel_1.add(l2);
-		
+
 		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		textField_2.setColumns(2);
 		panel_1.add(textField_2);
-		
+
 		JLabel l3 = new JLabel("Fourth:");
 		panel_1.add(l3);
-		
+
 		textField_3 = new JTextField();
-		textField_3.setColumns(10);
+		textField_3.setColumns(3);
 		panel_1.add(textField_3);
-		
+
 		JLabel l4 = new JLabel("Fifth");
 		panel_1.add(l4);
-		
+
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
 		panel_1.add(textField_4);
-		
+
 		JLabel l5 = new JLabel("Sixth:");
 		panel_1.add(l5);
-		
+
 		textField_5 = new JTextField();
 		textField_5.setColumns(10);
 		panel_1.add(textField_5);
-		
+
 		JLabel l6 = new JLabel("First: ");
 		panel_1.add(l6);
-		
+
 		textField_6 = new JTextField();
 		textField_6.setColumns(10);
 		panel_1.add(textField_6);
-		
+
 		JLabel l7 = new JLabel("First: ");
 		panel_1.add(l7);
-		
+
 		textField_7 = new JTextField();
 		textField_7.setColumns(10);
 		panel_1.add(textField_7);
-		
+
 		JLabel l8 = new JLabel("First: ");
 		panel_1.add(l8);
-		
+
 		textField_8 = new JTextField();
 		textField_8.setColumns(10);
 		panel_1.add(textField_8);
-		
+
 		JLabel l9 = new JLabel("First: ");
 		panel_1.add(l9);
-		
+
 		textField_9 = new JTextField();
 		textField_9.setColumns(10);
 		panel_1.add(textField_9);
-		
+
 		JLabel l10 = new JLabel("First: ");
 		panel_1.add(l10);
-		
+
 		textField_10 = new JTextField();
 		textField_10.setColumns(10);
 		panel_1.add(textField_10);
-		
+
 		JLabel l11 = new JLabel("First: ");
 		panel_1.add(l11);
-		
+
 		textField_11 = new JTextField();
 		textField_11.setColumns(10);
 		panel_1.add(textField_11);
-		
+
 		JLabel l12 = new JLabel("First: ");
 		panel_1.add(l12);
-		
+
 		textField_12 = new JTextField();
 		textField_12.setColumns(10);
 		panel_1.add(textField_12);
-		
+
 		JLabel l13 = new JLabel("First: ");
 		panel_1.add(l13);
-		
+
 		textField_13 = new JTextField();
 		textField_13.setColumns(10);
 		panel_1.add(textField_13);
-		
+
 		JLabel l14 = new JLabel("First: ");
 		panel_1.add(l14);
-		
+
 		textField_14 = new JTextField();
 		textField_14.setColumns(10);
 		panel_1.add(textField_14);
-		
+
 		JLabel l15 = new JLabel("First: ");
 		panel_1.add(l15);
-		
+
 		textField_15 = new JTextField();
 		textField_15.setColumns(10);
 		panel_1.add(textField_15);
-		
+
 		btnSubmit = new JButton("Submit");
+		//btnSubmit.setPreferredSize(new Dimension(75, 75));
 		frame.getContentPane().add(btnSubmit, BorderLayout.CENTER);
 		btnSubmit.addActionListener(this);
-		
-		textField.setVisible(false);
+		//Ensures box opens to add clients
+		comboBox.setSelectedIndex(0);
+
+
+
+		/*textField.setVisible(false);
 		textField_1.setVisible(false);
 		textField_2.setVisible(false);
 		textField_3.setVisible(false);
@@ -261,12 +266,12 @@ public class Add implements ActionListener{
 		l13.setVisible(false);
 		l14.setVisible(false);
 		l15.setVisible(false);
-
+        */
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		
+
 		//all done except for button
 		if(comboBox.getSelectedItem().equals("Add Client")) {
 			panel_1.removeAll();
@@ -289,6 +294,9 @@ public class Add implements ActionListener{
 			textField_15.setVisible(false);
 			l0 = new JLabel("First name");
 			panel_1.add(l0);
+			//JLabel fnReminder = new JLabel("First letter must be capitalized.");
+			panel_1.add(l0);
+			//panel_1.add(fnReminder);
 			panel_1.add(textField);
 			l1 = new JLabel("Last name");
 			panel_1.add(l1);
@@ -316,36 +324,34 @@ public class Add implements ActionListener{
 			panel_1.add(textField_8);
 			panel_1.validate();
 			panel_1.repaint();
-			
+
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
-				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) || 
+				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) ||
 						(textField_2.getText() == null) || (textField_3.getText() == null) ||
 						(textField_4.getText() == null) || (textField_5.getText() == null) ||
 						(textField_6.getText() == null) || (textField_7.getText() == null) ||
 						(textField_8.getText() == null);
-				
+
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
 //				if(cleared) {
-					Input clientinput = new Input("CLIENTS");
-					String fname = textField.getText();
-					String lname = textField_1.getText();
-					String type = textField_2.getText();
-					String phone = textField_3.getText();
-					double rent = Double.parseDouble(textField_4.getText());
-					int staffId = Integer.parseInt(textField_5.getText());
-					String street = textField_6.getText();
-					String city = textField_7.getText();
-					String zip = textField_8.getText();
-					clientinput.addClientInfo(fname, lname, type,
-							phone, rent, staffId,
-							street, city, zip);
+				String fname = "'" + textField.getText() + "'";
+				String lname = "'" + textField_1.getText() + "'";
+				String type = "'" + textField_2.getText() + "'";
+				String phone = "'" + textField_3.getText() + "'";
+				double rent = Double.parseDouble(textField_4.getText());
+				int staffId = Integer.parseInt(textField_5.getText());
+				String street = "'" + textField_6.getText() + "'";
+				String city = "'" + textField_7.getText() + "'";
+				String zip = "'" + textField_8.getText() + "'";
+				Input clientinput = new Input("CLIENTS");
+				clientinput.addClientInfo(fname, lname, type, phone, rent, staffId, street, city, zip);
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
 //
 //				}
-	
+
 			}
 			textField.setText(null);
 			textField_1.setText(null);
@@ -403,26 +409,26 @@ public class Add implements ActionListener{
 			panel_1.add(textField_6);
 			panel_1.validate();
 			panel_1.repaint();
-			
+
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
-				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) || 
+				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) ||
 						(textField_2.getText() == null) || (textField_3.getText() == null) ||
 						(textField_4.getText() == null) || (textField_5.getText() == null) ||
 						(textField_6.getText() == null);
-				
-				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-			//	if(cleared) {
-					Input propertyinput = new Input("PROPERTIES");
-					String street = textField.getText();
-					String city = textField_1.getText();
-					String zip = textField_2.getText();
-					String type = textField_3.getText();
-					int rooms = Integer.parseInt(textField_4.getText());
-					double rent = Double.parseDouble(textField_5.getText());
-					String owner = textField_6.getText();
 
-					propertyinput.addPropertyInfo(street, zip, city, type, rooms, rent, owner);
+				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
+				//	if(cleared) {
+				Input propertyinput = new Input("PROPERTIES");
+				String street = "'" + textField.getText() + "'";
+				String city = "'" + textField_1.getText() + "'";
+				String zip ="'" + textField_2.getText() + "'";
+				String type = "'" + textField_3.getText() + "'";
+				int rooms = Integer.parseInt(textField_4.getText());
+				double rent = Double.parseDouble(textField_5.getText());
+				String owner = "'" + textField_6.getText() + "'";
+
+				propertyinput.addPropertyInfo(street, zip, city, type, rooms, rent, owner);
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
@@ -483,33 +489,33 @@ public class Add implements ActionListener{
 			panel_1.add(textField_7);
 			panel_1.validate();
 			panel_1.repaint();
-			
+
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
-				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) || 
+				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) ||
 						(textField_2.getText() == null) || (textField_3.getText() == null) ||
 						(textField_4.getText() == null) || (textField_5.getText() == null) ||
 						(textField_6.getText() == null) ||(textField_7.getText() == null);
-				
+
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-			//	if(cleared) {
-					Input staffinput = new Input("STAFF");
-					String fname = textField.getText();
-					String lname = textField_1.getText();
-					int position = Integer.parseInt(textField_2.getText());
-					String branch = textField_3.getText();
-					String sex = textField_4.getText();
-					String DoB = textField_5.getText();
-					double salary = Double.parseDouble(textField_6.getText());
-					int supId = Integer.parseInt(textField_7.getText());
-					
-					staffinput.addStaffInfo(fname, lname, position, branch, sex, DoB, salary, supId);
+				//	if(cleared) {
+				Input staffinput = new Input("STAFF");
+				String fname = textField.getText();
+				String lname = textField_1.getText();
+				int position = Integer.parseInt(textField_2.getText());
+				String branch = textField_3.getText();
+				String sex = textField_4.getText();
+				String DoB = textField_5.getText();
+				double salary = Double.parseDouble(textField_6.getText());
+				int supId = Integer.parseInt(textField_7.getText());
+
+				//staffinput.addStaffInfo(fname, lname, position, branch, sex, DoB, salary,username,password, supId);
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
 //
 //				}
-	
+
 			}
 			textField.setText(null);
 			textField_1.setText(null);
@@ -563,31 +569,31 @@ public class Add implements ActionListener{
 			panel_1.add(textField_6);
 			panel_1.validate();
 			panel_1.repaint();
-			
+
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
-				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) || 
+				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) ||
 						(textField_2.getText() == null) || (textField_3.getText() == null) ||
 						(textField_4.getText() == null) || (textField_5.getText() == null) ||
 						(textField_6.getText() == null);
-				
+
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-		//		if(cleared) {
-					Input propownerinput = new Input("PROPOWNERS");
-					String fname = textField.getText();
-					String lname = textField_1.getText();
-					String street = textField_2.getText();
-					String city = textField_3.getText();
-					String zip = textField_4.getText();
-					String phone = textField_5.getText();
-					int staffId = Integer.parseInt(textField_6.getText());
-					propownerinput.addPropOwnerInfo(fname, lname, street, city, zip, phone, staffId);
+				//		if(cleared) {
+				Input addPropertyOwner = new Input("PROPOWNERS");
+				String fname = "'" + textField.getText() + "'";
+				String lname = "'" + textField_1.getText() + "'";
+				String street = "'" + textField_2.getText() + "'";
+				String city = "'" + textField_3.getText() + "'";
+				String zip = "'" + textField_4.getText() + "'";
+				String phone = "'" + textField_5.getText() + "'";
+				int staffId = Integer.parseInt(textField_6.getText());
+				addPropertyOwner.addPropOwnerInfo(fname, lname, street, city, zip, phone, staffId);
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
 //
 //				}
-	
+
 			}
 			textField.setText(null);
 			textField_1.setText(null);
@@ -646,34 +652,36 @@ public class Add implements ActionListener{
 			panel_1.add(textField_8);
 			panel_1.validate();
 			panel_1.repaint();
-			
-			//Button listener needs more idiot-proofing, but it works as of right now.
+
 			if(e.getSource() == btnSubmit) {
-				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) || 
+				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) ||
 						(textField_2.getText() == null) || (textField_3.getText() == null) ||
 						(textField_4.getText() == null) || (textField_5.getText() == null) ||
 						(textField_6.getText() == null) ||(textField_7.getText() == null) ||
 						(textField_8.getText() == null);
-				
+
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-			//	if(cleared) {
-					Input busownerinput = new Input("BUSOWNERS");
-					String fname = textField.getText();
-					String lname = textField_1.getText();
-					String street = textField_2.getText();
-					String city = textField_3.getText();
-					String zip = textField_4.getText();
-					String phone = textField_5.getText();
-					String bname = textField_6.getText();
-					String btype = textField_7.getText();
+				//	if(cleared) {
+				Input busownerinput = new Input("BUSOWNERS");
+				String fname = "'" + textField.getText() + "'";
+				String lname = "'" + textField_1.getText() + "'";
+				String street = "'" + textField_2.getText() + "'";
+				String city = "'" + textField_3.getText() + "'";
+				String zip = "'" + textField_4.getText() + "'";
+				String phone = "'" + textField_5.getText() + "'";
+				String bname = "'" + textField_6.getText() + "'";
+				String btype = "'" + textField_7.getText() + "'";
+				if(!textField_7.getText().equals("")) {
 					int staffId = Integer.parseInt(textField_8.getText());
 					busownerinput.addBusinessOwnerInfo(fname, lname, street, city, zip, phone, bname, btype, staffId);
+				}
+				//busownerinput.addBusinessOwnerInfo(fname, lname, street, city, zip, phone, bname, btype, staffId);
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
 //
 //				}
-	
+
 			}
 			textField.setText(null);
 			textField_1.setText(null);
@@ -699,7 +707,7 @@ public class Add implements ActionListener{
 			textField_6.setVisible(true);
 			textField_7.setVisible(true);
 			textField_8.setVisible(true);
-			textField_9.setVisible(false);
+			textField_9.setVisible(true);
 			textField_10.setVisible(false);
 			textField_11.setVisible(false);
 			textField_12.setVisible(false);
@@ -733,36 +741,40 @@ public class Add implements ActionListener{
 			l8 = new JLabel("Comments");
 			panel_1.add(l8);
 			panel_1.add(textField_8);
+			l9 = new JLabel("Client Number");
+			panel_1.add(l9);
+			panel_1.add(textField_9);
 			panel_1.validate();
 			panel_1.repaint();
-			
+
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
-				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) || 
+				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) ||
 						(textField_2.getText() == null) || (textField_3.getText() == null) ||
 						(textField_4.getText() == null) || (textField_5.getText() == null) ||
 						(textField_6.getText() == null) ||(textField_7.getText() == null) ||
-						(textField_8.getText() == null);
-				
+						(textField_8.getText() == null) || (textField_9.getText() == null);
+
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-		//		if(cleared) {
-					Input propviewinput = new Input("PROPVIEW");
-					String fname = textField.getText();
-					String lname = textField_1.getText();
-					String cell = textField_2.getText();
-					int propId = Integer.parseInt(textField_3.getText());
-					String street = textField_4.getText();
-					String city = textField_5.getText();
-					String zip = textField_6.getText();
-					String viewdate = textField_7.getText();
-					String comments = textField_8.getText();
-					propviewinput.addPropViewInfo(fname, lname, cell, propId, street, city, zip, viewdate, comments);
+				//		if(cleared) {
+				Input propviewinput = new Input("PROPVIEW");
+				String fname = "'" + textField.getText() + "'";
+				String lname = "'" + textField_1.getText() + "'";
+				String cell = "'" + textField_2.getText() + "'";
+				int propId = Integer.parseInt(textField_3.getText());
+				String street = "'" + textField_4.getText() + "'";
+				String city = "'" + textField_5.getText() + "'";
+				String zip = "'" + textField_6.getText() + "'";
+				String viewdate = "'" + textField_7.getText() + "'";
+				String comments = "'" + textField_8.getText() + "'";
+				int clientID = Integer.parseInt(textField_9.getText());
+				propviewinput.addPropViewInfo(clientID, fname, lname, cell, propId, street, city, zip, viewdate, comments);
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
 //
 //				}
-	
+
 			}
 			textField.setText(null);
 			textField_1.setText(null);
@@ -845,47 +857,43 @@ public class Add implements ActionListener{
 			panel_1.add(textField_15);
 			panel_1.validate();
 			panel_1.repaint();
-			
+
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
-				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) || 
+				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) ||
 						(textField_2.getText() == null) || (textField_3.getText() == null) ||
 						(textField_4.getText() == null) || (textField_5.getText() == null) ||
 						(textField_6.getText() == null) || (textField_7.getText() == null) ||
-					   (textField_10.getText() == null) || (textField_11.getText() == null)||
-					   (textField_12.getText() == null) || (textField_13.getText() == null)||
-					   (textField_14.getText() == null) || (textField_15.getText() == null);
-				
+						(textField_10.getText() == null) || (textField_11.getText() == null)||
+						(textField_12.getText() == null) || (textField_13.getText() == null)||
+						(textField_14.getText() == null) || (textField_15.getText() == null);
+
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
 //				if(cleared) {
-					Input leaseinput = new Input("LEASE");
-					int clientId = Integer.parseInt(textField.getText());
-					String fname = textField_1.getText();
-					String lname = textField_2.getText();
-					int propId = Integer.parseInt(textField_3.getText());
-					String street = textField_4.getText();
-					String city = textField_5.getText();
-					String zip = textField_6.getText();
-					String type = textField_7.getText();
-					int rooms = Integer.parseInt(textField_8.getText());
-					double rent = Double.parseDouble(textField_9.getText());
-					String paymethod = textField_10.getText();
-					double deposit = Double.parseDouble(textField_11.getText());
-					int paidDeposit = Integer.parseInt(textField_12.getText());
-					String startdate = textField_13.getText();
-					String enddate = textField_14.getText();
-					String duration = textField_15.getText();
-					leaseinput.addLeaseInfo(clientId, fname, lname, propId, street, city, zip, type, rooms,
-							rent, paymethod, deposit, paidDeposit, startdate, enddate, duration);
-
-
-					
+				Input leaseInput = new Input("LEASE");
+				int clientId = Integer.parseInt(textField.getText());
+				String fname = "'" + textField_1.getText() + "'";
+				String lname = "'" + textField_2.getText() + "'";
+				int propId = Integer.parseInt(textField_3.getText());
+				String street = "'" + textField_4.getText() + "'";
+				String city = "'" + textField_5.getText() + "'";
+				String zip = "'" + textField_6.getText() + "'";
+				String type = "'" + textField_7.getText() + "'";
+				int rooms = Integer.parseInt(textField_8.getText());
+				double rent = Double.parseDouble(textField_9.getText());
+				String paymethod = "'" + textField_10.getText() + "'";
+				double deposit = Double.parseDouble(textField_11.getText());
+				int paidDeposit = Integer.parseInt(textField_12.getText());
+				String startdate = "'" + textField_13.getText() + "'";
+				String enddate = "'" + textField_14.getText() + "'";
+				String duration = "'" + textField_15.getText() + "'";
+				leaseInput.addLeaseInfo(clientId, fname, lname, propId, street, city, zip, type, rooms,
+						rent, paymethod, deposit, paidDeposit, startdate, enddate, duration);
 //				}
 //				else {
 //					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
 //
 //				}
-	
 			}
 			textField.setText(null);
 			textField_1.setText(null);
@@ -903,11 +911,11 @@ public class Add implements ActionListener{
 			textField_13.setText(null);
 			textField_14.setText(null);
 			textField_15.setText(null);
-		
+
 		}
-		
-		
+
+
 	}
-	
+
 
 }

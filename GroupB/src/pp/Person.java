@@ -3,6 +3,8 @@ package pp;
 public class Person {
 	private String fname;
 	private String lname;
+
+	public Person() { }
 	
 	public Person(String fname, String lname) {
 		this.fname = fname;

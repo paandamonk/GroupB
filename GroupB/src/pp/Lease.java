@@ -1,6 +1,10 @@
 package pp;
 
-import static sql.Database.getClientByID;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Lease extends Property{
 	private int leaseId;
@@ -28,7 +32,66 @@ public class Lease extends Property{
 		this.rentStart = rentStart;
 		this.rentEnd = rentEnd;
 		this.duration = duration;
-		this.client = getClientByID(clientId).get(0);
+		this.client = client.getClientByID(clientId).get(0);
+	}
+
+	public static ArrayList<Lease> getLeaseByClientId(int clientIdInput){
+		Connection c = null;
+		Statement stmt = null;
+
+		ArrayList<Lease> leaseList = new ArrayList();
+		String fname, lname, street, city, postCode, type, payMethod, rentStart, rentEnd, duration;
+		int leaseId, clientId, propertyId, numRooms, paidDeposit;
+		double monthlyRent, deposit;
+
+		try{
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:database.db");
+			c.setAutoCommit(false);
+			System.out.println("Opened database successfully (Lease)");
+
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM LEASE;");
+			while(rs.next()){
+				leaseId = rs.getInt("LEASENUM");
+				clientId = rs.getInt("CLIENTNUM");
+				fname = rs.getString("FNAME");
+				lname = rs.getString("LNAME");
+				propertyId = rs.getInt("PROPNUM");
+				street = rs.getString("STREET");
+				city = rs.getString("CITY");
+				postCode = rs.getString("POSTCODE");
+				type = rs.getString("TYPE");
+				numRooms = rs.getInt("ROOMS");
+				monthlyRent = rs.getDouble("RENT");
+				payMethod = rs.getString("PAYMETHOD");
+				deposit = rs.getDouble("DEPOSIT");
+				paidDeposit = rs.getInt("PAIDDEPOSIT");
+				rentStart = rs.getString("STARTDATE");
+				rentEnd = rs.getString("ENDDATE");
+				duration = rs.getString("DURATION");
+
+				if(clientId == clientIdInput) {
+					Lease lease = new Lease(leaseId, clientId, fname, lname, propertyId, street, city, postCode,
+							type, numRooms, monthlyRent, payMethod, deposit, paidDeposit, rentStart, rentEnd, duration);
+					leaseList.add(lease);
+					return leaseList;
+				}
+                else if(clientIdInput == 0) {
+                    Lease lease = new Lease(leaseId, clientId, fname, lname, propertyId, street, city, postCode,
+                            type, numRooms, monthlyRent, payMethod, deposit, paidDeposit, rentStart, rentEnd, duration);
+                    leaseList.add(lease);
+                }
+			}
+			stmt.close();
+			c.commit();
+			c.close();
+		}catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
+		}
+		//TODO Might return null if no leases are associated with given client.
+		return leaseList;
 	}
 
 	/**

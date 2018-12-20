@@ -1,9 +1,14 @@
 package pp;
 
-import static sql.Database.getPropOwnersByID;
-import static sql.Database.getStaffByID;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Property {
+	Staff staff = new Staff();
+	PropertyOwner propertyOwner = new PropertyOwner();
 	private String street;
 	private String city;
 	private String postcode;
@@ -14,10 +19,8 @@ public class Property {
 	private Staff staffMember;
 	private double monthlyRent;
 	private PropertyOwner owner;
-	
-	public Property() {
-		super();
-	}
+
+	public Property() {}
 
 	public Property(String street, String city, String postcode, String type, int propertyId, int numRooms, double monthlyRent) {
 		super();
@@ -28,7 +31,7 @@ public class Property {
 		this.propertyId = propertyId;
 		this.numRooms = numRooms;
 		this.monthlyRent = monthlyRent;
-		this.owner = getPropOwnersByID(propertyId).get(0);
+		this.owner = propertyOwner.getPropOwnersByID(propertyId).get(0);
 		this.staffMember = owner.getStaff();
 		this.staffId = staffMember.getStaffNum();
 	}
@@ -42,7 +45,44 @@ public class Property {
 		this.propertyId = propertyId;
 		this.numRooms = numRooms;
 		this.monthlyRent = monthlyRent;
-		this.owner = getPropOwnersByID(propertyId).get(0);
+		this.owner = propertyOwner.getPropOwnersByID(propertyId).get(0);
+	}
+
+	public void getPropertyByID(int Num) {
+		Connection c = null;
+		Statement stmt = null;
+		ArrayList<Property> propertiesList = new ArrayList<Property>();
+
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:test.db");
+			c.setAutoCommit(false);
+			System.out.println("Opened database successfully");
+
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM " + "PROPERTIES " + ";");
+
+			while (rs.next()) {
+				int propNum = rs.getInt("PROPNUM");
+				String street = rs.getString("STREET");
+				String city = rs.getString("CITY");
+				String postcode = rs.getString("POSTCODE");
+				String type = rs.getString("TYPE");
+				int rooms = rs.getInt("ROOMS");
+				double rent = rs.getDouble("RENT");
+				int Owner = rs.getInt("OWNER");
+				if (Num == propNum) {
+					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, owner);
+					propertiesList.add(prp);
+				} else if (propNum == 000) {
+					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, owner);
+					propertiesList.add(prp);
+					System.out.println(propertiesList.get(0).getStreet().toString() + " TEST");
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -154,8 +194,8 @@ public class Property {
 	 * @param ownerId the owner to set
 	 */
 	public void setOwner(int ownerId) {
-		this.owner = getPropOwnersByID(ownerId).get(0);
+		this.owner = propertyOwner.getPropOwnersByID(ownerId).get(0);
 	}
-	
+
 
 }

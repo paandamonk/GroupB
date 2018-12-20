@@ -1,5 +1,9 @@
 package pp.Backend;
 
+import pp.Staff;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class InputAuthenticator {
@@ -19,12 +23,51 @@ public class InputAuthenticator {
         System.out.println(ia.nameAuthenticator("RogeR"));
 
         String nameInput = "Roger";
-        if(ia.nameAuthenticator(nameInput)) { // name authenticator returned true
+        if(ia.nameAuthenticator(nameInput)) { // authenticator returned true
             String nameForStorage = "'" + nameInput + "'";
             System.out.println("Name authentication succeeded. Value being stored is: " + nameForStorage);
         }
         else{ // name authenticator returned false
             System.out.println("Name authentication failed.");
+        }
+        System.out.println();
+
+        ////////////// ADDRESS AUTHENTICATION //////////////
+
+        System.out.println("Address authenticator:");
+        System.out.println(ia.addressAuthenticator("30 Hawk Drive"));
+        System.out.println(ia.addressAuthenticator("30 H!awk Drive"));
+        System.out.println(ia.addressAuthenticator("30 Hawk Drive "));
+        System.out.println(ia.addressAuthenticator("30 Hawk Drive123"));
+        System.out.println(ia.addressAuthenticator("30HawkDrive"));
+        System.out.println(ia.addressAuthenticator("3 0 H a w k D r i v e"));
+
+        String addressInput = "30 Hawk Drive";
+        if(ia.addressAuthenticator(addressInput)) { // authenticator returned true
+            String addressForStorage = "'" + addressInput + "'";
+            System.out.println("Address authentication succeeded. Value being stored is: " + addressForStorage);
+        }
+        else{ // name authenticator returned false
+            System.out.println("Address authentication failed.");
+        }
+        System.out.println();
+
+        ////////////// MONEY AUTHENTICATION //////////////
+
+        System.out.println("Money authenticator:");
+        System.out.println(ia.moneyAuthenticator("123FOUR5"));
+        System.out.println(ia.moneyAuthenticator("12345.00"));
+        System.out.println(ia.moneyAuthenticator("12345.0"));
+        System.out.println(ia.moneyAuthenticator("100.1040."));
+
+        String moneyInput = "9999999999999999999999999999999999999999999999999999999999999999999999999999999999999.99";
+        if(ia.moneyAuthenticator(moneyInput)) { // name authenticator returned true
+            double moneyForStorage = Double.valueOf(moneyInput);
+            System.out.println("Money authentication succeeded. Value being stored is: " + moneyForStorage);
+            System.out.println("Proof that input is now a double, here's the input - 1: " + (moneyForStorage - 1));
+        }
+        else{ // name authenticator returned false
+            System.out.println("Money authentication failed.");
         }
         System.out.println();
 
@@ -37,13 +80,32 @@ public class InputAuthenticator {
         System.out.println(ia.digitAuthenticator("!@#$5^&*("));
 
         String digitInput = "12345";
-        if(ia.digitAuthenticator(digitInput)) { // name authenticator returned true
+        if(ia.digitAuthenticator(digitInput)) { // authenticator returned true
             int digitsForStorage = Integer.valueOf(digitInput);
             System.out.println("Digit authentication succeeded. Value being stored is: " + digitsForStorage);
             System.out.println("Proof that input is now an integer, here's the input - 1: " + (digitsForStorage - 1));
         }
         else{ // name authenticator returned false
-            System.out.println("Name authentication failed.");
+            System.out.println("Digit authentication failed.");
+        }
+        System.out.println();
+
+        ////////////// ZIP CODE AUTHENTICATION //////////////
+
+        System.out.println("Zipcode authenticator:");
+        System.out.println(ia.zipcodeAuthenticator("123FOUR5"));
+        System.out.println(ia.zipcodeAuthenticator("aab456"));
+        System.out.println(ia.zipcodeAuthenticator("12345"));
+        System.out.println(ia.zipcodeAuthenticator("!@#$5^&*("));
+
+        String zipcodeInput = "12528";
+        if(ia.digitAuthenticator(zipcodeInput) && ia.zipcodeAuthenticator(zipcodeInput)) { // authenticator returned true
+            int digitsForStorage = Integer.valueOf(zipcodeInput);
+            System.out.println("Zipcode authentication succeeded. Value being stored is: " + digitsForStorage);
+            System.out.println("Proof that input is now an integer, here's the input - 1: " + (digitsForStorage - 1));
+        }
+        else{ // name authenticator returned false
+            System.out.println("Zipcode authentication failed.");
         }
         System.out.println();
 
@@ -59,7 +121,7 @@ public class InputAuthenticator {
         System.out.println("7: " + ia.dateAuthenticator("50", "03","20180"));
 
         String day = "25"; String month = "12"; String year = "2018";
-        if(ia.dateAuthenticator(day,month,year)) { // name authenticator returned true
+        if(ia.dateAuthenticator(day,month,year)) { // authenticator returned true
             String dateForStorage = ia.dateForDatabase(day,month,year);
             System.out.println("Date authentication succeeded. Value being stored is: " + dateForStorage);
 
@@ -141,12 +203,6 @@ public class InputAuthenticator {
     }
 
     //Returns true if string passed contains only numbers
-    public boolean monthAuthenticator(String month){
-
-        return false;
-    }
-
-    //Returns true if string passed contains only numbers
     public boolean digitAuthenticator(String digits){
         for(int i = 0; i < digits.length(); i++){
             if(!Character.isDigit(digits.charAt(i))){
@@ -159,17 +215,110 @@ public class InputAuthenticator {
         return false;
     }
 
-    //Returns true if string passed contains only letters, with the first letter being uppercase and the remaining lowercase.
-    public boolean nameAuthenticator(String name){
-        if(Character.isUpperCase(name.charAt(0))){
-            for(int i = 1; i < name.length(); i++){
-                if(Character.isUpperCase(name.charAt(i)) || !Character.isLetter(name.charAt(i))){
+    //Returns true if string passed contains only numbers
+    public boolean addressAuthenticator(String address){
+        if(lengthAuthenticator(address, 1)) {
+            for (int i = 0; i < address.length(); i++) {
+                if (!Character.isDigit(address.charAt(i)) && !Character.isLetter(address.charAt(i)) && address.charAt(i) != ' ') {
                     return false;
-                }
-                else if(!Character.isUpperCase(name.charAt(i)) && i == (name.length() - 1) && Character.isLetter(name.charAt(name.length() - 1))){
+                } else if (Character.isLetter(address.charAt(i)) && i == (address.length() - 1)) {
                     return true;
                 }
             }
+        }
+        return false;
+    }
+
+    //Returns true if string passed contains only numbers
+    public boolean moneyAuthenticator(String money){
+        int dotCount = 0;
+        double m = -1; //initialized to a negative to force a false return if parameters aren't met
+        if(lengthAuthenticator(money,1)) {
+            for (int i = 0; i < money.length(); i++) {
+                if (!Character.isDigit(money.charAt(i))) {
+                    if (money.charAt(i) != '.' && i != money.length() - 2) {
+                        return false;
+                    } else if (money.charAt(i) == '.') {
+                        dotCount++;
+                    }
+                }
+            }
+            if (dotCount == 1) {
+                String[] moneyForCalculation = money.split("\\.");
+                m = Double.valueOf(moneyForCalculation[0] + moneyForCalculation[1]);
+            }
+        }
+        return (m >= 0 && m < Double.MAX_VALUE); //returns the true or false result of this line. (i.e. returns true if m is within the boundaries set.)
+    }
+
+    //Returns true if string passed contains only numbers
+    public boolean zipcodeAuthenticator(String digits){
+        for(int i = 0; i < digits.length(); i++){
+            if(!Character.isDigit(digits.charAt(i))){
+                return false;
+            }
+            else if(Character.isDigit(digits.charAt(i)) && i == (digits.length() - 1)){
+                return (digits.length() != 5);
+            }
+        }
+        return false;
+    }
+
+    //Returns true if string passed contains only letters, with the first letter being uppercase and the remaining lowercase.
+    public boolean nameAuthenticator(String name){
+        if(lengthAuthenticator(name, 0)) {
+            if (Character.isUpperCase(name.charAt(0))) {
+                for (int i = 1; i < name.length(); i++) {
+                    if (Character.isUpperCase(name.charAt(i)) || !Character.isLetter(name.charAt(i))) {
+                        return false;
+                    } else if (!Character.isUpperCase(name.charAt(i)) && i == (name.length() - 1) && Character.isLetter(name.charAt(name.length() - 1))) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    //Returns true if username entered does not already exist in the system
+    public boolean usernameAuthenticator(String username){
+        Staff staff = new Staff();
+        if(lengthAuthenticator(username, 0)) {
+           ArrayList<Staff> staffList = staff.getStaffByID(0);
+           for(int i = 0; i < staffList.size(); i++){
+               if(username.equals(staffList.get(i).getUsername())){
+                   return false;
+               }
+               else if(i == staffList.size() - 1 && !username.equals(staffList.get(i).getUsername())){
+                    return true;
+               }
+           }
+        }
+        return false;
+    }
+
+    //Returns true if string passed contains only letters, numbers, and is between 1 and 16 characters in length
+    public boolean userDataAuthenticator(String userData){
+        if(lengthAuthenticator(userData, 0)) {
+            for (int i = 0; i < userData.length(); i++) {
+                if (!Character.isDigit(userData.charAt(i)) && !Character.isLetter(userData.charAt(i))) {
+                    return false;
+                }
+                else if (Character.isDigit(userData.charAt(i)) || Character.isLetter(userData.charAt(i)) && i == (userData.length() - 1)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    //Returns true if string passed is less than or equal to maximum length
+    public boolean lengthAuthenticator(String input, int inputType){
+        if(inputType == 0) {
+            return (input.length() > 0 && input.length() <= 16);
+        }
+        else if(inputType == 1) {
+            return (input.length() > 0 && input.length() <= 32);
         }
         return false;
     }

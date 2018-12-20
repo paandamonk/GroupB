@@ -1,10 +1,13 @@
 package pp;
 
-import sql.*;
-
-import static sql.Database.getStaffByID;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Client extends Person{
+	Staff staff = new Staff();
 	private int clientIdNum;
 	private String phone;
 	private int staffId;
@@ -12,6 +15,8 @@ public class Client extends Person{
 	private String street, city, postCode, type;
 	private int idNum;
 	private double max;
+
+	public Client() {}
 	
 	public Client(int clientIdNum, String fname, String lname, String type, String phone,
 				  int staffId, String street, String city, String postCode, double maxRent) {
@@ -20,7 +25,7 @@ public class Client extends Person{
 		this.clientIdNum = clientIdNum;
 		this.phone = phone;
 		this.staffId = staffId;
-		this.member = getStaffByID(staffId).get(0);
+		this.member = staff.getStaffByID(staffId).get(0);
 		this.street = street;
 		this.city = city;
 		this.postCode = postCode;
@@ -30,7 +35,56 @@ public class Client extends Person{
 		super(fname, lname);
 		this.phone = phone;
 		this.staffId = staffId;
-		this.member = getStaffByID(staffId).get(0);
+		this.member = staff.getStaffByID(staffId).get(0);
+	}
+
+	public ArrayList<Client> getClientByID(int cID){
+		Connection c = null;
+		Statement stmt = null;
+
+		ArrayList<Client> clientList = new ArrayList();
+		String fName, lName, type, phone, street, city, postCode;
+		int idNum, staffNum;
+		float maxRent;
+
+		try{
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:database.db");
+			c.setAutoCommit(false);
+			System.out.println("Opened database successfully (Clients)");
+
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM CLIENTS;");
+			while(rs.next()){
+				idNum = rs.getInt("CLIENTID");
+				fName = rs.getString("FNAME");
+				lName = rs.getString("LNAME");
+				type = rs.getString("TYPE");
+				phone = rs.getString("PHONE");
+				staffNum = rs.getInt("STAFFNUM");
+				street = rs.getString("STREET");
+				city = rs.getString("CITY");
+				postCode = rs.getString("POSTCODE");
+				maxRent = rs.getFloat("MAXRENT");
+
+				if(cID == idNum) {
+					Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
+					clientList.add(client);
+					return clientList;
+				}
+				else if(cID == 0) {
+					Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
+					clientList.add(client);
+				}
+			}
+			stmt.close();
+			c.commit();
+			c.close();
+		}catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
+		}
+		return clientList;
 	}
 
 	/**
