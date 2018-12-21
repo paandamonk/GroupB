@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6842675a-bcf4-462e-a1e5-b2ed410e1b3c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/pp/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pp/Add.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pp/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pp/Staff.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,12 +60,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="13254" />
+          <entry key="java" value="13542" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="13254" />
+          <entry key="JAVA" value="13542" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -98,8 +97,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pp/Add.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="290" column="14" selection-start-line="290" selection-start-column="14" selection-end-line="290" selection-end-column="14" />
+            <state relative-caret-position="117">
+              <caret line="88" column="40" selection-start-line="88" selection-start-column="40" selection-end-line="88" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -178,7 +177,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>3</find>
       <find>Welcome Mana</find>
       <find>User</find>
       <find>getStaffN</find>
@@ -208,6 +206,7 @@
       <find>list.</find>
       <find>Supervisor</find>
       <find>getStaff</find>
+      <find>textField_8</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -265,7 +264,8 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
+    <option name="x" value="-11" />
+    <option name="y" value="-25" />
     <option name="width" value="1620" />
     <option name="height" value="920" />
   </component>
@@ -453,12 +453,12 @@
       <workItem from="1544560328178" duration="5173000" />
       <workItem from="1544899623744" duration="5990000" />
       <workItem from="1545161334154" duration="4847000" />
-      <workItem from="1545422919832" duration="11503000" />
+      <workItem from="1545422919832" duration="13419000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66481000" />
+    <option name="totallyTimeSpent" value="68397000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -699,8 +699,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pp/Add.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="290" column="14" selection-start-line="290" selection-start-column="14" selection-end-line="290" selection-end-column="14" />
+        <state relative-caret-position="117">
+          <caret line="88" column="40" selection-start-line="88" selection-start-column="40" selection-end-line="88" selection-end-column="40" />
         </state>
       </provider>
     </entry>

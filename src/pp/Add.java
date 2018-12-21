@@ -53,6 +53,7 @@ public class Add implements ActionListener{
 	private JPanel panel_1, panelEast;
 	private JButton btnSubmit;
 	private JRadioButton b1, b2, b3;
+	private Staff staff = new Staff();
 
     /**
 	 * Launch the application.
@@ -85,7 +86,7 @@ public class Add implements ActionListener{
 	private void initialize(int cl) {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 600, 500);
+		frame.setBounds(100, 100, 800, 500);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -252,11 +253,11 @@ public class Add implements ActionListener{
 
 		JPanel display = new JPanel(new BorderLayout());
 		JPanel display2 = new JPanel(new BorderLayout());
-		JPanel display3 = new JPanel(new BorderLayout());
+		JPanel display3 = new JPanel();
 
 		btnSubmit = new JButton("<html><h4>Submit</h4></html>");
-		JButton btnSubmit2 = new JButton("TEST");
-		JButton btnSubmit3 = new JButton("TES2");
+		JLabel hint = new JLabel();
+		hint.setText("Example hint");
 		//btnSubmit.setPreferredSize(new Dimension(75, 75));
 		//frame.getContentPane().add(btnSubmit, BorderLayout.NORTH);
 		//frame.getContentPane().add(btnSubmit2, BorderLayout.SOUTH);
@@ -273,7 +274,6 @@ public class Add implements ActionListener{
 		//MultibleSelections ms = new MultibleSelections();
 		//JList<String> itemsForUpdating = ms.selectForUpdating("Staff");
 
-		Staff staff = new Staff();
 		ArrayList<Staff> staffList = staff.getStaffByID(0);
 
 		DefaultListModel<Staff> list = new DefaultListModel<>();
@@ -293,9 +293,7 @@ public class Add implements ActionListener{
 			textField_4.setText(selectedStaff.getGender());
 			textField_5.setText(selectedStaff.getDOB());
 			textField_6.setText(Double.toString(selectedStaff.getSalary()));
-			//String superVisorFName = staff.getStaffByID(selectedStaff.getSupervisorID()).get(0).getFname();
-			//String superVisorLName = staff.getStaffByID(selectedStaff.getSupervisorID()).get(0).getLname();
-			//textField_1.setText();
+			textField_8.setText("EIGHT");
 		});
 		JScrollPane scroll = new JScrollPane();
 		scroll.setViewportView(listForUpdating);
@@ -307,7 +305,7 @@ public class Add implements ActionListener{
 		panelEast.add(display2, BorderLayout.NORTH);
 		panelEast.add(display3, BorderLayout.SOUTH);
 		display2.add(scroll);
-		display3.add(btnSubmit3);
+		display3.add(hint);
 
 
 
@@ -535,7 +533,7 @@ public class Add implements ActionListener{
 			textField_5.setVisible(true);
 			textField_6.setVisible(true);
 			textField_7.setVisible(true);
-			textField_8.setVisible(true);
+			textField_8.setVisible(false);
 			textField_9.setVisible(false);
 			textField_10.setVisible(false);
 			textField_11.setVisible(false);
@@ -566,7 +564,28 @@ public class Add implements ActionListener{
 			panel_1.add(textField_6);
 			l7 = new JLabel("Supervisor");
 			panel_1.add(l7);
-			panel_1.add(textField_7);
+			//panel_1.add(textField_7);
+
+			Staff staff = new Staff();
+			ArrayList<Staff> staffList2 = staff.getStaffByPosition(1);
+
+			DefaultListModel<Staff> list2 = new DefaultListModel<>();
+
+			for(int i = 0; i < staffList2.size(); i++){
+				if(!list2.contains(staffList2.get(i))) {
+					list2.addElement(staffList2.get(i));
+				}
+			}
+			JList listForUpdating2 = new JList(list2);
+			listForUpdating2.addListSelectionListener(e2 -> {
+
+			});
+			JScrollPane scroll2 = new JScrollPane();
+			scroll2.setViewportView(listForUpdating2);
+
+			//panel_1.remove(textField_8);
+			panel_1.add(scroll2);
+
 			panel_1.validate();
 			panel_1.repaint();
 
