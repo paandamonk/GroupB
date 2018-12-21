@@ -26,8 +26,6 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import javax.swing.*;
-
-
 public class Menu extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -41,12 +39,12 @@ public class Menu extends JFrame implements ActionListener {
 	private int clearance;
 	private String[] manChoices = {"View Managers", "View Supervisors", "View Agents", "View Employees Salaries",
 			"View Clients", "View Property Owners", "View Properties", "View Property Viewings" };
-	private String[] supChoices = { "", "View Supervisors", "View Agents", "View Renters", "View Property Owners",
+	private String[] supChoices = {"View Supervisors", "View Agents", "View Renters", "View Property Owners",
 			"View Properties", "View Property Viewings" };
-	private String[] agentChoices = { "", "View Agents", "View Renters", "View Property Owners", "View Properties",
+	private String[] agentChoices = {"View Agents", "View Renters", "View Property Owners", "View Properties",
 			"View Property Viewings" };
 
-	private String[] addChoices = {"", "Add Client", "Add Property", "Add Staff", "Add Owners", "Add Property Viewing", "Add Lease"};
+	private String[] addChoices = {"Add Client", "Add Property", "Add Staff", "Add Owners", "Add Property Viewing", "Add Lease"};
 	private JComboBox<?> choices;
 	private JComboBox<?> add;
 	private JRadioButton noSelect;
