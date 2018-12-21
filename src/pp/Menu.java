@@ -49,7 +49,7 @@ public class Menu extends JFrame implements ActionListener {
 			"Add Lease" };
 	private JComboBox<?> choices;
 	private JComboBox<?> add;
-	private JRadioButton noSelect;
+
 	private JRadioButton firstName;
 	private JRadioButton lastName;
 	private JRadioButton staffId;
@@ -92,8 +92,7 @@ public class Menu extends JFrame implements ActionListener {
 	// ArrayList<Client> clientList = db.getClientByID(0);
 	ArrayList<Staff> staffList = s1.getStaffByID(0);
 	ArrayList<PropertyOwner> propOwnerList = propertyOwner.getPropOwnersByID(0);
-	ArrayList<BusinessOwner> busOwnerList =
-			businessOwner.getBusinessOwnersByID(0);
+	ArrayList<BusinessOwner> busOwnerList = businessOwner.getBusinessOwnersByID(0);
 	//ArrayList<PropView> propViewList = db.getPropView();
 	//ArrayList<Lease> leaseList = db.getLeaseByClientId(0);
 	DefaultListModel list = new DefaultListModel();
@@ -169,8 +168,7 @@ public class Menu extends JFrame implements ActionListener {
 			choices.setEditable(false);
 		}
 		filters = new ButtonGroup();
-		noSelect = new JRadioButton();
-		noSelect.addActionListener(this);
+
 		firstName = new JRadioButton();
 		firstName.addActionListener(this);
 		lastName = new JRadioButton();
@@ -193,7 +191,7 @@ public class Menu extends JFrame implements ActionListener {
 		lowtoHigh.addActionListener(this);
 		hightoLow = new JRadioButton();
 		hightoLow.addActionListener(this);
-		filters.add(noSelect);
+
 		filters.add(firstName);
 		filters.add(lastName);
 		filters.add(staffId);
@@ -206,7 +204,6 @@ public class Menu extends JFrame implements ActionListener {
 		filters.add(lowtoHigh);
 		filters.add(hightoLow);
 
-		noSelect.setText("(No Select)");
 		firstName.setText("First Name");
 		lastName.setText("Last Name");
 		staffId.setText("Id Number");
@@ -219,7 +216,6 @@ public class Menu extends JFrame implements ActionListener {
 		lowtoHigh.setText("Low to High");
 		hightoLow.setText("High to Low");
 
-		noSelect.setVisible(true);
 		firstName.setVisible(false);
 		lastName.setVisible(false);
 		staffId.setVisible(false);
@@ -245,7 +241,7 @@ public class Menu extends JFrame implements ActionListener {
 			});
 			Panel.add(register);
 		}
-		Panel2.add(noSelect);
+
 		Panel2.add(firstName);
 		Panel2.add(lastName);
 		Panel2.add(staffId);
@@ -268,7 +264,7 @@ public class Menu extends JFrame implements ActionListener {
 		Panel3.validate();
 		Panel3.repaint();
 		choices.setSelectedIndex(0);
-		noSelect.setSelected(true);
+
 
 	}
 
@@ -287,7 +283,6 @@ public class Menu extends JFrame implements ActionListener {
 		// needs work
 		if (choices.getSelectedItem().equals("View Managers")) {
 
-			noSelect.setVisible(true);
 			firstName.setVisible(true);
 			lastName.setVisible(true);
 			staffId.setVisible(true);
@@ -300,24 +295,9 @@ public class Menu extends JFrame implements ActionListener {
 						managers.add(staffList.get(i));
 						list.addElement(staffList.get(i));
 					}
-
 				}
 			}
 
-			if (noSelect.isSelected()) {
-				list = new DefaultListModel();
-				for(int i = 0; i < managers.size(); i++){
-					list.addElement(managers.get(i));
-				}
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-
-			}
 			if (firstName.isSelected()) {
 				list = new DefaultListModel();
 				Collections.sort(managers, ((m1, m2) -> m1.getFname().compareTo(m2.getFname())));
@@ -397,7 +377,6 @@ public class Menu extends JFrame implements ActionListener {
 		// needs work
 		if (choices.getSelectedItem().equals("View Supervisors")) {
 
-			noSelect.setVisible(true);
 			firstName.setVisible(true);
 			lastName.setVisible(true);
 			staffId.setVisible(true);
@@ -421,35 +400,6 @@ public class Menu extends JFrame implements ActionListener {
 			Panel3.validate();
 			Panel3.repaint();
 
-			if (noSelect.isSelected()) {
-				list = new DefaultListModel();
-
-				for (int i = 0; i < supervisors.size(); i++) {
-					list.addElement(supervisors.get(i));
-				}
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-				if(src == b) {
-					list = new DefaultListModel();
-					for (int i = 0; i < supervisors.size(); i++) {
-						if(supervisors.get(i).getFname().contains(search.getText())) {
-							list.addElement(supervisors.get(i));
-						}
-					}
-					l = new JList(list);
-					Panel3.removeAll();
-					scroll = new JScrollPane();
-					scroll.setViewportView(l);
-					Panel3.add(scroll);
-					Panel3.validate();
-					Panel3.repaint();
-				}
-			}
 			if (firstName.isSelected()) {
 				list = new DefaultListModel();
 				Collections.sort(supervisors, ((m1, m2) -> m1.getFname().compareTo(m2.getFname())));
@@ -527,7 +477,6 @@ public class Menu extends JFrame implements ActionListener {
 		// needs work
 		if (choices.getSelectedItem().equals("View Agents")) {
 
-			noSelect.setVisible(true);
 			firstName.setVisible(true);
 			lastName.setVisible(true);
 			staffId.setVisible(true);
@@ -551,34 +500,6 @@ public class Menu extends JFrame implements ActionListener {
 			Panel3.validate();
 			Panel3.repaint();
 
-			if (noSelect.isSelected()) {
-				list = new DefaultListModel();
-				for (int i = 0; i < agents.size(); i++) {
-					list.addElement(agents.get(i));
-				}
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-				if(src == b) {
-					list = new DefaultListModel();
-					for (int i = 0; i < agents.size(); i++) {
-						if(agents.get(i).getFname().contains(search.getText())) {
-							list.addElement(agents.get(i));
-						}
-					}
-					l = new JList(list);
-					Panel3.removeAll();
-					scroll = new JScrollPane();
-					scroll.setViewportView(l);
-					Panel3.add(scroll);
-					Panel3.validate();
-					Panel3.repaint();
-				}
-			}
 			if (firstName.isSelected()) {
 				list = new DefaultListModel();
 				Collections.sort(agents, ((m1, m2) -> m1.getFname().compareTo(m2.getFname())));
@@ -656,7 +577,6 @@ public class Menu extends JFrame implements ActionListener {
 		// needs work
 		if (choices.getSelectedItem().equals("View Employees")) {
 
-			noSelect.setVisible(true);
 			firstName.setVisible(true);
 			lastName.setVisible(true);
 			staffId.setVisible(true);
@@ -668,7 +588,6 @@ public class Menu extends JFrame implements ActionListener {
 			for(int i = 0; i < staffList.size(); i++){
 				staff.add(staffList.get(i));
 				list.addElement(staffList.get(i));
-				System.out.println(staffList.get(i).getSalary());
 			}
 			l = new JList(list);
 			Panel3.removeAll();
@@ -742,33 +661,6 @@ public class Menu extends JFrame implements ActionListener {
 				}
 			}
 
-			if (noSelect.isSelected()) {
-				l = new JList(list);
-				Panel3.removeAll();
-				scroll = new JScrollPane();
-				scroll.setViewportView(l);
-				Panel3.add(scroll);
-				Panel3.validate();
-				Panel3.repaint();
-				if(src == b) {
-					list = new DefaultListModel();
-					for (int i = 0; i < staff.size(); i++) {
-						if(staff.get(i).getFname().contains(search.getText())) {
-							list.addElement(staff.get(i));
-						}
-						if(staff.get(i).getLname().contains(search.getText())) {
-							list.addElement(staff.get(i));
-						}
-					}
-					l = new JList(list);
-					Panel3.removeAll();
-					scroll = new JScrollPane();
-					scroll.setViewportView(l);
-					Panel3.add(scroll);
-					Panel3.validate();
-					Panel3.repaint();
-				}
-			}
 			if (firstName.isSelected()) {
 				list = new DefaultListModel();
 				Collections.sort(staff, ((m1, m2) -> m1.getFname().compareTo(m2.getFname())));
@@ -865,7 +757,6 @@ public class Menu extends JFrame implements ActionListener {
 		// needs work
 		if (choices.getSelectedItem().equals("View Clients")) {
 
-			noSelect.setVisible(true);
 			firstName.setVisible(true);
 			lastName.setVisible(true);
 			renterId.setVisible(true);
@@ -886,9 +777,7 @@ public class Menu extends JFrame implements ActionListener {
 			Panel3.add(scroll);
 			Panel3.validate();
 			Panel3.repaint();
-			if (noSelect.isSelected()) {
 
-			}
 			if (firstName.isSelected()) {
 				list = new DefaultListModel();
 				Collections.sort(clients, ((m1, m2) -> m1.getFname().compareTo(m2.getFname())));
@@ -911,7 +800,6 @@ public class Menu extends JFrame implements ActionListener {
 		// needs work
 		if (choices.getSelectedItem().equals("View Property Owners")) {
 
-			noSelect.setVisible(true);
 			firstName.setVisible(true);
 			lastName.setVisible(true);
 			propOwnerId.setVisible(true);
@@ -919,9 +807,6 @@ public class Menu extends JFrame implements ActionListener {
 			phoneNum.setVisible(true);
 			staffMemAdded.setVisible(true);
 
-			if (noSelect.isSelected()) {
-
-			}
 			if (firstName.isSelected()) {
 
 			}
@@ -933,7 +818,6 @@ public class Menu extends JFrame implements ActionListener {
 		// needs work
 		if (choices.getSelectedItem().equals("View Properties")) {
 
-			noSelect.setVisible(true);
 			firstName.setVisible(true);
 			lastName.setVisible(true);
 			propOwnerId.setVisible(true);
@@ -941,9 +825,6 @@ public class Menu extends JFrame implements ActionListener {
 			phoneNum.setVisible(true);
 			city.setVisible(true);
 
-			if (noSelect.isSelected()) {
-
-			}
 			if (firstName.isSelected()) {
 
 			}
@@ -955,7 +836,6 @@ public class Menu extends JFrame implements ActionListener {
 		// needs work
 		if (choices.getSelectedItem().equals("View Property Viewings")) {
 
-			noSelect.setVisible(true);
 			firstName.setVisible(true);
 			lastName.setVisible(true);
 			propOwnerId.setVisible(true);
@@ -964,9 +844,6 @@ public class Menu extends JFrame implements ActionListener {
 			city.setVisible(true);
 			staffMemAdded.setVisible(true);
 
-			if (noSelect.isSelected()) {
-
-			}
 			if (firstName.isSelected()) {
 
 			}

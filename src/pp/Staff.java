@@ -24,11 +24,11 @@ public class Staff extends Person {
 	private int SupId;
 	File file = new File("11235813");
 	private int staffNum;
-	private String salary;
+	private double salary;
 	private ArrayList<Property> propList = new ArrayList<>(100);
 	private ArrayList<Staff> group = new ArrayList<>(10);
 
-	public Staff(int sID, int pos, String Fname, String Lname, String branch, String sex, String DoB, String salary, String Username, String Password, int sup) {
+	public Staff(int sID, int pos, String Fname, String Lname, String branch, String sex, String DoB, double salary, String Username, String Password, int sup) {
 		super(Fname, Lname);
 		this.position = pos;
 		this.Branch = branch;
@@ -45,7 +45,7 @@ public class Staff extends Person {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Staff(String fname, String lname, int position, String gender, String dOB, int staffNum, String salary) {
+	public Staff(String fname, String lname, int position, String gender, String dOB, int staffNum, double salary) {
 
 	}
 
@@ -73,7 +73,7 @@ public class Staff extends Person {
 		ArrayList<Staff> staffList = new ArrayList();
 		int staffID, position, supervisorId;
 		String Fname, Lname, branch, sex, DoB, username, password;
-		String salary;
+		double salary;
 
 		try{
 			Class.forName("org.sqlite.JDBC");
@@ -91,12 +91,11 @@ public class Staff extends Person {
 				branch = rs.getString("BRANCH");
 				sex = rs.getString("SEX");
 				DoB = rs.getString("DOB");
-				salary = rs.getString("SALARY");
+				salary = rs.getDouble("SALARY");
 				username = rs.getString("USERNAME");
 				password = rs.getString("PASSWORD");
 				supervisorId = rs.getInt("SUPERVISOR");
 				Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password, supervisorId);
-				System.out.println(salary);
 
 				//Return staff of given ID
 				if(staffID == idNum) {
@@ -129,7 +128,7 @@ public class Staff extends Person {
 		ArrayList<Staff> staffList = new ArrayList();
 		int staffID, position, supervisorId;
 		String Fname, Lname, branch, sex, DoB, username, password;
-		String salary;
+		double salary;
 
 		try{
 			Class.forName("org.sqlite.JDBC");
@@ -147,7 +146,7 @@ public class Staff extends Person {
 				branch = rs.getString("BRANCH");
 				sex = rs.getString("SEX");
 				DoB = rs.getString("DOB");
-				salary = rs.getString("SALARY");
+				salary = rs.getDouble("SALARY");
 				username = rs.getString("USERNAME");
 				password = rs.getString("PASSWORD");
 				supervisorId = rs.getInt("SUPERVISOR");
@@ -280,14 +279,14 @@ public class Staff extends Person {
 	/**
 	 * @return the salary
 	 */
-	public String getSalary() {
+	public double getSalary() {
 		return salary;
 	}
 
 	/**
 	 * @param salary the salary to set
 	 */
-	public void setSalary(String salary) {
+	public void setSalary(double salary) {
 		this.salary = salary;
 	}
 

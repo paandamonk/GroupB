@@ -23,8 +23,6 @@ public class encryption {
 			key = sha.digest(key);
 			key = Arrays.copyOf(key, 16);
 			secretKey = new SecretKeySpec(key, "AES");
-
-
 			System.out.println("Secret key set successfully");
 		}
 		catch (NoSuchAlgorithmException e) {
