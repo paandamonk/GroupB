@@ -321,6 +321,16 @@ public class Staff extends Person {
 	}
 	@Override
 	public String toString() {
-		return getFname() + " " + getLname() + "; Position: " + getPosition() + "; Salary: " + getSalary() + "; ID: " + getStaffNum();
+		String positionForOutput = "";
+		if(getPosition() == 2) {
+			positionForOutput = "Manager";
+		}
+		else if(getPosition() == 1){
+			positionForOutput = "Supervisor";
+		}
+		else if(getPosition() == 0){
+			positionForOutput = "Agent";
+		}
+		return "(" + positionForOutput + ") " + getFname() + " " + getLname() + " (ID: " + getStaffNum() + ")";
 	}
 }

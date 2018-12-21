@@ -284,35 +284,21 @@ public class Add implements ActionListener{
 			}
 		}
 		JList listForUpdating = new JList(list);
+		listForUpdating.addListSelectionListener(e2 -> {
+			Staff selectedStaff = (Staff) listForUpdating.getSelectedValue();
+			textField.setText(selectedStaff.getFname());
+			textField_1.setText(selectedStaff.getLname());
+			//textField_2.setText(selectedStaff.getPosition());
+			textField_3.setText(selectedStaff.getBranch());
+			textField_4.setText(selectedStaff.getGender());
+			textField_5.setText(selectedStaff.getDOB());
+			textField_6.setText(Double.toString(selectedStaff.getSalary()));
+			//String superVisorFName = staff.getStaffByID(selectedStaff.getSupervisorID()).get(0).getFname();
+			//String superVisorLName = staff.getStaffByID(selectedStaff.getSupervisorID()).get(0).getLname();
+			//textField_1.setText();
+		});
 		JScrollPane scroll = new JScrollPane();
 		scroll.setViewportView(listForUpdating);
-
-
-		/*int selectedPosition = Integer.parseInt(registrationField[2]);
-
-		if (selectedPosition == 1) {
-			staffList[0] = ms.StaffSelections(2); // If position is supervisor, only return managers
-		} else if (selectedPosition == 0) {
-			staffList[0] = ms.StaffSelections(1); // If position is agent, only return supervisors
-		}*/
-
-		/*staffList[0].addListSelectionListener(e2 -> {
-			String selection = "";
-			Object obj[] = staffList[0].getSelectedValues();
-			for (int i = 0; i < obj.length; i++) {
-				selection += (String) obj[i];
-			}
-			//get id of whoever was selected
-			String[] id = selection.split(" ");
-			keyText.setText(id[4].substring(0, id[4].length() - 1));
-		});
-		staffPane.set(new JScrollPane(staffList[0]));
-
-		add(staffPane.get());
-		staffPane.get().setVisible(true);
-		setSize(400, 350);*/
-
-
 
 		panelEast = new JPanel();
 		panelEast.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, null, null));
