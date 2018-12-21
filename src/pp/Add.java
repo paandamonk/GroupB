@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import sql.Input;
 import javax.swing.border.BevelBorder;
@@ -268,13 +269,58 @@ public class Add implements ActionListener{
 		comboBox.setSelectedIndex(0);
 
 		//EASTERN PANEL
+		//JScrollPane selectionPane = new JScrollPane();
+		//MultibleSelections ms = new MultibleSelections();
+		//JList<String> itemsForUpdating = ms.selectForUpdating("Staff");
+
+		Staff staff = new Staff();
+		ArrayList<Staff> staffList = staff.getStaffByID(0);
+
+		DefaultListModel<Staff> list = new DefaultListModel<>();
+
+		for(int i = 0; i < staffList.size(); i++){
+			if(!list.contains(staffList.get(i))) {
+				list.addElement(staffList.get(i));
+			}
+		}
+		JList listForUpdating = new JList(list);
+		JScrollPane scroll = new JScrollPane();
+		scroll.setViewportView(listForUpdating);
+
+
+		/*int selectedPosition = Integer.parseInt(registrationField[2]);
+
+		if (selectedPosition == 1) {
+			staffList[0] = ms.StaffSelections(2); // If position is supervisor, only return managers
+		} else if (selectedPosition == 0) {
+			staffList[0] = ms.StaffSelections(1); // If position is agent, only return supervisors
+		}*/
+
+		/*staffList[0].addListSelectionListener(e2 -> {
+			String selection = "";
+			Object obj[] = staffList[0].getSelectedValues();
+			for (int i = 0; i < obj.length; i++) {
+				selection += (String) obj[i];
+			}
+			//get id of whoever was selected
+			String[] id = selection.split(" ");
+			keyText.setText(id[4].substring(0, id[4].length() - 1));
+		});
+		staffPane.set(new JScrollPane(staffList[0]));
+
+		add(staffPane.get());
+		staffPane.get().setVisible(true);
+		setSize(400, 350);*/
+
+
+
 		panelEast = new JPanel();
 		panelEast.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, null, null));
 		frame.getContentPane().add(panelEast, BorderLayout.CENTER);
 		panelEast.setLayout(new GridLayout(2, 1, 0, 0));
 		panelEast.add(display2, BorderLayout.NORTH);
 		panelEast.add(display3, BorderLayout.SOUTH);
-		display2.add(btnSubmit2);
+		display2.add(scroll);
 		display3.add(btnSubmit3);
 
 

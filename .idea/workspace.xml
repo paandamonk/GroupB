@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6842675a-bcf4-462e-a1e5-b2ed410e1b3c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Add.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/SoftwareProject/pp/Add.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pp/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pp/Add.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pp/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pp/Staff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pp/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pp/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pp/Frontend/MultibleSelections.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/pp/Frontend/MultibleSelections.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,22 +54,22 @@
     <session id="-1639853557">
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="63" />
+          <entry key="java" value="67" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="63" />
+          <entry key="JAVA" value="67" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="11678" />
+          <entry key="java" value="12329" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="11678" />
+          <entry key="JAVA" value="12329" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
@@ -87,8 +89,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pp/UserInterface.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-660">
-              <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+            <state relative-caret-position="3518">
+              <caret line="239" column="53" selection-start-line="239" selection-start-column="53" selection-end-line="239" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -99,8 +101,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pp/Add.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="277" column="31" selection-start-line="277" selection-start-column="31" selection-end-line="277" selection-end-column="31" />
+            <state relative-caret-position="374">
+              <caret line="315" lean-forward="true" selection-start-line="315" selection-end-line="315" />
               <folding>
                 <element signature="e#2004#2005#0" expanded="true" />
                 <element signature="e#2025#2026#0" expanded="true" />
@@ -110,19 +112,25 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pp/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/pp/Menu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="55" selection-start-line="5" selection-start-column="55" selection-end-line="5" selection-end-column="55" />
+            <state relative-caret-position="357">
+              <caret line="320" column="36" lean-forward="true" selection-start-line="320" selection-start-column="36" selection-end-line="320" selection-end-column="36" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sql/Input.java">
+        <entry file="file://$PROJECT_DIR$/src/pp/Frontend/MultibleSelections.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3366">
-              <caret line="203" column="1" selection-start-line="203" selection-start-column="1" selection-end-line="203" selection-end-column="1" />
+            <state relative-caret-position="152">
+              <caret line="53" column="60" selection-start-line="53" selection-start-column="60" selection-end-line="53" selection-end-column="60" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -150,18 +158,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
               <caret line="6" selection-start-line="6" selection-end-line="6" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/pp/Menu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="48">
-              <caret line="647" column="58" lean-forward="true" selection-start-line="647" selection-start-column="58" selection-end-line="647" selection-end-column="58" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -201,15 +197,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>choices</find>
-      <find>Info</find>
-      <find>setSelectedIndex(0);</find>
-      <find>get</find>
-      <find>AddMen</find>
-      <find>Add</find>
-      <find>info</find>
-      <find>Add Inf</find>
-      <find>addL</find>
       <find>addP</find>
       <find>addProp</find>
       <find>new Add</find>
@@ -231,6 +218,15 @@
       <find>comboB</find>
       <find>Submi</find>
       <find>frame</find>
+      <find>panel_</find>
+      <find>staffPane</find>
+      <find>staffList[0]</find>
+      <find>staffList</find>
+      <find>staffLis</find>
+      <find>panelEas</find>
+      <find>list</find>
+      <find>l</find>
+      <find>list.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -258,7 +254,6 @@
         <option value="$PROJECT_DIR$/src/pp/PropView.java" />
         <option value="$PROJECT_DIR$/src/pp/UserTest.java" />
         <option value="$PROJECT_DIR$/src/pp/Backend/MultibleSelections.java" />
-        <option value="$PROJECT_DIR$/src/pp/Frontend/MultibleSelections.java" />
         <option value="$PROJECT_DIR$/src/pp/Backend/InputAuthenticator.java" />
         <option value="$PROJECT_DIR$/src/pp/Lease.java" />
         <option value="$PROJECT_DIR$/src/sql/Database.java" />
@@ -271,6 +266,7 @@
         <option value="$PROJECT_DIR$/src/pp/Menu.java" />
         <option value="$PROJECT_DIR$/src/pp/Staff.java" />
         <option value="$PROJECT_DIR$/src/pp/UserInterface.java" />
+        <option value="$PROJECT_DIR$/src/pp/Frontend/MultibleSelections.java" />
         <option value="$PROJECT_DIR$/src/pp/Add.java" />
       </list>
     </option>
@@ -321,6 +317,13 @@
               <item name="GroupB" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="pp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GroupB" type="b2602c69:ProjectViewProjectNode" />
+              <item name="GroupB" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pp" type="462c0819:PsiDirectoryNode" />
+              <item name="Frontend" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="GroupB" type="b2602c69:ProjectViewProjectNode" />
@@ -469,12 +472,12 @@
       <workItem from="1544560328178" duration="5173000" />
       <workItem from="1544899623744" duration="5990000" />
       <workItem from="1545161334154" duration="4847000" />
-      <workItem from="1545422919832" duration="3357000" />
+      <workItem from="1545422919832" duration="8245000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58335000" />
+    <option name="totallyTimeSpent" value="63223000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -489,7 +492,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4993573" weight="0.19272237" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.39791667" visible="true" weight="0.18867925" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.39791667" weight="0.10512129" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39979014" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -604,16 +607,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pp/Frontend/MultibleSelections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="34" column="86" selection-start-line="34" selection-start-column="86" selection-end-line="34" selection-end-column="86" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/pp/Backend/InputAuthenticator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5134">
@@ -628,13 +621,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3740">
           <caret line="250" column="5" selection-start-line="250" selection-start-column="5" selection-end-line="250" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sql/Initialize.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="29" column="55" lean-forward="true" selection-start-line="29" selection-start-column="55" selection-end-line="29" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -676,16 +662,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/pp/Menu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="647" column="58" lean-forward="true" selection-start-line="647" selection-start-column="58" selection-end-line="647" selection-end-column="58" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sql/EditData.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="248">
@@ -703,10 +679,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sql/Initialize.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1705">
+          <caret line="20" column="39" lean-forward="true" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pp/Frontend/MultibleSelections.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="53" column="60" selection-start-line="53" selection-start-column="60" selection-end-line="53" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pp/UserInterface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-660">
-          <caret line="63" lean-forward="true" selection-start-line="63" selection-end-line="63" />
+        <state relative-caret-position="3518">
+          <caret line="239" column="53" selection-start-line="239" selection-start-column="53" selection-end-line="239" selection-end-column="53" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pp/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="320" column="36" lean-forward="true" selection-start-line="320" selection-start-column="36" selection-end-line="320" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -715,8 +718,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pp/Add.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="277" column="31" selection-start-line="277" selection-start-column="31" selection-end-line="277" selection-end-column="31" />
+        <state relative-caret-position="374">
+          <caret line="315" lean-forward="true" selection-start-line="315" selection-end-line="315" />
           <folding>
             <element signature="e#2004#2005#0" expanded="true" />
             <element signature="e#2025#2026#0" expanded="true" />
