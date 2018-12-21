@@ -70,6 +70,10 @@ public class Client extends Person{
 				if(cID == idNum) {
 					Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
 					clientList.add(client);
+					rs.close();
+					stmt.close();
+					c.commit();
+					c.close();
 					return clientList;
 				}
 				else if(cID == 0) {

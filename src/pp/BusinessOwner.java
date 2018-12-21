@@ -51,6 +51,10 @@ public class BusinessOwner extends PropertyOwner{
 					BusinessOwner businessOwner = new BusinessOwner(FName, LName, street, city, postCode, phone, staffId, ownerId,
 							businessName, businessType);
 					BusinessOwnerList.add(businessOwner);
+					rs.close();
+					stmt.close();
+					c.commit();
+					c.close();
 					return BusinessOwnerList;
 				}
 				else if(ownID == 0) {
@@ -59,6 +63,10 @@ public class BusinessOwner extends PropertyOwner{
 					BusinessOwnerList.add(businessOwner);
 				}
 			}
+			rs.close();
+			stmt.close();
+			c.commit();
+			c.close();
 		}catch ( Exception e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);

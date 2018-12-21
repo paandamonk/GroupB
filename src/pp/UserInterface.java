@@ -558,6 +558,7 @@ public class UserInterface extends JFrame implements ActionListener {
 								String username = "'" + registrationField[8] + "'";
 								String password = "'" + staff.encryptPassword(registrationField[9]) + "'";
 
+								System.out.println("Test");
 								staffInput.addStaffInfo(fName, lName, position, branch, sex,
 										doB, salary,username,password,supervisorID);
 

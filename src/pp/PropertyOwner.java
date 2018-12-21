@@ -63,6 +63,10 @@ public class PropertyOwner extends Client{
 					OList.add(o1);
 				}
 			}
+			rs.close();
+			stmt.close();
+			c.commit();
+			c.close();
 		}catch ( Exception e ) {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);

@@ -107,7 +107,6 @@ public class Staff extends Person {
 					return staffList;
 				}
 				else if(idNum == 0){
-					//  Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password,  supervisorId);
 					staffList.add(staff);
 				}
 			}
@@ -157,6 +156,7 @@ public class Staff extends Person {
 					staffList.add(staff);
 				}
 			}
+			rs.close();
 			stmt.close();
 			c.commit();
 			c.close();
