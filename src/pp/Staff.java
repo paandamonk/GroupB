@@ -41,9 +41,7 @@ public class Staff extends Person {
 		this.salary = salary;
 	}
 
-	public Staff() {
-		// TODO Auto-generated constructor stub
-	}
+	public Staff() { }
 
 	public Staff(String fname, String lname, int position, String gender, String dOB, int staffNum, double salary) {
 

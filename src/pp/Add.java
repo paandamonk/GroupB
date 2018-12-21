@@ -49,7 +49,7 @@ public class Add implements ActionListener{
 	private JLabel l15;
 	private JComboBox<?> comboBox;
 	private JPanel panel;
-	private JPanel panel_1;
+	private JPanel panel_1, panelEast;
 	private JButton btnSubmit;
 	private JRadioButton b1, b2, b3;
 
@@ -249,12 +249,33 @@ public class Add implements ActionListener{
 		textField_15.setColumns(10);
 		panel_1.add(textField_15);
 
-		btnSubmit = new JButton("<html><h1>Submit</h1></html>");
+		JPanel display = new JPanel(new BorderLayout());
+		JPanel display2 = new JPanel(new BorderLayout());
+		JPanel display3 = new JPanel(new BorderLayout());
+
+		btnSubmit = new JButton("<html><h4>Submit</h4></html>");
+		JButton btnSubmit2 = new JButton("TEST");
+		JButton btnSubmit3 = new JButton("TES2");
 		//btnSubmit.setPreferredSize(new Dimension(75, 75));
-		frame.getContentPane().add(btnSubmit, BorderLayout.CENTER);
+		//frame.getContentPane().add(btnSubmit, BorderLayout.NORTH);
+		//frame.getContentPane().add(btnSubmit2, BorderLayout.SOUTH);
+		panel.add(display);
+		display.add(btnSubmit);
+		//panel_1.add(display);
+		//frame.getContentPane().add(comboBox, BorderLayout.SOUTH);
 		btnSubmit.addActionListener(this);
 		//Ensures box opens to add clients
 		comboBox.setSelectedIndex(0);
+
+		//EASTERN PANEL
+		panelEast = new JPanel();
+		panelEast.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, null, null));
+		frame.getContentPane().add(panelEast, BorderLayout.CENTER);
+		panelEast.setLayout(new GridLayout(2, 1, 0, 0));
+		panelEast.add(display2, BorderLayout.NORTH);
+		panelEast.add(display3, BorderLayout.SOUTH);
+		display2.add(btnSubmit2);
+		display3.add(btnSubmit3);
 
 
 

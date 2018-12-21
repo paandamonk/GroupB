@@ -110,7 +110,6 @@ public class UserInterface extends JFrame implements ActionListener {
 		JRadioButton b1 = new JRadioButton();
 		JRadioButton b2 = new JRadioButton();
 		JRadioButton b3 = new JRadioButton();
-		JRadioButton backButton = new JRadioButton();
 
 		if(!database.exists() && !staffRegistration){
 			add(display);
