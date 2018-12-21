@@ -24,18 +24,11 @@ public class Staff extends Person {
 	private int SupId;
 	File file = new File("11235813");
 	private int staffNum;
-	private double salary;
+	private String salary;
 	private ArrayList<Property> propList = new ArrayList<>(100);
 	private ArrayList<Staff> group = new ArrayList<>(10);
 
-	public Staff() { }
-
-	public Staff(String fname, String lname, int position) {
-		super(fname, lname);
-		this.position = position;
-	}
-
-	public Staff(int sID, int pos, String Fname, String Lname, String branch, String sex, String DoB, Double salary, String Username, String Password, int sup) {
+	public Staff(int sID, int pos, String Fname, String Lname, String branch, String sex, String DoB, String salary, String Username, String Password, int sup) {
 		super(Fname, Lname);
 		this.position = pos;
 		this.Branch = branch;
@@ -45,35 +38,15 @@ public class Staff extends Person {
 		this.username = Username;
 		this.Password = Password;
 		this.SupId = sup;
-	}
-
-	public Staff(int sID, int pos, String Fname, String Lname, String branch, String sex, String DoB, Double salary, int sup) {
-		super(Fname, Lname);
-		this.position = pos;
-		this.Branch = branch;
-		this.gender = sex;
-		this.DOB = DoB;
-		this.staffNum = sID;
-		this.SupId = sup;
-	}
-
-	public Staff(String fname, String lname, int position, String gender, String dOB, int staffNum, double salary) {
-		super(fname, lname);
-		this.position = position;
-		this.gender = gender;
-		DOB = dOB;
-		this.staffNum = staffNum;
 		this.salary = salary;
 	}
 
-	public Staff(String fname, String lname, int position, String gender, String dOB, int staffNum, double salary, Staff Supervisor) {
-		super(fname, lname);
-		this.position = position;
-		this.gender = gender;
-		DOB = dOB;
-		this.staffNum = staffNum;
-		this.salary = salary;
-		this.Supervisor = Supervisor;
+	public Staff() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Staff(String fname, String lname, int position, String gender, String dOB, int staffNum, String salary) {
+
 	}
 
 	public void inputData(Property p) {
@@ -93,52 +66,6 @@ public class Staff extends Person {
 		return false;
 	}
 
-	public ArrayList<Staff> getStaffByBranch(String Branch){
-		Connection c;
-		Statement stmt;
-
-		ArrayList<Staff> staffList = new ArrayList();
-		int staffID, position, supervisorId;
-		String Fname, Lname, branch, sex, DoB, username, password;
-		double salary;
-
-		try{
-			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:database.db");
-			c.setAutoCommit(false);
-			System.out.println("Opened database successfully (Staff)");
-
-			stmt = c.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM STAFF;");
-			while(rs.next()){
-				staffID = rs.getInt("STAFFNUM");
-				Fname = rs.getString("FNAME");
-				Lname = rs.getString("LNAME");
-				position = rs.getInt("POSITION");
-				branch = rs.getString("BRANCH");
-				sex = rs.getString("SEX");
-				DoB = rs.getString("DOB");
-				salary = rs.getDouble("SALARY");
-				username = rs.getString("USERNAME");
-				password = rs.getString("PASSWORD");
-				supervisorId = rs.getInt("SUPERVISOR");
-
-				//Return staff of given ID
-				if(branch.contains(Branch)) {
-					Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password, supervisorId);
-					staffList.add(staff);
-				}
-			}
-			stmt.close();
-			c.commit();
-			c.close();
-		}catch ( Exception e ) {
-			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-			System.exit(0);
-		}
-		return staffList;
-	}
-
 	public ArrayList<Staff> getStaffByID(int idNum){
 		Connection c;
 		Statement stmt;
@@ -146,7 +73,7 @@ public class Staff extends Person {
 		ArrayList<Staff> staffList = new ArrayList();
 		int staffID, position, supervisorId;
 		String Fname, Lname, branch, sex, DoB, username, password;
-		double salary;
+		String salary;
 
 		try{
 			Class.forName("org.sqlite.JDBC");
@@ -164,25 +91,28 @@ public class Staff extends Person {
 				branch = rs.getString("BRANCH");
 				sex = rs.getString("SEX");
 				DoB = rs.getString("DOB");
-				salary = rs.getDouble("SALARY");
+				salary = rs.getString("SALARY");
 				username = rs.getString("USERNAME");
 				password = rs.getString("PASSWORD");
 				supervisorId = rs.getInt("SUPERVISOR");
+				Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password, supervisorId);
+				System.out.println(salary);
 
 				//Return staff of given ID
 				if(staffID == idNum) {
-					Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password, supervisorId);
 					staffList.add(staff);
+					rs.close();
 					stmt.close();
 					c.commit();
 					c.close();
 					return staffList;
 				}
 				else if(idNum == 0){
-					Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password,  supervisorId);
+					//  Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password,  supervisorId);
 					staffList.add(staff);
 				}
 			}
+			rs.close();
 			stmt.close();
 			c.commit();
 			c.close();
@@ -199,7 +129,7 @@ public class Staff extends Person {
 		ArrayList<Staff> staffList = new ArrayList();
 		int staffID, position, supervisorId;
 		String Fname, Lname, branch, sex, DoB, username, password;
-		double salary;
+		String salary;
 
 		try{
 			Class.forName("org.sqlite.JDBC");
@@ -217,7 +147,7 @@ public class Staff extends Person {
 				branch = rs.getString("BRANCH");
 				sex = rs.getString("SEX");
 				DoB = rs.getString("DOB");
-				salary = rs.getDouble("SALARY");
+				salary = rs.getString("SALARY");
 				username = rs.getString("USERNAME");
 				password = rs.getString("PASSWORD");
 				supervisorId = rs.getInt("SUPERVISOR");
@@ -350,14 +280,14 @@ public class Staff extends Person {
 	/**
 	 * @return the salary
 	 */
-	public double getSalary() {
+	public String getSalary() {
 		return salary;
 	}
 
 	/**
 	 * @param salary the salary to set
 	 */
-	public void setSalary(double salary) {
+	public void setSalary(String salary) {
 		this.salary = salary;
 	}
 
@@ -391,5 +321,9 @@ public class Staff extends Person {
 
 	public String getBranch() {
 		return this.Branch;
+	}
+	@Override
+	public String toString() {
+		return getFname() + " " + getLname() + "; Position: " + getPosition() + "; Salary: " + getSalary() + "; ID: " + getStaffNum();
 	}
 }

@@ -4,11 +4,8 @@ import java.util.ArrayList;
 
 public class Supervisor extends Staff {
 	private ArrayList<Staff> group = new ArrayList<>(10);
-
-
 	
-	public Supervisor(String fname, String lname, int position, String branch, String gender, String dOB, int staffNum,
-			double salary) {
+	public Supervisor(String fname, String lname, int position, String branch, String gender, String dOB, int staffNum, String salary) {
 		super(fname, lname, position, gender, dOB, staffNum, salary);
 		this.group = group;
 	}
