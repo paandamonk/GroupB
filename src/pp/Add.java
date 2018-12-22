@@ -899,13 +899,10 @@ public class Add implements ActionListener{
                     if(selectedClient != null) {
                         textField.setText(selectedClient.getFname());
                         textField_1.setText(selectedClient.getLname());
-                        textField_2.setText(selectedClient.getType());
-                        textField_3.setText(selectedClient.getPhone());
-                        DecimalFormat df2 = new DecimalFormat(".##");
-                        textField_4.setText(df2.format(selectedClient.getMax())); //maxRent
-                        textField_6.setText(selectedClient.getStreet());
-                        textField_7.setText(selectedClient.getCity());
-                        textField_8.setText(selectedClient.getPostCode());
+                        textField_2.setText(selectedClient.getStreet());
+                        textField_3.setText(selectedClient.getCity());
+                        textField_4.setText(selectedClient.getPostCode()); //maxRent
+                        textField_5.setText(selectedClient.getPhone());
 
                         ArrayList<Staff> newStaffList;
                         //staffListForUpdating = new JList<>(supervisorList);
@@ -1345,18 +1342,12 @@ public class Add implements ActionListener{
 			textField_13.setVisible(true);
 			textField_14.setVisible(true);
 			textField_15.setVisible(true);
-			l0 = new JLabel("Client Id");
-			panel_1.add(l0);
-			panel_1.add(textField);
 			l1 = new JLabel("First Name");
 			panel_1.add(l1);
 			panel_1.add(textField_1);
 			l2 = new JLabel("Last Name");
 			panel_1.add(l2);
 			panel_1.add(textField_2);
-			l3 = new JLabel("Property Id");
-			panel_1.add(l3);
-			panel_1.add(textField_3);
 			l4 = new JLabel("Street");
 			panel_1.add(l4);
 			panel_1.add(textField_4);
@@ -1393,8 +1384,99 @@ public class Add implements ActionListener{
 			l15 = new JLabel("Duration");
 			panel_1.add(l15);
 			panel_1.add(textField_15);
-			panel_1.validate();
-			panel_1.repaint();
+            l0 = new JLabel("Client");
+            panel_1.add(l0);
+
+            staffListForUpdating = new JList<>(secondaryList);
+            staffScroll = new JScrollPane();
+            staffScroll.setViewportView(staffListForUpdating);
+
+            staffListForUpdating.addListSelectionListener(e3 -> {
+                if(switchCase == 6) {
+                    Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
+                    if (selectedStaff2 != null) {
+                        System.out.println(selectedStaff2.getStaffNum());
+                        //selectedStaff2.getStaffNum()
+                        //TODO use this variable for updating the staff number
+                    }
+                }
+            });
+            panel_1.add(staffScroll);
+
+            l3 = new JLabel("Property");
+            panel_1.add(l3);
+            //panel_1.add(staffScroll);
+
+            panel_1.validate();
+            panel_1.repaint();
+
+            /////////////////////////////////////////////////
+            if(list != null){
+                list.removeAllElements();
+            }
+            if(secondaryList != null){
+                secondaryList.removeAllElements();
+                ArrayList<Staff> newStaffList;
+                newStaffList = staff.getStaffByPosition(0);
+                for(int i = 0; i < newStaffList.size(); i++){
+                    secondaryList.addElement(newStaffList.get(i));
+                }
+            }
+            for(int i = 0; i < clientList.size(); i++){
+                if(!list.contains(clientList.get(i))) {
+                    list.addElement(clientList.get(i));
+                }
+            }
+            listForUpdating = new JList(list);
+
+            //Activated by clicking an item from the list
+
+            listForUpdating.addListSelectionListener(e2 -> {
+                if(switchCase == 6) { //clients are selected
+                    Client selectedClient = (Client)listForUpdating.getSelectedValue();
+                    if(selectedClient != null) {
+                        textField.setText(selectedClient.getFname());
+                        textField_1.setText(selectedClient.getLname());
+                        textField_2.setText(selectedClient.getType());
+                        textField_3.setText(selectedClient.getPhone());
+                        DecimalFormat df2 = new DecimalFormat(".##");
+                        textField_4.setText(df2.format(selectedClient.getMax())); //maxRent
+                        textField_6.setText(selectedClient.getStreet());
+                        textField_7.setText(selectedClient.getCity());
+                        textField_8.setText(selectedClient.getPostCode());
+
+                        ArrayList<Staff> newStaffList;
+                        //staffListForUpdating = new JList<>(supervisorList);
+                        secondaryList.removeAllElements();
+                        newStaffList = staff.getStaffByPosition(0);
+
+                        for (int i = 0; i < newStaffList.size(); i++) {
+                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                                secondaryList.addElement(newStaffList.get(i));
+                                break;
+                            }
+                        }
+                        for (int i = 0; i < newStaffList.size(); i++) {
+                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                                continue;
+                            }
+                            secondaryList.addElement(newStaffList.get(i));
+                        }
+                        panel_1.remove(staffScroll);
+                        staffScroll = new JScrollPane();
+                        staffScroll.setViewportView(staffListForUpdating);
+                        staffListForUpdating.setSelectedIndex(0);
+                        panel_1.add(staffScroll);
+                    }
+                    panel_1.validate();
+                    panel_1.repaint();
+                }
+            });
+
+            /////////////////////////////////////////////////
+
+            //revalidate Eastern panel
+            revalidateEast();
 
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
