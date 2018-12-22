@@ -80,7 +80,7 @@ public class Property {
 					c.close();
 					return propertiesList;
 				}
-				else if (propNum == 0) {
+				else if (Num == 0) {
 					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, propertyOwner.getPropOwnersByID(propertyId).get(Owner));
 					propertiesList.add(prp);
 				}
@@ -208,5 +208,8 @@ public class Property {
 		this.owner = propertyOwner.getPropOwnersByID(ownerId).get(0);
 	}
 
+	public String toString(){
+		return getStreet() + ", " + getCity() + ", " + getPostcode() + "; (ID: " + getPropertyId() + ")";
+	}
 
 }

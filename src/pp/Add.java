@@ -57,11 +57,18 @@ public class Add implements ActionListener{
 	private JRadioButton b1, b2, b3;
 	private JScrollPane scroll = new JScrollPane();
 	private Client client = new Client();
+	private Property property = new Property();
 	private Staff staff = new Staff();
+	private PropertyOwner propertyOwner = new PropertyOwner();
 	private ArrayList<Client> clientList = client.getClientByID(0);
-    private DefaultListModel<Staff> supervisorList = new DefaultListModel<>();
+	private ArrayList<Property> propertyList = property.getPropertyByID(0);
+	private ArrayList<Staff> staffList = staff.getStaffByID(0);
+	private ArrayList<PropertyOwner> propertyOwnerList = propertyOwner.getPropOwnersByID(0);
+
+    private DefaultListModel secondaryList = new DefaultListModel<>();
+	private DefaultListModel tertiaryList = new DefaultListModel<>();
     private JList<Staff> staffListForUpdating;
-    private ArrayList<Staff> staffList = staff.getStaffByID(0);
+	private JList<PropertyOwner> propertyOwnerListForUpdating;
     private JList listForUpdating;
     private DefaultListModel list = new DefaultListModel<>();
     private JScrollPane staffScroll = new JScrollPane();
@@ -352,12 +359,12 @@ public class Add implements ActionListener{
 			l5 = new JLabel("Staff");
 			panel_1.add(l5);
 
-			staffListForUpdating = new JList<>(supervisorList);
+			staffListForUpdating = new JList<>(secondaryList);
 			staffScroll = new JScrollPane();
 			staffScroll.setViewportView(staffListForUpdating);
 
 			staffListForUpdating.addListSelectionListener(e3 -> {
-				if(switchCase == 2) {
+				if(switchCase == 0) {
 					Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
 					if (selectedStaff2 != null) {
 						System.out.println(selectedStaff2.getStaffNum());
@@ -374,8 +381,8 @@ public class Add implements ActionListener{
 			if(list != null){
 				list.removeAllElements();
 			}
-			if(supervisorList != null){
-				supervisorList.removeAllElements();
+			if(secondaryList != null){
+				secondaryList.removeAllElements();
 			}
 			for(int i = 0; i < clientList.size(); i++){
 				if(!list.contains(clientList.get(i))) {
@@ -395,12 +402,12 @@ public class Add implements ActionListener{
 
 						ArrayList<Staff> newStaffList;
 						//staffListForUpdating = new JList<>(supervisorList);
-						supervisorList.removeAllElements();
+						secondaryList.removeAllElements();
 							newStaffList = staff.getStaffByPosition(0);
 
 							for (int i = 0; i < newStaffList.size(); i++) {
 								if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
-									supervisorList.addElement(newStaffList.get(i));
+									secondaryList.addElement(newStaffList.get(i));
 									break;
 								}
 							}
@@ -408,7 +415,7 @@ public class Add implements ActionListener{
 								if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
 									continue;
 								}
-								supervisorList.addElement(newStaffList.get(i));
+								secondaryList.addElement(newStaffList.get(i));
 							}
 							panel_1.remove(staffScroll);
 							staffScroll = new JScrollPane();
@@ -437,10 +444,6 @@ public class Add implements ActionListener{
 				panelEast.validate();
 				panelEast.repaint();
 			}
-
-
-
-
 
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
@@ -505,7 +508,8 @@ public class Add implements ActionListener{
 		}
 		//Up to date except button listener
 		if(comboBox.getSelectedItem().equals("Properties")) {
-            hint.setText("Example hint that happens to be really long");
+			switchCase = 1;
+            hint.setText("Example hint that happens to be really super duper totally long");
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -544,9 +548,89 @@ public class Add implements ActionListener{
 			panel_1.add(textField_5);
 			l6 = new JLabel("Owner");
 			panel_1.add(l6);
-			panel_1.add(textField_6);
+			//panel_1.add(textField_6); //if add is enabled
+
+			propertyOwnerListForUpdating = new JList<>(secondaryList);
+			staffScroll = new JScrollPane();
+			staffScroll.setViewportView(propertyOwnerListForUpdating);
+
+			propertyOwnerListForUpdating.addListSelectionListener(e3 -> {
+				if(switchCase == 1) {
+					PropertyOwner selectedPropertyOwner = propertyOwnerListForUpdating.getSelectedValue();
+					if (selectedPropertyOwner != null) {
+						System.out.println(selectedPropertyOwner.getOwnerNum());
+						//selectedStaff2.getStaffNum()
+						//TODO use this variable for updating the staff number
+					}
+					System.out.println("TEST");
+				}
+			});
+
+			panel_1.add(staffScroll);
 			panel_1.validate();
 			panel_1.repaint();
+			/////////////////////////////////////////////////
+			if(list != null){
+				list.removeAllElements();
+			}
+			if(secondaryList != null){
+				secondaryList.removeAllElements();
+			}
+
+			for(int i = 0; i < propertyList.size(); i++){
+				if(!list.contains(propertyList.get(i))) {
+					list.addElement(propertyList.get(i));
+				}
+			}
+			listForUpdating = new JList(list);
+
+			//Activated by clicking an item from the list
+			listForUpdating.addListSelectionListener(e2 -> {
+				if(switchCase == 1) {
+					Property selectedProperty = (Property)listForUpdating.getSelectedValue();
+					if(selectedProperty != null) {
+						textField.setText(selectedProperty.getStreet ());
+						textField_1.setText(selectedProperty.getCity());
+						textField_3.setText(selectedProperty.getPostcode());
+
+						ArrayList<PropertyOwner> newPropOwnerList;
+						//staffListForUpdating = new JList<>(supervisorList);
+						secondaryList.removeAllElements();
+
+							for (int i = 0; i < propertyOwnerList.size(); i++) {
+								if (selectedProperty.getOwner().getOwnerNum() == propertyOwnerList.get(i).getOwnerNum()) {
+									secondaryList.addElement(propertyOwnerList.get(i));
+									break;
+								}
+							}
+							for (int i = 0; i < propertyOwnerList.size(); i++) {
+								if (selectedProperty.getOwner().getOwnerNum() == propertyOwnerList.get(i).getOwnerNum()) {
+									continue;
+								}
+								secondaryList.addElement(propertyOwnerList.get(i));
+							}
+							panel_1.remove(staffScroll);
+							staffScroll = new JScrollPane();
+							staffScroll.setViewportView(staffListForUpdating);
+							staffListForUpdating.setSelectedIndex(0);
+							panel_1.add(staffScroll);
+						}
+						panel_1.validate();
+						panel_1.repaint();
+				}
+			});
+			/////////////////////////////////////////////////
+			//Revalidates main list when clicking on a new dropdown item
+			panelEast.remove(scroll);
+			panelEast.remove(display2);
+			panelEast.remove(display3);
+			scroll = new JScrollPane();
+			scroll.setViewportView(listForUpdating);
+
+			panelEast.add(scroll);
+			panelEast.add(display3);
+			panelEast.validate();
+			panelEast.repaint();
 
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
@@ -631,7 +715,7 @@ public class Add implements ActionListener{
             panel_1.validate();
             panel_1.repaint();
 
-            staffListForUpdating = new JList<>(supervisorList);
+            staffListForUpdating = new JList<>(secondaryList);
             staffScroll = new JScrollPane();
             staffScroll.setViewportView(staffListForUpdating);
 
@@ -670,7 +754,7 @@ public class Add implements ActionListener{
 
 						ArrayList<Staff> newStaffList;
 						//staffListForUpdating = new JList<>(supervisorList);
-						supervisorList.removeAllElements();
+						secondaryList.removeAllElements();
 						if (selectedStaff.getPosition() != 2) {
 							newStaffList = staff.getStaffByPosition(2);
 							if (selectedStaff.getPosition() == 1) {
@@ -680,7 +764,7 @@ public class Add implements ActionListener{
 							}
 							for (int i = 0; i < newStaffList.size(); i++) {
 								if (selectedStaff.getSupervisorID() == newStaffList.get(i).getStaffNum()) {
-									supervisorList.addElement(newStaffList.get(i));
+									secondaryList.addElement(newStaffList.get(i));
 									break;
 								}
 							}
@@ -688,7 +772,7 @@ public class Add implements ActionListener{
 								if (selectedStaff.getSupervisorID() == newStaffList.get(i).getStaffNum()) {
 									continue;
 								}
-								supervisorList.addElement(newStaffList.get(i));
+								secondaryList.addElement(newStaffList.get(i));
 							}
 							panel_1.remove(staffScroll);
 							staffScroll = new JScrollPane();
@@ -713,38 +797,10 @@ public class Add implements ActionListener{
             scroll.setViewportView(listForUpdating);
 
             panelEast.add(scroll);
-            //listForUpdating.setSelectedIndex(0);
             panelEast.add(display3);
             panelEast.validate();
             panelEast.repaint();
 
-			//Button listener needs more idiot-proofing, but it works as of right now.
-			if(e.getSource() == btnSubmit) {
-				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) ||
-						(textField_2.getText() == null) || (textField_3.getText() == null) ||
-						(textField_4.getText() == null) || (textField_5.getText() == null) ||
-						(textField_6.getText() == null) ||(textField_7.getText() == null);
-
-				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-				//	if(cleared) {
-				Input staffinput = new Input("STAFF");
-				String fname = textField.getText();
-				String lname = textField_1.getText();
-				int position = Integer.parseInt(textField_2.getText());
-				String branch = textField_3.getText();
-				String sex = textField_4.getText();
-				String DoB = textField_5.getText();
-				double salary = Double.parseDouble(textField_6.getText());
-				int supId = Integer.parseInt(textField_7.getText());
-
-				//staffinput.addStaffInfo(fname, lname, position, branch, sex, DoB, salary,username,password, supId);
-//				}
-//				else {
-//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-//
-//				}
-
-			}
 			textField.setText(null);
 			textField_1.setText(null);
 			textField_2.setText(null);

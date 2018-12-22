@@ -336,6 +336,6 @@ public class Staff extends Person {
 		else if(getPosition() == 0){
 			positionForOutput = "Agent";
 		}
-		return "(" + positionForOutput + ") " + getFname() + " " + getLname() + " (ID: " + getStaffNum() + ")";
+		return "(" + positionForOutput + ") " + getFname() + " " + getLname() + "; (ID: " + getStaffNum() + ")";
 	}
 }

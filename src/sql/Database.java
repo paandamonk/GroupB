@@ -25,6 +25,13 @@ public class Database {
        // staffInput.addStaffInfo("'Sarah'", "'Hughes'", 0, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 3);
         //staffInput.addStaffInfo("'Sarah'", "'Hughes'", 0, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 4);
 
+        Input propertyOwnerInput = new Input("PROPOWNERS");
+        //propertyOwnerInput.addPropOwnerInfo("'Robin'", "'Hood'", "'40 Dollop'", "'New York'", "'10020'",
+                //"'000-111-2222'", 9);
+
+        Input propertyInput = new Input("PROPERTIES");
+        //propertyInput.addPropertyInfo("'20 Bellend Road'", "'12345'", "'Riverrun'", "'House'", 6, 2.0, 1);
+
         //Input businessOwnerInput = new Input("BUSOWNERS");
         //businessOwnerInput.addBusinessOwnerInfo("'Robin'", "'Hood'",
         //      "'40 Dollop'", "'New York'", "'10020'", "'000-111-2222'",
@@ -72,10 +79,10 @@ public class Database {
         }
 
         //Staff staff = new Staff();
-        Client client = new Client();
-        ArrayList<Client> clientList = client.getClientByID(0);
-        for(int i = 0; i < clientList.size(); i++){
-            System.out.println(clientList.get(i).getFname() + " " + clientList.get(i).getLname() + ", " + clientList.get(i).getClientIdNum());
+        Property property = new Property();
+        ArrayList<Property> propertyList = property.getPropertyByID(0);
+        for(int i = 0; i < propertyList.size(); i++){
+            System.out.println(propertyList.get(i).getCity());
         }
     }
 }

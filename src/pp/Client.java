@@ -225,7 +225,7 @@ public class Client extends Person{
 	 */
 	@Override
 	public String toString() {
-		return getFname() + " " + getLname() + ", id = " + getClientIdNum();
+		return getFname() + ", " + getLname() + "; (ID: " + getClientIdNum() + ")";
 	}
 
 
