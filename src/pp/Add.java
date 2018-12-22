@@ -48,9 +48,9 @@ public class Add implements ActionListener{
 	private JLabel l12;
 	private JLabel l13;
 	private JLabel l14;
-	private JLabel l15;
+	private JLabel l15, hint;
 	private JComboBox<?> comboBox;
-	private JPanel panel, display2;
+	private JPanel panel, display2, display3;
 	private JPanel panel_1, panelEast;
 	private JButton btnSubmit;
 	private JRadioButton b1, b2, b3;
@@ -262,10 +262,10 @@ public class Add implements ActionListener{
 
 		JPanel display = new JPanel(new BorderLayout());
 		display2 = new JPanel(new BorderLayout());
-		JPanel display3 = new JPanel();
+		display3 = new JPanel();
 
 		btnSubmit = new JButton("<html><h4>Submit</h4></html>");
-		JLabel hint = new JLabel();
+		hint = new JLabel();
 		hint.setText("Example hint");
 		//btnSubmit.setPreferredSize(new Dimension(75, 75));
 		//frame.getContentPane().add(btnSubmit, BorderLayout.NORTH);
@@ -335,6 +335,7 @@ public class Add implements ActionListener{
             panel_1.validate();
             panel_1.repaint();
 		});
+
 		scroll = new JScrollPane();
 		scroll.setViewportView(listForUpdating);
 
@@ -570,57 +571,86 @@ public class Add implements ActionListener{
 			panel_1.add(textField_6);
 			l7 = new JLabel("Supervisor");
 			panel_1.add(l7);
-
-
-            /*for(int i = 0; i < staffList.size(); i++){
-                if(!supervisorList.contains(staffList.get(i))) {
-                    supervisorList.addElement(staffList.get(i));
-                }
-            }*/
+            panel_1.validate();
+            panel_1.repaint();
 
             staffScroll = new JScrollPane();
             staffScroll.setViewportView(staffListForUpdating);
-            staffListForUpdating.setSelectedIndex(1);
+            staffListForUpdating.setSelectedIndex(0);
             staffListForUpdating.addListSelectionListener(e2 -> {
-                /*Staff selectedStaff = listForUpdating.getSelectedValue();
+                System.out.println("AAAH");
+		    });
+            /////////////////////////////////////////////////
+            /*
+            for(int i = 0; i < staffList.size(); i++){
+                if(!list.contains(staffList.get(i))) {
+                    list.addElement(staffList.get(i));
+                }
+            }
+
+            listForUpdating = new JList(list);
+
+            //Activated by clicking an item from the list
+            listForUpdating.addListSelectionListener(e2 -> {
+                Staff selectedStaff = listForUpdating.getSelectedValue();
                 textField.setText(selectedStaff.getFname());
                 textField_1.setText(selectedStaff.getLname());
                 //textField_2.setText(selectedStaff.getPosition());
                 textField_3.setText(selectedStaff.getBranch());
                 textField_4.setText(selectedStaff.getGender());
                 textField_5.setText(selectedStaff.getDOB());
-                textField_6.setText(Double.toString(selectedStaff.getSalary()));*/
-                System.out.println("TEST");
-		    });
+                textField_6.setText(Double.toString(selectedStaff.getSalary()));
 
-            /*for(int i = 0; i < staffList.size(); i++){
-                if(!list.contains(staffList.get(i))) {
-                    list.addElement(staffList.get(i));
+                ArrayList<Staff> newStaffList;
+                supervisorList.clear();
+                if(selectedStaff.getPosition() != 2) {
+                    newStaffList = staff.getStaffByPosition(2);
+                    if (selectedStaff.getPosition() == 1) {
+                        newStaffList = staff.getStaffByPosition(2);
+                    }
+                    else if (selectedStaff.getPosition() == 0) {
+                        newStaffList = staff.getStaffByPosition(1);
+                    }
+                    for (int i = 0; i < newStaffList.size(); i++) {
+                        if (selectedStaff.getSupervisorID() == newStaffList.get(i).getStaffNum()) {
+                            supervisorList.addElement(newStaffList.get(i));
+                            break;
+                        }
+                    }
+                    for (int i = 0; i < newStaffList.size(); i++) {
+                        if (selectedStaff.getSupervisorID() == newStaffList.get(i).getStaffNum()) {
+                            continue;
+                        }
+                        supervisorList.addElement(newStaffList.get(i));
+                    }
+                    panel_1.remove(staffScroll);
+                    staffScroll = new JScrollPane();
+                    staffScroll.setViewportView(staffListForUpdating);
+                    staffListForUpdating.setSelectedIndex(0);
+                    panel_1.add(staffScroll);
                 }
-            }*/
-            /*listForUpdating = new JList<>(list);
-            //Activated by clicking an item from the list
-
-
-            //scroll = new JScrollPane();
-            //scroll.setViewportView(listForUpdating);
-
-           // listForUpdating.setSelectedIndex(0);
-
-
-
-            //textField.setText(staffList.get(0).getFname());
-            /*textField_1.setText(staffList.get(0).getLname());
-            textField_3.setText(staffList.get(0).getBranch());
-            textField_4.setText(staffList.get(0).getGender());
-            textField_5.setText(staffList.get(0).getDOB());
-            textField_6.setText(Double.toString(staffList.get(0).getSalary()));
+                else{
+                    panel_1.remove(staffScroll);
+                }
+                panel_1.validate();
+                panel_1.repaint();
+            });
             */
+            /////////////////////////////////////////////////
+            //Revalidates main list when clicking on a new dropdown item
+            panelEast.remove(scroll);
+            panelEast.remove(display2);
+            panelEast.remove(display3);
+            scroll = new JScrollPane();
+            scroll.setViewportView(listForUpdating);
 
-            //display2.add(scroll);
-            panel_1.add(staffScroll);
-			panel_1.validate();
-			panel_1.repaint();
+            panelEast.setLayout(new GridLayout(2, 1, 0, 0));
+
+            panelEast.add(scroll);
+            listForUpdating.setSelectedIndex(0);
+            panelEast.add(display3);
+            panelEast.validate();
+            panelEast.repaint();
 
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
