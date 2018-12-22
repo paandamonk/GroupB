@@ -55,12 +55,12 @@ public class Property {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			c = DriverManager.getConnection("jdbc:sqlite:test.db");
+			c = DriverManager.getConnection("jdbc:sqlite:database.db");
 			c.setAutoCommit(false);
-			System.out.println("Opened database successfully");
+			System.out.println("Opened database successfully (Properties)");
 
 			stmt = c.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM " + "PROPERTIES " + ";");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM PROPERTIES;");
 
 			while (rs.next()) {
 				int propNum = rs.getInt("PROPNUM");
@@ -72,12 +72,17 @@ public class Property {
 				double rent = rs.getDouble("RENT");
 				int Owner = rs.getInt("OWNER");
 				if (Num == propNum) {
-					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, owner);
+					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, propertyOwner.getPropOwnersByID(propertyId).get(Owner));
 					propertiesList.add(prp);
-				} else if (propNum == 000) {
-					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, owner);
+					rs.close();
+					stmt.close();
+					c.commit();
+					c.close();
+					return propertiesList;
+				}
+				else if (propNum == 0) {
+					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, propertyOwner.getPropOwnersByID(propertyId).get(Owner));
 					propertiesList.add(prp);
-					System.out.println(propertiesList.get(0).getStreet().toString() + " TEST");
 				}
 			}
 			rs.close();

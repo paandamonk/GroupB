@@ -118,7 +118,7 @@ public class Input
         System.out.println("Business Owner record created successfully");
     }
 
-    public void addPropertyInfo(String Street, String Postcode, String City, String type, int rooms, double rent, String Owner) {
+    public void addPropertyInfo(String Street, String Postcode, String City, String type, int rooms, double rent, int Owner) {
         Connection c = null;
         Statement stmt = null;
 

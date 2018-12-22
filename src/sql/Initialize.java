@@ -41,7 +41,7 @@ public class Initialize {
                     " TYPE         TEXT   NOT NULL, " +
                     " ROOMS        INT    NOT NULL, " +
                     " RENT         REAL   NOT NULL, " +
-                    " OWNER        TEXT   NOT NULL)";
+                    " OWNER        INT    NOT NULL)";
             stmt.executeUpdate(sql);//1
 
             sql = "CREATE TABLE PROPOWNERS" +

@@ -210,9 +210,9 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 		filters.add(startDate);
 		filters.add(endDate);
 		filters.add(duration);
+		filters.add(staffId);
 		filters.add(firstName);
 		filters.add(lastName);
-		filters.add(staffId);
 		filters.add(propOwnerId);
 		filters.add(propId);
 		filters.add(staffMemAdded);
@@ -235,6 +235,7 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 		firstName.setVisible(false);
 		lastName.setVisible(false);
 		staffId.setVisible(false);
+		staffId.setSelected(true);
 		propOwnerId.setVisible(false);
 		propId.setVisible(false);
 		renterId.setVisible(false);

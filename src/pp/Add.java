@@ -453,7 +453,7 @@ public class Add implements ActionListener{
 				String type = "'" + textField_3.getText() + "'";
 				int rooms = Integer.parseInt(textField_4.getText());
 				double rent = Double.parseDouble(textField_5.getText());
-				String owner = "'" + textField_6.getText() + "'";
+				int owner = Integer.parseInt(textField_6.getText());
 
 				propertyinput.addPropertyInfo(street, zip, city, type, rooms, rent, owner);
 //				}
