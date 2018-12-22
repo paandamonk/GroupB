@@ -562,7 +562,6 @@ public class Add implements ActionListener{
 						//selectedStaff2.getStaffNum()
 						//TODO use this variable for updating the staff number
 					}
-					System.out.println("TEST");
 				}
 			});
 
@@ -611,7 +610,7 @@ public class Add implements ActionListener{
 							}
 							panel_1.remove(staffScroll);
 							staffScroll = new JScrollPane();
-							staffScroll.setViewportView(staffListForUpdating);
+							staffScroll.setViewportView(propertyOwnerListForUpdating);
 							staffListForUpdating.setSelectedIndex(0);
 							panel_1.add(staffScroll);
 						}

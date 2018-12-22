@@ -98,8 +98,8 @@
       <file leaf-file-name="Add.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pp/Add.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="553" column="44" lean-forward="true" selection-start-line="553" selection-start-column="44" selection-end-line="553" selection-end-column="44" />
+            <state relative-caret-position="382">
+              <caret line="561" column="54" lean-forward="true" selection-start-line="561" selection-start-column="54" selection-end-line="561" selection-end-column="54" />
               <folding>
                 <element signature="e#3101#3102#0" expanded="true" />
                 <element signature="e#3122#3123#0" expanded="true" />
@@ -173,8 +173,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>CLIENTS</find>
-      <find>set</find>
       <find>Info</find>
       <find>setSelectedIndex(0);</find>
       <find>get</find>
@@ -203,6 +201,8 @@
       <find>.equals(&quot;P</find>
       <find>selectedStaff2</find>
       <find>staffListForUpdating</find>
+      <find>secondaryList</find>
+      <find>staffListForUpda</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -895,8 +895,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/pp/Add.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="553" column="44" lean-forward="true" selection-start-line="553" selection-start-column="44" selection-end-line="553" selection-end-column="44" />
+        <state relative-caret-position="382">
+          <caret line="561" column="54" lean-forward="true" selection-start-line="561" selection-start-column="54" selection-end-line="561" selection-end-column="54" />
           <folding>
             <element signature="e#3101#3102#0" expanded="true" />
             <element signature="e#3122#3123#0" expanded="true" />
