@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import sql.Input;
@@ -404,8 +405,15 @@ public class Add implements ActionListener{
 					if(selectedClient != null) {
 						textField.setText(selectedClient.getFname());
 						textField_1.setText(selectedClient.getLname());
+                        textField_2.setText(selectedClient.getType());
+                        textField_3.setText(selectedClient.getPhone());
+                        DecimalFormat df2 = new DecimalFormat(".##");
+                        textField_4.setText(df2.format(selectedClient.getMax())); //maxRent
+                        textField_6.setText(selectedClient.getStreet());
+                        textField_7.setText(selectedClient.getCity());
+                        textField_8.setText(selectedClient.getPostCode());
 
-						ArrayList<Staff> newStaffList;
+                        ArrayList<Staff> newStaffList;
 						//staffListForUpdating = new JList<>(supervisorList);
 						secondaryList.removeAllElements();
 							newStaffList = staff.getStaffByPosition(0);
@@ -575,7 +583,11 @@ public class Add implements ActionListener{
 					if(selectedProperty != null) {
 						textField.setText(selectedProperty.getStreet ());
 						textField_1.setText(selectedProperty.getCity());
-						textField_3.setText(selectedProperty.getPostcode());
+						textField_2.setText(selectedProperty.getPostcode());
+                        textField_3.setText(selectedProperty.getType());
+                        textField_4.setText(Integer.toString(selectedProperty.getNumRooms()));
+                        DecimalFormat df2 = new DecimalFormat(".##");
+                        textField_5.setText(df2.format(selectedProperty.getMonthlyRent()));
 
 						ArrayList<PropertyOwner> newPropOwnerList;
 						//staffListForUpdating = new JList<>(supervisorList);
@@ -734,7 +746,8 @@ public class Add implements ActionListener{
 						textField_3.setText(selectedStaff.getBranch());
 						textField_4.setText(selectedStaff.getGender());
 						textField_5.setText(selectedStaff.getDOB());
-						textField_6.setText(Double.toString(selectedStaff.getSalary()));
+                        DecimalFormat df2 = new DecimalFormat(".##");
+						textField_6.setText(df2.format(selectedStaff.getSalary()));
 
 						ArrayList<Staff> newStaffList;
 						//staffListForUpdating = new JList<>(supervisorList);
