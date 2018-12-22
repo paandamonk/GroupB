@@ -1,4 +1,4 @@
-	package pp;
+package pp;
 
 import pp.Backend.InputAuthenticator;
 import pp.Frontend.MultibleSelections;
@@ -53,7 +53,7 @@ public class UserInterface extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setLayout(new GridLayout(5, 2));
 		//if(!staffRegistration) {
-			setSize(1500, 3000);
+		setSize(1500, 3000);
 		//}
 		setResizable(false);
 		buildLogin(staffRegistration);
@@ -110,7 +110,6 @@ public class UserInterface extends JFrame implements ActionListener {
 		JRadioButton b1 = new JRadioButton();
 		JRadioButton b2 = new JRadioButton();
 		JRadioButton b3 = new JRadioButton();
-		JRadioButton backButton = new JRadioButton();
 
 		if(!database.exists() && !staffRegistration){
 			add(display);
@@ -124,97 +123,97 @@ public class UserInterface extends JFrame implements ActionListener {
 			hint.add(hintText, BorderLayout.NORTH);
 
 			//Set submit button to a local variable to avoid potential conflicts
-				submit.addActionListener(e -> {
-					if(ia.lengthAuthenticator(keyText.getText(), 1)) { //1 - 32 character length parameter.
-						switch (count[0]){
-							case 0: {
-								System.out.println(ia.nameAuthenticator(keyText.getText()));
-								registrationField[0] = keyText.getText(); // secretKey
-								keyInput.setText("Please Enter First Name:");
+			submit.addActionListener(e -> {
+				if(ia.lengthAuthenticator(keyText.getText(), 1)) { //1 - 32 character length parameter.
+					switch (count[0]){
+						case 0: {
+							System.out.println(ia.nameAuthenticator(keyText.getText()));
+							registrationField[0] = keyText.getText(); // secretKey
+							keyInput.setText("Please Enter First Name:");
+							hintText.setText("");
+							count[0]++; // 1
+						}
+						break;
+						case 1: {
+							if(ia.nameAuthenticator(keyText.getText())) {
+								registrationField[1] = keyText.getText(); // fName
+								keyInput.setText("Please Enter Last Name:");
 								hintText.setText("");
-								count[0]++; // 1
+								count[0]++; // 2
 							}
-							break;
-							case 1: {
-								if(ia.nameAuthenticator(keyText.getText())) {
-									registrationField[1] = keyText.getText(); // fName
-									keyInput.setText("Please Enter Last Name:");
-									hintText.setText("");
-									count[0]++; // 2
-								}
-								else{
-									hintText.setText("The first letter of a name must be uppercase, and the rest must be lowercase.");
-								}
+							else{
+								hintText.setText("The first letter of a name must be uppercase, and the rest must be lowercase.");
 							}
-							break;
-							case 2: {
-								if(ia.nameAuthenticator(keyText.getText())) {
-									registrationField[2] = keyText.getText(); // lName
-									keyInput.setText("Please Enter Username:");
-									hintText.setText("");
-									count[0]++; // 3
-								}
-								else{
-									hintText.setText("The first letter of a name must be uppercase, and the rest must be lowercase.");
-								}
+						}
+						break;
+						case 2: {
+							if(ia.nameAuthenticator(keyText.getText())) {
+								registrationField[2] = keyText.getText(); // lName
+								keyInput.setText("Please Enter Username:");
+								hintText.setText("");
+								count[0]++; // 3
 							}
-							break;
-							case 3: {
-								if(ia.lengthAuthenticator(keyText.getText(), 0)) {
-									registrationField[3] = keyText.getText(); // username
-									keyInput.setText("Please Enter Password:");
-									hintText.setText("");
-									count[0]++; // 4
-								}
-								else{
-									hintText.setText("Input must be between 1 & 16 characters");
-								}
+							else{
+								hintText.setText("The first letter of a name must be uppercase, and the rest must be lowercase.");
 							}
-							break;
-							case 4: {
-								if(ia.lengthAuthenticator(keyText.getText(), 0)) {
-									registrationField[4] = keyText.getText(); // password
-									keyInput.setText("Verify Password:");
-									hintText.setText("");
-									count[0]++; // 5
-								}
-								else{
-									hintText.setText("Input must be between 1 & 16 characters");
-								}
+						}
+						break;
+						case 3: {
+							if(ia.lengthAuthenticator(keyText.getText(), 0)) {
+								registrationField[3] = keyText.getText(); // username
+								keyInput.setText("Please Enter Password:");
+								hintText.setText("");
+								count[0]++; // 4
 							}
-							break;
-							case 5: {
-								// If passwords match, execute final user creation
-								if(registrationField[4].equals(keyText.getText())){
-									Initialize i = new Initialize();
-									i.initializeTables();
-									i.initializeMasterUser(registrationField);
+							else{
+								hintText.setText("Input must be between 1 & 16 characters");
+							}
+						}
+						break;
+						case 4: {
+							if(ia.lengthAuthenticator(keyText.getText(), 0)) {
+								registrationField[4] = keyText.getText(); // password
+								keyInput.setText("Verify Password:");
+								hintText.setText("");
+								count[0]++; // 5
+							}
+							else{
+								hintText.setText("Input must be between 1 & 16 characters");
+							}
+						}
+						break;
+						case 5: {
+							// If passwords match, execute final user creation
+							if(registrationField[4].equals(keyText.getText())){
+								Initialize i = new Initialize();
+								i.initializeTables();
+								i.initializeMasterUser(registrationField);
 
-									setVisible(false);
-									setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-									UserInterface u = new UserInterface(false);
-								}
-								// If they don't, passwords should be entered anew
-								else{
-									keyInput.setText("Please Enter Password:");
-									hintText.setText("Passwords did not match. Please try again.");
-									count[0] = 4;
-								}
+								setVisible(false);
+								setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+								UserInterface u = new UserInterface(false);
+							}
+							// If they don't, passwords should be entered anew
+							else{
+								keyInput.setText("Please Enter Password:");
+								hintText.setText("Passwords did not match. Please try again.");
+								count[0] = 4;
 							}
 						}
-						keyText.setText("");
 					}
+					keyText.setText("");
+				}
+				else{
+					// Usernames
+					if(count[0] == 3 || count[0] == 4) {
+						hintText.setText("Input must be between 1 & 16 characters");
+					}
+					// Everything else
 					else{
-						// Usernames
-						if(count[0] == 3 || count[0] == 4) {
-							hintText.setText("Input must be between 1 & 16 characters");
-						}
-						// Everything else
-						else{
-							hintText.setText("Input must be between 1 & 32 characters");
-						}
+						hintText.setText("Input must be between 1 & 32 characters");
 					}
-				});
+				}
+			});
 		}
 		//database was generated. Enable login.
 		else if(!staffRegistration){
@@ -258,7 +257,7 @@ public class UserInterface extends JFrame implements ActionListener {
 			add(registration);
 			add(hint);
 			display.add(welcomeText);
-				welcomeText.setText("Welcome Manager! Enter new staff information below:");
+			welcomeText.setText("Welcome Manager! Enter new staff information below:");
 
 			registration.add(keyInput);
 			keyInput.setText("Please Enter First Name:");
@@ -397,7 +396,7 @@ public class UserInterface extends JFrame implements ActionListener {
 							registration.add(yearLabel);
 
 							registration.add(keyText);
-								keyText.setColumns(3);
+							keyText.setColumns(3);
 
 							registration.add(monthLabel);
 							registration.add(monthField);
@@ -499,16 +498,16 @@ public class UserInterface extends JFrame implements ActionListener {
 							else{
 								registrationField[7] = keyText.getText(); // supervisor
 							}
-								keyInput.setText("Please Enter Username:");
-								hintText.setText("");
-								staffPane.get().setVisible(false);
+							keyInput.setText("Please Enter Username:");
+							hintText.setText("");
+							staffPane.get().setVisible(false);
 
-								registration.remove(submit);
-								registration.add(keyText);
-								keyText.setColumns(10);
-								registration.add(submit);
+							registration.remove(submit);
+							registration.add(keyText);
+							keyText.setColumns(10);
+							registration.add(submit);
 
-								count[0]++; // 3
+							count[0]++; // 3
 						}
 						break;
 						case 8: {
@@ -553,14 +552,19 @@ public class UserInterface extends JFrame implements ActionListener {
 								String branch = "'" + registrationField[3] + "'";
 								String sex = "'" + registrationField[4] + "'";
 								String doB =  "'" + registrationField[5] + "'";
-								String salary = "'" + registrationField[6] + "'";
+								double salary = Double.parseDouble(registrationField[6]);
 								int supervisorID = Integer.parseInt(registrationField[7]);
 								String username = "'" + registrationField[8] + "'";
 								String password = "'" + staff.encryptPassword(registrationField[9]) + "'";
 
 								staffInput.addStaffInfo(fName, lName, position, branch, sex,
 										doB, salary,username,password,supervisorID);
-
+								Staff newstaff = new Staff(supervisorID, position, fName, lName, branch,
+										sex, doB, salary, username, password, supervisorID);
+								Staff staffObj = new Staff();
+								ArrayList<Staff> s = staffObj.getStaffByID(supervisorID);
+								staffObj = s.get(0);
+								staffObj.addGroup(newstaff);
 								System.out.println("Creating Staff: " + fName + ", " + lName + ", " + position + ", " + branch
 										+ ", " + sex + ", " + doB + ", " + salary + ", " + supervisorID + ", " + username + ", " + password);
 

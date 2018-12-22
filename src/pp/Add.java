@@ -1,17 +1,11 @@
 package pp;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import sql.Input;
 import javax.swing.border.BevelBorder;
@@ -27,7 +21,8 @@ public class Add implements ActionListener{
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private String[] addChoices = {"Add Client", "Add Property", "Add Property Owners", "Add Business Owners", "Add Property Viewing", "Add Lease"};
+	private String[] addChoices = {"Clients", "Properties", "Staff", "Property Owners", "Business Owners", "Property Viewings", "Leases"};
+    private String[]addChoicesNotManager = {"Clients", "Properties", "Property Owners", "Business Owners", "Property Viewings", "Leases"};
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
@@ -38,10 +33,6 @@ public class Add implements ActionListener{
 	private JTextField textField_13;
 	private JTextField textField_14;
 	private JTextField textField_15;
-	private JRadioButton add;
-	private JRadioButton update;
-	private JRadioButton delete;
-	private ButtonGroup select;
 	private JLabel l0;
 	private JLabel l1;
 	private JLabel l2;
@@ -57,22 +48,29 @@ public class Add implements ActionListener{
 	private JLabel l12;
 	private JLabel l13;
 	private JLabel l14;
-	private JLabel l15;
+	private JLabel l15, hint;
 	private JComboBox<?> comboBox;
-	private JPanel panel;
-	private JPanel panel_1;
+	private JPanel panel, display2, display3;
+	private JPanel panel_1, panelEast;
 	private JButton btnSubmit;
-	private int menuType;
+	private JRadioButton b1, b2, b3;
+	private JScrollPane scroll = new JScrollPane();
+	private Staff staff = new Staff();
+    private DefaultListModel<Staff> supervisorList = new DefaultListModel<>();
+    private JList<Staff> staffListForUpdating;
+    private ArrayList<Staff> staffList = staff.getStaffByID(0);
+    private JList<Staff> listForUpdating;
+    private DefaultListModel<Staff> list = new DefaultListModel<>();
+    private JScrollPane staffScroll = new JScrollPane();
 
 
 
-
-	/**
+    /**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		Add window = new Add();
-		window.frame.setVisible(true);
+		//Add window = new Add(cl);
+		//window.frame.setVisible(true);
 //		EventQueue.invokeLater(new Runnable() {
 //			public void run() {
 //				try {
@@ -88,31 +86,17 @@ public class Add implements ActionListener{
 	/**
 	 * Create the application.
 	 */
-	public Add() {
-		initialize();
-	}
 	public Add(int cl) {
-		this.menuType = cl;
-		initialize();
+		initialize(cl);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		select = new ButtonGroup();
-		add = new JRadioButton();
-		update = new JRadioButton();
-		delete = new JRadioButton();
-		select.add(add);
-		select.add(update);
-		select.add(delete);
-		add.setText("Add");
-		update.setText("Update");
-		delete.setText("Delete");
+	private void initialize(int cl) {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 450, 500);
+		frame.setBounds(100, 100, 800, 500);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -122,16 +106,47 @@ public class Add implements ActionListener{
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
 
 		JLabel lblSelect = new JLabel("Select:");
-		panel.add(lblSelect);
-		comboBox = new JComboBox<Object>(addChoices);
+		//panel.add(lblSelect);
+        if(cl == 2) {
+            comboBox = new JComboBox<Object>(addChoices);
+        }
+        else{
+            comboBox = new JComboBox<Object>(addChoicesNotManager);
+        }
 		comboBox.addActionListener(this);
 		//comboBox.setSelectedIndex(0);
 
-		panel.add(comboBox);
+        panel.add(comboBox);
+
+        b1 = new JRadioButton();
+            b1.setText("Add");
+        b2 = new JRadioButton();
+            b2.setText("Update");
+        b3 = new JRadioButton();
+            b3.setText("Delete");
+        panel.add(b1);
+        b1.setSelected(true);
+        panel.add(b2);
+        panel.add(b3);
+        //add
+        b1.addActionListener(e2 -> {
+            b2.setSelected(false);
+            b3.setSelected(false);
+        });
+        //update
+        b2.addActionListener(e2 -> {
+            b1.setSelected(false);
+            b3.setSelected(false);
+        });
+        //delete
+        b3.addActionListener(e2 -> {
+            b1.setSelected(false);
+            b2.setSelected(false);
+        });
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, null, null));
-		frame.getContentPane().add(panel_1, BorderLayout.WEST);
+		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 
 		JLabel l0 = new JLabel("First: ");
@@ -246,55 +261,45 @@ public class Add implements ActionListener{
 		textField_15.setColumns(10);
 		panel_1.add(textField_15);
 
-		btnSubmit = new JButton("Submit");
+		JPanel display = new JPanel(new BorderLayout());
+		display2 = new JPanel(new BorderLayout());
+		display3 = new JPanel();
+
+		btnSubmit = new JButton("<html><h4>Submit</h4></html>");
+		hint = new JLabel();
+		hint.setText("Example hint");
 		//btnSubmit.setPreferredSize(new Dimension(75, 75));
-		frame.getContentPane().add(btnSubmit, BorderLayout.CENTER);
+		//frame.getContentPane().add(btnSubmit, BorderLayout.NORTH);
+		//frame.getContentPane().add(btnSubmit2, BorderLayout.SOUTH);
+		panel.add(display);
+		display.add(btnSubmit);
+		//panel_1.add(display);
+		//frame.getContentPane().add(comboBox, BorderLayout.SOUTH);
 		btnSubmit.addActionListener(this);
 		//Ensures box opens to add clients
 		comboBox.setSelectedIndex(0);
 
+        // Creating the eastern jScrollPane before we fill it with data
+		scroll = new JScrollPane();
+		scroll.setViewportView(listForUpdating);
 
-
-		/*textField.setVisible(false);
-		textField_1.setVisible(false);
-		textField_2.setVisible(false);
-		textField_3.setVisible(false);
-		textField_4.setVisible(false);
-		textField_5.setVisible(false);
-		textField_6.setVisible(false);
-		textField_7.setVisible(false);
-		textField_8.setVisible(false);
-		textField_9.setVisible(false);
-		textField_10.setVisible(false);
-		textField_11.setVisible(false);
-		textField_12.setVisible(false);
-		textField_13.setVisible(false);
-		textField_14.setVisible(false);
-		textField_15.setVisible(false);
-		l0.setVisible(false);
-		l1.setVisible(false);
-		l2.setVisible(false);
-		l3.setVisible(false);
-		l4.setVisible(false);
-		l5.setVisible(false);
-		l6.setVisible(false);
-		l7.setVisible(false);
-		l8.setVisible(false);
-		l9.setVisible(false);
-		l10.setVisible(false);
-		l11.setVisible(false);
-		l12.setVisible(false);
-		l13.setVisible(false);
-		l14.setVisible(false);
-		l15.setVisible(false);
-        */
+		//Setting the JScrollPane's location
+		panelEast = new JPanel();
+		panelEast.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, null, null));
+		frame.getContentPane().add(panelEast, BorderLayout.EAST);
+		panelEast.setLayout(new GridLayout(2, 1, 0, 0));
+		panelEast.add(display2, BorderLayout.NORTH);
+		panelEast.add(display3, BorderLayout.SOUTH);
+		display2.add(scroll);
+		display3.add(hint);
+		//END Staff
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
 		//all done except for button
-		if(comboBox.getSelectedItem().equals("Add Client")) {
+		if(comboBox.getSelectedItem().equals("Clients")) {
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -388,7 +393,8 @@ public class Add implements ActionListener{
 
 		}
 		//Up to date except button listener
-		if(comboBox.getSelectedItem().equals("Add Property")) {
+		if(comboBox.getSelectedItem().equals("Properties")) {
+            hint.setText("Example hint that happens to be really long");
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -465,8 +471,11 @@ public class Add implements ActionListener{
 			textField_6.setText(null);
 		}
 		//Up to date except button listener
-		if(comboBox.getSelectedItem().equals("Add Staff")) {
+		if(comboBox.getSelectedItem().equals("Staff")) {
 			panel_1.removeAll();
+
+			b1.setSelected(false);
+            b1.setVisible(false);
 
 			textField.setVisible(true);
 			textField_1.setVisible(true);
@@ -476,7 +485,7 @@ public class Add implements ActionListener{
 			textField_5.setVisible(true);
 			textField_6.setVisible(true);
 			textField_7.setVisible(true);
-			textField_8.setVisible(true);
+			textField_8.setVisible(false);
 			textField_9.setVisible(false);
 			textField_10.setVisible(false);
 			textField_11.setVisible(false);
@@ -507,9 +516,87 @@ public class Add implements ActionListener{
 			panel_1.add(textField_6);
 			l7 = new JLabel("Supervisor");
 			panel_1.add(l7);
-			panel_1.add(textField_7);
-			panel_1.validate();
-			panel_1.repaint();
+            panel_1.validate();
+            panel_1.repaint();
+
+            staffListForUpdating = new JList<>(supervisorList);
+            staffScroll = new JScrollPane();
+            staffScroll.setViewportView(staffListForUpdating);
+
+            staffListForUpdating.addListSelectionListener(e3 -> {
+                Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
+                if(selectedStaff2 != null) {
+                    System.out.println(selectedStaff2.getStaffNum());
+                    //selectedStaff2.getStaffNum()
+                    //TODO use this variable for updating the staff number
+                }
+            });
+            /////////////////////////////////////////////////
+            for(int i = 0; i < staffList.size(); i++){
+                if(!list.contains(staffList.get(i))) {
+                    list.addElement(staffList.get(i));
+                }
+            }
+            listForUpdating = new JList(list);
+
+            //Activated by clicking an item from the list
+            listForUpdating.addListSelectionListener(e2 -> {
+                Staff selectedStaff = listForUpdating.getSelectedValue();
+                textField.setText(selectedStaff.getFname());
+                textField_1.setText(selectedStaff.getLname());
+                textField_3.setText(selectedStaff.getBranch());
+                textField_4.setText(selectedStaff.getGender());
+                textField_5.setText(selectedStaff.getDOB());
+                textField_6.setText(Double.toString(selectedStaff.getSalary()));
+
+                ArrayList<Staff> newStaffList;
+                //staffListForUpdating = new JList<>(supervisorList);
+                supervisorList.removeAllElements();
+                if(selectedStaff.getPosition() != 2) {
+                    newStaffList = staff.getStaffByPosition(2);
+                    if (selectedStaff.getPosition() == 1) {
+                        newStaffList = staff.getStaffByPosition(2);
+                    }
+                    else if (selectedStaff.getPosition() == 0) {
+                        newStaffList = staff.getStaffByPosition(1);
+                    }
+                    for (int i = 0; i < newStaffList.size(); i++) {
+                        if (selectedStaff.getSupervisorID() == newStaffList.get(i).getStaffNum()) {
+                            supervisorList.addElement(newStaffList.get(i));
+                            break;
+                        }
+                    }
+                    for (int i = 0; i < newStaffList.size(); i++) {
+                        if (selectedStaff.getSupervisorID() == newStaffList.get(i).getStaffNum()) {
+                            continue;
+                        }
+                        supervisorList.addElement(newStaffList.get(i));
+                    }
+                    panel_1.remove(staffScroll);
+                    staffScroll = new JScrollPane();
+                    staffScroll.setViewportView(staffListForUpdating);
+                    staffListForUpdating.setSelectedIndex(0);
+                    panel_1.add(staffScroll);
+                }
+                else{
+                    panel_1.remove(staffScroll);
+                }
+                panel_1.validate();
+                panel_1.repaint();
+            });
+            /////////////////////////////////////////////////
+            //Revalidates main list when clicking on a new dropdown item
+            panelEast.remove(scroll);
+            panelEast.remove(display2);
+            panelEast.remove(display3);
+            scroll = new JScrollPane();
+            scroll.setViewportView(listForUpdating);
+
+            panelEast.add(scroll);
+            listForUpdating.setSelectedIndex(0);
+            panelEast.add(display3);
+            panelEast.validate();
+            panelEast.repaint();
 
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
@@ -547,8 +634,11 @@ public class Add implements ActionListener{
 			textField_6.setText(null);
 
 		}
+		else{
+            b1.setVisible(true);
+        }
 		//under construction
-		if(comboBox.getSelectedItem().equals("Add Property Owners")) {
+		if(comboBox.getSelectedItem().equals("Property Owners")) {
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -625,7 +715,7 @@ public class Add implements ActionListener{
 			textField_6.setText(null);
 		}
 		//Up to date besides the idiot protection
-		if(comboBox.getSelectedItem().equals("Add Business Owners")) {
+		if(comboBox.getSelectedItem().equals("Business Owners")) {
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -716,7 +806,7 @@ public class Add implements ActionListener{
 
 		}
 		//idiot proofing
-		if(comboBox.getSelectedItem().equals("Add Property Viewing")) {
+		if(comboBox.getSelectedItem().equals("Property Viewing")) {
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -809,7 +899,7 @@ public class Add implements ActionListener{
 		}
 		//under construction
 
-		if(comboBox.getSelectedItem().equals("Add Lease")) {
+		if(comboBox.getSelectedItem().equals("Leases")) {
 			panel_1.removeAll();
 
 			textField.setVisible(true);

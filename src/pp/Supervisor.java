@@ -3,19 +3,12 @@ package pp;
 import java.util.ArrayList;
 
 public class Supervisor extends Staff {
-	
-	
-	
-
 	private ArrayList<Staff> group = new ArrayList<>(10);
-
-	public Supervisor(int sID, int pos, String Fname, String Lname, String branch, String sex, String DoB,
-			String salary, String Username, String Password, int sup) {
-		super(sID, pos, Fname, Lname, branch, sex, DoB, salary, Username, Password, sup);
-		
+	
+	public Supervisor(String fname, String lname, int position, String branch, String gender, String dOB, int staffNum, double salary) {
+		super(fname, lname, position, gender, dOB, staffNum, salary);
+		this.group = group;
 	}
-	
-	
 
 	public void addStaff(Staff s) {
 		group.add(s);

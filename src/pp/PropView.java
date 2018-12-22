@@ -68,6 +68,7 @@ public class PropView {
 				PropView propView = new PropView(clientId, fname, lname, phone, propertyId, street, city, postCode, viewDate, comments);
 				propViewList.add(propView);
 			}
+			rs.close();
 			stmt.close();
 			c.commit();
 			c.close();

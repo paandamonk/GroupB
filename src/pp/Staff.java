@@ -24,13 +24,11 @@ public class Staff extends Person {
 	private int SupId;
 	File file = new File("11235813");
 	private int staffNum;
-	private String salary;
+	private double salary;
 	private ArrayList<Property> propList = new ArrayList<>(100);
 	private ArrayList<Staff> group = new ArrayList<>(10);
 
-
-
-	public Staff(int sID, int pos, String Fname, String Lname, String branch, String sex, String DoB, String salary, String Username, String Password, int sup) {
+	public Staff(int sID, int pos, String Fname, String Lname, String branch, String sex, String DoB, double salary, String Username, String Password, int sup) {
 		super(Fname, Lname);
 		this.position = pos;
 		this.Branch = branch;
@@ -43,91 +41,37 @@ public class Staff extends Person {
 		this.salary = salary;
 	}
 
-	public Staff() {
-		// TODO Auto-generated constructor stub
+	public Staff() { }
+
+	public Staff(String fname, String lname, int position, String gender, String dOB, int staffNum, double salary) {
+
 	}
 
 	public void inputData(Property p) {
 		propList.add(p);
 	}
-	
+
 	public static void setPass(String password, String skey) {
 		System.out.println(aes.encryption.encrypt(password, skey));
 	}
-	
+
 	public boolean checkPass(String EnterPass) throws FileNotFoundException {
 		Scanner inf = new Scanner(file);
 		if(EnterPass == encryption.decrypt(Password, inf.next())) {
 			System.out.println("Password Confirmed");
 			return true;
-		}		
+		}
 		return false;
 	}
 
-    public ArrayList<Staff> getStaffByID(int idNum){
-        Connection c;
-        Statement stmt;
-
-        ArrayList<Staff> staffList = new ArrayList();
-        int staffID, position, supervisorId;
-        String Fname, Lname, branch, sex, DoB, username, password;
-        String salary;
-
-        try{
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite:database.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened database successfully (Staff)");
-
-            stmt = c.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM STAFF;");
-            while(rs.next()){
-                staffID = rs.getInt("STAFFNUM");
-                Fname = rs.getString("FNAME");
-                Lname = rs.getString("LNAME");
-                position = rs.getInt("POSITION");
-                branch = rs.getString("BRANCH");
-                sex = rs.getString("SEX");
-                DoB = rs.getString("DOB");
-                salary = rs.getString("SALARY");
-                username = rs.getString("USERNAME");
-                password = rs.getString("PASSWORD");
-                supervisorId = rs.getInt("SUPERVISOR");
-                Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password, supervisorId);
-                System.out.println(salary);
-
-                //Return staff of given ID
-                if(staffID == idNum) {
-                    staffList.add(staff);
-                    rs.close();
-        			stmt.close();
-        			c.commit();
-        			c.close();
-                    return staffList;
-                }
-                else if(idNum == 0){
-                  //  Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password,  supervisorId);
-                    staffList.add(staff);
-                }
-            }
-            rs.close();
-			stmt.close();
-			c.commit();
-			c.close();
-        }catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
-        }
-        return staffList;
-    }
-	public ArrayList<Staff> getStaffByPosition(int staffPos){
+	public ArrayList<Staff> getStaffByID(int idNum){
 		Connection c;
 		Statement stmt;
 
 		ArrayList<Staff> staffList = new ArrayList();
 		int staffID, position, supervisorId;
 		String Fname, Lname, branch, sex, DoB, username, password;
-		String salary;
+		double salary;
 
 		try{
 			Class.forName("org.sqlite.JDBC");
@@ -145,7 +89,62 @@ public class Staff extends Person {
 				branch = rs.getString("BRANCH");
 				sex = rs.getString("SEX");
 				DoB = rs.getString("DOB");
-                salary = rs.getString("SALARY");
+				salary = rs.getDouble("SALARY");
+				username = rs.getString("USERNAME");
+				password = rs.getString("PASSWORD");
+				supervisorId = rs.getInt("SUPERVISOR");
+				Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password, supervisorId);
+
+				//Return staff of given ID
+				if(staffID == idNum) {
+					staffList.add(staff);
+					rs.close();
+					stmt.close();
+					c.commit();
+					c.close();
+					return staffList;
+				}
+				else if(idNum == 0){
+					//  Staff staff = new Staff(staffID, position, Fname, Lname, branch, sex, DoB, salary, username, password,  supervisorId);
+					staffList.add(staff);
+				}
+			}
+			rs.close();
+			stmt.close();
+			c.commit();
+			c.close();
+		}catch ( Exception e ) {
+			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
+		}
+		return staffList;
+	}
+	public ArrayList<Staff> getStaffByPosition(int staffPos){
+		Connection c;
+		Statement stmt;
+
+		ArrayList<Staff> staffList = new ArrayList();
+		int staffID, position, supervisorId;
+		String Fname, Lname, branch, sex, DoB, username, password;
+		double salary;
+
+		try{
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:database.db");
+			c.setAutoCommit(false);
+			System.out.println("Opened database successfully (Staff)");
+
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM STAFF;");
+			while(rs.next()){
+				staffID = rs.getInt("STAFFNUM");
+				Fname = rs.getString("FNAME");
+				Lname = rs.getString("LNAME");
+				position = rs.getInt("POSITION");
+				branch = rs.getString("BRANCH");
+				sex = rs.getString("SEX");
+				DoB = rs.getString("DOB");
+				salary = rs.getDouble("SALARY");
 				username = rs.getString("USERNAME");
 				password = rs.getString("PASSWORD");
 				supervisorId = rs.getInt("SUPERVISOR");
@@ -156,6 +155,7 @@ public class Staff extends Person {
 					staffList.add(staff);
 				}
 			}
+			rs.close();
 			stmt.close();
 			c.commit();
 			c.close();
@@ -278,14 +278,14 @@ public class Staff extends Person {
 	/**
 	 * @return the salary
 	 */
-	public String getSalary() {
+	public double getSalary() {
 		return salary;
 	}
 
 	/**
 	 * @param salary the salary to set
 	 */
-	public void setSalary(String salary) {
+	public void setSalary(double salary) {
 		this.salary = salary;
 	}
 
@@ -316,13 +316,26 @@ public class Staff extends Person {
 	public void setGroup(ArrayList<Staff> group) {
 		this.group = group;
 	}
+	
+	public void addGroup(Staff s) {
+		this.group.add(s);
+	}
 
 	public String getBranch() {
 		return this.Branch;
 	}
 	@Override
 	public String toString() {
-		return getFname() + " " + getLname() + "; Position: " + getPosition() + "; Salary: " + getSalary()
-		+ "; ID: " + getStaffNum();
+		String positionForOutput = "";
+		if(getPosition() == 2) {
+			positionForOutput = "Manager";
+		}
+		else if(getPosition() == 1){
+			positionForOutput = "Supervisor";
+		}
+		else if(getPosition() == 0){
+			positionForOutput = "Agent";
+		}
+		return "(" + positionForOutput + ") " + getFname() + " " + getLname() + " (ID: " + getStaffNum() + ")";
 	}
 }

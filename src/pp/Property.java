@@ -48,7 +48,7 @@ public class Property {
 		this.owner = propertyOwner.getPropOwnersByID(propertyId).get(0);
 	}
 
-	public void getPropertyByID(int Num) {
+	public ArrayList<Property> getPropertyByID(int Num) {
 		Connection c = null;
 		Statement stmt = null;
 		ArrayList<Property> propertiesList = new ArrayList<Property>();
@@ -80,10 +80,16 @@ public class Property {
 					System.out.println(propertiesList.get(0).getStreet().toString() + " TEST");
 				}
 			}
+			rs.close();
+			stmt.close();
+			c.commit();
+			c.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return propertiesList;
 	}
+
 
 	/**
 	 * @return the street

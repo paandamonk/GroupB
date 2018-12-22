@@ -21,21 +21,21 @@ public class Database {
         }
 
         Input staffInput = new Input("STAFF");
-        //staffInput.addStaffInfo("'Lupin'", "'Three'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 1);
+        staffInput.addStaffInfo("'Lupin'", "'Three'", 1, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 1);
 
         //Input businessOwnerInput = new Input("BUSOWNERS");
         //businessOwnerInput.addBusinessOwnerInfo("'Robin'", "'Hood'",
-         //      "'40 Dollop'", "'New York'", "'10020'", "'000-111-2222'",
-          //    "'Proper Properties'", "'Property Rental'", 1);
+        //      "'40 Dollop'", "'New York'", "'10020'", "'000-111-2222'",
+        //    "'Proper Properties'", "'Property Rental'", 1);
 
         //ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
         // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
 
         EditData ed = new EditData();
-       // ed.deleteInfo("STAFF", "STAFFNUM", 1);
+        // ed.deleteInfo("STAFF", "STAFFNUM", 1);
 
         //ed.updateInfo("STAFF", "FNAME", 0, "Seymour", "STAFFNUM",1);
-       // ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
+        // ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
 
         //Input clientInput = new Input("CLIENTS");
         //clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'",
@@ -54,7 +54,7 @@ public class Database {
         Staff staff = new Staff();
         ArrayList<Staff> staffList = staff.getStaffByID(1);
         for(int i = 0; i < staffList.size(); i++){
-            System.out.println(staffList.get(i).getFname() + " " + staffList.get(i).getLname() + ", " + staffList.get(i).getUsername() + ", " + staffList.get(i).getSalary());
+            System.out.println(staffList.get(i).getFname() + " " + staffList.get(i).getLname() + ", " + staffList.get(i).getUsername() + ", " + staffList.get(i).getPassword());
         }
 
         //Staff staff = new Staff();

@@ -77,6 +77,7 @@ public class Client extends Person{
 					clientList.add(client);
 				}
 			}
+			rs.close();
 			stmt.close();
 			c.commit();
 			c.close();

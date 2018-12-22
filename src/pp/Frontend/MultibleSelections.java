@@ -51,6 +51,37 @@ public class MultibleSelections extends JFrame implements ListSelectionListener 
        // setVisible(true);
     }
 
+    public JList<String> selectForUpdating(String rowName) {
+        JList<String> itemsToUpdateJList = new JList<>();
+        Container c = getContentPane();
+        c.setLayout(new FlowLayout());
+        if (rowName.equals("Staff")) {
+            ArrayList<Staff> staffList = staff.getStaffByID(0);
+            String items[] = new String[staffList.size()];
+            //Fill the list with data
+            for (int i = 0; i < items.length; i++) {
+                String position = Integer.toString(staffList.get(i).getPosition());
+                String fName = staffList.get(i).getFname();
+                String lName = staffList.get(i).getLname();
+                int id = staffList.get(i).getStaffNum();
+
+                items[i] = "(" + position + ") " + fName + " " + lName + " (ID: " + id + ")";
+            }
+
+            itemsToUpdateJList = new JList<>(items);                    // creating JList object; pass the array as parameter
+            itemsToUpdateJList.setVisibleRowCount(5);
+
+            itemsToUpdateJList.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+
+            return itemsToUpdateJList;
+        }
+
+        //setTitle("Practcing Multiple selection JList");
+        // setSize(300,300);
+        // setVisible(true);
+        return  itemsToUpdateJList;
+    }
+
     public void StaffSelections1() {
         Container c = getContentPane();
         c.setLayout(new FlowLayout());

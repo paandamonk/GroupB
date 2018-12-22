@@ -59,6 +59,7 @@ public class BusinessOwner extends PropertyOwner{
 					BusinessOwnerList.add(businessOwner);
 				}
 			}
+			rs.close();
 			stmt.close();
 			c.commit();
 			c.close();
