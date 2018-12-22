@@ -294,30 +294,49 @@ public class UserInterface extends JFrame implements ActionListener {
 								hintText.setText("");
 								registration.remove(keyText);
 								registration.remove(submit);
+								Staff staff = new Staff();
+								ArrayList<Staff>supervisorList = new ArrayList<>();
+								supervisorList = staff.getStaffByPosition(1);
+								if(supervisorList.size() == 0) {
+									registration.add(b1);
+									b1.setText("Manager");
+									b1.addActionListener(e2 -> {
+										input.set("2");
+										b2.setSelected(false);
+										b3.setSelected(false);
+									});
 
-								registration.add(b1);
-								b1.setText("Manager");
-								b1.addActionListener(e2 -> {
-									input.set("2");
-									b2.setSelected(false);
-									b3.setSelected(false);
-								});
+									registration.add(b2);
+									b2.setText("Supervisor");
+									b2.addActionListener(e2 -> {
+										input.set("1");
+										b1.setSelected(false);
+										b3.setSelected(false);
+									});
 
-								registration.add(b2);
-								b2.setText("Supervisor");
-								b2.addActionListener(e2 -> {
-									input.set("1");
-									b1.setSelected(false);
-									b3.setSelected(false);
-								});
+									registration.add(b3);
+									b3.setText("Agent");
+									b3.addActionListener(e2 -> {
+										input.set("0");
+										b1.setSelected(false);
+										b2.setSelected(false);
+									});
+								}
+								else{
+									registration.add(b1);
+									b1.setText("Manager");
+									b1.addActionListener(e2 -> {
+										input.set("2");
+										b2.setSelected(false);
+									});
 
-								registration.add(b3);
-								b3.setText("Agent");
-								b3.addActionListener(e2 -> {
-									input.set("0");
-									b1.setSelected(false);
-									b2.setSelected(false);
-								});
+									registration.add(b2);
+									b2.setText("Supervisor");
+									b2.addActionListener(e2 -> {
+										input.set("1");
+										b1.setSelected(false);
+									});
+								}
 								registration.add(submit);
 
 								count[0]++; // 3
