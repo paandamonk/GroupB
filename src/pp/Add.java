@@ -383,6 +383,11 @@ public class Add implements ActionListener{
 			}
 			if(secondaryList != null){
 				secondaryList.removeAllElements();
+                ArrayList<Staff> newStaffList;
+                newStaffList = staff.getStaffByPosition(0);
+				for(int i = 0; i < newStaffList.size(); i++){
+				    secondaryList.addElement(newStaffList.get(i));
+                }
 			}
 			for(int i = 0; i < clientList.size(); i++){
 				if(!list.contains(clientList.get(i))) {
@@ -430,20 +435,8 @@ public class Add implements ActionListener{
 
 			/////////////////////////////////////////////////
 
-			//Revalidates main list when clicking on a new dropdown item
-			if(panelEast != null) {
-				panelEast.remove(scroll);
-				panelEast.remove(display2);
-				panelEast.remove(display3);
-				scroll = new JScrollPane();
-				scroll.setViewportView(listForUpdating);
-
-				panelEast.add(scroll);
-				listForUpdating.setSelectedIndex(0);
-				panelEast.add(display3);
-				panelEast.validate();
-				panelEast.repaint();
-			}
+            //revalidate Eastern panel
+			revalidateEast();
 
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
@@ -478,19 +471,7 @@ public class Add implements ActionListener{
 				}
 				listForUpdating = new JList(list);
 				//Revalidates main list when clicking on a new dropdown item
-				if(panelEast != null) {
-					panelEast.remove(scroll);
-					panelEast.remove(display2);
-					panelEast.remove(display3);
-					scroll = new JScrollPane();
-					scroll.setViewportView(listForUpdating);
-
-					panelEast.add(scroll);
-					listForUpdating.setSelectedIndex(0);
-					panelEast.add(display3);
-					panelEast.validate();
-					panelEast.repaint();
-				}
+				revalidateEast();
 
 			}
 			textField.setText(null);
@@ -615,7 +596,7 @@ public class Add implements ActionListener{
 							panel_1.remove(staffScroll);
 							staffScroll = new JScrollPane();
 							staffScroll.setViewportView(propertyOwnerListForUpdating);
-							staffListForUpdating.setSelectedIndex(0);
+							propertyOwnerListForUpdating.setSelectedIndex(0);
 							panel_1.add(staffScroll);
 						}
 						panel_1.validate();
@@ -798,6 +779,7 @@ public class Add implements ActionListener{
             panelEast.remove(display3);
             scroll = new JScrollPane();
             scroll.setViewportView(listForUpdating);
+            listForUpdating.setSelectedIndex(0);
 
             panelEast.add(scroll);
             panelEast.add(display3);
@@ -1207,5 +1189,21 @@ public class Add implements ActionListener{
 
 	}
 
+    public void revalidateEast(){
+        //Revalidates main list when clicking on a new dropdown item
+        if(panelEast != null) {
+            panelEast.remove(scroll);
+            panelEast.remove(display2);
+            panelEast.remove(display3);
+            scroll = new JScrollPane();
+            scroll.setViewportView(listForUpdating);
+
+            panelEast.add(scroll);
+            //listForUpdating.setSelectedIndex(0);
+            panelEast.add(display3);
+            panelEast.validate();
+            panelEast.repaint();
+        }
+    }
 
 }
