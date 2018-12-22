@@ -574,6 +574,10 @@ public class Add implements ActionListener{
 			}
 			if(secondaryList != null){
 				secondaryList.removeAllElements();
+
+				for(int i = 0; i < propertyOwnerList.size(); i++){
+					secondaryList.addElement(propertyOwnerList.get(i));
+				}
 			}
 
 			for(int i = 0; i < propertyList.size(); i++){
