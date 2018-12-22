@@ -57,11 +57,12 @@ public class Add implements ActionListener{
 	private JScrollPane scroll = new JScrollPane();
 	private Staff staff = new Staff();
     private DefaultListModel<Staff> supervisorList = new DefaultListModel<>();
-    private JList<Staff> staffListForUpdating = new JList<>(supervisorList);
+    private JList<Staff> staffListForUpdating;
     private ArrayList<Staff> staffList = staff.getStaffByID(0);
     private JList<Staff> listForUpdating;
     private DefaultListModel<Staff> list = new DefaultListModel<>();
     private JScrollPane staffScroll = new JScrollPane();
+
 
 
     /**
@@ -145,7 +146,7 @@ public class Add implements ActionListener{
 
 		panel_1 = new JPanel();
 		panel_1.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, null, null));
-		frame.getContentPane().add(panel_1, BorderLayout.WEST);
+		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 
 		JLabel l0 = new JLabel("First: ");
@@ -279,10 +280,6 @@ public class Add implements ActionListener{
 		comboBox.setSelectedIndex(0);
 
 		//EASTERN PANEL
-		//JScrollPane selectionPane = new JScrollPane();
-		//MultibleSelections ms = new MultibleSelections();
-		//JList<String> itemsForUpdating = ms.selectForUpdating("Staff");
-
         for(int i = 0; i < staffList.size(); i++){
             if(!list.contains(staffList.get(i))) {
                 list.addElement(staffList.get(i));
@@ -295,14 +292,14 @@ public class Add implements ActionListener{
 			Staff selectedStaff = listForUpdating.getSelectedValue();
 			textField.setText(selectedStaff.getFname());
 			textField_1.setText(selectedStaff.getLname());
-			//textField_2.setText(selectedStaff.getPosition());
 			textField_3.setText(selectedStaff.getBranch());
 			textField_4.setText(selectedStaff.getGender());
 			textField_5.setText(selectedStaff.getDOB());
 			textField_6.setText(Double.toString(selectedStaff.getSalary()));
 
             ArrayList<Staff> newStaffList;
-            supervisorList.clear();
+            //staffListForUpdating = new JList<>(supervisorList);
+            supervisorList.removeAllElements();
             if(selectedStaff.getPosition() != 2) {
                 newStaffList = staff.getStaffByPosition(2);
                 if (selectedStaff.getPosition() == 1) {
@@ -341,7 +338,7 @@ public class Add implements ActionListener{
 
 		panelEast = new JPanel();
 		panelEast.setBorder(new BevelBorder(BevelBorder.RAISED, Color.BLACK, null, null, null));
-		frame.getContentPane().add(panelEast, BorderLayout.CENTER);
+		frame.getContentPane().add(panelEast, BorderLayout.EAST);
 		panelEast.setLayout(new GridLayout(2, 1, 0, 0));
 		panelEast.add(display2, BorderLayout.NORTH);
 		panelEast.add(display3, BorderLayout.SOUTH);
@@ -550,7 +547,6 @@ public class Add implements ActionListener{
 			l0 = new JLabel("First name");
 			panel_1.add(l0);
 			panel_1.add(textField);
-            panel_1.revalidate();
 			l1 = new JLabel("Last name");
 			panel_1.add(l1);
 			panel_1.add(textField_1);
@@ -574,12 +570,25 @@ public class Add implements ActionListener{
             panel_1.validate();
             panel_1.repaint();
 
+            staffListForUpdating = new JList<>(supervisorList);
             staffScroll = new JScrollPane();
             staffScroll.setViewportView(staffListForUpdating);
-            staffListForUpdating.setSelectedIndex(0);
+
+            staffListForUpdating.addListSelectionListener(e3 -> {
+                Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
+                if(selectedStaff2 != null) {
+                    System.out.println(selectedStaff2.getStaffNum());
+                    //selectedStaff2.getStaffNum()
+                    //TODO use this variable for updating the staff number
+                }
+            });
+
+            /*staffListForUpdating.setSelectedIndex(1);
             staffListForUpdating.addListSelectionListener(e2 -> {
-                System.out.println("AAAH");
-		    });
+                //System.out.println(staffListForUpdating.getSelectedValue().getStaffNum());
+               // System.out.println(staffListForUpdating.getSelectedValue().getFname());
+                System.out.println();
+		    });*/
             /////////////////////////////////////////////////
             /*
             for(int i = 0; i < staffList.size(); i++){
@@ -644,10 +653,10 @@ public class Add implements ActionListener{
             scroll = new JScrollPane();
             scroll.setViewportView(listForUpdating);
 
-            panelEast.setLayout(new GridLayout(2, 1, 0, 0));
+           // panelEast.setLayout(new GridLayout(2, 1, 0, 0));
 
             panelEast.add(scroll);
-            listForUpdating.setSelectedIndex(0);
+            //listForUpdating.setSelectedIndex(0);
             panelEast.add(display3);
             panelEast.validate();
             panelEast.repaint();
