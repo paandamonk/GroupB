@@ -108,7 +108,7 @@ public class Add implements ActionListener{
 	private void initialize(int cl) {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 800, 500);
+		frame.setBounds(100, 100, 800, 600);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 
@@ -813,6 +813,7 @@ public class Add implements ActionListener{
         }
 		//under construction
 		if(comboBox.getSelectedItem().equals("Property Owners")) {
+            switchCase = 3;
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -849,11 +850,95 @@ public class Add implements ActionListener{
 			l5 = new JLabel("Phone");
 			panel_1.add(l5);
 			panel_1.add(textField_5);
-			l6 = new JLabel("Staff Id");
+			l6 = new JLabel("Staff");
 			panel_1.add(l6);
-			panel_1.add(textField_6);
-			panel_1.validate();
-			panel_1.repaint();
+			//panel_1.add(textField_6);
+
+            staffListForUpdating = new JList<>(secondaryList);
+            staffScroll = new JScrollPane();
+            staffScroll.setViewportView(staffListForUpdating);
+
+            staffListForUpdating.addListSelectionListener(e3 -> {
+                if(switchCase == 3) {
+                    Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
+                    if (selectedStaff2 != null) {
+                        System.out.println(selectedStaff2.getStaffNum());
+                        //selectedStaff2.getStaffNum()
+                        //TODO use this variable for updating the staff number
+                    }
+                }
+            });
+            panel_1.add(staffScroll);
+            panel_1.validate();
+            panel_1.repaint();
+
+            /////////////////////////////////////////////////
+            if(list != null){
+                list.removeAllElements();
+            }
+            if(secondaryList != null){
+                secondaryList.removeAllElements();
+                ArrayList<Staff> newStaffList;
+                newStaffList = staff.getStaffByPosition(0);
+                for(int i = 0; i < newStaffList.size(); i++){
+                    secondaryList.addElement(newStaffList.get(i));
+                }
+            }
+            for(int i = 0; i < clientList.size(); i++){
+                if(!list.contains(clientList.get(i))) {
+                    list.addElement(clientList.get(i));
+                }
+            }
+            listForUpdating = new JList(list);
+
+            //Activated by clicking an item from the list
+
+            listForUpdating.addListSelectionListener(e2 -> {
+                if(switchCase == 3) { //clients are selected
+                    Client selectedClient = (Client)listForUpdating.getSelectedValue();
+                    if(selectedClient != null) {
+                        textField.setText(selectedClient.getFname());
+                        textField_1.setText(selectedClient.getLname());
+                        textField_2.setText(selectedClient.getType());
+                        textField_3.setText(selectedClient.getPhone());
+                        DecimalFormat df2 = new DecimalFormat(".##");
+                        textField_4.setText(df2.format(selectedClient.getMax())); //maxRent
+                        textField_6.setText(selectedClient.getStreet());
+                        textField_7.setText(selectedClient.getCity());
+                        textField_8.setText(selectedClient.getPostCode());
+
+                        ArrayList<Staff> newStaffList;
+                        //staffListForUpdating = new JList<>(supervisorList);
+                        secondaryList.removeAllElements();
+                        newStaffList = staff.getStaffByPosition(0);
+
+                        for (int i = 0; i < newStaffList.size(); i++) {
+                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                                secondaryList.addElement(newStaffList.get(i));
+                                break;
+                            }
+                        }
+                        for (int i = 0; i < newStaffList.size(); i++) {
+                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                                continue;
+                            }
+                            secondaryList.addElement(newStaffList.get(i));
+                        }
+                        panel_1.remove(staffScroll);
+                        staffScroll = new JScrollPane();
+                        staffScroll.setViewportView(staffListForUpdating);
+                        staffListForUpdating.setSelectedIndex(0);
+                        panel_1.add(staffScroll);
+                    }
+                    panel_1.validate();
+                    panel_1.repaint();
+                }
+            });
+
+            /////////////////////////////////////////////////
+
+            //revalidate Eastern panel
+            revalidateEast();
 
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
@@ -890,6 +975,7 @@ public class Add implements ActionListener{
 		}
 		//Up to date besides the idiot protection
 		if(comboBox.getSelectedItem().equals("Business Owners")) {
+		    switchCase = 4;
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -934,9 +1020,92 @@ public class Add implements ActionListener{
 			panel_1.add(textField_7);
 			l8 = new JLabel("Staff Id");
 			panel_1.add(l8);
-			panel_1.add(textField_8);
-			panel_1.validate();
-			panel_1.repaint();
+
+            staffListForUpdating = new JList<>(secondaryList);
+            staffScroll = new JScrollPane();
+            staffScroll.setViewportView(staffListForUpdating);
+
+            staffListForUpdating.addListSelectionListener(e3 -> {
+                if(switchCase == 4) {
+                    Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
+                    if (selectedStaff2 != null) {
+                        System.out.println(selectedStaff2.getStaffNum());
+                        //selectedStaff2.getStaffNum()
+                        //TODO use this variable for updating the staff number
+                    }
+                }
+            });
+            panel_1.add(staffScroll);
+            panel_1.validate();
+            panel_1.repaint();
+
+            /////////////////////////////////////////////////
+            if(list != null){
+                list.removeAllElements();
+            }
+            if(secondaryList != null){
+                secondaryList.removeAllElements();
+                ArrayList<Staff> newStaffList;
+                newStaffList = staff.getStaffByPosition(0);
+                for(int i = 0; i < newStaffList.size(); i++){
+                    secondaryList.addElement(newStaffList.get(i));
+                }
+            }
+            for(int i = 0; i < clientList.size(); i++){
+                if(!list.contains(clientList.get(i))) {
+                    list.addElement(clientList.get(i));
+                }
+            }
+            listForUpdating = new JList(list);
+
+            //Activated by clicking an item from the list
+
+            listForUpdating.addListSelectionListener(e2 -> {
+                if(switchCase == 4) { //clients are selected
+                    Client selectedClient = (Client)listForUpdating.getSelectedValue();
+                    if(selectedClient != null) {
+                        textField.setText(selectedClient.getFname());
+                        textField_1.setText(selectedClient.getLname());
+                        textField_2.setText(selectedClient.getType());
+                        textField_3.setText(selectedClient.getPhone());
+                        DecimalFormat df2 = new DecimalFormat(".##");
+                        textField_4.setText(df2.format(selectedClient.getMax())); //maxRent
+                        textField_6.setText(selectedClient.getStreet());
+                        textField_7.setText(selectedClient.getCity());
+                        textField_8.setText(selectedClient.getPostCode());
+
+                        ArrayList<Staff> newStaffList;
+                        //staffListForUpdating = new JList<>(supervisorList);
+                        secondaryList.removeAllElements();
+                        newStaffList = staff.getStaffByPosition(0);
+
+                        for (int i = 0; i < newStaffList.size(); i++) {
+                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                                secondaryList.addElement(newStaffList.get(i));
+                                break;
+                            }
+                        }
+                        for (int i = 0; i < newStaffList.size(); i++) {
+                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                                continue;
+                            }
+                            secondaryList.addElement(newStaffList.get(i));
+                        }
+                        panel_1.remove(staffScroll);
+                        staffScroll = new JScrollPane();
+                        staffScroll.setViewportView(staffListForUpdating);
+                        staffListForUpdating.setSelectedIndex(0);
+                        panel_1.add(staffScroll);
+                    }
+                    panel_1.validate();
+                    panel_1.repaint();
+                }
+            });
+
+            /////////////////////////////////////////////////
+
+            //revalidate Eastern panel
+            revalidateEast();
 
 			if(e.getSource() == btnSubmit) {
 				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) ||
@@ -981,6 +1150,7 @@ public class Add implements ActionListener{
 		}
 		//idiot proofing
 		if(comboBox.getSelectedItem().equals("Property Viewing")) {
+		    switchCase = 5;
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -1028,9 +1198,92 @@ public class Add implements ActionListener{
 			panel_1.add(textField_8);
 			l9 = new JLabel("Client Number");
 			panel_1.add(l9);
-			panel_1.add(textField_9);
-			panel_1.validate();
-			panel_1.repaint();
+
+            staffListForUpdating = new JList<>(secondaryList);
+            staffScroll = new JScrollPane();
+            staffScroll.setViewportView(staffListForUpdating);
+
+            staffListForUpdating.addListSelectionListener(e3 -> {
+                if(switchCase == 5) {
+                    Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
+                    if (selectedStaff2 != null) {
+                        System.out.println(selectedStaff2.getStaffNum());
+                        //selectedStaff2.getStaffNum()
+                        //TODO use this variable for updating the staff number
+                    }
+                }
+            });
+            panel_1.add(staffScroll);
+            panel_1.validate();
+            panel_1.repaint();
+
+            /////////////////////////////////////////////////
+            if(list != null){
+                list.removeAllElements();
+            }
+            if(secondaryList != null){
+                secondaryList.removeAllElements();
+                ArrayList<Staff> newStaffList;
+                newStaffList = staff.getStaffByPosition(0);
+                for(int i = 0; i < newStaffList.size(); i++){
+                    secondaryList.addElement(newStaffList.get(i));
+                }
+            }
+            for(int i = 0; i < clientList.size(); i++){
+                if(!list.contains(clientList.get(i))) {
+                    list.addElement(clientList.get(i));
+                }
+            }
+            listForUpdating = new JList(list);
+
+            //Activated by clicking an item from the list
+
+            listForUpdating.addListSelectionListener(e2 -> {
+                if(switchCase == 5) { //clients are selected
+                    Client selectedClient = (Client)listForUpdating.getSelectedValue();
+                    if(selectedClient != null) {
+                        textField.setText(selectedClient.getFname());
+                        textField_1.setText(selectedClient.getLname());
+                        textField_2.setText(selectedClient.getType());
+                        textField_3.setText(selectedClient.getPhone());
+                        DecimalFormat df2 = new DecimalFormat(".##");
+                        textField_4.setText(df2.format(selectedClient.getMax())); //maxRent
+                        textField_6.setText(selectedClient.getStreet());
+                        textField_7.setText(selectedClient.getCity());
+                        textField_8.setText(selectedClient.getPostCode());
+
+                        ArrayList<Staff> newStaffList;
+                        //staffListForUpdating = new JList<>(supervisorList);
+                        secondaryList.removeAllElements();
+                        newStaffList = staff.getStaffByPosition(0);
+
+                        for (int i = 0; i < newStaffList.size(); i++) {
+                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                                secondaryList.addElement(newStaffList.get(i));
+                                break;
+                            }
+                        }
+                        for (int i = 0; i < newStaffList.size(); i++) {
+                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                                continue;
+                            }
+                            secondaryList.addElement(newStaffList.get(i));
+                        }
+                        panel_1.remove(staffScroll);
+                        staffScroll = new JScrollPane();
+                        staffScroll.setViewportView(staffListForUpdating);
+                        staffListForUpdating.setSelectedIndex(0);
+                        panel_1.add(staffScroll);
+                    }
+                    panel_1.validate();
+                    panel_1.repaint();
+                }
+            });
+
+            /////////////////////////////////////////////////
+
+            //revalidate Eastern panel
+            revalidateEast();
 
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
