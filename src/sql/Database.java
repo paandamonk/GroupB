@@ -21,9 +21,9 @@ public class Database {
         }
 
         Input staffInput = new Input("STAFF");
-        staffInput.addStaffInfo("'Sarah'", "'Hughes'", 0, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 2);
-        staffInput.addStaffInfo("'Sarah'", "'Hughes'", 0, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 3);
-        staffInput.addStaffInfo("'Sarah'", "'Hughes'", 0, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 4);
+        //staffInput.addStaffInfo("'Sarah'", "'Hughes'", 0, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 2);
+       // staffInput.addStaffInfo("'Sarah'", "'Hughes'", 0, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 3);
+        //staffInput.addStaffInfo("'Sarah'", "'Hughes'", 0, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 4);
 
         //Input businessOwnerInput = new Input("BUSOWNERS");
         //businessOwnerInput.addBusinessOwnerInfo("'Robin'", "'Hood'",
@@ -34,14 +34,26 @@ public class Database {
         // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
 
         EditData ed = new EditData();
-        // ed.deleteInfo("STAFF", "STAFFNUM", 1);
+        /*ed.deleteInfo("CLIENTS", "CLIENTID", 7);
+        ed.deleteInfo("CLIENTS", "CLIENTID", 8);
+        ed.deleteInfo("CLIENTS", "CLIENTID", 9);
+        ed.deleteInfo("CLIENTS", "CLIENTID", 10);
+        ed.deleteInfo("CLIENTS", "CLIENTID", 11);
+        ed.deleteInfo("CLIENTS", "CLIENTID", 12);
+        ed.deleteInfo("CLIENTS", "CLIENTID", 13);
+        ed.deleteInfo("CLIENTS", "CLIENTID", 14);
+        ed.deleteInfo("CLIENTS", "CLIENTID", 15);
+        ed.deleteInfo("CLIENTS", "CLIENTID", 16);*/
 
         //ed.updateInfo("STAFF", "FNAME", 0, "Seymour", "STAFFNUM",1);
         // ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
 
-        //Input clientInput = new Input("CLIENTS");
-        //clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'",
-        //        30.1, 5, "'40'", "'Highland'", "'12234'");
+        Input clientInput = new Input("CLIENTS");
+        //clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'", 30.1, 9, "'40'", "'Highland'", "'12234'");
+        //clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'", 30.1, 11, "'40'", "'Highland'", "'12234'");
+        //clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'", 30.1, 10, "'40'", "'Highland'", "'12234'");
+       // clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'", 30.1, 2, "'40'", "'Highland'", "'12234'");
+       // clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'", 30.1, 4, "'40'", "'Highland'", "'12234'");
 
         BusinessOwner businessOwner = new BusinessOwner();
         ArrayList<BusinessOwner> businessOwnerList = businessOwner.getBusinessOwnersByID(0);

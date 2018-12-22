@@ -62,7 +62,7 @@ public class Add implements ActionListener{
     private DefaultListModel<Staff> supervisorList = new DefaultListModel<>();
     private JList<Staff> staffListForUpdating;
     private ArrayList<Staff> staffList = staff.getStaffByID(0);
-    private JList<Staff> listForUpdating;
+    private JList listForUpdating;
     private DefaultListModel list = new DefaultListModel<>();
     private JScrollPane staffScroll = new JScrollPane();
     private int switchCase = 0;
@@ -340,9 +340,6 @@ public class Add implements ActionListener{
 			l4 = new JLabel("Max Rent");
 			panel_1.add(l4);
 			panel_1.add(textField_4);
-			l5 = new JLabel("Staff Id");
-			panel_1.add(l5);
-			panel_1.add(textField_5);
 			l6 = new JLabel("Street");
 			panel_1.add(l6);
 			panel_1.add(textField_6);
@@ -352,14 +349,33 @@ public class Add implements ActionListener{
 			l8 = new JLabel("zip");
 			panel_1.add(l8);
 			panel_1.add(textField_8);
+			l5 = new JLabel("Staff");
+			panel_1.add(l5);
+
+			staffListForUpdating = new JList<>(supervisorList);
+			staffScroll = new JScrollPane();
+			staffScroll.setViewportView(staffListForUpdating);
+
+			staffListForUpdating.addListSelectionListener(e3 -> {
+				if(switchCase == 2) {
+					Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
+					if (selectedStaff2 != null) {
+						System.out.println(selectedStaff2.getStaffNum());
+						//selectedStaff2.getStaffNum()
+						//TODO use this variable for updating the staff number
+					}
+				}
+			});
+			panel_1.add(staffScroll);
 			panel_1.validate();
 			panel_1.repaint();
-
-
 
 			/////////////////////////////////////////////////
 			if(list != null){
 				list.removeAllElements();
+			}
+			if(supervisorList != null){
+				supervisorList.removeAllElements();
 			}
 			for(int i = 0; i < clientList.size(); i++){
 				if(!list.contains(clientList.get(i))) {
@@ -369,53 +385,42 @@ public class Add implements ActionListener{
 			listForUpdating = new JList(list);
 
 			//Activated by clicking an item from the list
+
 			listForUpdating.addListSelectionListener(e2 -> {
 				if(switchCase == 0) { //clients are selected
-					/*Staff selectedStaff = listForUpdating.getSelectedValue();
-					textField.setText(selectedStaff.getFname());
-					textField_1.setText(selectedStaff.getLname());
-					textField_3.setText(selectedStaff.getBranch());
-					textField_4.setText(selectedStaff.getGender());
-					textField_5.setText(selectedStaff.getDOB());
-					textField_6.setText(Double.toString(selectedStaff.getSalary()));
-					*/
+					Client selectedClient = (Client)listForUpdating.getSelectedValue();
+					if(selectedClient != null) {
+						textField.setText(selectedClient.getFname());
+						textField_1.setText(selectedClient.getLname());
 
-				/*	ArrayList<Staff> newStaffList;
-					//staffListForUpdating = new JList<>(supervisorList);
-					supervisorList.removeAllElements();
-					if(selectedStaff.getPosition() != 2) {
-						newStaffList = staff.getStaffByPosition(2);
-						if (selectedStaff.getPosition() == 1) {
-							newStaffList = staff.getStaffByPosition(2);
-						}
-						else if (selectedStaff.getPosition() == 0) {
-							newStaffList = staff.getStaffByPosition(1);
-						}
-						for (int i = 0; i < newStaffList.size(); i++) {
-							if (selectedStaff.getSupervisorID() == newStaffList.get(i).getStaffNum()) {
+						ArrayList<Staff> newStaffList;
+						//staffListForUpdating = new JList<>(supervisorList);
+						supervisorList.removeAllElements();
+							newStaffList = staff.getStaffByPosition(0);
+
+							for (int i = 0; i < newStaffList.size(); i++) {
+								if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+									supervisorList.addElement(newStaffList.get(i));
+									break;
+								}
+							}
+							for (int i = 0; i < newStaffList.size(); i++) {
+								if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+									continue;
+								}
 								supervisorList.addElement(newStaffList.get(i));
-								break;
 							}
-						}
-						for (int i = 0; i < newStaffList.size(); i++) {
-							if (selectedStaff.getSupervisorID() == newStaffList.get(i).getStaffNum()) {
-								continue;
-							}
-							supervisorList.addElement(newStaffList.get(i));
-						}
-						panel_1.remove(staffScroll);
-						staffScroll = new JScrollPane();
-						staffScroll.setViewportView(staffListForUpdating);
-						staffListForUpdating.setSelectedIndex(0);
-						panel_1.add(staffScroll);
+							panel_1.remove(staffScroll);
+							staffScroll = new JScrollPane();
+							staffScroll.setViewportView(staffListForUpdating);
+							staffListForUpdating.setSelectedIndex(0);
+							panel_1.add(staffScroll);
 					}
-					else{
-						panel_1.remove(staffScroll);
-					}*/
 					panel_1.validate();
 					panel_1.repaint();
 				}
 			});
+
 			/////////////////////////////////////////////////
 
 			//Revalidates main list when clicking on a new dropdown item
@@ -631,12 +636,14 @@ public class Add implements ActionListener{
             staffScroll.setViewportView(staffListForUpdating);
 
             staffListForUpdating.addListSelectionListener(e3 -> {
-                Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
-                if(selectedStaff2 != null) {
-                    System.out.println(selectedStaff2.getStaffNum());
-                    //selectedStaff2.getStaffNum()
-                    //TODO use this variable for updating the staff number
-                }
+				if(switchCase == 2) {
+					Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
+					if (selectedStaff2 != null) {
+						System.out.println(selectedStaff2.getStaffNum());
+						//selectedStaff2.getStaffNum()
+						//TODO use this variable for updating the staff number
+					}
+				}
             });
             /////////////////////////////////////////////////
 			if(list != null){
@@ -652,46 +659,49 @@ public class Add implements ActionListener{
             //Activated by clicking an item from the list
             listForUpdating.addListSelectionListener(e2 -> {
             	if(switchCase == 2) {
-					Staff selectedStaff = listForUpdating.getSelectedValue();
-					textField.setText(selectedStaff.getFname());
-					textField_1.setText(selectedStaff.getLname());
-					textField_3.setText(selectedStaff.getBranch());
-					textField_4.setText(selectedStaff.getGender());
-					textField_5.setText(selectedStaff.getDOB());
-					textField_6.setText(Double.toString(selectedStaff.getSalary()));
+					Staff selectedStaff = (Staff)listForUpdating.getSelectedValue();
+					if(selectedStaff != null) {
+						textField.setText(selectedStaff.getFname());
+						textField_1.setText(selectedStaff.getLname());
+						textField_3.setText(selectedStaff.getBranch());
+						textField_4.setText(selectedStaff.getGender());
+						textField_5.setText(selectedStaff.getDOB());
+						textField_6.setText(Double.toString(selectedStaff.getSalary()));
 
-					ArrayList<Staff> newStaffList;
-					//staffListForUpdating = new JList<>(supervisorList);
-					supervisorList.removeAllElements();
-					if (selectedStaff.getPosition() != 2) {
-						newStaffList = staff.getStaffByPosition(2);
-						if (selectedStaff.getPosition() == 1) {
+						ArrayList<Staff> newStaffList;
+						//staffListForUpdating = new JList<>(supervisorList);
+						supervisorList.removeAllElements();
+						if (selectedStaff.getPosition() != 2) {
 							newStaffList = staff.getStaffByPosition(2);
-						} else if (selectedStaff.getPosition() == 0) {
-							newStaffList = staff.getStaffByPosition(1);
-						}
-						for (int i = 0; i < newStaffList.size(); i++) {
-							if (selectedStaff.getSupervisorID() == newStaffList.get(i).getStaffNum()) {
+							if (selectedStaff.getPosition() == 1) {
+								newStaffList = staff.getStaffByPosition(2);
+							} else if (selectedStaff.getPosition() == 0) {
+								newStaffList = staff.getStaffByPosition(1);
+							}
+							for (int i = 0; i < newStaffList.size(); i++) {
+								if (selectedStaff.getSupervisorID() == newStaffList.get(i).getStaffNum()) {
+									supervisorList.addElement(newStaffList.get(i));
+									break;
+								}
+							}
+							for (int i = 0; i < newStaffList.size(); i++) {
+								if (selectedStaff.getSupervisorID() == newStaffList.get(i).getStaffNum()) {
+									continue;
+								}
 								supervisorList.addElement(newStaffList.get(i));
-								break;
 							}
+							panel_1.remove(staffScroll);
+							staffScroll = new JScrollPane();
+							staffScroll.setViewportView(staffListForUpdating);
+							staffListForUpdating.setSelectedIndex(0);
+							panel_1.add(staffScroll);
 						}
-						for (int i = 0; i < newStaffList.size(); i++) {
-							if (selectedStaff.getSupervisorID() == newStaffList.get(i).getStaffNum()) {
-								continue;
-							}
-							supervisorList.addElement(newStaffList.get(i));
+						else {
+							panel_1.remove(staffScroll);
 						}
-						panel_1.remove(staffScroll);
-						staffScroll = new JScrollPane();
-						staffScroll.setViewportView(staffListForUpdating);
-						staffListForUpdating.setSelectedIndex(0);
-						panel_1.add(staffScroll);
-					} else {
-						panel_1.remove(staffScroll);
+						panel_1.validate();
+						panel_1.repaint();
 					}
-					panel_1.validate();
-					panel_1.repaint();
 				}
             });
             /////////////////////////////////////////////////
