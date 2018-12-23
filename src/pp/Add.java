@@ -23,8 +23,8 @@ public class Add implements ActionListener{
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private String[] addChoices = {"Clients", "Properties", "Staff", "Property Owners", "Business Owners", "Property Viewings", "Leases"};
-    private String[]addChoicesNotManager = {"Clients", "Properties", "Property Owners", "Business Owners", "Property Viewings", "Leases"};
+	private String[] addChoices = {"Clients", /*"Properties",*/ "Staff", "Property Owners", "Business Owners"/*, "Property Viewings", "Leases"*/};
+    private String[]addChoicesNotManager = {"Clients", /*"Properties",*/ "Property Owners", "Business Owners"/*, "Property Viewings", "Leases"*/};
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
@@ -322,6 +322,7 @@ public class Add implements ActionListener{
 		//all done except for button
 		if(comboBox.getSelectedItem().equals("Clients")) {
 			switchCase = 0;
+			hint.setText("");
 
 			panel_1.removeAll();
 			textField.setVisible(true);
@@ -466,32 +467,35 @@ public class Add implements ActionListener{
 						(textField_8.getText() == null);
 
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-//				if(cleared) {
-				String fname = "'" + textField.getText() + "'";
-				String lname = "'" + textField_1.getText() + "'";
-				String type = "'" + textField_2.getText() + "'";
-				String phone = "'" + textField_3.getText() + "'";
-				double rent = Double.parseDouble(textField_4.getText());
-				int staffId = Integer.parseInt(textField_5.getText());
-				String street = "'" + textField_6.getText() + "'";
-				String city = "'" + textField_7.getText() + "'";
-				String zip = "'" + textField_8.getText() + "'";
-				Input clientinput = new Input("CLIENTS");
-				clientinput.addClientInfo(fname, lname, type, phone, rent, staffId, street, city, zip);
+				if(cleared) {
+					String fname = "'" + textField.getText() + "'";
+					String lname = "'" + textField_1.getText() + "'";
+					String type = "'" + textField_2.getText() + "'";
+					String phone = "'" + textField_3.getText() + "'";
+					double rent = Double.parseDouble(textField_4.getText());
+					int staffId = Integer.parseInt(textField_5.getText());
+					String street = "'" + textField_6.getText() + "'";
+					String city = "'" + textField_7.getText() + "'";
+					String zip = "'" + textField_8.getText() + "'";
+					Input clientinput = new Input("CLIENTS");
+					clientinput.addClientInfo(fname, lname, type, phone, rent, staffId, street, city, zip);
 
-				clientList = client.getClientByID(0);
-				if(list != null){
-					list.removeAllElements();
-				}
-				for(int i = 0; i < clientList.size(); i++){
-					if(!list.contains(clientList.get(i))) {
-						list.addElement(clientList.get(i));
+					clientList = client.getClientByID(0);
+					if (list != null) {
+						list.removeAllElements();
 					}
+					for (int i = 0; i < clientList.size(); i++) {
+						if (!list.contains(clientList.get(i))) {
+							list.addElement(clientList.get(i));
+						}
+					}
+					listForUpdating = new JList(list);
+					//Revalidates main list when clicking on a new dropdown item
+					revalidateEast();
 				}
-				listForUpdating = new JList(list);
-				//Revalidates main list when clicking on a new dropdown item
-				revalidateEast();
-
+				else{
+					hint.setText("One or more of the fields is unfilled.");
+				}
 			}
 			textField.setText(null);
 			textField_1.setText(null);
@@ -681,6 +685,7 @@ public class Add implements ActionListener{
 		//Up to date except button listener
 		if(comboBox.getSelectedItem().equals("Staff")) {
 			switchCase = 2;
+			hint.setText("");
 			panel_1.removeAll();
 
 			b1.setSelected(false);
@@ -935,6 +940,7 @@ public class Add implements ActionListener{
 
             listForUpdating.addListSelectionListener(e2 -> {
                 if(switchCase == 3) { //clients are selected
+					hint.setText("");
                     PropertyOwner selectedPropertyOwner = (PropertyOwner) listForUpdating.getSelectedValue();
                     if(selectedPropertyOwner != null) {
                         textField.setText(selectedPropertyOwner.getFname());
@@ -1106,6 +1112,7 @@ public class Add implements ActionListener{
 
             listForUpdating.addListSelectionListener(e2 -> {
                 if(switchCase == 4) { //clients are selected
+					hint.setText("");
                     BusinessOwner selectedBusinessOwner = (BusinessOwner)listForUpdating.getSelectedValue();
                     if(selectedBusinessOwner != null) {
                         textField.setText(selectedBusinessOwner.getFname());
@@ -1201,6 +1208,7 @@ public class Add implements ActionListener{
 		//idiot proofing
 		if(comboBox.getSelectedItem().equals("Property Viewings")) {
 		    switchCase = 5;
+			hint.setText("");
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -1403,6 +1411,7 @@ public class Add implements ActionListener{
 
 		if(comboBox.getSelectedItem().equals("Leases")) {
             switchCase = 6;
+			hint.setText("");
 			panel_1.removeAll();
 
 			textField.setVisible(true);

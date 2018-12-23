@@ -1,4 +1,5 @@
 package pp;
+import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ public class PropView {
 	private Client client = new Client();
 	private int clientId, propertyId, viewnum;
 	private String fname, lname, phone, street, city, postCode, date, viewDate, comments;
+	private Staff staffMem;
 
 	public PropView() {}
 	
@@ -26,6 +28,7 @@ public class PropView {
 		this.postCode = client.getPostCode();
 		this.viewDate = viewDate;
 		this.comments = comments;
+		this.staffMem = client.getMember();
 	}
 
 	public ArrayList<PropView> getPropViewByID(int PVid){
@@ -80,6 +83,18 @@ public class PropView {
 			System.exit(0);
 		}
 		return propViewList;
+	}
+
+	public Staff getMember(){
+		return staffMem;
+	}
+
+	public int getCID(){
+		return clientId;
+	}
+
+	public int getPID(){
+		return propertyId;
 	}
 
 	public int getViewNum() {
@@ -162,5 +177,4 @@ public class PropView {
 
 		return getFname() + " " + getLname() + " (VIEW ID: " + getViewNum() + ")";
 	}
-
 }

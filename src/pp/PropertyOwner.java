@@ -82,6 +82,12 @@ public class PropertyOwner extends Client{
 		return OList;
 	}
 
+	public int compareTo(PropertyOwner p1){
+		if(p1.getOwnerNum() == this.OID)	return 0;
+		else if(p1.getOwnerNum() < this.OID) return 1;
+		else return -1;
+	}
+
 	/**
 	 * @return the ownerNum
 	 */

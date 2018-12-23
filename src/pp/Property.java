@@ -19,6 +19,7 @@ public class Property {
 	private Staff staffMember;
 	private double monthlyRent;
 	private PropertyOwner owner = new PropertyOwner();
+	private int POID;
 
 	public Property() {}
 
@@ -32,6 +33,7 @@ public class Property {
 		this.numRooms = numRooms;
 		this.monthlyRent = monthlyRent;
 		this.owner = propertyOwner.getPropOwnersByID(propertyId).get(0);
+		this.POID = propertyOwner.getPropOwnersByID(propertyId).get(0).getOwnerNum();
 		this.staffMember = owner.getStaff();
 		this.staffId = staffMember.getStaffNum();
 	}
@@ -72,7 +74,7 @@ public class Property {
 				double rent = rs.getDouble("RENT");
 				int Owner = rs.getInt("OWNER");
 				if (Num == propNum) {
-					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, propertyOwner.getPropOwnersByID(propertyId).get(Owner));
+					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, propertyOwner.getPropOwnersByID(propertyId).get(0));
 					propertiesList.add(prp);
 					rs.close();
 					stmt.close();
@@ -81,7 +83,7 @@ public class Property {
 					return propertiesList;
 				}
 				else if (Num == 0) {
-					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, propertyOwner.getPropOwnersByID(propertyId).get(Owner));
+					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, propertyOwner.getPropOwnersByID(propertyId).get(0));
 					propertiesList.add(prp);
 				}
 			}
@@ -95,6 +97,9 @@ public class Property {
 		return propertiesList;
 	}
 
+	public Staff getStaff(){
+		return staff;
+	}
 
 	/**
 	 * @return the street
@@ -199,6 +204,10 @@ public class Property {
 	 */
 	public PropertyOwner getOwner() {
 		return owner;
+	}
+
+	public int getOID(){
+		return this.POID;
 	}
 
 	/**
