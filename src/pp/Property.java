@@ -18,7 +18,7 @@ public class Property {
 	private int staffId;
 	private Staff staffMember;
 	private double monthlyRent;
-	private PropertyOwner owner;
+	private PropertyOwner owner = new PropertyOwner();
 
 	public Property() {}
 

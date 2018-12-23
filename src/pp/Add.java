@@ -749,6 +749,18 @@ public class Add implements ActionListener{
 					if(selectedStaff != null) {
 						textField.setText(selectedStaff.getFname());
 						textField_1.setText(selectedStaff.getLname());
+						int position = selectedStaff.getPosition();
+						String staffTitle = "";
+						if(position == 2){
+                            staffTitle = "Manager";
+                        }
+                        else if (position == 1){
+                            staffTitle = "Supervisor";
+                        }
+                        else if (position == 0){
+                            staffTitle = "Agent";
+                        }
+                        textField_2.setText(staffTitle);
 						textField_3.setText(selectedStaff.getBranch());
 						textField_4.setText(selectedStaff.getGender());
 						textField_5.setText(selectedStaff.getDOB());
@@ -1024,15 +1036,15 @@ public class Add implements ActionListener{
 			l8 = new JLabel("Staff Id");
 			panel_1.add(l8);
 
-            businessOwnerListForUpdating = new JList<>(secondaryList);
+            staffListForUpdating = new JList<>(secondaryList);
             staffScroll = new JScrollPane();
-            staffScroll.setViewportView(businessOwnerListForUpdating);
+            staffScroll.setViewportView(staffListForUpdating);
 
-            businessOwnerListForUpdating.addListSelectionListener(e3 -> {
+            staffListForUpdating.addListSelectionListener(e3 -> {
                 if(switchCase == 4) {
-                    BusinessOwner selectedBusinessOwner = businessOwnerListForUpdating.getSelectedValue();
-                    if (selectedBusinessOwner != null) {
-                        System.out.println(selectedBusinessOwner.getOwnerNum());
+                    Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
+                    if (selectedStaff2 != null) {
+                        System.out.println(selectedStaff2.getStaffNum());
                         //selectedStaff2.getStaffNum()
                         //TODO use this variable for updating the staff number
                     }
@@ -1151,7 +1163,7 @@ public class Add implements ActionListener{
 
 		}
 		//idiot proofing
-		if(comboBox.getSelectedItem().equals("Property Viewing")) {
+		if(comboBox.getSelectedItem().equals("Property Viewings")) {
 		    switchCase = 5;
 			panel_1.removeAll();
 
@@ -1392,6 +1404,7 @@ public class Add implements ActionListener{
             l0 = new JLabel("Client");
             panel_1.add(l0);
 
+
             staffListForUpdating = new JList<>(secondaryList);
             staffScroll = new JScrollPane();
             staffScroll.setViewportView(staffListForUpdating);
@@ -1407,7 +1420,8 @@ public class Add implements ActionListener{
                 }
             });
             panel_1.add(staffScroll);
-
+            panel_1.validate();
+            panel_1.repaint();
             l3 = new JLabel("Property");
             panel_1.add(l3);
 
@@ -1450,18 +1464,17 @@ public class Add implements ActionListener{
                     tertiaryList.addElement(newPropertyList.get(i));
                 }
             }
-            /*for(int i = 0; i < leaseList.size(); i++){
+            for(int i = 0; i < leaseList.size(); i++){
                 if(!list.contains(leaseList.get(i))) {
                     list.addElement(leaseList.get(i));
                 }
-            }*/
+            }
             listForUpdating = new JList(list);
 
             //Activated by clicking an item from the list
 
             listForUpdating.addListSelectionListener(e2 -> {
                 if(switchCase == 6) { //clients are selected
-                    /*
                     Lease selectedLease = (Lease)listForUpdating.getSelectedValue();
                     if(selectedLease != null) {
                         /*textField.setText(selectedLease.getFname());
@@ -1491,7 +1504,7 @@ public class Add implements ActionListener{
                             }
                             secondaryList.addElement(newStaffList.get(i));
 
-                        }
+                        }*/
                         panel_1.remove(staffScroll);
                         staffScroll = new JScrollPane();
                         staffScroll.setViewportView(staffListForUpdating);
@@ -1500,7 +1513,6 @@ public class Add implements ActionListener{
                     }
                     panel_1.validate();
                     panel_1.repaint();
-                    */
                 }
             });
 
