@@ -62,11 +62,13 @@ public class Add implements ActionListener{
 	private Staff staff = new Staff();
     private PropertyOwner propertyOwner = new PropertyOwner();
     private BusinessOwner businessOwner = new BusinessOwner();
+    private Lease lease = new Lease();
 	private ArrayList<Client> clientList = client.getClientByID(0);
 	private ArrayList<Property> propertyList = property.getPropertyByID(0);
 	private ArrayList<Staff> staffList = staff.getStaffByID(0);
 	private ArrayList<PropertyOwner> propertyOwnerList = propertyOwner.getPropOwnersByID(0);
     private ArrayList<BusinessOwner> businessOwnerList = businessOwner.getBusinessOwnersByID(0);
+    private ArrayList<Lease> leaseList = lease.getLeaseByClientId(0);
 
     private DefaultListModel secondaryList = new DefaultListModel<>();
 	private DefaultListModel tertiaryList = new DefaultListModel<>();
@@ -76,6 +78,7 @@ public class Add implements ActionListener{
     private JList listForUpdating;
     private DefaultListModel list = new DefaultListModel<>();
     private JScrollPane staffScroll = new JScrollPane();
+    private JScrollPane secondaryScroll = new JScrollPane();
     private int switchCase = 0;
 
 
@@ -1407,8 +1410,23 @@ public class Add implements ActionListener{
 
             l3 = new JLabel("Property");
             panel_1.add(l3);
-            //panel_1.add(staffScroll);
 
+            propertyOwnerListForUpdating = new JList<>(tertiaryList);
+            secondaryScroll = new JScrollPane();
+            secondaryScroll.setViewportView(propertyOwnerListForUpdating);
+
+            propertyOwnerListForUpdating.addListSelectionListener(e3 -> {
+                if(switchCase == 6) {
+                    PropertyOwner selectedPropertyOwner = propertyOwnerListForUpdating.getSelectedValue();
+                    if (selectedPropertyOwner != null) {
+                        System.out.println(selectedPropertyOwner.getOwnerNum());
+                        //selectedStaff2.getStaffNum()
+                        //TODO use this variable for updating the staff number
+                    }
+                }
+            });
+
+            panel_1.add(secondaryScroll);
             panel_1.validate();
             panel_1.repaint();
 
@@ -1424,28 +1442,37 @@ public class Add implements ActionListener{
                     secondaryList.addElement(newStaffList.get(i));
                 }
             }
-            for(int i = 0; i < clientList.size(); i++){
-                if(!list.contains(clientList.get(i))) {
-                    list.addElement(clientList.get(i));
+            if(tertiaryList != null){
+                tertiaryList.removeAllElements();
+                ArrayList<Property> newPropertyList;
+                newPropertyList = property.getPropertyByID(0);
+                for(int i = 0; i < newPropertyList.size(); i++){
+                    tertiaryList.addElement(newPropertyList.get(i));
                 }
             }
+            /*for(int i = 0; i < leaseList.size(); i++){
+                if(!list.contains(leaseList.get(i))) {
+                    list.addElement(leaseList.get(i));
+                }
+            }*/
             listForUpdating = new JList(list);
 
             //Activated by clicking an item from the list
 
             listForUpdating.addListSelectionListener(e2 -> {
                 if(switchCase == 6) { //clients are selected
-                    Client selectedClient = (Client)listForUpdating.getSelectedValue();
-                    if(selectedClient != null) {
-                        textField.setText(selectedClient.getFname());
-                        textField_1.setText(selectedClient.getLname());
-                        textField_2.setText(selectedClient.getType());
-                        textField_3.setText(selectedClient.getPhone());
+                    /*
+                    Lease selectedLease = (Lease)listForUpdating.getSelectedValue();
+                    if(selectedLease != null) {
+                        /*textField.setText(selectedLease.getFname());
+                        textField_1.setText(selectedLease.getLname());
+                        textField_2.setText(selectedLease.getType());
+                        textField_3.setText(selectedLease.getPhone());
                         DecimalFormat df2 = new DecimalFormat(".##");
                         textField_4.setText(df2.format(selectedClient.getMax())); //maxRent
-                        textField_6.setText(selectedClient.getStreet());
-                        textField_7.setText(selectedClient.getCity());
-                        textField_8.setText(selectedClient.getPostCode());
+                        textField_6.setText(selectedLease.getStreet());
+                        textField_7.setText(selectedLease.getCity());
+                        textField_8.setText(selectedLease.getPostCode());
 
                         ArrayList<Staff> newStaffList;
                         //staffListForUpdating = new JList<>(supervisorList);
@@ -1453,16 +1480,17 @@ public class Add implements ActionListener{
                         newStaffList = staff.getStaffByPosition(0);
 
                         for (int i = 0; i < newStaffList.size(); i++) {
-                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                            if (selectedLease.getStaffId() == newStaffList.get(i).getStaffNum()) {
                                 secondaryList.addElement(newStaffList.get(i));
                                 break;
                             }
                         }
                         for (int i = 0; i < newStaffList.size(); i++) {
-                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                            if (selectedLease.getStaffId() == newStaffList.get(i).getStaffNum()) {
                                 continue;
                             }
                             secondaryList.addElement(newStaffList.get(i));
+
                         }
                         panel_1.remove(staffScroll);
                         staffScroll = new JScrollPane();
@@ -1472,6 +1500,7 @@ public class Add implements ActionListener{
                     }
                     panel_1.validate();
                     panel_1.repaint();
+                    */
                 }
             });
 

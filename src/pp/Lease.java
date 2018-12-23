@@ -19,6 +19,8 @@ public class Lease extends Property{
 	private String duration;
 	private Client client;
 
+	public Lease(){}
+
 	public Lease(int leaseId, int clientId, String fname, String lname, int propertyId, String street, String city, String postCode,
 				 String type, int numRooms, double monthlyRent, String payMethod, double deposit, int depositPaid, String rentStart, String rentEnd, String duration) {
 		super(street, city, postCode, type, propertyId, numRooms, monthlyRent);
@@ -35,7 +37,7 @@ public class Lease extends Property{
 		this.client = client.getClientByID(clientId).get(0);
 	}
 
-	public static ArrayList<Lease> getLeaseByClientId(int clientIdInput){
+	public ArrayList<Lease> getLeaseByClientId(int clientIdInput){
 		Connection c = null;
 		Statement stmt = null;
 
@@ -81,9 +83,9 @@ public class Lease extends Property{
 					return leaseList;
 				}
 				else if(clientIdInput == 0) {
-					Lease lease = new Lease(leaseId, clientId, fname, lname, propertyId, street, city, postCode,
-							type, numRooms, monthlyRent, payMethod, deposit, paidDeposit, rentStart, rentEnd, duration);
+					Lease lease = new Lease(leaseId, clientId, fname, lname, propertyId, street, city, postCode, type, numRooms, monthlyRent, payMethod, deposit, paidDeposit, rentStart, rentEnd, duration);
 					leaseList.add(lease);
+					System.out.println(fname);
 				}
 			}
 			rs.close();

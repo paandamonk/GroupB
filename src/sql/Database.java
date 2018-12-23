@@ -26,11 +26,11 @@ public class Database {
         //staffInput.addStaffInfo("'Sarah'", "'Hughes'", 0, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 4);
 
         Input propertyOwnerInput = new Input("PROPOWNERS");
-        propertyOwnerInput.addPropOwnerInfo("'Captain'", "'Picard'", "'40 Dollop'", "'New York'", "'10020'",
-                "'000-111-2222'", 11);
+      //  propertyOwnerInput.addPropOwnerInfo("'Captain'", "'Picard'", "'40 Dollop'", "'New York'", "'10020'",
+       //         "'000-111-2222'", 11);
 
         Input propertyInput = new Input("PROPERTIES");
-        //propertyInput.addPropertyInfo("'20 Bellend Road'", "'12345'", "'Riverrun'", "'House'", 6, 2.0, 1);
+        //propertyInput.addPropertyInfo("'60 South Street'", "'12345'", "'Riverrun'", "'House'", 6, 2.0, 2);
 
         Input businessOwnerInput = new Input("BUSOWNERS");
        // businessOwnerInput.addBusinessOwnerInfo("'Benny'", "'Hood'",
@@ -39,6 +39,14 @@ public class Database {
 
         //ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
         // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
+
+        Input leaseInput = new Input("LEASE");
+        //leaseInput.addLeaseInfo(17, "'Sherlock'", "'Holmes'", 1, "'test'", "'test two'", "'12345'", "'House'",
+        //        3, 2.5, "'cash'", 100, 1, "'1/1/19'", "'2/1/20'", "'100 days'");
+
+        Lease lease = new Lease();
+        ArrayList<Lease> leaseList = lease.getLeaseByClientId(0);
+        //System.out.println(leaseList.size());
 
         EditData ed = new EditData();
         //ed.deleteInfo("BUSOWNERS", "BOWNERNUM", 1);
