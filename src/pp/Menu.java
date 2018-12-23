@@ -1062,16 +1062,12 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			city.setVisible(true);
 
 			ArrayList<Property> prop = new ArrayList<Property>();
-			prop = pr1.getPropertyByID(0);
+			prop = pr1.getPropertyByID();
+			System.out.println(prop.get(0).getMonthlyRent());
 			list = new DefaultListModel();
 			l = new JList(list);
-			try{
 			for(int i = 0; i < staffList.size(); i++){
 				list.addElement(prop.get(i));
-			}
-			}catch(Exception IndexOutOfBoundsException){
-				JOptionPane.showMessageDialog(null, "Property Database Empty \n Please add a new Property.");
-				return;
 			}
 			Panel3.removeAll();
 			scroll = new JScrollPane();

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Property {
 	Staff staff = new Staff();
-	PropertyOwner propertyOwner = new PropertyOwner();
+	PropertyOwner owner = new PropertyOwner();
 	private String street;
 	private String city;
 	private String postcode;
@@ -16,9 +16,7 @@ public class Property {
 	private int propertyId;
 	private int numRooms;
 	private int staffId;
-	private Staff staffMember;
 	private double monthlyRent;
-	private PropertyOwner owner;
 	private int POID;
 
 	public Property() {}
@@ -32,9 +30,9 @@ public class Property {
 		this.propertyId = propertyId;
 		this.numRooms = numRooms;
 		this.monthlyRent = monthlyRent;
-		this.owner = propertyOwner.getPropOwnersByID(propertyId).get(0);
-		this.staffMember = owner.getStaff();
-		this.staffId = staffMember.getStaffNum();
+		owner = owner.getPropOwnersByID(propertyId).get(0);
+		staff = owner.getStaff();
+		this.staffId = staff.getStaffNum();
 	}
 
 	public Property(String street, String city, String postcode, String type, int propertyId, int numRooms, double monthlyRent, PropertyOwner owner) {
@@ -46,9 +44,51 @@ public class Property {
 		this.propertyId = propertyId;
 		this.numRooms = numRooms;
 		this.monthlyRent = monthlyRent;
-		this.owner = propertyOwner.getPropOwnersByID(propertyId).get(0);
+		owner = owner.getPropOwnersByID(propertyId).get(0);
 	}
 
+	public ArrayList<Property> getPropertyByID() {
+		Connection c = null;
+		Statement stmt = null;
+		ArrayList<Property> propertiesList = new ArrayList<Property>();
+
+		try {
+			Class.forName("org.sqlite.JDBC");
+			c = DriverManager.getConnection("jdbc:sqlite:database.db");
+			c.setAutoCommit(false);
+			System.out.println("Opened database successfully (Properties)");
+
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM PROPERTIES;");
+
+			while (rs.next()) {
+				int propNum = rs.getInt("PROPNUM");
+				String street = rs.getString("STREET");
+				String city = rs.getString("CITY");
+				String postcode = rs.getString("POSTCODE");
+				String type = rs.getString("TYPE");
+				int rooms = rs.getInt("ROOMS");
+				double rent = rs.getDouble("RENT");
+				int Owner = rs.getInt("OWNER");
+				//if (Num == propNum) {
+					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, owner.getPropOwnersByID(propertyId).get(Owner));
+					propertiesList.add(prp);
+				//}
+				//else if (propNum == 0) {
+					//Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, owner.getPropOwnersByID(propertyId).get(Owner));
+					//propertiesList.add(prp);
+			//}
+				}
+			rs.close();
+			stmt.close();
+			c.commit();
+			c.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return propertiesList;
+	}
+	
 	public ArrayList<Property> getPropertyByID(int Num) {
 		Connection c = null;
 		Statement stmt = null;
@@ -73,19 +113,14 @@ public class Property {
 				double rent = rs.getDouble("RENT");
 				int Owner = rs.getInt("OWNER");
 				if (Num == propNum) {
-					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, propertyOwner.getPropOwnersByID(propertyId).get(Owner));
+					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, owner.getPropOwnersByID(propertyId).get(Owner));
 					propertiesList.add(prp);
-					rs.close();
-					stmt.close();
-					c.commit();
-					c.close();
-					return propertiesList;
 				}
 				else if (propNum == 0) {
-					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, propertyOwner.getPropOwnersByID(propertyId).get(Owner));
+					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, owner.getPropOwnersByID(propertyId).get(Owner));
 					propertiesList.add(prp);
-				}
 			}
+				}
 			rs.close();
 			stmt.close();
 			c.commit();
@@ -96,7 +131,6 @@ public class Property {
 		return propertiesList;
 	}
 
-
 	/**
 	 * @return the street
 	 */
@@ -105,7 +139,7 @@ public class Property {
 	}
 	
 	public Staff getStaff(){
-		return staffMember;
+		return staff;
 	}
 
 	/**
@@ -214,7 +248,7 @@ public class Property {
 	 * @param ownerId the owner to set
 	 */
 	public void setOwner(int ownerId) {
-		this.owner = propertyOwner.getPropOwnersByID(ownerId).get(0);
+		this.owner = owner.getPropOwnersByID(ownerId).get(0);
 	}
 
 

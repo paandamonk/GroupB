@@ -17,7 +17,7 @@ public class Lease extends Property{
 	private String rentStart;
 	private String rentEnd;
 	private String duration;
-	private Client client;
+	private Client client = new Client();
 	
 	public Lease(){}
 	
