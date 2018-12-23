@@ -60,16 +60,19 @@ public class Add implements ActionListener{
 	private Client client = new Client();
 	private Property property = new Property();
 	private Staff staff = new Staff();
-	private PropertyOwner propertyOwner = new PropertyOwner();
+    private PropertyOwner propertyOwner = new PropertyOwner();
+    private BusinessOwner businessOwner = new BusinessOwner();
 	private ArrayList<Client> clientList = client.getClientByID(0);
 	private ArrayList<Property> propertyList = property.getPropertyByID(0);
 	private ArrayList<Staff> staffList = staff.getStaffByID(0);
 	private ArrayList<PropertyOwner> propertyOwnerList = propertyOwner.getPropOwnersByID(0);
+    private ArrayList<BusinessOwner> businessOwnerList = businessOwner.getBusinessOwnersByID(0);
 
     private DefaultListModel secondaryList = new DefaultListModel<>();
 	private DefaultListModel tertiaryList = new DefaultListModel<>();
     private JList<Staff> staffListForUpdating;
 	private JList<PropertyOwner> propertyOwnerListForUpdating;
+	private JList<BusinessOwner> businessOwnerListForUpdating;
     private JList listForUpdating;
     private DefaultListModel list = new DefaultListModel<>();
     private JScrollPane staffScroll = new JScrollPane();
@@ -884,9 +887,9 @@ public class Add implements ActionListener{
                     secondaryList.addElement(newStaffList.get(i));
                 }
             }
-            for(int i = 0; i < clientList.size(); i++){
-                if(!list.contains(clientList.get(i))) {
-                    list.addElement(clientList.get(i));
+            for(int i = 0; i < propertyOwnerList.size(); i++){
+                if(!list.contains(propertyOwnerList.get(i))) {
+                    list.addElement(propertyOwnerList.get(i));
                 }
             }
             listForUpdating = new JList(list);
@@ -895,14 +898,14 @@ public class Add implements ActionListener{
 
             listForUpdating.addListSelectionListener(e2 -> {
                 if(switchCase == 3) { //clients are selected
-                    Client selectedClient = (Client)listForUpdating.getSelectedValue();
-                    if(selectedClient != null) {
-                        textField.setText(selectedClient.getFname());
-                        textField_1.setText(selectedClient.getLname());
-                        textField_2.setText(selectedClient.getStreet());
-                        textField_3.setText(selectedClient.getCity());
-                        textField_4.setText(selectedClient.getPostCode()); //maxRent
-                        textField_5.setText(selectedClient.getPhone());
+                    PropertyOwner selectedPropertyOwner = (PropertyOwner) listForUpdating.getSelectedValue();
+                    if(selectedPropertyOwner != null) {
+                        textField.setText(selectedPropertyOwner.getFname());
+                        textField_1.setText(selectedPropertyOwner.getLname());
+                        textField_2.setText(selectedPropertyOwner.getStreet());
+                        textField_3.setText(selectedPropertyOwner.getCity());
+                        textField_4.setText(selectedPropertyOwner.getPostCode());
+                        textField_5.setText(selectedPropertyOwner.getPhone());
 
                         ArrayList<Staff> newStaffList;
                         //staffListForUpdating = new JList<>(supervisorList);
@@ -910,13 +913,13 @@ public class Add implements ActionListener{
                         newStaffList = staff.getStaffByPosition(0);
 
                         for (int i = 0; i < newStaffList.size(); i++) {
-                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                            if (selectedPropertyOwner.getStaffId() == newStaffList.get(i).getStaffNum()) {
                                 secondaryList.addElement(newStaffList.get(i));
                                 break;
                             }
                         }
                         for (int i = 0; i < newStaffList.size(); i++) {
-                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                            if (selectedPropertyOwner.getStaffId() == newStaffList.get(i).getStaffNum()) {
                                 continue;
                             }
                             secondaryList.addElement(newStaffList.get(i));
@@ -1018,15 +1021,15 @@ public class Add implements ActionListener{
 			l8 = new JLabel("Staff Id");
 			panel_1.add(l8);
 
-            staffListForUpdating = new JList<>(secondaryList);
+            businessOwnerListForUpdating = new JList<>(secondaryList);
             staffScroll = new JScrollPane();
-            staffScroll.setViewportView(staffListForUpdating);
+            staffScroll.setViewportView(businessOwnerListForUpdating);
 
-            staffListForUpdating.addListSelectionListener(e3 -> {
+            businessOwnerListForUpdating.addListSelectionListener(e3 -> {
                 if(switchCase == 4) {
-                    Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
-                    if (selectedStaff2 != null) {
-                        System.out.println(selectedStaff2.getStaffNum());
+                    BusinessOwner selectedBusinessOwner = businessOwnerListForUpdating.getSelectedValue();
+                    if (selectedBusinessOwner != null) {
+                        System.out.println(selectedBusinessOwner.getOwnerNum());
                         //selectedStaff2.getStaffNum()
                         //TODO use this variable for updating the staff number
                     }
@@ -1048,9 +1051,9 @@ public class Add implements ActionListener{
                     secondaryList.addElement(newStaffList.get(i));
                 }
             }
-            for(int i = 0; i < clientList.size(); i++){
-                if(!list.contains(clientList.get(i))) {
-                    list.addElement(clientList.get(i));
+            for(int i = 0; i < businessOwnerList.size(); i++){
+                if(!list.contains(businessOwnerList.get(i))) {
+                    list.addElement(businessOwnerList.get(i));
                 }
             }
             listForUpdating = new JList(list);
@@ -1059,17 +1062,16 @@ public class Add implements ActionListener{
 
             listForUpdating.addListSelectionListener(e2 -> {
                 if(switchCase == 4) { //clients are selected
-                    Client selectedClient = (Client)listForUpdating.getSelectedValue();
-                    if(selectedClient != null) {
-                        textField.setText(selectedClient.getFname());
-                        textField_1.setText(selectedClient.getLname());
-                        textField_2.setText(selectedClient.getType());
-                        textField_3.setText(selectedClient.getPhone());
-                        DecimalFormat df2 = new DecimalFormat(".##");
-                        textField_4.setText(df2.format(selectedClient.getMax())); //maxRent
-                        textField_6.setText(selectedClient.getStreet());
-                        textField_7.setText(selectedClient.getCity());
-                        textField_8.setText(selectedClient.getPostCode());
+                    BusinessOwner selectedBusinessOwner = (BusinessOwner)listForUpdating.getSelectedValue();
+                    if(selectedBusinessOwner != null) {
+                        textField.setText(selectedBusinessOwner.getFname());
+                        textField_1.setText(selectedBusinessOwner.getLname());
+                        textField_2.setText(selectedBusinessOwner.getStreet());
+                        textField_3.setText(selectedBusinessOwner.getCity());
+                        textField_4.setText(selectedBusinessOwner.getPostCode());
+                        textField_5.setText(selectedBusinessOwner.getBusinessName());
+                        textField_6.setText(selectedBusinessOwner.getPhone());
+                        textField_7.setText(selectedBusinessOwner.getBusinessType()); //business type
 
                         ArrayList<Staff> newStaffList;
                         //staffListForUpdating = new JList<>(supervisorList);
@@ -1077,13 +1079,13 @@ public class Add implements ActionListener{
                         newStaffList = staff.getStaffByPosition(0);
 
                         for (int i = 0; i < newStaffList.size(); i++) {
-                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                            if (selectedBusinessOwner.getStaffId() == newStaffList.get(i).getStaffNum()) {
                                 secondaryList.addElement(newStaffList.get(i));
                                 break;
                             }
                         }
                         for (int i = 0; i < newStaffList.size(); i++) {
-                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                            if (selectedBusinessOwner.getStaffId() == newStaffList.get(i).getStaffNum()) {
                                 continue;
                             }
                             secondaryList.addElement(newStaffList.get(i));

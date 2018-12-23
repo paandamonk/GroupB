@@ -7,6 +7,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class BusinessOwner extends PropertyOwner{
+	private String street;
+	private String city;
+	private String postCode;
 	private String businessName;
 	private String businessType;
 
@@ -15,6 +18,9 @@ public class BusinessOwner extends PropertyOwner{
 	private BusinessOwner(String fname, String lname, String street, String city, String postCode, String phone, int staffId, int ownerId,
 						 String businessName, String businessType) {
 		super(fname, lname, street, city, postCode, phone, ownerId, staffId);
+		this.street = street;
+		this.city = city;
+		this.postCode = postCode;
 		this.businessName = businessName;
 		this.businessType = businessType;
 	}
@@ -46,16 +52,17 @@ public class BusinessOwner extends PropertyOwner{
 				businessName = rs.getString("BNAME");
 				businessType = rs.getString("BTYPE");
 
-
 				if(ownID == ownerId) {
-					BusinessOwner businessOwner = new BusinessOwner(FName, LName, street, city, postCode, phone, staffId, ownerId,
-							businessName, businessType);
+					BusinessOwner businessOwner = new BusinessOwner(FName, LName, street, city, postCode, phone, staffId, ownerId, businessName, businessType);
 					BusinessOwnerList.add(businessOwner);
+					rs.close();
+					stmt.close();
+					c.commit();
+					c.close();
 					return BusinessOwnerList;
 				}
 				else if(ownID == 0) {
-					BusinessOwner businessOwner = new BusinessOwner(FName, LName, street, city, postCode, phone, staffId, ownerId,
-							businessName, businessType);
+					BusinessOwner businessOwner = new BusinessOwner(FName, LName, street, city, postCode, phone, staffId, ownerId, businessName, businessType);
 					BusinessOwnerList.add(businessOwner);
 				}
 			}
@@ -96,6 +103,14 @@ public class BusinessOwner extends PropertyOwner{
 		this.businessType = businessType;
 	}
 
-	
+	public String getStreet() {
+		return street;
+	}
+	public String getCity() {
+		return city;
+	}
+	public String getPostCode() {
+		return postCode;
+	}
 
 }

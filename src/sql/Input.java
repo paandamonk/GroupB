@@ -92,7 +92,7 @@ public class Input
     }
 
     public void addBusinessOwnerInfo(String Fname, String Lname, String street, String City, String Postcode,
-                                     String Phone, String BusinessName, String BusinessType,  int sID) {
+                                     String Phone, String BusinessName, String BusinessType, int sID) {
         Connection c = null;
         Statement stmt = null;
 

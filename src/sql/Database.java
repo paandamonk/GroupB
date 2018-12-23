@@ -26,31 +26,23 @@ public class Database {
         //staffInput.addStaffInfo("'Sarah'", "'Hughes'", 0, "'New York'", "'Male'", "'10/14/1997'", 23000.540,"'Bugs'","'RabbitSeason'", 4);
 
         Input propertyOwnerInput = new Input("PROPOWNERS");
-        //propertyOwnerInput.addPropOwnerInfo("'Robin'", "'Hood'", "'40 Dollop'", "'New York'", "'10020'",
-                //"'000-111-2222'", 9);
+        propertyOwnerInput.addPropOwnerInfo("'Captain'", "'Picard'", "'40 Dollop'", "'New York'", "'10020'",
+                "'000-111-2222'", 11);
 
         Input propertyInput = new Input("PROPERTIES");
         //propertyInput.addPropertyInfo("'20 Bellend Road'", "'12345'", "'Riverrun'", "'House'", 6, 2.0, 1);
 
-        //Input businessOwnerInput = new Input("BUSOWNERS");
-        //businessOwnerInput.addBusinessOwnerInfo("'Robin'", "'Hood'",
-        //      "'40 Dollop'", "'New York'", "'10020'", "'000-111-2222'",
-        //    "'Proper Properties'", "'Property Rental'", 1);
+        Input businessOwnerInput = new Input("BUSOWNERS");
+       // businessOwnerInput.addBusinessOwnerInfo("'Benny'", "'Hood'",
+         //     "'40 Dollop'", "'New York'", "'10020'", "'000-111-2222'",
+         //   "'Proper Properties'", "'Property Rental'", 11);
 
         //ArrayList<BusinessOwner> businessOwnerList = getBusinessOwnersByID(0);
         // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
 
         EditData ed = new EditData();
-        /*ed.deleteInfo("CLIENTS", "CLIENTID", 7);
-        ed.deleteInfo("CLIENTS", "CLIENTID", 8);
-        ed.deleteInfo("CLIENTS", "CLIENTID", 9);
-        ed.deleteInfo("CLIENTS", "CLIENTID", 10);
-        ed.deleteInfo("CLIENTS", "CLIENTID", 11);
-        ed.deleteInfo("CLIENTS", "CLIENTID", 12);
-        ed.deleteInfo("CLIENTS", "CLIENTID", 13);
-        ed.deleteInfo("CLIENTS", "CLIENTID", 14);
-        ed.deleteInfo("CLIENTS", "CLIENTID", 15);
-        ed.deleteInfo("CLIENTS", "CLIENTID", 16);*/
+        //ed.deleteInfo("BUSOWNERS", "BOWNERNUM", 1);
+
 
         //ed.updateInfo("STAFF", "FNAME", 0, "Seymour", "STAFFNUM",1);
         // ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
@@ -66,7 +58,7 @@ public class Database {
         ArrayList<BusinessOwner> businessOwnerList = businessOwner.getBusinessOwnersByID(0);
         if(businessOwnerList.size() > 0) {
             for(int i = 0; i < businessOwnerList.size(); i++){
-                System.out.println(businessOwnerList.get(i).getFname() + " " + businessOwnerList.get(i).getLname() + ", " +  businessOwnerList.get(i).getOwnerNum());
+                System.out.println(businessOwnerList.get(i).getPostCode() + ", " + businessOwnerList.get(i).getCity() + ", " +  businessOwnerList.get(i).getStreet());
             }
         }
         else{

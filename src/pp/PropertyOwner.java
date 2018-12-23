@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class PropertyOwner extends Client{
 	Staff staff = new Staff();
-	private String Street;
-	private String City;
-	private String Postcode;
+	private String street;
+	private String city;
+	private String postCode;
 	private int OID;
 	private int MID;
 	private Staff member;
@@ -22,9 +22,9 @@ public class PropertyOwner extends Client{
 		super(FName, LName, phone, MID);
 		this.OID = OID;
 		this.MID = MID;
-		this.Street = street;
-		this.City = city;
-		this.Postcode = postcode;
+		this.street = street;
+		this.city = city;
+		this.postCode = postcode;
 		this.member = staff.getStaffByID(MID).get(0);
 	}
 
@@ -91,6 +91,17 @@ public class PropertyOwner extends Client{
 	public void setOwnerNum(int ownerNum) {
 		this.OID = ownerNum;
 	}
+
+	public String getStreet() {
+		return street;
+	}
+	public String getCity() {
+		return city;
+	}
+	public String getPostCode() {
+		return postCode;
+	}
+
 
 	public String toString(){
 		return getFname() + ", " + getLname() + "; (ID: " + getOwnerNum() + ")";
