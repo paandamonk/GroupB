@@ -338,4 +338,6 @@ public class Staff extends Person {
 		}
 		return "(" + positionForOutput + ") " + getFname() + " " + getLname() + " (ID: " + getStaffNum() + ")";
 	}
+	
+	
 }

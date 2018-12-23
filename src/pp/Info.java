@@ -140,9 +140,98 @@ public class Info {
 			
 		}
 		if(o.getClass() == Client.class) {
+			JPanel north = new JPanel();
+			JPanel center = new JPanel();
+			JPanel west = new JPanel();
+			JPanel south = new JPanel();
+			JPanel east = new JPanel();
 			
+			frame.add(north, BorderLayout.NORTH);
+			frame.add(center, BorderLayout.CENTER);
+			frame.add(west, BorderLayout.WEST);
+			frame.add(south, BorderLayout.SOUTH);
+			frame.add(east, BorderLayout.EAST);
+
+			Client client = (Client) o;
+			JLabel name_1 = new JLabel("Name: ");
+			JLabel name_2 = new JLabel(client.getFname() + " " + client.getLname());
+			JLabel id_1 = new JLabel("Id number: ");
+			JLabel id_2 = new JLabel(Integer.toString(client.getIdNum()));
+			north.setLayout(new GridLayout(1, 4));
+			north.setBorder(BorderFactory.createLineBorder(Color.black));
+			north.add(name_1);
+			north.add(name_2);
+			north.add(id_1);
+			north.add(id_2);
+			
+			JLabel phone = new JLabel("Phone Number: ");
+			JLabel phone_2 = new JLabel(client.getPhone());
+			JLabel staff_1 = new JLabel("Staff Member: ");
+			JLabel staff_2 = new JLabel(client.getStaff().toString());
+			JLabel add = new JLabel("Address: ");
+			JLabel add_1 = new JLabel(client.getStreet() + " " + client.getCity() + " " + client.getPostCode());
+			JLabel Max = new JLabel("Max Rent: ");
+			JLabel Max_2 = new JLabel(Double.toString(client.getMax()));
+			
+			west.setLayout(new GridLayout(4, 2));
+			west.setBorder(BorderFactory.createLineBorder(Color.black));
+			west.add(phone);
+			west.add(phone_2);
+			west.add(staff_1);
+			west.add(staff_2);
+			west.add(add);
+			west.add(add_1);
+			west.add(Max);
+			west.add(Max_2);
 		}
 		if(o.getClass() == Property.class) {
+			JPanel north = new JPanel();
+			JPanel center = new JPanel();
+			JPanel west = new JPanel();
+			JPanel south = new JPanel();
+			JPanel east = new JPanel();
+			
+			frame.add(north, BorderLayout.NORTH);
+			frame.add(center, BorderLayout.CENTER);
+			frame.add(west, BorderLayout.WEST);
+			frame.add(south, BorderLayout.SOUTH);
+			frame.add(east, BorderLayout.EAST);
+
+			Property prop = (Property) o;
+			JLabel name_1 = new JLabel("Owner: ");
+			JLabel name_2 = new JLabel(prop.getOwner().getFname() + " " + prop.getOwner().getFname());
+			JLabel id_1 = new JLabel("Property Id: ");
+			JLabel id_2 = new JLabel(Integer.toString(prop.getPropertyId()));
+			north.setLayout(new GridLayout(1, 4));
+			north.setBorder(BorderFactory.createLineBorder(Color.black));
+			north.add(name_1);
+			north.add(name_2);
+			north.add(id_1);
+			north.add(id_2);
+			
+			JLabel type_1 = new JLabel("Type: ");
+			JLabel type_2 = new JLabel(prop.getType());
+			JLabel add_1 = new JLabel("Address: ");
+			JLabel add_2 = new JLabel(prop.getStreet() + " " + prop.getCity() + " " + prop.getPostcode());
+			JLabel rooms_1 = new JLabel("Rooms: ");
+			JLabel rooms_2 = new JLabel(Integer.toString(prop.getNumRooms()));
+			JLabel staff_1 = new JLabel("Staff Member: ");
+			JLabel staff_2 = new JLabel(prop.getStaff().toString());
+			JLabel rent_1 = new JLabel("Monthly Rent: ");
+			JLabel rent_2 = new JLabel(Double.toString(prop.getMonthlyRent()));
+			
+			west.setLayout(new GridLayout(4, 2));
+			west.setBorder(BorderFactory.createLineBorder(Color.black));
+			west.add(type_1);
+			west.add(type_2);
+			west.add(add_1);
+			west.add(add_2);
+			west.add(rooms_1);
+			west.add(rooms_2);
+			west.add(staff_1);
+			west.add(staff_2);
+			west.add(rent_1);
+			west.add(rent_2);
 			
 		}
 		if(o.getClass() == PropertyOwner.class) {

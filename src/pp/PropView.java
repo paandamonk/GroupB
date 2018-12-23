@@ -10,7 +10,7 @@ public class PropView {
 	private Client client;
 	private int clientId, propertyId;
 	private String fname, lname, phone, street, city, postCode, date, viewDate, comments;
-
+	private Staff staffMem;
 	public PropView() {}
 	
 	public PropView(int clientId, String fname, String lname, String phone, int propertyId, String street, String city, String postCode, String viewDate, String comments) {
@@ -25,6 +25,7 @@ public class PropView {
 		this.postCode = client.getPostCode();
 		this.viewDate = viewDate;
 		this.comments = comments;
+		this.staffMem = client.getMember();
 	}
 
 	public static ArrayList<PropView> getPropView(int PVid){
@@ -78,7 +79,22 @@ public class PropView {
 		}
 		return propViewList;
 	}
+	
+	public Staff getMember(){
+		return staffMem;
+	}
 
+	public int getCID(){
+		return clientId;
+	}
+	
+	public int getPID(){
+		return propertyId;
+	}
+	
+	public String getCity(){
+		return city;
+	}
 	/**
 	 * @return the renter
 	 */

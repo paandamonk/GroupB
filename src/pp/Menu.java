@@ -95,6 +95,8 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 	Client c1 = new Client();
 	PropertyOwner p1 = new PropertyOwner();
 	Property pr1 = new Property();
+	PropView pv1 = new PropView();
+	Lease l1 = new Lease();
 	PropertyOwner propertyOwner = new PropertyOwner();
 	BusinessOwner businessOwner = new BusinessOwner();
 	// ArrayList<Client> clientList = db.getClientByID(0);
@@ -723,7 +725,7 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			}
 			if (hightoLow.isSelected()) {
 				list = new DefaultListModel();
-				//	Collections.sort(staff, ((m1,m2) -> Double.compare(m2.getSalary(),m1.getSalary()) ));
+				Collections.sort(staff, ((m1,m2) -> Double.compare(m2.getSalary(),m1.getSalary()) ));
 				for(int i = 0; i < staff.size(); i++){
 					list.addElement(staff.get(i));
 				}
@@ -855,14 +857,14 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			}
 
 		}
+		
 
-		// needs work
 		if (choices.getSelectedItem().equals("View Clients")) {
 			rent.setVisible(false);
 			duration.setVisible(false);
 			startDate.setVisible(false);
 			endDate.setVisible(false);
-			staffMemAdded.setVisible(false);
+			staffMemAdded.setVisible(true);
 			staffId.setVisible(false);
 			lowtoHigh.setVisible(false);
 			hightoLow.setVisible(false);
@@ -870,24 +872,23 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			firstName.setVisible(true);
 			lastName.setVisible(true);
 			renterId.setVisible(true);
-			propOwnerId.setVisible(true);
-			propId.setVisible(true);
+			propOwnerId.setVisible(false);
+			propId.setVisible(false);
 
 			ArrayList<Client> clients = new ArrayList();
 			clients = c1.getClientByID(0);
 			list = new DefaultListModel();
-			for (int i = 0; i < clients.size(); i++) {
-				list.addElement(clients.get(i));
-			}
 			l = new JList(list);
-			l.addMouseListener(this);
 			Panel3.removeAll();
 			scroll = new JScrollPane();
 			scroll.setViewportView(l);
 			Panel3.add(scroll);
 			Panel3.validate();
 			Panel3.repaint();
-			
+			/*
+			 * for(int i = 0; i < clientList.size(); i++) { clients.add(clientList.get(i));
+			 * list.addElement(clientList.get(i)); }
+			 */
 			if (firstName.isSelected()) {
 				list = new DefaultListModel();
 				Collections.sort(clients, ((m1, m2) -> m1.getFname().compareTo(m2.getFname())));
@@ -920,7 +921,7 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			}
 			if (renterId.isSelected()){
 				list = new DefaultListModel();
-				//Collections.sort(clients, ((m1,m2) -> m1.getIdNum().compareTo(m2.getIdNum())));
+				Collections.sort(clients, ((m1,m2) -> m1.getClientIdNum() - m2.getIdNum()));
 				for(int i = 0; i < clients.size(); i++){
 					list.addElement(clients.get(i));
 				}
@@ -933,11 +934,20 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 				Panel3.validate();
 				Panel3.repaint();
 			}
-			if (propOwnerId.isSelected()){
-				
-			}
-			if (propId.isSelected()){
-				
+			if (staffMemAdded.isSelected()){
+				list = new DefaultListModel();
+				Collections.sort(clients, ((m1,m2) -> m1.getStaffId() - m2.getStaffId()));
+				for(int i = 0; i < clients.size(); i++){
+					list.addElement(clients.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
 		}
 
@@ -959,14 +969,10 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			propId.setVisible(true);
 			staffMemAdded.setVisible(true);
 			
-			ArrayList<Client> Powners = new ArrayList();
-			Powners = p1.getClientByID(0);
+			ArrayList<PropertyOwner> Powners = new ArrayList();
+			Powners = p1.getPropOwnersByID(0);
 			list = new DefaultListModel();
-			for (int i = 0; i < Powners.size(); i++) {
-				list.addElement(Powners.get(i));
-			}
 			l = new JList(list);
-			l.addMouseListener(this);
 			Panel3.removeAll();
 			scroll = new JScrollPane();
 			scroll.setViewportView(l);
@@ -1005,13 +1011,33 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 				Panel3.repaint();
 			}
 			if (propOwnerId.isSelected()){
-				
-			}
-			if(propId.isSelected()){
-				
+				list = new DefaultListModel();
+				Collections.sort(Powners, ((m1,m2) -> m1.getOwnerNum() - m2.getOwnerNum()));
+				for(int i = 0; i < Powners.size(); i++){
+					list.addElement(Powners.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
 			if(staffMemAdded.isSelected()){
-				
+				list = new DefaultListModel();
+				Collections.sort(Powners, ((m1,m2) -> m1.getStaffId() - m2.getStaffId()));
+				for(int i = 0; i < Powners.size(); i++){
+					list.addElement(Powners.get(i));
+				}
+				l = new JList(list);
+				Panel3.removeAll();
+				scroll = new JScrollPane();				
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
 
 		}
@@ -1038,11 +1064,15 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			ArrayList<Property> prop = new ArrayList<Property>();
 			prop = pr1.getPropertyByID(0);
 			list = new DefaultListModel();
-			for (int i = 0; i < prop.size(); i++) {
+			l = new JList(list);
+			try{
+			for(int i = 0; i < staffList.size(); i++){
 				list.addElement(prop.get(i));
 			}
-			l = new JList(list);
-			l.addMouseListener(this);
+			}catch(Exception IndexOutOfBoundsException){
+				JOptionPane.showMessageDialog(null, "Property Database Empty \n Please add a new Property.");
+				return;
+			}
 			Panel3.removeAll();
 			scroll = new JScrollPane();
 			scroll.setViewportView(l);
@@ -1050,10 +1080,34 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			Panel3.validate();
 			Panel3.repaint();
 			if (propOwnerId.isSelected()) {
-				
+				list = new DefaultListModel();
+				Collections.sort(prop, ((m1,m2) -> m1.getOwner().compareTo(m2.getOwner())));
+				for(int i = 0; i < prop.size(); i++){
+					list.addElement(prop.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
 			if (propId.isSelected()) {
-
+				list = new DefaultListModel();
+				Collections.sort(prop, ((m1,m2) -> m1.getPropertyId() - m2.getPropertyId()));
+				for(int i = 0; i < prop.size(); i++){
+					list.addElement(prop.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
 			if(city.isSelected()){
 				list = new DefaultListModel();
@@ -1084,29 +1138,96 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			lowtoHigh.setVisible(false);
 			hightoLow.setVisible(false);
 			firstName.setVisible(true);
-			lastName.setVisible(true);
+			lastName.setVisible(false);
 			propOwnerId.setVisible(true);
 			propId.setVisible(true);
 			city.setVisible(true);
 			staffMemAdded.setVisible(true);
 
+			ArrayList<PropView> view = new ArrayList<PropView>(pv1.getPropView(0));
+			list = new DefaultListModel();
+			l = new JList(list);
+			Panel3.removeAll();
+			scroll = new JScrollPane();
+			scroll.setViewportView(l);
+			Panel3.add(scroll);
+			Panel3.validate();
+			Panel3.repaint();
 			if (firstName.isSelected()) {
-
-			}
-			if (lastName.isSelected()) {
-
+				list = new DefaultListModel();
+				Collections.sort(view, ((m1, m2) -> m1.getCID() - m2.getCID()));
+				for (int i = 0; i < view.size(); i++) {
+					list.addElement(view.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
 			if (propOwnerId.isSelected()){
+				list = new DefaultListModel();
+				Collections.sort(view, ((m1, m2) -> pr1.getPropertyByID(m1.getPID()).get(0).getOID() - pr1.getPropertyByID(m2.getPID()).get(0).getOID()));
+				for(int i = 0; i < view.size(); i++){
+					list.addElement(view.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 				
 			}
 			if(propId.isSelected()){
-				
+				list = new DefaultListModel();
+				Collections.sort(view, ((m1, m2) -> m1.getPID() - m2.getPID()));
+				for (int i = 0; i < view.size(); i++) {
+					list.addElement(view.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
 			if(city.isSelected()){
-				
+				list = new DefaultListModel();
+				Collections.sort(view, ((m1, m2) -> m1.getCity().compareTo(m2.getCity())));
+				for (int i = 0; i < view.size(); i++) {
+					list.addElement(view.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
 			if(staffMemAdded.isSelected()){
-				
+				list = new DefaultListModel();
+				Collections.sort(view, ((m1, m2) -> m1.getMember().getStaffNum() - m2.getMember().getStaffNum()));
+				for(int i = 0; i < view.size(); i++){
+					list.addElement(view.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
 		}
 		if(choices.getSelectedItem().equals("View Leases")){
@@ -1125,14 +1246,66 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			endDate.setVisible(true);
 			duration.setVisible(true);
 			
+			ArrayList<Lease> Lease = new ArrayList<Lease>(l1.getLeaseByLeaseId(0));
+			for (int i = 0; i < Lease.size(); i++) {
+				list.addElement(Lease.get(i));
+			}
+			list = new DefaultListModel();
+			l = new JList(list);
+			l.addMouseListener(this);
+			Panel3.removeAll();
+			scroll = new JScrollPane();
+			scroll.setViewportView(l);
+			Panel3.add(scroll);
+			Panel3.validate();
+			Panel3.repaint();
+			
 			if (propOwnerId.isSelected()){
-				
+				list = new DefaultListModel();
+				Collections.sort(Lease, ((m1, m2) -> m1.getOID() - m2.getOID()));
+				for(int i = 0; i < Lease.size(); i++){
+					list.addElement(Lease.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();				
 			}
+			
 			if(city.isSelected()){
-				
+				list = new DefaultListModel();
+				Collections.sort(Lease, ((m1, m2) -> m1.getCity().compareTo(m2.getCity())));
+				for (int i = 0; i < Lease.size(); i++) {
+					list.addElement(Lease.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
+			
 			if(rent.isSelected()){
-				
+				list = new DefaultListModel();
+				Collections.sort(Lease, ((m1, m2) -> Double.compare(m1.getMonthlyRent(), m2.getMonthlyRent())));
+				for (int i = 0; i < Lease.size(); i++) {
+					list.addElement(Lease.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
 			if(startDate.isSelected()){
 				
@@ -1143,9 +1316,8 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			if (duration.isSelected()){
 				
 			}
-		}
 	}
-
+		}
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		if(e.getClickCount() == 2) {
@@ -1179,4 +1351,5 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 		// TODO Auto-generated method stub
 		
 	}
+
 }

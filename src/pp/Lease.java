@@ -18,7 +18,9 @@ public class Lease extends Property{
 	private String rentEnd;
 	private String duration;
 	private Client client;
-
+	
+	public Lease(){}
+	
 	public Lease(int leaseId, int clientId, String fname, String lname, int propertyId, String street, String city, String postCode,
 				 String type, int numRooms, double monthlyRent, String payMethod, double deposit, int depositPaid, String rentStart, String rentEnd, String duration) {
 		super(street, city, postCode, type, propertyId, numRooms, monthlyRent);

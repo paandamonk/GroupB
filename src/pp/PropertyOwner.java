@@ -50,7 +50,7 @@ public class PropertyOwner extends Client{
 				city = rs.getString("CITY");
 				postcode = rs.getString("POSTCODE");
 				phone = rs.getString("PHONE");
-				OID = rs.getInt("OWNERNUM");
+				OID = rs.getInt("POWNERNUM");
 				MID = rs.getInt("STAFFNUM");
 
 				if(ownID == OID) {
@@ -72,6 +72,12 @@ public class PropertyOwner extends Client{
 			System.exit(0);
 		}
 		return OList;
+	}
+
+	public int compareTo(PropertyOwner p1){
+		if(p1.getOwnerNum() == this.OID)	return 0;
+		else if(p1.getOwnerNum() < this.OID) return 1;
+		else return -1;
 	}
 
 	/**

@@ -19,6 +19,7 @@ public class Property {
 	private Staff staffMember;
 	private double monthlyRent;
 	private PropertyOwner owner;
+	private int POID;
 
 	public Property() {}
 
@@ -101,6 +102,10 @@ public class Property {
 	 */
 	public String getStreet() {
 		return street;
+	}
+	
+	public Staff getStaff(){
+		return staffMember;
 	}
 
 	/**
@@ -199,6 +204,10 @@ public class Property {
 	 */
 	public PropertyOwner getOwner() {
 		return owner;
+	}
+	
+	public int getOID(){
+		return this.POID;
 	}
 
 	/**
