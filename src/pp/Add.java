@@ -62,16 +62,20 @@ public class Add implements ActionListener{
 	private Staff staff = new Staff();
     private PropertyOwner propertyOwner = new PropertyOwner();
     private BusinessOwner businessOwner = new BusinessOwner();
+    private PropView propView = new PropView();
     private Lease lease = new Lease();
 	private ArrayList<Client> clientList = client.getClientByID(0);
 	private ArrayList<Property> propertyList = property.getPropertyByID(0);
 	private ArrayList<Staff> staffList = staff.getStaffByID(0);
 	private ArrayList<PropertyOwner> propertyOwnerList = propertyOwner.getPropOwnersByID(0);
     private ArrayList<BusinessOwner> businessOwnerList = businessOwner.getBusinessOwnersByID(0);
+    private ArrayList<PropView> propViewList = propView.getPropViewByID(0);
     private ArrayList<Lease> leaseList = lease.getLeaseByClientId(0);
 
     private DefaultListModel secondaryList = new DefaultListModel<>();
 	private DefaultListModel tertiaryList = new DefaultListModel<>();
+    private JList<Property> propertyListForUpdating;
+    private JList<Client> clientListForUpdating;
     private JList<Staff> staffListForUpdating;
 	private JList<PropertyOwner> propertyOwnerListForUpdating;
 	private JList<BusinessOwner> businessOwnerListForUpdating;
@@ -497,9 +501,6 @@ public class Add implements ActionListener{
 			textField_6.setText(null);
 			textField_7.setText(null);
 			textField_8.setText(null);
-
-
-
 		}
 		//Up to date except button listener
 		if(comboBox.getSelectedItem().equals("Properties")) {
@@ -1210,18 +1211,18 @@ public class Add implements ActionListener{
 			l8 = new JLabel("Comments");
 			panel_1.add(l8);
 			panel_1.add(textField_8);
-			l9 = new JLabel("Client Number");
+			l9 = new JLabel("Client");
 			panel_1.add(l9);
 
-            staffListForUpdating = new JList<>(secondaryList);
+            clientListForUpdating = new JList<>(secondaryList);
             staffScroll = new JScrollPane();
-            staffScroll.setViewportView(staffListForUpdating);
+            staffScroll.setViewportView(clientListForUpdating);
 
-            staffListForUpdating.addListSelectionListener(e3 -> {
+            clientListForUpdating.addListSelectionListener(e3 -> {
                 if(switchCase == 5) {
-                    Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
-                    if (selectedStaff2 != null) {
-                        System.out.println(selectedStaff2.getStaffNum());
+                    Client selectedClient = clientListForUpdating.getSelectedValue();
+                    if (selectedClient != null) {
+                        System.out.println(selectedClient.getClientIdNum());
                         //selectedStaff2.getStaffNum()
                         //TODO use this variable for updating the staff number
                     }
@@ -1237,15 +1238,15 @@ public class Add implements ActionListener{
             }
             if(secondaryList != null){
                 secondaryList.removeAllElements();
-                ArrayList<Staff> newStaffList;
-                newStaffList = staff.getStaffByPosition(0);
-                for(int i = 0; i < newStaffList.size(); i++){
-                    secondaryList.addElement(newStaffList.get(i));
+                ArrayList<Client> newClientList;
+                newClientList = client.getClientByID(0);
+                for(int i = 0; i < newClientList.size(); i++){
+                    secondaryList.addElement(newClientList.get(i));
                 }
             }
-            for(int i = 0; i < clientList.size(); i++){
-                if(!list.contains(clientList.get(i))) {
-                    list.addElement(clientList.get(i));
+            for(int i = 0; i < propViewList.size(); i++){
+                if(!list.contains(propViewList.get(i))) {
+                    list.addElement(propViewList.get(i));
                 }
             }
             listForUpdating = new JList(list);
@@ -1254,39 +1255,40 @@ public class Add implements ActionListener{
 
             listForUpdating.addListSelectionListener(e2 -> {
                 if(switchCase == 5) { //clients are selected
-                    Client selectedClient = (Client)listForUpdating.getSelectedValue();
-                    if(selectedClient != null) {
-                        textField.setText(selectedClient.getFname());
-                        textField_1.setText(selectedClient.getLname());
-                        textField_2.setText(selectedClient.getType());
-                        textField_3.setText(selectedClient.getPhone());
+                    PropView selectedPropView = (PropView)listForUpdating.getSelectedValue();
+                    if(selectedPropView  != null) {
+                       /* textField.setText(selectedPropView .getFname());
+                        textField_1.setText(selectedPropView .getLname());
+                        textField_2.setText(selectedClient.getPhone());
+                        textField_3.setText(selectedClient.getType());
                         DecimalFormat df2 = new DecimalFormat(".##");
                         textField_4.setText(df2.format(selectedClient.getMax())); //maxRent
                         textField_6.setText(selectedClient.getStreet());
                         textField_7.setText(selectedClient.getCity());
                         textField_8.setText(selectedClient.getPostCode());
+                        */
 
-                        ArrayList<Staff> newStaffList;
-                        //staffListForUpdating = new JList<>(supervisorList);
+                        ArrayList<Client> newClientList;
                         secondaryList.removeAllElements();
-                        newStaffList = staff.getStaffByPosition(0);
+                        newClientList = client.getClientByID(0);
 
-                        for (int i = 0; i < newStaffList.size(); i++) {
-                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
-                                secondaryList.addElement(newStaffList.get(i));
+                        //clientList
+                        for (int i = 0; i <  newClientList.size(); i++) {
+                            if (selectedPropView.getClientId() ==  newClientList.get(i).getClientIdNum()) {
+                                secondaryList.addElement( newClientList.get(i));
                                 break;
                             }
                         }
-                        for (int i = 0; i < newStaffList.size(); i++) {
-                            if (selectedClient.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                        for (int i = 0; i < newClientList.size(); i++) {
+                            if (selectedPropView.getClientId() ==  newClientList.get(i).getClientIdNum()) {
                                 continue;
                             }
-                            secondaryList.addElement(newStaffList.get(i));
+                            secondaryList.addElement(newClientList.get(i));
                         }
                         panel_1.remove(staffScroll);
                         staffScroll = new JScrollPane();
-                        staffScroll.setViewportView(staffListForUpdating);
-                        staffListForUpdating.setSelectedIndex(0);
+                        staffScroll.setViewportView(clientListForUpdating);
+                        clientListForUpdating.setSelectedIndex(0);
                         panel_1.add(staffScroll);
                     }
                     panel_1.validate();
@@ -1341,6 +1343,7 @@ public class Add implements ActionListener{
 		//under construction
 
 		if(comboBox.getSelectedItem().equals("Leases")) {
+            switchCase = 6;
 			panel_1.removeAll();
 
 			textField.setVisible(true);
@@ -1405,35 +1408,35 @@ public class Add implements ActionListener{
             panel_1.add(l0);
 
 
-            staffListForUpdating = new JList<>(secondaryList);
+            clientListForUpdating = new JList<>(secondaryList);
             staffScroll = new JScrollPane();
-            staffScroll.setViewportView(staffListForUpdating);
+            staffScroll.setViewportView(clientListForUpdating);
 
-            staffListForUpdating.addListSelectionListener(e3 -> {
+            clientListForUpdating.addListSelectionListener(e3 -> {
                 if(switchCase == 6) {
-                    Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
-                    if (selectedStaff2 != null) {
-                        System.out.println(selectedStaff2.getStaffNum());
+                    Client selectedClient = clientListForUpdating.getSelectedValue();
+                    if (selectedClient != null) {
+                        System.out.println(selectedClient.getClientIdNum());
                         //selectedStaff2.getStaffNum()
                         //TODO use this variable for updating the staff number
                     }
                 }
             });
             panel_1.add(staffScroll);
-            panel_1.validate();
-            panel_1.repaint();
-            l3 = new JLabel("Property");
-            panel_1.add(l3);
 
-            propertyOwnerListForUpdating = new JList<>(tertiaryList);
+
+            JLabel propLabel = new JLabel("Property");
+            panel_1.add(propLabel);
+
+            propertyListForUpdating = new JList<>(tertiaryList);
             secondaryScroll = new JScrollPane();
-            secondaryScroll.setViewportView(propertyOwnerListForUpdating);
+            secondaryScroll.setViewportView(propertyListForUpdating);
 
-            propertyOwnerListForUpdating.addListSelectionListener(e3 -> {
+            propertyListForUpdating.addListSelectionListener(e3 -> {
                 if(switchCase == 6) {
-                    PropertyOwner selectedPropertyOwner = propertyOwnerListForUpdating.getSelectedValue();
-                    if (selectedPropertyOwner != null) {
-                        System.out.println(selectedPropertyOwner.getOwnerNum());
+                    Property selectedProperty = propertyListForUpdating.getSelectedValue();
+                    if (selectedProperty != null) {
+                        System.out.println(selectedProperty.getPropertyId());
                         //selectedStaff2.getStaffNum()
                         //TODO use this variable for updating the staff number
                     }
@@ -1450,10 +1453,10 @@ public class Add implements ActionListener{
             }
             if(secondaryList != null){
                 secondaryList.removeAllElements();
-                ArrayList<Staff> newStaffList;
-                newStaffList = staff.getStaffByPosition(0);
-                for(int i = 0; i < newStaffList.size(); i++){
-                    secondaryList.addElement(newStaffList.get(i));
+                ArrayList<Client> newClientList;
+                newClientList = client.getClientByID(0);
+                for(int i = 0; i < newClientList.size(); i++){
+                    secondaryList.addElement(newClientList.get(i));
                 }
             }
             if(tertiaryList != null){
@@ -1486,30 +1489,54 @@ public class Add implements ActionListener{
                         textField_6.setText(selectedLease.getStreet());
                         textField_7.setText(selectedLease.getCity());
                         textField_8.setText(selectedLease.getPostCode());
-
-                        ArrayList<Staff> newStaffList;
+                        */
+                          ArrayList<Client> newClientList;
+                        ArrayList<Property> newPropertyList;
                         //staffListForUpdating = new JList<>(supervisorList);
                         secondaryList.removeAllElements();
-                        newStaffList = staff.getStaffByPosition(0);
+                        tertiaryList.removeAllElements();
+                        newClientList = client.getClientByID(0);
+                        newPropertyList = property.getPropertyByID(0);
 
-                        for (int i = 0; i < newStaffList.size(); i++) {
-                            if (selectedLease.getStaffId() == newStaffList.get(i).getStaffNum()) {
-                                secondaryList.addElement(newStaffList.get(i));
+                        //clientList
+                        for (int i = 0; i <  newClientList.size(); i++) {
+                            if (selectedLease.getClientId() ==  newClientList.get(i).getClientIdNum()) {
+                                secondaryList.addElement( newClientList.get(i));
                                 break;
                             }
                         }
-                        for (int i = 0; i < newStaffList.size(); i++) {
-                            if (selectedLease.getStaffId() == newStaffList.get(i).getStaffNum()) {
+                        for (int i = 0; i < newClientList.size(); i++) {
+                            if (selectedLease.getClientId() ==  newClientList.get(i).getClientIdNum()) {
                                 continue;
                             }
-                            secondaryList.addElement(newStaffList.get(i));
+                            secondaryList.addElement(newClientList.get(i));
+                        }
 
-                        }*/
+                        //propertyList
+                        for (int i = 0; i <  newPropertyList.size(); i++) {
+                            if (selectedLease.getPropertyId() ==  newPropertyList.get(i).getPropertyId()) {
+                                tertiaryList.addElement(newPropertyList.get(i));
+                                break;
+                            }
+                        }
+                        for (int i = 0; i < newPropertyList.size(); i++) {
+                            if (selectedLease.getPropertyId() ==  newPropertyList.get(i).getPropertyId()) {
+                                continue;
+                            }
+                            tertiaryList.addElement(newPropertyList.get(i));
+                        }
+
                         panel_1.remove(staffScroll);
+                        panel_1.remove(propLabel);
+                        panel_1.remove(secondaryScroll);
                         staffScroll = new JScrollPane();
-                        staffScroll.setViewportView(staffListForUpdating);
-                        staffListForUpdating.setSelectedIndex(0);
+                        staffScroll.setViewportView(clientListForUpdating);
+                        secondaryScroll.setViewportView(propertyListForUpdating);
+                        clientListForUpdating.setSelectedIndex(0);
+                        propertyListForUpdating.setSelectedIndex(0);
                         panel_1.add(staffScroll);
+                        panel_1.add(propLabel);
+                        panel_1.add(secondaryScroll);
                     }
                     panel_1.validate();
                     panel_1.repaint();

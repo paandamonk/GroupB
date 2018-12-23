@@ -7,14 +7,15 @@ import java.util.ArrayList;
 
 public class PropView {
 	private Renter renter;
-	private Client client;
-	private int clientId, propertyId;
+	private Client client = new Client();
+	private int clientId, propertyId, viewnum;
 	private String fname, lname, phone, street, city, postCode, date, viewDate, comments;
 
 	public PropView() {}
 	
-	public PropView(int clientId, String fname, String lname, String phone, int propertyId, String street, String city, String postCode, String viewDate, String comments) {
+	public PropView(int viewnum, int clientId, String fname, String lname, String phone, int propertyId, String street, String city, String postCode, String viewDate, String comments) {
 		this.client = client.getClientByID(clientId).get(0);
+		this.viewnum = viewnum;
 		this.clientId = clientId;
 		this.propertyId = propertyId;
 		this.fname = client.getFname();
@@ -27,12 +28,12 @@ public class PropView {
 		this.comments = comments;
 	}
 
-	public static ArrayList<PropView> getPropView(int PVid){
+	public ArrayList<PropView> getPropViewByID(int PVid){
 		Connection c = null;
 		Statement stmt = null;
 
 		ArrayList<PropView> propViewList = new ArrayList();
-		int clientId, propertyId;
+		int viewnum, clientId, propertyId;
 		String fname, lname, phone, street, city, postCode, viewDate, comments;
 
 		try{
@@ -44,6 +45,7 @@ public class PropView {
 			stmt = c.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM PROPVIEW;");
 			while(rs.next()){
+				viewnum = rs.getInt("VIEWNUM");
 				clientId = rs.getInt("CLIENTNUM");
 				fname = rs.getString("FNAME");
 				lname = rs.getString("LNAME");
@@ -55,18 +57,19 @@ public class PropView {
 				viewDate = rs.getString("VIEWDATE");
 				comments = rs.getString("COMMENTS");
 
-				/*if(propViewId == PVid) {
-					Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
-					clientList.add(client);
-					return clientList;
+				PropView propView = new PropView(viewnum, clientId, fname, lname, phone, propertyId, street, city, postCode, viewDate, comments);
+
+				if(viewnum == PVid) {
+					propViewList.add(propView);
+					rs.close();
+					stmt.close();
+					c.commit();
+					c.close();
+					return propViewList;
 				}
 				else if(PVid == 0) {
-					Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
-					clientList.add(client);
-				}*/
-
-				PropView propView = new PropView(clientId, fname, lname, phone, propertyId, street, city, postCode, viewDate, comments);
-				propViewList.add(propView);
+					propViewList.add(propView);
+				}
 			}
 			rs.close();
 			stmt.close();
@@ -77,6 +80,10 @@ public class PropView {
 			System.exit(0);
 		}
 		return propViewList;
+	}
+
+	public int getViewNum() {
+		return viewnum;
 	}
 
 	/**
@@ -135,5 +142,15 @@ public class PropView {
 		this.comments = comments;
 	}
 
+	public String getFname(){ return fname;}
+
+	public String getLname(){ return lname;}
+
+	public int getClientId(){ return clientId;}
+
+	public String toString(){
+
+		return getFname() + " " + getLname() + " (VIEW ID: " + getViewNum() + ")";
+	}
 
 }

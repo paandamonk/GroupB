@@ -32,6 +32,13 @@ public class Database {
         Input propertyInput = new Input("PROPERTIES");
         //propertyInput.addPropertyInfo("'60 South Street'", "'12345'", "'Riverrun'", "'House'", 6, 2.0, 2);
 
+        Input propViewInput = new Input("PROPVIEW");
+        //propViewInput.addPropViewInfo(17, "'Test'", "'Two'", "'000-111-2222'", 1, "'ExampleStreet'", "'ExampleCity'", "'12234'", "'Today'", "'Cool!'");
+
+        PropView propView = new PropView();
+        ArrayList<PropView> propViewList = propView.getPropViewByID(0);
+        System.out.println(propViewList.get(0).getComments() + " TEST 1");
+
         Input businessOwnerInput = new Input("BUSOWNERS");
        // businessOwnerInput.addBusinessOwnerInfo("'Benny'", "'Hood'",
          //     "'40 Dollop'", "'New York'", "'10020'", "'000-111-2222'",
@@ -41,8 +48,9 @@ public class Database {
         // System.out.println(businessOwnerList.get(0).getFname() + " TEST 1");
 
         Input leaseInput = new Input("LEASE");
-        //leaseInput.addLeaseInfo(17, "'Sherlock'", "'Holmes'", 1, "'test'", "'test two'", "'12345'", "'House'",
+        //leaseInput.addLeaseInfo(18, "'Sherlock'", "'Holmes'", 2, "'test'", "'test two'", "'12345'", "'House'",
         //        3, 2.5, "'cash'", 100, 1, "'1/1/19'", "'2/1/20'", "'100 days'");
+
 
         Lease lease = new Lease();
         ArrayList<Lease> leaseList = lease.getLeaseByClientId(0);
