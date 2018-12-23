@@ -94,7 +94,7 @@ public class PropertyOwner extends Client{
 	}
 	
 	public String toString(){
-		return getStreet() + " " + getCity() + " " + getPostCode();
+		return getFname() + " " + getLname() + " id: " + getOwnerNum();
 	}
 
 

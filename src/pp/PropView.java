@@ -150,6 +150,10 @@ public class PropView {
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
+	
+	public Staff getStaff(){
+		return staffMem;
+	}
 
 
 }

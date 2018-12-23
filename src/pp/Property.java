@@ -201,7 +201,7 @@ public class Property {
 	/**
 	 * @param propertyId the propertyId to set
 	 */
-	public void setPpropertyId(int propertyId) {
+	public void setPropertyId(int propertyId) {
 		this.propertyId = propertyId;
 	}
 
@@ -249,6 +249,10 @@ public class Property {
 	 */
 	public void setOwner(int ownerId) {
 		this.owner = owner.getPropOwnersByID(ownerId).get(0);
+	}
+	
+	public String toString(){
+		return "address: " + getStreet() + " " + getCity() + " " + getPostcode() + " id: " + getPropertyId();
 	}
 
 

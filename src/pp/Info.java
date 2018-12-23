@@ -1,6 +1,7 @@
 package pp;
 
 import java.awt.BorderLayout;
+import pp.Client;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
@@ -235,16 +236,117 @@ public class Info {
 			
 		}
 		if(o.getClass() == PropertyOwner.class) {
+			JPanel north = new JPanel();
+			JPanel center = new JPanel();
+			JPanel west = new JPanel();
+			JPanel south = new JPanel();
+			JPanel east = new JPanel();
 			
+			frame.add(north, BorderLayout.NORTH);
+			frame.add(center, BorderLayout.CENTER);
+			frame.add(west, BorderLayout.WEST);
+			frame.add(south, BorderLayout.SOUTH);
+			frame.add(east, BorderLayout.EAST);
+
+			PropertyOwner propOwn = (PropertyOwner) o;
+			JLabel name_1 = new JLabel("Owner: ");
+			JLabel name_2 = new JLabel(propOwn.getFname() + " " + propOwn.getLname());
+			JLabel Oid_1 = new JLabel("ID: ");
+			JLabel Oid_2 = new JLabel(Integer.toString(propOwn.getOwnerNum()));
+			JLabel mem_1 = new JLabel("Staff Member: ");
+			JLabel mem_2 = new JLabel(propOwn.getStaff().toString());
+			JLabel add_1 = new JLabel("Address:" );
+			JLabel add_2 = new JLabel(propOwn.getStreet() + " " + propOwn.getCity() + " " + propOwn.getPostCode());
+			JLabel phone_1 = new JLabel("Phone Number: ");
+			JLabel phone_2 = new JLabel(propOwn.getPhone());
+			north.setLayout(new GridLayout(1, 4));
+			north.setBorder(BorderFactory.createLineBorder(Color.black));
+			north.add(name_1);
+			north.add(name_2);
+			north.add(Oid_1);
+			north.add(Oid_2);
+			
+			west.setLayout(new GridLayout(4, 2));
+			west.setBorder(BorderFactory.createLineBorder(Color.black));
+			west.add(mem_1);
+			west.add(mem_2);
+			west.add(add_1);
+			west.add(add_2);
+			west.add(phone_1);
+			west.add(phone_2);
 		}
 		if(o.getClass() == BusinessOwner.class) {
 			
 		}
 		if(o.getClass() == PropView.class) {
+			JPanel north = new JPanel();
+			JPanel center = new JPanel();
+			JPanel west = new JPanel();
+			JPanel south = new JPanel();
+			JPanel east = new JPanel();
 			
+			frame.add(north, BorderLayout.NORTH);
+			frame.add(center, BorderLayout.CENTER);
+			frame.add(west, BorderLayout.WEST);
+			frame.add(south, BorderLayout.SOUTH);
+			frame.add(east, BorderLayout.EAST);
+
+			PropView view = (PropView) o;
+			Client c1 = new Client();
+			JLabel client_1 = new JLabel("Client: ");
+			JLabel client_2 = new JLabel(c1.getClientByID(view.getCID()).toString());
+			JLabel name_1 = new JLabel("Property ID: ");
+			JLabel name_2 = new JLabel(Integer.toString(view.getPID()));
+			JLabel view_1 = new JLabel("View Date: ");
+			JLabel view_2 = new JLabel(view.getViewDate());
+			JLabel comments_1 = new JLabel("Comments: ");
+			JLabel comments_2 = new JLabel(view.getComments());
+			JLabel staff_1 = new JLabel("Staff member: ");
+			JLabel staff_2 = new JLabel(view.getStaff().toString());
+			
+			north.setLayout(new GridLayout(1, 4));
+			north.setBorder(BorderFactory.createLineBorder(Color.black));
+			north.add(client_1);
+			north.add(client_2);
+			north.add(name_1);
+			north.add(name_2);
+			
+			west.setLayout(new GridLayout(4, 2));
+			west.setBorder(BorderFactory.createLineBorder(Color.black));
+			west.add(view_1);
+			west.add(view_2);
+			west.add(comments_1);
+			west.add(comments_2);
+			west.add(staff_1);
+			west.add(staff_2);
 		}
 		if(o.getClass() == Lease.class) {
+			JPanel north = new JPanel();
+			JPanel center = new JPanel();
+			JPanel west = new JPanel();
+			JPanel south = new JPanel();
+			JPanel east = new JPanel();
 			
+			frame.add(north, BorderLayout.NORTH);
+			frame.add(center, BorderLayout.CENTER);
+			frame.add(west, BorderLayout.WEST);
+			frame.add(south, BorderLayout.SOUTH);
+			frame.add(east, BorderLayout.EAST);
+			
+			Lease l = (Lease) o;
+			JLabel id_1 = new JLabel("Lease ID:");
+			JLabel id_2 = new JLabel(Integer.toString(l.getLeaseId()));
+			JLabel cid_1 = new JLabel("Client ID: ");
+			JLabel cid_2 = new JLabel(Integer.toString(l.getClientId()));
+			JLabel cname_1 = new JLabel("Cient Name: ");
+			JLabel cname_2 = new JLabel(l.getClient().getFname() + " " + l.getClient().getLname());
+			JLabel add_1 = new JLabel("Address: ");
+			JLabel add_2 = new JLabel(l.getStreet() + " " + l.getCity() + " " + l.getPostcode());
+			JLabel type_1 = new JLabel("Property Type: ");
+			JLabel type_2 = new JLabel(l.getType());
+			JLabel rooms_1 = new JLabel("Number of Rooms: ");
+			
+					
 		}
 		
 		
