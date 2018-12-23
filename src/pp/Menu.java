@@ -971,6 +971,9 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			
 			ArrayList<PropertyOwner> Powners = new ArrayList();
 			Powners = p1.getPropOwnersByID(0);
+			for (int i = 0; i < Powners.size(); i++) {
+				list.addElement(Powners.get(i));
+			}
 			list = new DefaultListModel();
 			l = new JList(list);
 			Panel3.removeAll();
@@ -1063,10 +1066,9 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 
 			ArrayList<Property> prop = new ArrayList<Property>();
 			prop = pr1.getPropertyByID();
-			System.out.println(prop.get(0).getMonthlyRent());
 			list = new DefaultListModel();
 			l = new JList(list);
-			for(int i = 0; i < staffList.size(); i++){
+			for(int i = 0; i < prop.size(); i++){
 				list.addElement(prop.get(i));
 			}
 			Panel3.removeAll();
@@ -1141,6 +1143,9 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 			staffMemAdded.setVisible(true);
 
 			ArrayList<PropView> view = new ArrayList<PropView>(pv1.getPropView(0));
+			for (int i = 0; i < view.size(); i++) {
+				list.addElement(view.get(i));
+			}
 			list = new DefaultListModel();
 			l = new JList(list);
 			Panel3.removeAll();
@@ -1304,13 +1309,49 @@ public class Menu extends JFrame implements ActionListener,MouseListener {
 				Panel3.repaint();
 			}
 			if(startDate.isSelected()){
-				
+				list = new DefaultListModel();
+				Collections.sort(Lease, ((m1, m2) -> m1.getRentStart().compareTo(m2.getRentStart())));
+				for (int i = 0; i < Lease.size(); i++) {
+					list.addElement(Lease.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
 			if(endDate.isSelected()){
-				
+				list = new DefaultListModel();
+				Collections.sort(Lease, ((m1, m2) -> m1.getRentEnd().compareTo(m2.getRentEnd())));
+				for (int i = 0; i < Lease.size(); i++) {
+					list.addElement(Lease.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();
 			}
 			if (duration.isSelected()){
-				
+				list = new DefaultListModel();
+				Collections.sort(Lease, ((m1, m2) -> m1.getDuration().compareTo(m2.getDuration())));
+				for(int i = 0; i < Lease.size(); i++){
+					list.addElement(Lease.get(i));
+				}
+				l = new JList(list);
+				l.addMouseListener(this);
+				Panel3.removeAll();
+				scroll = new JScrollPane();
+				scroll.setViewportView(l);
+				Panel3.add(scroll);
+				Panel3.validate();
+				Panel3.repaint();				
 			}
 	}
 		}

@@ -71,7 +71,7 @@ public class Property {
 				double rent = rs.getDouble("RENT");
 				int Owner = rs.getInt("OWNER");
 				//if (Num == propNum) {
-					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, owner.getPropOwnersByID(propertyId).get(Owner));
+					Property prp = new Property(street, city, postcode, type, propNum, rooms, rent, owner.getPropOwnersByID(propertyId).get(0));
 					propertiesList.add(prp);
 				//}
 				//else if (propNum == 0) {

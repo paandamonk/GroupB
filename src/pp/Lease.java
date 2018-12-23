@@ -17,7 +17,7 @@ public class Lease extends Property{
 	private String rentStart;
 	private String rentEnd;
 	private String duration;
-	private Client client = new Client();
+	Client client = new Client();
 	
 	public Lease(){}
 	
@@ -34,7 +34,7 @@ public class Lease extends Property{
 		this.rentStart = rentStart;
 		this.rentEnd = rentEnd;
 		this.duration = duration;
-		this.client = client.getClientByID(clientId).get(0);
+		client = client.getClientByID(clientId).get(0);
 	}
 
 	public static ArrayList<Lease> getLeaseByClientId(int clientIdInput){

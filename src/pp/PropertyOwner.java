@@ -8,13 +8,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class PropertyOwner extends Client{
-	Staff staff = new Staff();
+	Staff member = new Staff();
 	private String Street;
 	private String City;
 	private String Postcode;
 	private int OID;
 	private int MID;
-	private Staff member;
 
 	public PropertyOwner() {}
 
@@ -92,6 +91,10 @@ public class PropertyOwner extends Client{
 	 */
 	public void setOwnerNum(int ownerNum) {
 		this.OID = ownerNum;
+	}
+	
+	public String toString(){
+		return getStreet() + " " + getCity() + " " + getPostCode();
 	}
 
 
