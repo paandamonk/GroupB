@@ -24,8 +24,8 @@ public class Add implements ActionListener{
 	private JTextField textField_3;
 	private JTextField textField_4;
 	private JTextField textField_5;
-	private String[] addChoices = {"Clients", /*"Properties",*/ "Staff", "Property Owners", "Business Owners"/*, "Property Viewings", "Leases"*/};
-    private String[]addChoicesNotManager = {"Clients", /*"Properties",*/ "Property Owners", "Business Owners"/*, "Property Viewings", "Leases"*/};
+	private String[] addChoices = {"Clients", "Properties", "Staff", "Property Owners", "Business Owners", "Property Viewings", "Leases"};
+    private String[]addChoicesNotManager = {"Clients", "Properties", "Property Owners", "Business Owners", "Property Viewings", "Leases"};
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
