@@ -379,6 +379,7 @@ public class Add implements ActionListener{
 					Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
 					if (selectedStaff2 != null) {
 						System.out.println(selectedStaff2.getStaffNum());
+                        textField_5.setText(Integer.toString(selectedStaff2.getStaffNum()));
 						//selectedStaff2.getStaffNum()
 						//TODO use this variable for updating the staff number
 					}
@@ -419,12 +420,12 @@ public class Add implements ActionListener{
                         textField_3.setText(selectedClient.getPhone());
                         DecimalFormat df2 = new DecimalFormat(".##");
                         textField_4.setText(df2.format(selectedClient.getMax())); //maxRent
+                        textField_5.setText(Integer.toString(selectedClient.getStaffId()));
                         textField_6.setText(selectedClient.getStreet());
                         textField_7.setText(selectedClient.getCity());
                         textField_8.setText(selectedClient.getPostCode());
 
                         ArrayList<Staff> newStaffList;
-						//staffListForUpdating = new JList<>(supervisorList);
 						secondaryList.removeAllElements();
 							newStaffList = staff.getStaffByPosition(0);
 
@@ -555,7 +556,7 @@ public class Add implements ActionListener{
 					PropertyOwner selectedPropertyOwner = propertyOwnerListForUpdating.getSelectedValue();
 					if (selectedPropertyOwner != null) {
 						System.out.println(selectedPropertyOwner.getOwnerNum());
-						//selectedStaff2.getStaffNum()
+                        textField_6.setText(Integer.toString(selectedPropertyOwner.getOwnerNum()));
 						//TODO use this variable for updating the staff number
 					}
 				}
@@ -595,6 +596,7 @@ public class Add implements ActionListener{
                         textField_4.setText(Integer.toString(selectedProperty.getNumRooms()));
                         DecimalFormat df2 = new DecimalFormat(".##");
                         textField_5.setText(df2.format(selectedProperty.getMonthlyRent()));
+                        textField_6.setText(Integer.toString(selectedProperty.getOwner().getOwnerNum()));
 
 						ArrayList<PropertyOwner> newPropOwnerList;
 						//staffListForUpdating = new JList<>(supervisorList);

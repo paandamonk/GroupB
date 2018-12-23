@@ -70,6 +70,8 @@ public class Client extends Person{
 				if(cID == idNum) {
 					Client client = new Client(idNum, fName, lName, type, phone, staffNum, street, city, postCode, maxRent);
 					clientList.add(client);
+					System.out.println("Closing database (Client)");
+					System.out.println();
 					return clientList;
 				}
 				else if(cID == 0) {
@@ -85,6 +87,8 @@ public class Client extends Person{
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
+		System.out.println("Closing database (Client)");
+		System.out.println();
 		return clientList;
 	}
 

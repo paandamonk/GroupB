@@ -60,6 +60,8 @@ public class PropertyOwner extends Client{
 					stmt.close();
 					c.commit();
 					c.close();
+					System.out.println("Closing database (Property Owner)");
+					System.out.println();
 					return OList;
 				}
 				else if(ownID == 0) {
@@ -75,6 +77,8 @@ public class PropertyOwner extends Client{
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
+		System.out.println("Closing database (Property Owner)");
+		System.out.println();
 		return OList;
 	}
 

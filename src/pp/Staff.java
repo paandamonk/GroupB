@@ -102,6 +102,8 @@ public class Staff extends Person {
 					stmt.close();
 					c.commit();
 					c.close();
+					System.out.println("Closing database (Staff)");
+					System.out.println();
 					return staffList;
 				}
 				else if(idNum == 0){
@@ -117,6 +119,8 @@ public class Staff extends Person {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
+		System.out.println("Closing database (Staff)");
+		System.out.println();
 		return staffList;
 	}
 	public ArrayList<Staff> getStaffByPosition(int staffPos){
@@ -163,6 +167,8 @@ public class Staff extends Person {
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
+		System.out.println();
+		System.out.println("Closing database (Staff)");
 		return staffList;
 	}
 
