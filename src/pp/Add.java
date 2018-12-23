@@ -4,14 +4,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
+import pp.Backend.InputAuthenticator;
+import sql.EditData;
 import sql.Input;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
-import javax.swing.event.ListSelectionListener;
 
 
 public class Add implements ActionListener{
@@ -84,6 +85,11 @@ public class Add implements ActionListener{
     private JScrollPane staffScroll = new JScrollPane();
     private JScrollPane secondaryScroll = new JScrollPane();
     private int switchCase = 0;
+    private int id = 0;
+
+    Client selectedClient = new Client();
+	private EditData ed = new EditData();
+	private InputAuthenticator ia = new InputAuthenticator();
 
 
 
@@ -410,10 +416,10 @@ public class Add implements ActionListener{
 			listForUpdating = new JList(list);
 
 			//Activated by clicking an item from the list
-
 			listForUpdating.addListSelectionListener(e2 -> {
 				if(switchCase == 0) { //clients are selected
-					Client selectedClient = (Client)listForUpdating.getSelectedValue();
+					selectedClient = (Client)listForUpdating.getSelectedValue();
+					id = selectedClient.getClientIdNum();
 					if(selectedClient != null) {
 						textField.setText(selectedClient.getFname());
 						textField_1.setText(selectedClient.getLname());
@@ -447,6 +453,7 @@ public class Add implements ActionListener{
 							staffScroll.setViewportView(staffListForUpdating);
 							staffListForUpdating.setSelectedIndex(0);
 							panel_1.add(staffScroll);
+							System.out.println(selectedClient.getFname() + " was selected!");
 					}
 					panel_1.validate();
 					panel_1.repaint();
@@ -460,52 +467,67 @@ public class Add implements ActionListener{
 
 			//Button listener needs more idiot-proofing, but it works as of right now.
 			if(e.getSource() == btnSubmit) {
-				boolean cleared = (textField.getText() == null) || (textField_1.getText() == null) ||
-						(textField_2.getText() == null) || (textField_3.getText() == null) ||
-						(textField_4.getText() == null) || (textField_5.getText() == null) ||
-						(textField_6.getText() == null) || (textField_7.getText() == null) ||
-						(textField_8.getText() == null);
+				boolean cleared = (!textField.getText().equals("")) || (!textField_1.getText().equals("")) ||
+						(!textField_2.getText().equals("") || (!textField_3.getText().equals("")) ||
+								(!textField_4.getText().equals("")) || (!textField_5.getText().equals("")) ||
+								(!textField_6.getText().equals("")) || (!textField_7.getText().equals("")) ||
+								(!textField_8.getText().equals("")));
 
-				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-				if(cleared) {
-					String fname = "'" + textField.getText() + "'";
-					String lname = "'" + textField_1.getText() + "'";
-					String type = "'" + textField_2.getText() + "'";
-					String phone = "'" + textField_3.getText() + "'";
-					double rent = Double.parseDouble(textField_4.getText());
-					int staffId = Integer.parseInt(textField_5.getText());
-					String street = "'" + textField_6.getText() + "'";
-					String city = "'" + textField_7.getText() + "'";
-					String zip = "'" + textField_8.getText() + "'";
-					Input clientinput = new Input("CLIENTS");
-					clientinput.addClientInfo(fname, lname, type, phone, rent, staffId, street, city, zip);
+					//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
+					if (b1.isSelected()) {
+						if(cleared) {
+							String fname = "'" + textField.getText() + "'";
+							String lname = "'" + textField_1.getText() + "'";
+							String type = "'" + textField_2.getText() + "'";
+							String phone = "'" + textField_3.getText() + "'";
+							double rent = Double.parseDouble(textField_4.getText());
+							int staffId = Integer.parseInt(textField_5.getText());
+							String street = "'" + textField_6.getText() + "'";
+							String city = "'" + textField_7.getText() + "'";
+							String zip = "'" + textField_8.getText() + "'";
+							Input clientinput = new Input("CLIENTS");
+							clientinput.addClientInfo(fname, lname, type, phone, rent, staffId, street, city, zip);
 
-					clientList = client.getClientByID(0);
-					if (list != null) {
-						list.removeAllElements();
-					}
-					for (int i = 0; i < clientList.size(); i++) {
-						if (!list.contains(clientList.get(i))) {
-							list.addElement(clientList.get(i));
+							textField.setText("");
+							textField_1.setText("");
+							textField_2.setText("");
+							textField_3.setText("");
+							textField_4.setText("");
+							textField_5.setText("");
+							textField_6.setText("");
+							textField_7.setText("");
+							textField_8.setText("");
+							textField_9.setText("");
 						}
 					}
-					listForUpdating = new JList(list);
-					//Revalidates main list when clicking on a new dropdown item
-					revalidateEast();
+					else if (b2.isSelected()) {
+						hint.setText("TEST");
+						if(!textField.getText().equals("")) {
+							System.out.println(textField.getText());
+							if (ia.nameAuthenticator(textField.getText()) && ia.IDAuthenticator(id)) {
+								String fname = textField.getText();
+								ed.updateInfo("CLIENTS", "FNAME", 0, fname, "CLIENTID", id);
+								textField.setText("");
+								id = 0;
+							}
+							else {
+								hint.setText("The first letter of a name must be uppercase, and the rest must be lowercase.");
+							}
+						}
+					}
+				clientList = client.getClientByID(0);
+				if (list != null) {
+					list.removeAllElements();
 				}
-				else{
-					hint.setText("One or more of the fields is unfilled.");
+				for (int i = 0; i < clientList.size(); i++) {
+					if (!list.contains(clientList.get(i))) {
+						list.addElement(clientList.get(i));
+					}
 				}
+				listForUpdating = new JList(list);
+				//Revalidates main list when clicking on a new dropdown item
+				revalidateEast();
 			}
-			textField.setText(null);
-			textField_1.setText(null);
-			textField_2.setText(null);
-			textField_3.setText(null);
-			textField_4.setText(null);
-			textField_5.setText(null);
-			textField_6.setText(null);
-			textField_7.setText(null);
-			textField_8.setText(null);
 		}
 		//Up to date except button listener
 		if(comboBox.getSelectedItem().equals("Properties")) {

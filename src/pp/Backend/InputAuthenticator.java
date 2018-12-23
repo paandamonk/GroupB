@@ -281,8 +281,8 @@ public class InputAuthenticator {
     }
 
     //Returns true if string passed contains only letters, with the first letter being uppercase and the remaining lowercase.
-    public boolean IDAuthenticator(String ID){
-        if(Integer.parseInt(ID) != 0){
+    public boolean IDAuthenticator(int ID){
+        if(ID != 0){
             return true;
         }
         return false;
