@@ -1257,16 +1257,15 @@ public class Add implements ActionListener{
                 if(switchCase == 5) { //clients are selected
                     PropView selectedPropView = (PropView)listForUpdating.getSelectedValue();
                     if(selectedPropView  != null) {
-                       /* textField.setText(selectedPropView .getFname());
-                        textField_1.setText(selectedPropView .getLname());
-                        textField_2.setText(selectedClient.getPhone());
-                        textField_3.setText(selectedClient.getType());
-                        DecimalFormat df2 = new DecimalFormat(".##");
-                        textField_4.setText(df2.format(selectedClient.getMax())); //maxRent
-                        textField_6.setText(selectedClient.getStreet());
-                        textField_7.setText(selectedClient.getCity());
-                        textField_8.setText(selectedClient.getPostCode());
-                        */
+                        textField.setText(selectedPropView.getFname());
+                        textField_1.setText(selectedPropView.getLname());
+                        textField_2.setText(selectedPropView.getPhone());
+                        textField_3.setText(Integer.toString(selectedPropView.getPropertyId()));
+                        textField_4.setText(selectedPropView.getStreet());
+                        textField_5.setText(selectedPropView.getCity());
+                        textField_6.setText(selectedPropView.getPostCode());
+                        textField_7.setText(selectedPropView.getViewDate());
+                        textField_8.setText(selectedPropView.getComments());
 
                         ArrayList<Client> newClientList;
                         secondaryList.removeAllElements();
@@ -1480,17 +1479,31 @@ public class Add implements ActionListener{
                 if(switchCase == 6) { //clients are selected
                     Lease selectedLease = (Lease)listForUpdating.getSelectedValue();
                     if(selectedLease != null) {
-                        /*textField.setText(selectedLease.getFname());
-                        textField_1.setText(selectedLease.getLname());
-                        textField_2.setText(selectedLease.getType());
-                        textField_3.setText(selectedLease.getPhone());
+                            textField_1.setText(selectedLease.getFname());
+                            textField_2.setText(selectedLease.getLname());
+                        textField_4.setText(selectedLease.getStreet());
+                        textField_5.setText(selectedLease.getCity());
+                        textField_6.setText(selectedLease.getPostcode());
+                        textField_7.setText(selectedLease.getType());
+                        textField_8.setText(Integer.toString(selectedLease.getNumRooms()));
                         DecimalFormat df2 = new DecimalFormat(".##");
-                        textField_4.setText(df2.format(selectedClient.getMax())); //maxRent
-                        textField_6.setText(selectedLease.getStreet());
-                        textField_7.setText(selectedLease.getCity());
-                        textField_8.setText(selectedLease.getPostCode());
-                        */
-                          ArrayList<Client> newClientList;
+                        textField_9.setText(df2.format(selectedLease.getMonthlyRent()));
+                        textField_10.setText(selectedLease.getPayMethod());
+
+                        textField_11.setText(df2.format(selectedLease.getDeposit()));
+                        boolean paidDeposit = false;
+                        if(selectedLease.isDepositPaid() == 0){
+                            paidDeposit = false;
+                        }
+                        if(selectedLease.isDepositPaid() == 1){
+                            paidDeposit = true;
+                        }
+                        textField_12.setText(Boolean.toString(paidDeposit));
+                        textField_13.setText(selectedLease.getRentStart());
+                        textField_14.setText(selectedLease.getRentEnd());
+                        textField_15.setText(selectedLease.getDuration());
+
+                        ArrayList<Client> newClientList;
                         ArrayList<Property> newPropertyList;
                         //staffListForUpdating = new JList<>(supervisorList);
                         secondaryList.removeAllElements();

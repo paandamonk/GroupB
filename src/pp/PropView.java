@@ -146,6 +146,16 @@ public class PropView {
 
 	public String getLname(){ return lname;}
 
+	public String getPhone(){ return phone;}
+
+	public int getPropertyId(){ return propertyId;}
+
+	public String getStreet(){ return street;}
+
+	public String getCity(){ return city;}
+
+	public String getPostCode(){ return postCode;}
+
 	public int getClientId(){ return clientId;}
 
 	public String toString(){

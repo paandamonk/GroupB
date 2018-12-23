@@ -273,6 +273,14 @@ public class Lease extends Property{
 		return duration;
 	}
 
+	public String getFname() {
+		return fname;
+	}
+
+	public String getLname() {
+		return lname;
+	}
+
 	/**
 	 * @param duration the duration to set
 	 */
