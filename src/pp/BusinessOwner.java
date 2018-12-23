@@ -59,6 +59,8 @@ public class BusinessOwner extends PropertyOwner{
 					stmt.close();
 					c.commit();
 					c.close();
+					System.out.println("Closing database (Business Owner)");
+					System.out.println();
 					return BusinessOwnerList;
 				}
 				else if(ownID == 0) {
@@ -74,6 +76,8 @@ public class BusinessOwner extends PropertyOwner{
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
+		System.out.println("Closing database (Business Owner)");
+		System.out.println();
 		return BusinessOwnerList;
 	}
 

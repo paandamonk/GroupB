@@ -70,7 +70,7 @@ public class Add implements ActionListener{
 	private ArrayList<PropertyOwner> propertyOwnerList = propertyOwner.getPropOwnersByID(0);
     private ArrayList<BusinessOwner> businessOwnerList = businessOwner.getBusinessOwnersByID(0);
     private ArrayList<PropView> propViewList = propView.getPropViewByID(0);
-    private ArrayList<Lease> leaseList = lease.getLeaseByClientId(0);
+    private ArrayList<Lease> leaseList = lease.getLeaseByLeaseId(0);
 
     private DefaultListModel secondaryList = new DefaultListModel<>();
 	private DefaultListModel tertiaryList = new DefaultListModel<>();
@@ -656,11 +656,19 @@ public class Add implements ActionListener{
 				int owner = Integer.parseInt(textField_6.getText());
 
 				propertyinput.addPropertyInfo(street, zip, city, type, rooms, rent, owner);
-//				}
-//				else {
-//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-//
-//				}
+
+				propertyList = property.getPropertyByID(0);
+				if(list != null){
+					list.removeAllElements();
+				}
+				for(int i = 0; i < propertyList.size(); i++){
+					if(!list.contains(propertyList.get(i))) {
+						list.addElement(propertyList.get(i));
+					}
+				}
+				listForUpdating = new JList(list);
+				//Revalidates main list when clicking on a new dropdown item
+				revalidateEast();
 			}
 			textField.setText(null);
 			textField_1.setText(null);
@@ -806,6 +814,17 @@ public class Add implements ActionListener{
 					}
 				}
             });
+
+			staffList = staff.getStaffByID(0);
+			if(list != null){
+				list.removeAllElements();
+			}
+			for(int i = 0; i < staffList.size(); i++){
+				if(!list.contains(staffList.get(i))) {
+					list.addElement(staffList.get(i));
+				}
+			}
+			listForUpdating = new JList(list);
             /////////////////////////////////////////////////
             //Revalidates main list when clicking on a new dropdown item
             panelEast.remove(scroll);
@@ -884,7 +903,7 @@ public class Add implements ActionListener{
                     Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
                     if (selectedStaff2 != null) {
                         System.out.println(selectedStaff2.getStaffNum());
-                        //selectedStaff2.getStaffNum()
+                        textField_6.setText(Integer.toString(selectedStaff2.getStaffNum()));
                         //TODO use this variable for updating the staff number
                     }
                 }
@@ -924,6 +943,7 @@ public class Add implements ActionListener{
                         textField_3.setText(selectedPropertyOwner.getCity());
                         textField_4.setText(selectedPropertyOwner.getPostCode());
                         textField_5.setText(selectedPropertyOwner.getPhone());
+						textField_6.setText(Integer.toString(selectedPropertyOwner.getStaffId()));
 
                         ArrayList<Staff> newStaffList;
                         //staffListForUpdating = new JList<>(supervisorList);
@@ -976,12 +996,19 @@ public class Add implements ActionListener{
 				String phone = "'" + textField_5.getText() + "'";
 				int staffId = Integer.parseInt(textField_6.getText());
 				addPropertyOwner.addPropOwnerInfo(fname, lname, street, city, zip, phone, staffId);
-//				}
-//				else {
-//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-//
-//				}
 
+				propertyOwnerList = propertyOwner.getPropOwnersByID(0);
+				if(list != null){
+					list.removeAllElements();
+				}
+				for(int i = 0; i < propertyOwnerList.size(); i++){
+					if(!list.contains(propertyOwnerList.get(i))) {
+						list.addElement(propertyOwnerList.get(i));
+					}
+				}
+				listForUpdating = new JList(list);
+				//Revalidates main list when clicking on a new dropdown item
+				revalidateEast();
 			}
 			textField.setText(null);
 			textField_1.setText(null);
@@ -1048,8 +1075,7 @@ public class Add implements ActionListener{
                     Staff selectedStaff2 = staffListForUpdating.getSelectedValue();
                     if (selectedStaff2 != null) {
                         System.out.println(selectedStaff2.getStaffNum());
-                        //selectedStaff2.getStaffNum()
-                        //TODO use this variable for updating the staff number
+                        textField_8.setText(Integer.toString(selectedStaff2.getStaffNum()));
                     }
                 }
             });
@@ -1090,6 +1116,7 @@ public class Add implements ActionListener{
                         textField_5.setText(selectedBusinessOwner.getBusinessName());
                         textField_6.setText(selectedBusinessOwner.getPhone());
                         textField_7.setText(selectedBusinessOwner.getBusinessType()); //business type
+						textField_8.setText(Integer.toString(selectedBusinessOwner.getStaffId())); //business type
 
                         ArrayList<Staff> newStaffList;
                         //staffListForUpdating = new JList<>(supervisorList);
@@ -1146,13 +1173,19 @@ public class Add implements ActionListener{
 					int staffId = Integer.parseInt(textField_8.getText());
 					busownerinput.addBusinessOwnerInfo(fname, lname, street, city, zip, phone, bname, btype, staffId);
 				}
-				//busownerinput.addBusinessOwnerInfo(fname, lname, street, city, zip, phone, bname, btype, staffId);
-//				}
-//				else {
-//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-//
-//				}
 
+				businessOwnerList = businessOwner.getBusinessOwnersByID(0);
+				if(list != null){
+					list.removeAllElements();
+				}
+				for(int i = 0; i < businessOwnerList.size(); i++){
+					if(!list.contains(businessOwnerList.get(i))) {
+						list.addElement(businessOwnerList.get(i));
+					}
+				}
+				listForUpdating = new JList(list);
+				//Revalidates main list when clicking on a new dropdown item
+				revalidateEast();
 			}
 			textField.setText(null);
 			textField_1.setText(null);
@@ -1195,9 +1228,6 @@ public class Add implements ActionListener{
 			l2 = new JLabel("Cell");
 			panel_1.add(l2);
 			panel_1.add(textField_2);
-			l3 = new JLabel("Property Id");
-			panel_1.add(l3);
-			panel_1.add(textField_3);
 			l4 = new JLabel("Street");
 			panel_1.add(l4);
 			panel_1.add(textField_4);
@@ -1216,25 +1246,45 @@ public class Add implements ActionListener{
 			l9 = new JLabel("Client");
 			panel_1.add(l9);
 
-            clientListForUpdating = new JList<>(secondaryList);
-            staffScroll = new JScrollPane();
-            staffScroll.setViewportView(clientListForUpdating);
+			clientListForUpdating = new JList<>(secondaryList);
+			staffScroll = new JScrollPane();
+			staffScroll.setViewportView(clientListForUpdating);
 
-            clientListForUpdating.addListSelectionListener(e3 -> {
-                if(switchCase == 5) {
-                    Client selectedClient = clientListForUpdating.getSelectedValue();
-                    if (selectedClient != null) {
-                        System.out.println(selectedClient.getClientIdNum());
-                        //selectedStaff2.getStaffNum()
-                        //TODO use this variable for updating the staff number
-                    }
-                }
-            });
-            panel_1.add(staffScroll);
-            panel_1.validate();
-            panel_1.repaint();
+			clientListForUpdating.addListSelectionListener(e3 -> {
+				if(switchCase == 5) {
+					Client selectedClient = clientListForUpdating.getSelectedValue();
+					if (selectedClient != null) {
+						System.out.println(selectedClient.getClientIdNum());
+						//selectedStaff2.getStaffNum()
+						//TODO use this variable for updating the staff number
+					}
+				}
+			});
+			panel_1.add(staffScroll);
 
-            /////////////////////////////////////////////////
+			JLabel propLabel = new JLabel("Property");
+			panel_1.add(propLabel);
+
+			propertyListForUpdating = new JList<>(tertiaryList);
+			secondaryScroll = new JScrollPane();
+			secondaryScroll.setViewportView(propertyListForUpdating);
+
+			propertyListForUpdating.addListSelectionListener(e3 -> {
+				if(switchCase == 5) {
+					Property selectedProperty = propertyListForUpdating.getSelectedValue();
+					if (selectedProperty != null) {
+						System.out.println(selectedProperty.getPropertyId());
+						//selectedStaff2.getStaffNum()
+						//TODO use this variable for updating the staff number
+					}
+				}
+			});
+
+			panel_1.add(secondaryScroll);
+			panel_1.validate();
+			panel_1.repaint();
+
+			/////////////////////////////////////////////////
             if(list != null){
                 list.removeAllElements();
             }
@@ -1324,11 +1374,19 @@ public class Add implements ActionListener{
 				String comments = "'" + textField_8.getText() + "'";
 				int clientID = Integer.parseInt(textField_9.getText());
 				propviewinput.addPropViewInfo(clientID, fname, lname, cell, propId, street, city, zip, viewdate, comments);
-//				}
-//				else {
-//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-//
-//				}
+
+				propViewList = propView.getPropViewByID(0);
+				if(list != null){
+					list.removeAllElements();
+				}
+				for(int i = 0; i < propViewList.size(); i++){
+					if(!list.contains(propViewList.get(i))) {
+						list.addElement(propViewList.get(i));
+					}
+				}
+				listForUpdating = new JList(list);
+				//Revalidates main list when clicking on a new dropdown item
+				revalidateEast();
 
 			}
 			textField.setText(null);
@@ -1574,31 +1632,43 @@ public class Add implements ActionListener{
 						(textField_14.getText() == null) || (textField_15.getText() == null);
 
 				//right now it either crashes when trying to submit empty or it gives the dialog box each time. Needs work.
-//				if(cleared) {
-				Input leaseInput = new Input("LEASE");
-				int clientId = Integer.parseInt(textField.getText());
-				String fname = "'" + textField_1.getText() + "'";
-				String lname = "'" + textField_2.getText() + "'";
-				int propId = Integer.parseInt(textField_3.getText());
-				String street = "'" + textField_4.getText() + "'";
-				String city = "'" + textField_5.getText() + "'";
-				String zip = "'" + textField_6.getText() + "'";
-				String type = "'" + textField_7.getText() + "'";
-				int rooms = Integer.parseInt(textField_8.getText());
-				double rent = Double.parseDouble(textField_9.getText());
-				String paymethod = "'" + textField_10.getText() + "'";
-				double deposit = Double.parseDouble(textField_11.getText());
-				int paidDeposit = Integer.parseInt(textField_12.getText());
-				String startdate = "'" + textField_13.getText() + "'";
-				String enddate = "'" + textField_14.getText() + "'";
-				String duration = "'" + textField_15.getText() + "'";
-				leaseInput.addLeaseInfo(clientId, fname, lname, propId, street, city, zip, type, rooms,
-						rent, paymethod, deposit, paidDeposit, startdate, enddate, duration);
-//				}
-//				else {
-//					JOptionPane.showMessageDialog(null, "Something was empty. \n Try again.");
-//
-//				}
+				if(cleared) {
+					Input leaseInput = new Input("LEASE");
+					int clientId = Integer.parseInt(textField.getText());
+					String fname = "'" + textField_1.getText() + "'";
+					String lname = "'" + textField_2.getText() + "'";
+					int propId = Integer.parseInt(textField_3.getText());
+					String street = "'" + textField_4.getText() + "'";
+					String city = "'" + textField_5.getText() + "'";
+					String zip = "'" + textField_6.getText() + "'";
+					String type = "'" + textField_7.getText() + "'";
+					int rooms = Integer.parseInt(textField_8.getText());
+					double rent = Double.parseDouble(textField_9.getText());
+					String paymethod = "'" + textField_10.getText() + "'";
+					double deposit = Double.parseDouble(textField_11.getText());
+					int paidDeposit = Integer.parseInt(textField_12.getText());
+					String startdate = "'" + textField_13.getText() + "'";
+					String enddate = "'" + textField_14.getText() + "'";
+					String duration = "'" + textField_15.getText() + "'";
+					leaseInput.addLeaseInfo(clientId, fname, lname, propId, street, city, zip, type, rooms,
+							rent, paymethod, deposit, paidDeposit, startdate, enddate, duration);
+
+					leaseList = lease.getLeaseByLeaseId(0);
+					if (list != null) {
+						list.removeAllElements();
+					}
+					for (int i = 0; i < leaseList.size(); i++) {
+						if (!list.contains(leaseList.get(i))) {
+							list.addElement(leaseList.get(i));
+						}
+					}
+					listForUpdating = new JList(list);
+					//Revalidates main list when clicking on a new dropdown item
+					revalidateEast();
+				}
+				else{
+					hint.setText("One or more of the fields are unfilled.");
+				}
 			}
 			textField.setText(null);
 			textField_1.setText(null);

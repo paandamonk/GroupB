@@ -30,14 +30,14 @@ public class Database {
        //         "'000-111-2222'", 11);
 
         Input propertyInput = new Input("PROPERTIES");
-        //propertyInput.addPropertyInfo("'60 South Street'", "'12345'", "'Riverrun'", "'House'", 6, 2.0, 2);
+        //propertyInput.addPropertyInfo("'60 South Street'", "'12345'", "'Riverrun'", "'House'", 6, 2.0, 1);
 
         Input propViewInput = new Input("PROPVIEW");
-        //propViewInput.addPropViewInfo(17, "'Test'", "'Two'", "'000-111-2222'", 1, "'ExampleStreet'", "'ExampleCity'", "'12234'", "'Today'", "'Cool!'");
+        propViewInput.addPropViewInfo(1, "'Test'", "'Two'", "'000-111-2222'", 1, "'ExampleStreet'", "'ExampleCity'", "'12234'", "'Today'", "'Cool!'");
 
         PropView propView = new PropView();
-        ArrayList<PropView> propViewList = propView.getPropViewByID(0);
-        System.out.println(propViewList.get(0).getComments() + " TEST 1");
+        //ArrayList<PropView> propViewList = propView.getPropViewByID(0);
+//        System.out.println(propViewList.get(0).getComments() + " TEST 1");
 
         Input businessOwnerInput = new Input("BUSOWNERS");
        // businessOwnerInput.addBusinessOwnerInfo("'Benny'", "'Hood'",
@@ -57,14 +57,14 @@ public class Database {
         //System.out.println(leaseList.size());
 
         EditData ed = new EditData();
-        //ed.deleteInfo("BUSOWNERS", "BOWNERNUM", 1);
+        ed.deleteInfo("PROPVIEW", "VIEWNUM", 1);
 
 
         //ed.updateInfo("STAFF", "FNAME", 0, "Seymour", "STAFFNUM",1);
         // ed.updateInfo("STAFF", "LNAME", 0, "Lanellope", "STAFFNUM",1);
 
         Input clientInput = new Input("CLIENTS");
-        //clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'", 30.1, 9, "'40'", "'Highland'", "'12234'");
+        clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'", 30.1, 9, "'40'", "'Highland'", "'12234'");
         //clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'", 30.1, 11, "'40'", "'Highland'", "'12234'");
         //clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'", 30.1, 10, "'40'", "'Highland'", "'12234'");
        // clientInput.addClientInfo("'Connor'", "'Colabella'", "'Apartment'", "'123-456-7890'", 30.1, 2, "'40'", "'Highland'", "'12234'");

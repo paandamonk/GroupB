@@ -280,6 +280,14 @@ public class InputAuthenticator {
         return false;
     }
 
+    //Returns true if string passed contains only letters, with the first letter being uppercase and the remaining lowercase.
+    public boolean IDAuthenticator(String ID){
+        if(Integer.parseInt(ID) != 0){
+            return true;
+        }
+        return false;
+    }
+
     //Returns true if username entered does not already exist in the system
     public boolean usernameAuthenticator(String username){
         Staff staff = new Staff();

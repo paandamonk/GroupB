@@ -77,7 +77,7 @@ public class PropertyOwner extends Client{
 			System.err.println( e.getClass().getName() + ": " + e.getMessage() );
 			System.exit(0);
 		}
-		System.out.println("Closing database (Property Owner)");
+		System.out.println("Closing database (Property Owners)");
 		System.out.println();
 		return OList;
 	}

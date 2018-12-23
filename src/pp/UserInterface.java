@@ -290,14 +290,14 @@ public class UserInterface extends JFrame implements ActionListener {
 							if(ia.nameAuthenticator(keyText.getText())) {
 
 								registrationField[1] = keyText.getText(); // lName
-								keyInput.setText("Please Enter Position: ");
+								keyInput.setText("Please Select Position: ");
 								hintText.setText("");
 								registration.remove(keyText);
 								registration.remove(submit);
 								Staff staff = new Staff();
 								ArrayList<Staff>supervisorList = new ArrayList<>();
 								supervisorList = staff.getStaffByPosition(1);
-								if(supervisorList.size() == 0) {
+								if(supervisorList.size() > 0) {
 									registration.add(b1);
 									b1.setText("Manager");
 									b1.addActionListener(e2 -> {
